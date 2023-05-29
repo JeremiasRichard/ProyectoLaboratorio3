@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.UserController">
+   <left>
+      <AnchorPane prefHeight="400.0" prefWidth="207.0" style="-fx-background-color: #244894;" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <AnchorPane prefHeight="400.0" prefWidth="393.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="exitButton" layoutX="281.0" layoutY="325.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="75.0" text="Salir" />
+            <Button layoutX="196.0" layoutY="325.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Guardar" />
+            <TextArea layoutX="35.0" layoutY="178.0" prefHeight="122.0" prefWidth="321.0" />
+            <Label layoutX="35.0" layoutY="124.0" prefHeight="54.0" prefWidth="322.0" text="Comentario del cliente" />
+            <Label layoutX="35.0" layoutY="108.0" prefHeight="25.0" prefWidth="96.0" text="Cliente ID: " />
+            <DatePicker fx:id="datePicker" layoutX="254.0" layoutY="139.0" onAction="#setearFecha" prefHeight="25.0" prefWidth="120.0" promptText="Fecha" />
+            <Label fx:id="fecha" layoutX="24.0" layoutY="30.0" prefHeight="17.0" prefWidth="329.0" text="Label" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

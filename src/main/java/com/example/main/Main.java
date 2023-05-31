@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.main;
 
+import com.example.main.controladores.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,9 +13,8 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws IOException
     {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/com.example.demo/vista/loginView.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/main/vista/loginView.fxml"));
         Scene scene = new Scene(loader.load(), 640, 480);
-        primaryStage.setTitle("LOGIN");
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(scene);
         LoginController controller = loader.getController();

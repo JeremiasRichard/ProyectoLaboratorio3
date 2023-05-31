@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main.controladores.UserController">
+   <left>
+      <AnchorPane prefHeight="400.0" prefWidth="207.0" style="-fx-background-color: #244894;" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <AnchorPane prefHeight="400.0" prefWidth="393.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="exitButton" layoutX="304.0" layoutY="361.0" mnemonicParsing="false" onAction="#closeCurrentWindow" prefHeight="25.0" prefWidth="75.0" text="Salir" />
+            <Button fx:id="detalleButton" layoutX="231.0" layoutY="276.0" mnemonicParsing="false" onAction="#verDetalle" prefHeight="25.0" prefWidth="120.0" text="Ver Detalle" />
+            <Button fx:id="cerrarSesion" layoutX="172.0" layoutY="361.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="25.0" prefWidth="119.0" text="Cerrar Sesion" />
+            <TableView fx:id="arreglos" layoutX="15.0" layoutY="66.0" prefHeight="200.0" prefWidth="364.0">
+              <columns>
+                <TableColumn fx:id="IdClienteColumna" prefWidth="75.0" text="Id Cliente" />
+                <TableColumn fx:id="IdVehiculoColumna" prefWidth="75.0" text="Id Vehiculo" />
+                  <TableColumn fx:id="MarcaColumna" prefWidth="213.0" text="Marca" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

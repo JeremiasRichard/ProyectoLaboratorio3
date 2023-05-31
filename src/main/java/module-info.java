@@ -1,5 +1,5 @@
 
-module com.example.demo {
+module com.example.main {
     requires javafx.controls;
     requires javafx.base;
     requires javafx.fxml;
@@ -8,8 +8,11 @@ module com.example.demo {
     requires org.kordamp.bootstrapfx.core;
     requires com.google.gson;
 
-    opens com.example.demo to javafx.fxml;
-    exports com.example.demo;
+    opens com.example.main to javafx.fxml;
+    exports com.example.main;
+
+    exports com.example.main.controladores;
+    opens com.example.main.controladores to javafx.fxml;
 
 }
 

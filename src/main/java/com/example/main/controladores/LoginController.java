@@ -1,24 +1,26 @@
-package com.example.demo;
+package com.example.main.controladores;
 
+import com.example.main.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class LoginController {
-    private  Stage stage;
+    private  Stage primaryStage;
     @FXML
     private TextField userTextField;
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private Button exitButton;
     @FXML
     public void iniciarSesion()
     {
@@ -38,12 +40,13 @@ public class LoginController {
     }
     private void abrirVistaAdmin() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.example.demo/vista/adminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/vista/adminView.fxml"));
             Scene scene = new Scene(loader.load(),640,480);
-            stage.setTitle("Admin");
-            this.stage = (Stage) userTextField.getScene().getWindow();
+            this.primaryStage = (Stage) userTextField.getScene().getWindow();
             AdminController adminController = loader.getController();
-            stage.setScene(scene);
+            primaryStage.setScene(scene);
+            //primaryStage.initStyle(StageStyle.UNDECORATED);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,12 +54,13 @@ public class LoginController {
 
     private void abrirVistaUsuario() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.example.demo/vista/userView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/vista/userView.fxml"));
             Scene scene = new Scene(loader.load(),640,480);
-            stage.setTitle("Usuario");
-            this.stage = (Stage) userTextField.getScene().getWindow();
+            this.primaryStage = (Stage) userTextField.getScene().getWindow();
             UserController userController = loader.getController();
-            stage.setScene(scene);
+            userController.setStageAnterior(this.primaryStage);
+            //primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,15 +72,17 @@ public class LoginController {
     @FXML
     void closeApplication(ActionEvent event) throws IOException
     {
+        Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
-    public void setStage(Stage primaryStage)
-    {
-        stage = primaryStage;
+    public void setStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
-
     public void show(ActionEvent event)
     {
-        stage.show();
+        primaryStage.show();
     }
+
+
+
 }

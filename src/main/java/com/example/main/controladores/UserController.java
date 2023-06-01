@@ -59,10 +59,10 @@ public class UserController {
         // Obtener los com.example.main.datos de los autos (puedes reemplazar esto con tus propios com.example.main.datos)
         ObservableList<Auto> autosList =  FXCollections.observableArrayList();
 
-        Auto auto1 = new Auto(1,1,"Volkswagen Gol GTI");
-        Auto auto2 = new Auto(2,2,"Volkswagen Gol Power");
-        Auto auto3 = new Auto(3,3,"Volkswagen Gol AB9");
-        Auto auto4 = new Auto(4,4,"Volkswagen Gol Trend");
+        Auto auto1 = new Auto(1,1,"Volkswagen Gol GTI","El cliente solicita un service completo.");
+        Auto auto2 = new Auto(2,2,"Volkswagen Gol Power","El cliente señala que tiene fallas en la potencia");
+        Auto auto3 = new Auto(3,3,"Volkswagen Gol AB9","El cliente señala que quiere pulido y tratamiento de acrilico");
+        Auto auto4 = new Auto(4,4,"Volkswagen Gol Trend","El cliente señala que quiere hacer un chequeo general");
 
         autosList.add(auto1);
         autosList.add(auto2);

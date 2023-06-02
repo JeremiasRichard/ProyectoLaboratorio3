@@ -10,11 +10,13 @@ public class Auto
     public IntegerProperty IdCliente;
     public IntegerProperty IdVehiculo;
     public StringProperty Marca;
+    public StringProperty DetalleDeFalla;
 
-    public Auto(int idCliente, int idVehiculo, String marca) {
+    public Auto(int idCliente, int idVehiculo, String marca,String detalleDeFalla) {
         this.IdCliente = new SimpleIntegerProperty(idCliente);
         this.IdVehiculo = new SimpleIntegerProperty(idVehiculo);
         this.Marca = new SimpleStringProperty(marca);
+        this.DetalleDeFalla = new SimpleStringProperty(detalleDeFalla);
     }
     // Getter y setter para IdCliente
     public int getIdCliente() {
@@ -28,18 +30,17 @@ public class Auto
     public IntegerProperty idClienteProperty() {
         return IdCliente;
     }
-
-    // Getter y setter para idVehiculo
-    public int getIdVehiculo() {
-        return IdVehiculo.get();
-    }
-
-    public void setIdVehiculo(int idVehiculo) {
-        this.IdVehiculo.set(idVehiculo);
-    }
-
     public IntegerProperty idVehiculoProperty() {
         return IdVehiculo;
+    }
+
+    // Getter y setter para idVehiculo
+    public int getIdVehiculo()
+    {
+        return IdVehiculo.get();
+    }
+    public void setIdVehiculo(int idVehiculo) {
+        this.IdVehiculo.set(idVehiculo);
     }
 
     // Getter y setter para marca
@@ -56,8 +57,13 @@ public class Auto
     }
 
     // Otros getters y setters para los demás campos
+    public String getDetalleDeFalla() {
+        return DetalleDeFalla.get();
+    }
 
-
+    public void setDetalleDeFalla(String detalleDeFalla) {
+        this.DetalleDeFalla.set(detalleDeFalla);
+    }
     // ToString
 
     @Override

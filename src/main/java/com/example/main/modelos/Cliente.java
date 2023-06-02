@@ -3,81 +3,81 @@ package com.example.main.modelos;
 import java.util.List;
 
 public class Cliente extends Persona{
-    private int IdCliente;
-    private List<Arreglo> HistorialArreglos;
-    private int NroTelefono;
-    private String Mail;
-    private String Direccion;
-    private List<Vehiculo> ListaVehiculos;
+    private int idCliente;
+    private List<Arreglo> historialArreglos;
+    private int nroTelefono;
+    private String mail;
+    private String direccion;
+    private List<Vehiculo> listaVehiculos;
 
     public Cliente(){}
 
     public Cliente(int idCliente, List<Arreglo> historialArreglos, int nroTelefono, String mail, String direccion, List<Vehiculo> listaVehiculos) {
-        IdCliente = idCliente;
-        HistorialArreglos = historialArreglos;
-        NroTelefono = nroTelefono;
-        Mail = mail;
-        Direccion = direccion;
-        ListaVehiculos = listaVehiculos;
+        this.idCliente = idCliente;
+        this.historialArreglos = historialArreglos;
+        this.nroTelefono = nroTelefono;
+        this.mail = mail;
+        this.direccion = direccion;
+        this.listaVehiculos = listaVehiculos;
     }
 
     public int getIdCliente() {
-        return IdCliente;
+        return idCliente;
     }
 
     public void setIdCliente(int idCliente) {
-        IdCliente = idCliente;
+        idCliente = idCliente;
     }
 
     public List<Arreglo> getHistorialArreglos() {
-        return HistorialArreglos;
+        return historialArreglos;
     }
 
     public void setHistorialArreglos(List<Arreglo> historialArreglos) {
-        HistorialArreglos = historialArreglos;
+        historialArreglos = historialArreglos;
     }
 
     public int getNroTelefono() {
-        return NroTelefono;
+        return nroTelefono;
     }
 
     public void setNroTelefono(int nroTelefono) {
-        NroTelefono = nroTelefono;
+        nroTelefono = nroTelefono;
     }
 
     public String getMail() {
-        return Mail;
+        return mail;
     }
 
     public void setMail(String mail) {
-        Mail = mail;
+        mail = mail;
     }
 
     public String getDireccion() {
-        return Direccion;
+        return direccion;
     }
 
     public void setDireccion(String direccion) {
-        Direccion = direccion;
+        direccion = direccion;
     }
 
     public List<Vehiculo> getListaVehiculos() {
-        return ListaVehiculos;
+        return listaVehiculos;
     }
 
     public void setListaVehiculos(List<Vehiculo> listaVehiculos) {
-        ListaVehiculos = listaVehiculos;
+        listaVehiculos = listaVehiculos;
     }
 
     @Override
     public String toString() {
         return "Cliente{" +
-                "IdCliente=" + IdCliente +
-                ", HistorialArreglos=" + HistorialArreglos +
-                ", NroTelefono=" + NroTelefono +
-                ", Mail='" + Mail + '\'' +
-                ", Direccion='" + Direccion + '\'' +
-                ", ListaVehiculos=" + ListaVehiculos +
+                "IdCliente=" + idCliente +
+                ", HistorialArreglos=" + historialArreglos +
+                ", NroTelefono=" + nroTelefono +
+                ", Mail='" + mail + '\'' +
+                ", Direccion='" + direccion + '\'' +
+                ", ListaVehiculos=" + listaVehiculos +
                 '}';
     }
 }

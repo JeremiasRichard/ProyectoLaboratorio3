@@ -6,48 +6,48 @@ import com.example.main.enums.TipoVehiculo;
 import java.util.List;
 
 public class Mecanico extends Personal{
-    private List<Arreglo> ListaArreglos;
-    private TipoVehiculo TipoVehiculo;
-    private Especialidad Especialidad;
+    private List<Arreglo> listaArreglos;
+    private TipoVehiculo tipoVehiculo;
+    private Especialidad especialidad;
 
     public Mecanico(){}
 
     public Mecanico(List<Arreglo> listaArreglos, com.example.main.enums.TipoVehiculo tipoVehiculo, com.example.main.enums.Especialidad especialidad) {
-        ListaArreglos = listaArreglos;
-        TipoVehiculo = tipoVehiculo;
-        Especialidad = especialidad;
+        this.listaArreglos = listaArreglos;
+        this.tipoVehiculo = tipoVehiculo;
+        this.especialidad = especialidad;
     }
 
     public List<Arreglo> getListaArreglos() {
-        return ListaArreglos;
+        return listaArreglos;
     }
 
     public void setListaArreglos(List<Arreglo> listaArreglos) {
-        ListaArreglos = listaArreglos;
+        listaArreglos = listaArreglos;
     }
 
     public com.example.main.enums.TipoVehiculo getTipoVehiculo() {
-        return TipoVehiculo;
+        return tipoVehiculo;
     }
 
     public void setTipoVehiculo(com.example.main.enums.TipoVehiculo tipoVehiculo) {
-        TipoVehiculo = tipoVehiculo;
+        tipoVehiculo = tipoVehiculo;
     }
 
     public com.example.main.enums.Especialidad getEspecialidad() {
-        return Especialidad;
+        return especialidad;
     }
 
     public void setEspecialidad(com.example.main.enums.Especialidad especialidad) {
-        Especialidad = especialidad;
+        especialidad = especialidad;
     }
 
     @Override
     public String toString() {
         return "Mecanico{" +
-                "ListaArreglos=" + ListaArreglos +
-                ", TipoVehiculo=" + TipoVehiculo +
-                ", Especialidad=" + Especialidad +
+                "ListaArreglos=" + listaArreglos +
+                ", TipoVehiculo=" + tipoVehiculo +
+                ", Especialidad=" + especialidad +
                 '}';
     }
 }

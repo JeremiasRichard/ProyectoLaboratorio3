@@ -3,58 +3,58 @@ package com.example.main.modelos;
 import com.example.main.enums.TipoVehiculo;
 
 public abstract class Vehiculo {
-    private int IdVehiculo;
-    private int AnioFabricacion;
-    private TipoVehiculo TipoVehiculo;
-    private String Marca;
+    private int idVehiculo;
+    private int anioFabricacion;
+    private TipoVehiculo tipoVehiculo;
+    private String marca;
 
     public Vehiculo(){}
     public Vehiculo(int idVehiculo, int anioFabricacion, com.example.main.enums.TipoVehiculo tipoVehiculo, String marca) {
-        IdVehiculo = idVehiculo;
-        AnioFabricacion = anioFabricacion;
-        TipoVehiculo = tipoVehiculo;
-        Marca = marca;
+        this.idVehiculo = idVehiculo;
+        this.anioFabricacion = anioFabricacion;
+        this.tipoVehiculo = tipoVehiculo;
+        this.marca = marca;
     }
 
     public int getIdVehiculo() {
-        return IdVehiculo;
+        return idVehiculo;
     }
 
     public void setIdVehiculo(int idVehiculo) {
-        IdVehiculo = idVehiculo;
+        idVehiculo = idVehiculo;
     }
 
     public int getAnioFabricacion() {
-        return AnioFabricacion;
+        return anioFabricacion;
     }
 
     public void setAnioFabricacion(int anioFabricacion) {
-        AnioFabricacion = anioFabricacion;
+        anioFabricacion = anioFabricacion;
     }
 
     public com.example.main.enums.TipoVehiculo getTipoVehiculo() {
-        return TipoVehiculo;
+        return tipoVehiculo;
     }
 
     public void setTipoVehiculo(com.example.main.enums.TipoVehiculo tipoVehiculo) {
-        TipoVehiculo = tipoVehiculo;
+        tipoVehiculo = tipoVehiculo;
     }
 
     public String getMarca() {
-        return Marca;
+        return marca;
     }
 
     public void setMarca(String marca) {
-        Marca = marca;
+        marca = marca;
     }
 
     @Override
     public String toString() {
         return "Vehiculo{" +
-                "IdVehiculo=" + IdVehiculo +
-                ", AnioFabricacion=" + AnioFabricacion +
-                ", TipoVehiculo=" + TipoVehiculo +
-                ", Marca='" + Marca + '\'' +
+                "IdVehiculo=" + idVehiculo +
+                ", AnioFabricacion=" + anioFabricacion +
+                ", TipoVehiculo=" + tipoVehiculo +
+                ", Marca='" + marca + '\'' +
                 '}';
     }
 }

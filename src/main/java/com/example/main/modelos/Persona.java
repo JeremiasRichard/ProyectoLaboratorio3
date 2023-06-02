@@ -1,48 +1,48 @@
 package com.example.main.modelos;
 
 public abstract class Persona {
-    private String Nombre;
-    private String Apellido;
-    private int Edad;
+    private String nombre;
+    private String apellido;
+    private int edad;
 
     public Persona(){}
 
     public Persona(String nombre, String apellido, int edad) {
-        Nombre = nombre;
-        Apellido = apellido;
-        Edad = edad;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        nombre = nombre;
     }
 
     public String getApellido() {
-        return Apellido;
+        return apellido;
     }
 
     public void setApellido(String apellido) {
-        Apellido = apellido;
+        apellido = apellido;
     }
 
     public int getEdad() {
-        return Edad;
+        return edad;
     }
 
     public void setEdad(int edad) {
-        Edad = edad;
+        edad = edad;
     }
 
     @Override
     public String toString() {
         return "Persona{" +
-                "Nombre='" + Nombre + '\'' +
-                ", Apellido='" + Apellido + '\'' +
-                ", Edad=" + Edad +
+                "Nombre='" + nombre + '\'' +
+                ", Apellido='" + apellido + '\'' +
+                ", Edad=" + edad +
                 '}';
     }
 }

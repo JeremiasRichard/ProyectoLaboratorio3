@@ -1,59 +1,59 @@
 package com.example.main.modelos;
 
 public class Usuario extends Persona{
-    private int IdUsuario;
-    private String User;
-    private String Password;
-    private boolean NivelDeAcceso;
+    private int idUsuario;
+    private String user;
+    private String password;
+    private boolean nivelDeAcceso;
 
     public Usuario(){}
 
     public Usuario(int idUsuario, String user, String password, boolean nivelDeAcceso) {
-        IdUsuario = idUsuario;
-        User = user;
-        Password = password;
-        NivelDeAcceso = nivelDeAcceso;
+        this.idUsuario = idUsuario;
+        this.user = user;
+        this.password = password;
+        this.nivelDeAcceso = nivelDeAcceso;
     }
 
     public int getIdUsuario() {
-        return IdUsuario;
+        return idUsuario;
     }
 
     public void setIdUsuario(int idUsuario) {
-        IdUsuario = idUsuario;
+        idUsuario = idUsuario;
     }
 
     public String getUser() {
-        return User;
+        return user;
     }
 
     public void setUser(String user) {
-        User = user;
+        user = user;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        password = password;
     }
 
     public boolean isNivelDeAcceso() {
-        return NivelDeAcceso;
+        return nivelDeAcceso;
     }
 
     public void setNivelDeAcceso(boolean nivelDeAcceso) {
-        NivelDeAcceso = nivelDeAcceso;
+        nivelDeAcceso = nivelDeAcceso;
     }
 
     @Override
     public String toString() {
         return "Usuario{" +
-                "IdUsuario=" + IdUsuario +
-                ", User='" + User + '\'' +
-                ", Password='" + Password + '\'' +
-                ", NivelDeAcceso=" + NivelDeAcceso +
+                "IdUsuario=" + idUsuario +
+                ", User='" + user + '\'' +
+                ", Password='" + password + '\'' +
+                ", NivelDeAcceso=" + nivelDeAcceso +
                 '}';
     }
 }

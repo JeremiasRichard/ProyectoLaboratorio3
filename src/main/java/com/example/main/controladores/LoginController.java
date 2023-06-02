@@ -6,8 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -22,10 +25,15 @@ public class LoginController {
     @FXML
     private Button exitButton;
     @FXML
+    private Label errorLabel;
+
+
+    @FXML
     public void iniciarSesion()
     {
         String user = userTextField.getText();
         String password = passwordField.getText();
+        errorLabel.setVisible(false);
 
         if (user.equals("admin") && password.equals("admin")) {
             // Acceso de administrador
@@ -35,17 +43,16 @@ public class LoginController {
             abrirVistaUsuario();
         } else {
             // Credenciales inválidas
-            mostrarMensajeError("Credenciales inválidas");
+            mostrarMensajeError(errorLabel);
         }
     }
     private void abrirVistaAdmin() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/vista/adminView.fxml"));
-            Scene scene = new Scene(loader.load(),640,480);
+            Scene scene = new Scene(loader.load(),800,600);
             this.primaryStage = (Stage) userTextField.getScene().getWindow();
             AdminController adminController = loader.getController();
             primaryStage.setScene(scene);
-            //primaryStage.initStyle(StageStyle.UNDECORATED);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,19 +62,21 @@ public class LoginController {
     private void abrirVistaUsuario() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/vista/userView.fxml"));
-            Scene scene = new Scene(loader.load(),640,480);
+            Scene scene = new Scene(loader.load(),800,600);
             this.primaryStage = (Stage) userTextField.getScene().getWindow();
             UserController userController = loader.getController();
             userController.setStageAnterior(this.primaryStage);
-            //primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void mostrarMensajeError(String mensaje) {
-        System.out.println(mensaje);
+    private void mostrarMensajeError(Label errorLabel)
+    {
+       errorLabel.setText("Credenciales inválidas.Intenta nuevamente.");
+       errorLabel.setTextFill(Color.RED);
+       errorLabel.setVisible(true);
     }
     @FXML
     void closeApplication(ActionEvent event) throws IOException

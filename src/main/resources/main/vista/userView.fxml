@@ -1,23 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Circle?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main.controladores.UserController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main.controladores.UserController">
    <left>
-      <AnchorPane prefHeight="400.0" prefWidth="207.0" style="-fx-background-color: #244894;" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="400.0" prefWidth="250.0" style="-fx-background-color: #244894;" BorderPane.alignment="CENTER">
+         <children>
+            <Circle fill="#1f93ff00" layoutX="125.0" layoutY="169.0" radius="85.0" stroke="#d32e54" strokeType="INSIDE" strokeWidth="5.0" />
+            <Circle fill="#1f93ff00" layoutX="125.0" layoutY="169.0" radius="82.0" stroke="#f5f5f5" strokeType="INSIDE" strokeWidth="3.0" />
+            <ImageView fitHeight="27.0" fitWidth="118.0" layoutX="72.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/alpine.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="112.0" layoutX="69.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Alpine_logo_name.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="27.0" layoutY="557.0" prefHeight="19.0" prefWidth="197.0" text="Copyright(c). All Rights Reserved." textFill="#fcf2f2" />
+         </children></AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="400.0" prefWidth="393.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="600.0" prefWidth="579.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="exitButton" layoutX="304.0" layoutY="361.0" mnemonicParsing="false" onAction="#closeCurrentWindow" prefHeight="25.0" prefWidth="75.0" text="Salir" />
-            <Button fx:id="detalleButton" layoutX="231.0" layoutY="276.0" mnemonicParsing="false" onAction="#verDetalle" prefHeight="25.0" prefWidth="120.0" text="Ver Detalle" />
-            <Button fx:id="cerrarSesion" layoutX="172.0" layoutY="361.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="25.0" prefWidth="119.0" text="Cerrar Sesion" />
-            <TableView fx:id="arreglos" layoutX="15.0" layoutY="66.0" prefHeight="200.0" prefWidth="364.0">
+            <Button fx:id="exitButton" layoutX="515.0" layoutY="8.0" mnemonicParsing="false" onAction="#closeCurrentWindow" prefHeight="25.0" prefWidth="25.0" text="X" />
+            <Button fx:id="detalleButton" layoutX="436.0" layoutY="461.0" mnemonicParsing="false" onAction="#verDetalle" prefHeight="25.0" prefWidth="100.0" text="Ver Detalle" />
+            <Button fx:id="cerrarSesion" layoutX="436.0" layoutY="543.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="25.0" prefWidth="100.0" text="Cerrar Sesion" />
+            <TableView fx:id="arreglos" layoutX="22.0" layoutY="111.0" prefHeight="343.0" prefWidth="514.0">
               <columns>
-                <TableColumn fx:id="IdClienteColumna" prefWidth="75.0" text="Id Cliente" />
-                <TableColumn fx:id="IdVehiculoColumna" prefWidth="75.0" text="Id Vehiculo" />
-                  <TableColumn fx:id="MarcaColumna" prefWidth="213.0" text="Marca" />
+                <TableColumn fx:id="IdClienteColumna" prefWidth="98.0" text="Id Cliente" />
+                <TableColumn fx:id="IdVehiculoColumna" prefWidth="93.0" text="Id Vehiculo" />
+                  <TableColumn fx:id="MarcaColumna" prefWidth="322.0" text="Marca" />
               </columns>
             </TableView>
          </children>

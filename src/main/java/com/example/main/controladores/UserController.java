@@ -96,7 +96,7 @@ public class UserController {
                 Stage detalleStage = new Stage();
                 detalleStage.initStyle(StageStyle.UNDECORATED);
                 detalleStage.initOwner(userStage);
-                detalleStage.setScene(new Scene(root,640,480));
+                detalleStage.setScene(new Scene(root,800,600));
                 detalleStage.show();
                 userStage = (Stage) detalleButton.getScene().getWindow();
             } catch (IOException e)

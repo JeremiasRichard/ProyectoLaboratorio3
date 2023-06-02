@@ -1,13 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <AnchorPane prefHeight="400.0" prefWidth="207.0" style="-fx-background-color: #244894;" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="400.0" prefWidth="250.0" style="-fx-background-color: #244894;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="27.0" fitWidth="118.0" layoutX="72.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/alpine.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="112.0" layoutX="69.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Alpine_logo_name.png" />
+               </image>
+            </ImageView>
+            <Circle fill="#1f93ff00" layoutX="125.0" layoutY="169.0" radius="85.0" stroke="#d32e54" strokeType="INSIDE" strokeWidth="4.0" />
+            <Circle fill="#1f93ff00" layoutX="125.0" layoutY="169.0" radius="82.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" />
+            <Label layoutX="27.0" layoutY="557.0" prefHeight="19.0" prefWidth="197.0" text="Copyright(c). All Rights Reserved." textFill="#fffefe" />
+         </children></AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="400.0" prefWidth="396.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="600.0" prefWidth="562.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="75.0" layoutY="300.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-image: url('https://i.pinimg.com/originals/f6/f6/8b/f6f68b756a826533040032d42fcdc973.png'); -fx-background-size: 140 140; -fx-background-position: center center; -fx-background-repeat: no-repeat no-repeat;" />
+            <Button layoutX="304.0" layoutY="300.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="200.0" />
+            <Button layoutX="75.0" layoutY="71.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-image: url('https://cdn-icons-png.flaticon.com/512/814/814406.png'); -fx-background-size: 140 140; -fx-background-position: center center; -fx-background-repeat: no-repeat no-repeat;" />
+            <Button layoutX="304.0" layoutY="71.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-image: url('https://cdn2.iconfinder.com/data/icons/flat-style-svg-icons-part-1/512/motor_mechanic_tools-512.png'); -fx-background-size: 140 140; -fx-background-position: center center; -fx-background-repeat: no-repeat no-repeat;" />
+            <Text layoutX="117.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion de Arreglos" wrappingWidth="115.13671875">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
+            <Text layoutX="338.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion de Empleados" wrappingWidth="131.13671875">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
+            <Text layoutX="346.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion de Algo" wrappingWidth="115.13671875">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
+            <Text layoutX="117.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion de Clientes" wrappingWidth="115.13671875">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
    </right>
 </BorderPane>

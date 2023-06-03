@@ -1,6 +1,9 @@
 package com.example.main.controladores;
 
+import com.example.main.enums.TipoVehiculo;
+import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Auto;
+import com.example.main.modelos.Vehiculo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,13 +21,13 @@ import java.io.IOException;
 public class UserController {
 
     @FXML
-    private TableView<Auto> arreglos = new TableView<>();
+    private TableView<Arreglo> ListaTareas = new TableView<>();
     @FXML
-    private TableColumn<Auto,Integer> IdClienteColumna;
+    private TableColumn<Arreglo,Integer> IdArregloColumna;
     @FXML
-    private TableColumn<Auto,Integer> IdVehiculoColumna;
+    private TableColumn<Arreglo,Integer> anioFabricacionColumna;
     @FXML
-    private TableColumn<Auto,String> MarcaColumna;
+    private TableColumn<Arreglo,String> MarcaColumna;
     @FXML
     private ObservableList<Auto> itemsList;
     private Stage userStage;
@@ -32,8 +35,6 @@ public class UserController {
     private Button exitButton;
     @FXML
     private Button detalleButton;
-    @FXML
-    private Button cerrarSesion;
     @FXML
     private Stage stageAnterior;
 
@@ -52,24 +53,29 @@ public class UserController {
     @FXML
     public void initialize() {
         // Configurar las columnas
-        IdClienteColumna.setCellValueFactory(cellData -> cellData.getValue().idClienteProperty().asObject());
-        IdVehiculoColumna.setCellValueFactory(cellData -> cellData.getValue().idVehiculoProperty().asObject());
-        MarcaColumna.setCellValueFactory(cellData -> cellData.getValue().marcaProperty());
+        IdArregloColumna.setCellValueFactory(cellData -> cellData.getValue().getIdArreglo().asObject());
+        anioFabricacionColumna.setCellValueFactory(cellData -> cellData.getValue().getVehiculo().getAnioFabricacion().asObject());
+        MarcaColumna.setCellValueFactory(cellData -> cellData.getValue().getVehiculo().getMarca());
 
         // Obtener los com.example.main.datos de los autos (puedes reemplazar esto con tus propios com.example.main.datos)
-        ObservableList<Auto> autosList =  FXCollections.observableArrayList();
+        ObservableList<Arreglo> autosList =  FXCollections.observableArrayList();
+        Vehiculo vehiculoUno = new Vehiculo(1,2005, TipoVehiculo.AUTO,"VolksWagen GOL POWER 1.6");
+        Vehiculo vehiculoDos = new Vehiculo(2,1995, TipoVehiculo.AUTO,"VolksWagen GOL G1 1.8");
+        Vehiculo vehiculoTres = new Vehiculo(3,2012, TipoVehiculo.AUTO,"VolksWagen GOL TREND");
+        Vehiculo vehiculoCuatro = new Vehiculo(4,2008, TipoVehiculo.AUTO,"VolksWagen GOLF MK2");
 
-        Auto auto1 = new Auto(1,1,"Volkswagen Gol GTI","El cliente solicita un service completo.");
-        Auto auto2 = new Auto(2,2,"Volkswagen Gol Power","El cliente señala que tiene fallas en la potencia");
-        Auto auto3 = new Auto(3,3,"Volkswagen Gol AB9","El cliente señala que quiere pulido y tratamiento de acrilico");
-        Auto auto4 = new Auto(4,4,"Volkswagen Gol Trend","El cliente señala que quiere hacer un chequeo general");
 
-        autosList.add(auto1);
-        autosList.add(auto2);
-        autosList.add(auto3);
-        autosList.add(auto4);
+        Arreglo arreglo1 = new Arreglo(1,vehiculoUno,1,1,"Detalla falla motor",false);
+        Arreglo arreglo2 = new Arreglo(2,vehiculoDos,2,1,"Detalla falla calefaccion",false);
+        Arreglo arreglo3 = new Arreglo(3,vehiculoTres,3,1,"Detalla falla direccion",false);
+        Arreglo arreglo4 = new Arreglo(4,vehiculoCuatro,4,1,"Detalla falla direccion",false);
 
-        arreglos.setItems(autosList);
+        autosList.add(arreglo1);
+        autosList.add(arreglo2);
+        autosList.add(arreglo3);
+        autosList.add(arreglo4);
+
+        ListaTareas.setItems(autosList);
     }
 
     @FXML
@@ -83,8 +89,7 @@ public class UserController {
     }
 
     public void verDetalle() {
-        Auto elementoSeleccionado = arreglos.getSelectionModel().getSelectedItem();
-
+        Arreglo elementoSeleccionado = ListaTareas.getSelectionModel().getSelectedItem();
         if(elementoSeleccionado != null)
         {
             try {

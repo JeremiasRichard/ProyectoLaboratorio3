@@ -7,7 +7,7 @@ import javafx.beans.property.StringProperty;
 
 public class Auto
 {
-    public IntegerProperty IdCliente;
+    /*public IntegerProperty IdCliente;
     public IntegerProperty IdVehiculo;
     public StringProperty Marca;
     public StringProperty DetalleDeFalla;
@@ -73,5 +73,5 @@ public class Auto
                 ", IdVehiculo=" + IdVehiculo +
                 ", Marca=" + Marca +
                 '}';
-    }
+    }*/
 }

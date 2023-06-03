@@ -1,6 +1,10 @@
 package com.example.main.controladores;
 
 import com.example.main.Main;
+import com.example.main.controladores.validaciones.Validaciones;
+import com.example.main.modelos.Usuario;
+import com.example.main.servicios.LoginService;
+import com.example.main.servicios.LoginServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,24 +31,47 @@ public class LoginController {
     @FXML
     private Label errorLabel;
 
-
     @FXML
     public void iniciarSesion()
     {
-        String user = userTextField.getText();
-        String password = passwordField.getText();
+        LoginService loginService = new LoginServiceImpl();
+
+        String usuario = userTextField.getText();
+        String contraseña = passwordField.getText();
+
         errorLabel.setVisible(false);
 
-        if (user.equals("admin") && password.equals("admin")) {
-            // Acceso de administrador
-            abrirVistaAdmin();
-        } else if (user.equals("usuario") && password.equals("usuario")) {
-            // Acceso de usuario normal
-            abrirVistaUsuario();
-        } else {
-            // Credenciales inválidas
-            mostrarMensajeError(errorLabel);
+        if(Validaciones.isStringNull(usuario) || Validaciones.isStringNull(contraseña))
+        {
+            mostrarErrorCamposVacios(errorLabel);
         }
+        else if(Validaciones.validarLogin(usuario,contraseña))
+        {
+            Usuario deseado = loginService.autenticar(usuario,contraseña);
+
+            if(deseado !=  null)
+            {
+                // solo se va a verificar el nivel de acceso.
+                if (deseado.isNivelDeAcceso())
+                {
+                    // Acceso de administrador
+                    abrirVistaAdmin();
+                } else
+                {
+                    // Acceso de usuario normal
+                    abrirVistaUsuario();
+                }
+            }
+            else {
+                // Credenciales inválidas
+                mostrarUsuarioOContraseñaInvalidos(errorLabel);
+            }
+        }
+        else
+        {   //Campos no alfanumericos detectados!
+            mostrarErrorCamposInvalidos(errorLabel);
+        }
+
     }
     private void abrirVistaAdmin() {
         try {
@@ -52,6 +79,7 @@ public class LoginController {
             Scene scene = new Scene(loader.load(),800,600);
             this.primaryStage = (Stage) userTextField.getScene().getWindow();
             AdminController adminController = loader.getController();
+            //adminController.setStageAnterior(this.primaryStage);
             primaryStage.setScene(scene);
 
         } catch (IOException e) {
@@ -72,21 +100,39 @@ public class LoginController {
         }
     }
 
-    private void mostrarMensajeError(Label errorLabel)
+    private void mostrarUsuarioOContraseñaInvalidos(Label errorLabel)
     {
-       errorLabel.setText("Credenciales inválidas.Intenta nuevamente.");
+       errorLabel.setText("Credenciales inválidas.Intenta nuevamente!");
        errorLabel.setTextFill(Color.RED);
        errorLabel.setVisible(true);
     }
+
+    private void mostrarErrorCamposInvalidos(Label errorLabel)
+    {
+        errorLabel.setText("Solo se admiten caracteres alfanumericos!");
+        errorLabel.setTextFill(Color.RED);
+        errorLabel.setVisible(true);
+    }
+
+    private void mostrarErrorCamposVacios(Label errorLabel)
+    {
+        errorLabel.setText("El campo usuario o contraseña estan vacios!");
+        errorLabel.setTextFill(Color.RED);
+        errorLabel.setVisible(true);
+    }
+
     @FXML
     void closeApplication(ActionEvent event) throws IOException
     {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
-    public void setStage(Stage primaryStage) {
+
+    public void setStage(Stage primaryStage)
+    {
         this.primaryStage = primaryStage;
     }
+
     public void show(ActionEvent event)
     {
         primaryStage.show();

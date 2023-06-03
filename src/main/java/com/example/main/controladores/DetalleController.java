@@ -1,8 +1,6 @@
 package com.example.main.controladores;
 
-import com.example.main.modelos.Auto;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import com.example.main.modelos.Arreglo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,8 +22,6 @@ public class DetalleController
     private Label IdVehiculo = new Label();
 
     @FXML
-    private Label Marca  = new Label();
-    @FXML
     private Label DetallesDeFalla = new Label();
 
     @FXML
@@ -40,12 +36,11 @@ public class DetalleController
         );
         EstadoReparacion.setItems(opciones);
     }
-    public void inicializar(Auto auto)
+    public void inicializar(Arreglo ListaTareas)
     {
-        IdCliente.setText(String.valueOf(auto.getIdCliente()));
-        IdVehiculo.setText(String.valueOf(auto.getIdVehiculo()));
-        Marca.setText(auto.getMarca());
-        DetallesDeFalla.setText(auto.getDetalleDeFalla());
+        IdCliente.setText(String.valueOf(ListaTareas.getIdCliente()));
+        IdVehiculo.setText(String.valueOf(ListaTareas.getVehiculo().getIdVehiculo()));
+        DetallesDeFalla.setText(ListaTareas.getDetalleCliente());
         DetallesDeFalla.setWrapText(true);
     }
 

@@ -1,117 +1,104 @@
 package com.example.main.modelos;
 
-import java.util.Date;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class Arreglo {
-    private int IdArreglo;
-    private int IdVehiculo;
-    private int IdCliente;
-    private int IdEmpleado;
-    private String DetalleCliente;
-    private Date FechaDeEntrada;
-    private String DetalleArreglo;
-    private double Costo;
-    private boolean EstaListo;
+    private IntegerProperty idArreglo;
+    private Vehiculo vehiculo;
+    private int idCliente;
+    private int idEmpleado;
+    private String detalleCliente;
+    private String observacionesDelArreglo;
+    private double costo;
+    private boolean estaListo;
 
     public Arreglo(){
 
     }
-    public Arreglo(int idArreglo, int idVehiculo, int idCliente, int idEmpleado, String detalleCliente, Date fechaDeEntrada, String detalleArreglo, double costo, boolean estaListo) {
-        IdArreglo = idArreglo;
-        IdVehiculo = idVehiculo;
-        IdCliente = idCliente;
-        IdEmpleado = idEmpleado;
-        DetalleCliente = detalleCliente;
-        FechaDeEntrada = fechaDeEntrada;
-        DetalleArreglo = detalleArreglo;
-        Costo = costo;
-        EstaListo = estaListo;
+    public Arreglo(int idArreglo,Vehiculo vehiculo, int idCliente, int idEmpleado, String detalleCliente, boolean estaListo) {
+        this.idArreglo = new SimpleIntegerProperty(idArreglo);
+        this.vehiculo = vehiculo;
+        this.idCliente = idCliente;
+        this.idEmpleado = idEmpleado;
+        this.detalleCliente = detalleCliente;
+        this.estaListo = estaListo;
     }
 
-    public int getIdArreglo() {
-        return IdArreglo;
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setAuto(Vehiculo auto) {
+        this.vehiculo = auto;
+    }
+
+    public IntegerProperty getIdArreglo() {
+        return this.idArreglo;
     }
 
     public void setIdArreglo(int idArreglo) {
-        IdArreglo = idArreglo;
-    }
-
-    public int getIdVehiculo() {
-        return IdVehiculo;
-    }
-
-    public void setIdVehiculo(int idVehiculo) {
-        IdVehiculo = idVehiculo;
+        this.idArreglo = new SimpleIntegerProperty(idArreglo);
     }
 
     public int getIdCliente() {
-        return IdCliente;
+        return idCliente;
     }
 
     public void setIdCliente(int idCliente) {
-        IdCliente = idCliente;
+        this.idCliente = idCliente;
     }
 
     public int getIdEmpleado() {
-        return IdEmpleado;
+        return idEmpleado;
     }
 
     public void setIdEmpleado(int idEmpleado) {
-        IdEmpleado = idEmpleado;
+        this.idEmpleado = idEmpleado;
     }
 
     public String getDetalleCliente() {
-        return DetalleCliente;
+        return detalleCliente;
     }
 
     public void setDetalleCliente(String detalleCliente) {
-        DetalleCliente = detalleCliente;
-    }
-
-    public Date getFechaDeEntrada() {
-        return FechaDeEntrada;
-    }
-
-    public void setFechaDeEntrada(Date fechaDeEntrada) {
-        FechaDeEntrada = fechaDeEntrada;
+        this.detalleCliente = detalleCliente;
     }
 
     public String getDetalleArreglo() {
-        return DetalleArreglo;
+        return observacionesDelArreglo;
     }
 
     public void setDetalleArreglo(String detalleArreglo) {
-        DetalleArreglo = detalleArreglo;
+        observacionesDelArreglo = detalleArreglo;
     }
 
     public double getCosto() {
-        return Costo;
+        return costo;
     }
 
     public void setCosto(double costo) {
-        Costo = costo;
+        this.costo = costo;
     }
 
     public boolean isEstaListo() {
-        return EstaListo;
+        return estaListo;
     }
 
     public void setEstaListo(boolean estaListo) {
-        EstaListo = estaListo;
+        this.estaListo = estaListo;
     }
 
     @Override
     public String toString() {
         return "Arreglo{" +
-                "IdArreglo=" + IdArreglo +
-                ", IdVehiculo=" + IdVehiculo +
-                ", IdCliente=" + IdCliente +
-                ", IdEmpleado=" + IdEmpleado +
-                ", DetalleCliente='" + DetalleCliente + '\'' +
-                ", FechaDeEntrada=" + FechaDeEntrada +
-                ", DetalleArreglo='" + DetalleArreglo + '\'' +
-                ", Costo=" + Costo +
-                ", EstaListo=" + EstaListo +
+                "idArreglo=" + idArreglo +
+                ", idCliente=" + idCliente +
+                ", idEmpleado=" + idEmpleado +
+                ", detalleCliente='" + detalleCliente + '\'' +
+                ", observacionesDelArreglo='" + observacionesDelArreglo + '\'' +
+                ", costo=" + costo +
+                ", estaListo=" + estaListo +
                 '}';
     }
 }

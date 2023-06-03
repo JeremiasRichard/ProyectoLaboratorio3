@@ -1,49 +1,49 @@
 package com.example.main.modelos;
 
 public abstract class Personal extends Persona{
-    private int IdEmpleado;
-    private String DatosContacto;//hay un objeto tipo DatosContacto?
-    private Usuario Usuario;
+    private int idEmpleado;
+    private String datosContacto;//hay un objeto tipo DatosContacto?
+    private Usuario usuario;
 
     public Personal(){}
 
     public Personal(String nombre, String apellido, int edad, int idEmpleado, String datosContacto, com.example.main.modelos.Usuario usuario) {
         super(nombre, apellido, edad);
-        IdEmpleado = idEmpleado;
-        DatosContacto = datosContacto;
-        Usuario = usuario;
+        this.idEmpleado = idEmpleado;
+        this.datosContacto = datosContacto;
+        this.usuario = usuario;
     }
 
     public int getIdEmpleado() {
-        return IdEmpleado;
+        return idEmpleado;
     }
 
     public void setIdEmpleado(int idEmpleado) {
-        IdEmpleado = idEmpleado;
+        idEmpleado = idEmpleado;
     }
 
     public String getDatosContacto() {
-        return DatosContacto;
+        return datosContacto;
     }
 
     public void setDatosContacto(String datosContacto) {
-        DatosContacto = datosContacto;
+        datosContacto = datosContacto;
     }
 
     public com.example.main.modelos.Usuario getUsuario() {
-        return Usuario;
+        return usuario;
     }
 
     public void setUsuario(com.example.main.modelos.Usuario usuario) {
-        Usuario = usuario;
+        usuario = usuario;
     }
 
     @Override
     public String toString() {
         return "Personal{" +
-                "IdEmpleado=" + IdEmpleado +
-                ", DatosContacto='" + DatosContacto + '\'' +
-                ", Usuario=" + Usuario +
+                "IdEmpleado=" + idEmpleado +
+                ", DatosContacto='" + datosContacto + '\'' +
+                ", Usuario=" + usuario +
                 '}';
     }
 }

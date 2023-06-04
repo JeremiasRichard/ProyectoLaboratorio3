@@ -4,7 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Arreglo {
-    private IntegerProperty idArreglo;
+    private int idArreglo;
     private Vehiculo vehiculo;
     private int idCliente;
     private int idEmpleado;
@@ -17,28 +17,27 @@ public class Arreglo {
 
     }
     public Arreglo(int idArreglo,Vehiculo vehiculo, int idCliente, int idEmpleado, String detalleCliente, boolean estaListo) {
-        this.idArreglo = new SimpleIntegerProperty(idArreglo);
+        this.idArreglo = idArreglo;
         this.vehiculo = vehiculo;
         this.idCliente = idCliente;
         this.idEmpleado = idEmpleado;
         this.detalleCliente = detalleCliente;
         this.estaListo = estaListo;
     }
-
+    //region Getters y Setters
     public Vehiculo getVehiculo() {
         return vehiculo;
     }
 
-    public void setAuto(Vehiculo auto) {
-        this.vehiculo = auto;
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
     }
 
-    public IntegerProperty getIdArreglo() {
+    public int getIdArreglo() {
         return this.idArreglo;
     }
-
     public void setIdArreglo(int idArreglo) {
-        this.idArreglo = new SimpleIntegerProperty(idArreglo);
+        this.idArreglo = idArreglo;
     }
 
     public int getIdCliente() {
@@ -88,7 +87,7 @@ public class Arreglo {
     public void setEstaListo(boolean estaListo) {
         this.estaListo = estaListo;
     }
-
+    //endregion
     @Override
     public String toString() {
         return "Arreglo{" +

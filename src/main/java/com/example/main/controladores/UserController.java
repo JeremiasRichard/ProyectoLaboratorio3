@@ -53,7 +53,7 @@ public class UserController {
     @FXML
     public void initialize() {
         // Configurar las columnas
-        IdArregloColumna.setCellValueFactory(cellData -> cellData.getValue().getIdArreglo().asObject());
+        //IdArregloColumna.setCellValueFactory(cellData -> cellData.getValue().getIdArreglo().asObject());
         anioFabricacionColumna.setCellValueFactory(cellData -> cellData.getValue().getVehiculo().getAnioFabricacion().asObject());
         MarcaColumna.setCellValueFactory(cellData -> cellData.getValue().getVehiculo().getMarca());
 

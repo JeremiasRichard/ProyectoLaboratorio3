@@ -17,7 +17,7 @@ public class Mecanico extends Personal{
         this.tipoVehiculo = tipoVehiculo;
         this.especialidad = especialidad;
     }
-
+    //region Getters y Setters
     public List<Arreglo> getListaArreglos() {
         return listaArreglos;
     }
@@ -41,7 +41,7 @@ public class Mecanico extends Personal{
     public void setEspecialidad(com.example.main.enums.Especialidad especialidad) {
         especialidad = especialidad;
     }
-
+    //endregion
     @Override
     public String toString() {
         return "Mecanico{" +

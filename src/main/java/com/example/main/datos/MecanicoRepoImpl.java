@@ -34,9 +34,10 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
     }
 
     @Override
-    public void agregar(Mecanico... objeto) {
+    public void agregar(Mecanico nuevo) {
         cargar();
-        this.listaMecanicos.addAll(List.of(objeto));
+        nuevo.setIdEmpleado(listaMecanicos.size()+1);
+        this.listaMecanicos.add(nuevo);
         guardar();
     }
 
@@ -45,7 +46,15 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
         cargar();
         for (Mecanico mecanico : listaMecanicos) {
             if (mecanico.getIdEmpleado() == id) {
-                mecanico = nuevo;
+                //Persona
+                mecanico.setNombre(nuevo.getNombre());
+                mecanico.setApellido(nuevo.getApellido());
+                mecanico.setEdad(nuevo.getEdad());
+                mecanico.setDatosContacto(nuevo.getDatosContacto());
+                //Mecanico
+                mecanico.setEspecialidad(nuevo.getEspecialidad());
+                mecanico.setTipoVehiculo(nuevo.getTipoVehiculo());
+
                 break;
             }
         }

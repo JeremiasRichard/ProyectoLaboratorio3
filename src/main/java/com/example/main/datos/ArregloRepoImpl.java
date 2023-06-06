@@ -35,9 +35,10 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
     }
 
     @Override
-    public void agregar(Arreglo... objeto) {
+    public void agregar(Arreglo nuevo) {
         cargar();
-        this.listaArreglos.addAll(List.of(objeto));
+        nuevo.setIdArreglo(listaArreglos.size()+1);
+        this.listaArreglos.add(nuevo);
         guardar();
     }
 
@@ -46,7 +47,13 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
         cargar();
         for (Arreglo arreglo : listaArreglos) {
             if (arreglo.getIdArreglo() == id) {
-                arreglo = nuevo;
+                arreglo.setIdEmpleado(nuevo.getIdEmpleado());
+                arreglo.setIdEmpleado(nuevo.getIdEmpleado());
+                arreglo.setCosto(nuevo.getCosto());
+                arreglo.setVehiculo(nuevo.getVehiculo());
+                arreglo.setEstaListo(nuevo.isEstaListo());
+                arreglo.setDetalleArreglo(nuevo.getDetalleArreglo());
+                arreglo.setDetalleCliente(nuevo.getDetalleCliente());
                 break;
             }
         }

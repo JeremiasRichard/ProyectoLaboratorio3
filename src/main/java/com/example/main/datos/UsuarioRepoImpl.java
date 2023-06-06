@@ -1,6 +1,7 @@
 package com.example.main.datos;
 
 import com.example.main.modelos.Usuario;
+import com.example.main.utils.Encriptador;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 
@@ -34,9 +35,10 @@ public class UsuarioRepoImpl implements Repositorio<Usuario> {
     }
 
     @Override
-    public void agregar(Usuario... objeto) {
+    public void agregar(Usuario nuevo) {
         cargar();
-        this.listaUsuarios.addAll(List.of(objeto));
+        nuevo.setIdUsuario(listaUsuarios.size()+1);
+        this.listaUsuarios.add(nuevo);
         guardar();
     }
 
@@ -45,7 +47,8 @@ public class UsuarioRepoImpl implements Repositorio<Usuario> {
         cargar();
         for (Usuario usr : listaUsuarios) {
             if (usr.getIdUsuario() == id) {
-                usr = nuevo;
+                usr.setUser(nuevo.getUser());
+                usr.setPassword(Encriptador.obtenerMD5(nuevo.getPassword()));
                 break;
             }
         }
@@ -80,5 +83,21 @@ public class UsuarioRepoImpl implements Repositorio<Usuario> {
     public List<Usuario> listar() {
         cargar();
         return this.listaUsuarios;
+    }
+
+    public Usuario buscarPorUsuarioYPassword(String usuario,String password){
+        cargar();
+        Usuario encontrado = null;
+        for(Usuario usr : listaUsuarios){
+            if(isUsuarioBuscado(usuario, password, usr)){
+                encontrado = usr;
+                break;
+            }
+        }
+       return encontrado;
+    }
+
+    private static boolean isUsuarioBuscado(String usuario, String password, Usuario usr) {
+        return usr.getUser().equals(usuario) && usr.getPassword().equals(password);
     }
 }

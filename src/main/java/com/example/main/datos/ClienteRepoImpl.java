@@ -35,9 +35,10 @@ public class ClienteRepoImpl implements Repositorio<Cliente>{
     }
 
     @Override
-    public void agregar(Cliente... objeto) {
+    public void agregar(Cliente cliente) {
         cargar();
-        this.listaClientes.addAll(List.of(objeto));
+        cliente.setIdCliente(listaClientes.size()+1);
+        this.listaClientes.add(cliente);
         guardar();
     }
 
@@ -46,7 +47,16 @@ public class ClienteRepoImpl implements Repositorio<Cliente>{
         cargar();
         for (Cliente cliente : listaClientes) {
             if (cliente.getIdCliente() == id) {
-                cliente = nuevo;
+                //Persona
+                cliente.setNombre(nuevo.getNombre());
+                cliente.setApellido(nuevo.getApellido());
+                cliente.setEdad(nuevo.getEdad());
+                //Cliente
+                cliente.setDireccion(nuevo.getDireccion());
+                cliente.setMail(nuevo.getMail());
+                cliente.setNroTelefono(nuevo.getNroTelefono());
+                cliente.setHistorialArreglos(nuevo.getHistorialArreglos());
+                cliente.setListaVehiculos(nuevo.getListaVehiculos());
                 break;
             }
         }

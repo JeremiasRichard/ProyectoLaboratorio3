@@ -36,9 +36,10 @@ public class VehiculoRepoImpl implements  Repositorio<Vehiculo>{
     }
 
     @Override
-    public void agregar(Vehiculo... objeto) {
+    public void agregar(Vehiculo nuevo) {
         cargar();
-        this.listaVehiculos.addAll(List.of(objeto));
+        nuevo.setIdVehiculo(listaVehiculos.size()+1);
+        this.listaVehiculos.add(nuevo);
         guardar();
     }
 
@@ -47,7 +48,10 @@ public class VehiculoRepoImpl implements  Repositorio<Vehiculo>{
         cargar();
         for (Vehiculo vehiculo : listaVehiculos) {
             if (vehiculo.getIdVehiculo() == id) {
-                vehiculo = nuevo;
+                vehiculo.setTipoVehiculo(nuevo.getTipoVehiculo());
+                //TODO cambiar tipo de dato de vehiculo
+                vehiculo.setMarca(nuevo.getMarca().get());
+                vehiculo.setAnioFabricacion(nuevo.getAnioFabricacion().get());
                 break;
             }
         }

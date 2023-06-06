@@ -7,7 +7,7 @@ import java.util.List;
 public interface Repositorio<T> {
 
     void cargar();
-    void agregar(T ... objeto);
+    void agregar(T nuevo);
     void editar(int id, T nuevo);
     T buscarPorId(int id);
     void eliminar(int id);

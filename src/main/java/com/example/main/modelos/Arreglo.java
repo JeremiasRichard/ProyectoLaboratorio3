@@ -1,7 +1,5 @@
 package com.example.main.modelos;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 public class Arreglo {
     private int idArreglo;

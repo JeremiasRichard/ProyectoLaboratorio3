@@ -1,7 +1,6 @@
 package com.example.main.datos;
 
 import com.example.main.modelos.Vehiculo;
-import com.example.main.modelos.Vehiculo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 

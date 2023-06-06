@@ -8,16 +8,16 @@ import javafx.beans.property.StringProperty;
 
 public class Vehiculo {
     private int IdVehiculo;
-    private IntegerProperty AnioFabricacion;
+    private int AnioFabricacion;
     private TipoVehiculo TipoVehiculo;
-    private StringProperty Marca;
+    private String Marca;
 
     public Vehiculo(){}
     public Vehiculo(int idVehiculo, int anioFabricacion, TipoVehiculo tipoVehiculo, String marca) {
         IdVehiculo = idVehiculo;
-        AnioFabricacion =  new SimpleIntegerProperty(anioFabricacion);
+        AnioFabricacion =  anioFabricacion;
         TipoVehiculo = tipoVehiculo;
-        Marca = new SimpleStringProperty(marca);
+        Marca = marca;
     }
     //region Getters y Setters
     public int getIdVehiculo() {
@@ -28,12 +28,12 @@ public class Vehiculo {
         IdVehiculo = idVehiculo;
     }
 
-    public IntegerProperty getAnioFabricacion() {
+    public int getAnioFabricacion() {
         return AnioFabricacion;
     }
 
     public void setAnioFabricacion(int anioFabricacion) {
-        this.AnioFabricacion.set(anioFabricacion);
+        this.AnioFabricacion = anioFabricacion;
     }
 
     public TipoVehiculo getTipoVehiculo()
@@ -46,17 +46,22 @@ public class Vehiculo {
         TipoVehiculo = tipoVehiculo;
     }
 
-    public StringProperty getMarca() {
+    public int anioFabricacionProperty() {
+        return AnioFabricacion;
+    }
+
+    public String getMarca() {
         return Marca;
     }
 
     public void setMarca(String marca) {
-        this.Marca.set(marca);
+        Marca = marca;
     }
+
     @Override
     public String toString() {
         return "Vehiculo{" +
-                "IdVehiculo=" + IdVehiculo +
+                "AñoFrabricacion=" + IdVehiculo +
                 ", AnioFabricacion=" + AnioFabricacion +
                 ", TipoVehiculo=" + TipoVehiculo +
                 ", Marca='" + Marca + '\'' +

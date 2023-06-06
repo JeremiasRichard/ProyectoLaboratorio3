@@ -1,6 +1,8 @@
 package com.example.main.controladores;
 
+import com.example.main.DTOs.ArregloDTO;
 import com.example.main.modelos.Arreglo;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,7 +18,7 @@ public class DetalleController
     @FXML
     private Stage stageAnterior;
     @FXML
-    private  Label IdCliente = new Label();
+    private  Label IdArreglo = new Label();
 
     @FXML
     private Label IdVehiculo = new Label();
@@ -35,11 +37,12 @@ public class DetalleController
                 "Finalizado"
         );
         EstadoReparacion.setItems(opciones);
+
     }
-    public void inicializar(Arreglo ListaTareas)
+    public void inicializar(ArregloDTO ListaTareas)
     {
-        IdCliente.setText(String.valueOf(ListaTareas.getIdCliente()));
-        IdVehiculo.setText(String.valueOf(ListaTareas.getVehiculo().getIdVehiculo()));
+        IdArreglo.setText(String.valueOf(ListaTareas.idArregloProperty()));
+        IdVehiculo.setText(String.valueOf(ListaTareas.getVehiculoDTO().getIdVehiculo()));
         DetallesDeFalla.setText(ListaTareas.getDetalleCliente());
         DetallesDeFalla.setWrapText(true);
     }

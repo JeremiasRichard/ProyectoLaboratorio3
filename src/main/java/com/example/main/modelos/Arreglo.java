@@ -1,6 +1,8 @@
 package com.example.main.modelos;
 
 
+import com.example.main.enums.EstadoReparacion;
+
 public class Arreglo {
     private int idArreglo;
     private Vehiculo vehiculo;
@@ -9,22 +11,30 @@ public class Arreglo {
     private String detalleCliente;
     private String observacionesDelArreglo;
     private double costo;
-    private boolean estaListo;
+    private EstadoReparacion estadoReparacion;
 
     public Arreglo(){
 
     }
-    public Arreglo(int idArreglo,Vehiculo vehiculo, int idCliente, int idEmpleado, String detalleCliente, boolean estaListo) {
+    public Arreglo(int idArreglo,Vehiculo vehiculo, int idCliente, int idEmpleado, String detalleCliente, EstadoReparacion estadoReparacion) {
         this.idArreglo = idArreglo;
         this.vehiculo = vehiculo;
         this.idCliente = idCliente;
         this.idEmpleado = idEmpleado;
         this.detalleCliente = detalleCliente;
-        this.estaListo = estaListo;
+        this.estadoReparacion = estadoReparacion;
     }
     //region Getters y Setters
     public Vehiculo getVehiculo() {
         return vehiculo;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     public void setVehiculo(Vehiculo vehiculo) {
@@ -36,14 +46,6 @@ public class Arreglo {
     }
     public void setIdArreglo(int idArreglo) {
         this.idArreglo = idArreglo;
-    }
-
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
     }
 
     public int getIdEmpleado() {
@@ -78,24 +80,32 @@ public class Arreglo {
         this.costo = costo;
     }
 
-    public boolean isEstaListo() {
-        return estaListo;
+    public String getObservacionesDelArreglo() {
+        return observacionesDelArreglo;
     }
 
-    public void setEstaListo(boolean estaListo) {
-        this.estaListo = estaListo;
+    public void setObservacionesDelArreglo(String observacionesDelArreglo) {
+        this.observacionesDelArreglo = observacionesDelArreglo;
     }
-    //endregion
+
+    public EstadoReparacion getEstadoReparacion() {
+        return estadoReparacion;
+    }
+
+    public void setEstadoReparacion(EstadoReparacion estadoReparacion) {
+        this.estadoReparacion = estadoReparacion;
+    }
     @Override
     public String toString() {
         return "Arreglo{" +
                 "idArreglo=" + idArreglo +
+                ", vehiculo=" + vehiculo +
                 ", idCliente=" + idCliente +
                 ", idEmpleado=" + idEmpleado +
                 ", detalleCliente='" + detalleCliente + '\'' +
                 ", observacionesDelArreglo='" + observacionesDelArreglo + '\'' +
                 ", costo=" + costo +
-                ", estaListo=" + estaListo +
+                ", estadoReparacion=" + estadoReparacion +
                 '}';
     }
 }

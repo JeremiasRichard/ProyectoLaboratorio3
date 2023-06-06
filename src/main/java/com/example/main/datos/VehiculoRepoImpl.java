@@ -49,8 +49,8 @@ public class VehiculoRepoImpl implements  Repositorio<Vehiculo>{
             if (vehiculo.getIdVehiculo() == id) {
                 vehiculo.setTipoVehiculo(nuevo.getTipoVehiculo());
                 //TODO cambiar tipo de dato de vehiculo
-                vehiculo.setMarca(nuevo.getMarca().get());
-                vehiculo.setAnioFabricacion(nuevo.getAnioFabricacion().get());
+                vehiculo.setMarca(nuevo.getMarca());
+                vehiculo.setAnioFabricacion(nuevo.getAnioFabricacion());
                 break;
             }
         }

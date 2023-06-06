@@ -12,7 +12,7 @@ public abstract class Persona {
         this.apellido = apellido;
         this.edad = edad;
     }
-
+    //region Getters y Setters
     public String getNombre() {
         return nombre;
     }
@@ -36,7 +36,7 @@ public abstract class Persona {
     public void setEdad(int edad) {
         edad = edad;
     }
-
+    //endregion
     @Override
     public String toString() {
         return "Persona{" +

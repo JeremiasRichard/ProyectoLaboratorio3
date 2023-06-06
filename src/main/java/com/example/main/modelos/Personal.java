@@ -13,7 +13,7 @@ public abstract class Personal extends Persona{
         this.datosContacto = datosContacto;
         this.usuario = usuario;
     }
-
+    //region Getters y Setters
     public int getIdEmpleado() {
         return idEmpleado;
     }
@@ -37,7 +37,7 @@ public abstract class Personal extends Persona{
     public void setUsuario(com.example.main.modelos.Usuario usuario) {
         usuario = usuario;
     }
-
+    //endregion
     @Override
     public String toString() {
         return "Personal{" +

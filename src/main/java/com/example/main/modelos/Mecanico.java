@@ -17,7 +17,7 @@ public class Mecanico extends Personal{
         this.tipoVehiculo = tipoVehiculo;
         this.especialidad = especialidad;
     }
-
+    //region Getters y Setters
     public List<Arreglo> getListaArreglos() {
         return listaArreglos;
     }
@@ -26,22 +26,22 @@ public class Mecanico extends Personal{
         listaArreglos = listaArreglos;
     }
 
-    public com.example.main.enums.TipoVehiculo getTipoVehiculo() {
+    public TipoVehiculo getTipoVehiculo() {
         return tipoVehiculo;
     }
 
-    public void setTipoVehiculo(com.example.main.enums.TipoVehiculo tipoVehiculo) {
+    public void setTipoVehiculo(TipoVehiculo tipoVehiculo) {
         tipoVehiculo = tipoVehiculo;
     }
 
-    public com.example.main.enums.Especialidad getEspecialidad() {
+    public Especialidad getEspecialidad() {
         return especialidad;
     }
 
-    public void setEspecialidad(com.example.main.enums.Especialidad especialidad) {
+    public void setEspecialidad(Especialidad especialidad) {
         especialidad = especialidad;
     }
-
+    //endregion
     @Override
     public String toString() {
         return "Mecanico{" +

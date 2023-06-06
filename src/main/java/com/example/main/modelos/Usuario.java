@@ -1,12 +1,13 @@
 package com.example.main.modelos;
 
-public class Usuario extends Persona{
+public class Usuario {
     private int idUsuario;
     private String user;
     private String password;
     private boolean nivelDeAcceso;
 
-    public Usuario(){}
+    public Usuario() {
+    }
 
     public Usuario(int idUsuario, String user, String password, boolean nivelDeAcceso) {
         this.idUsuario = idUsuario;
@@ -15,12 +16,13 @@ public class Usuario extends Persona{
         this.nivelDeAcceso = nivelDeAcceso;
     }
 
+    //region Getters y Setters
     public int getIdUsuario() {
         return idUsuario;
     }
 
     public void setIdUsuario(int idUsuario) {
-        idUsuario = idUsuario;
+        this.idUsuario = idUsuario;
     }
 
     public String getUser() {
@@ -28,7 +30,7 @@ public class Usuario extends Persona{
     }
 
     public void setUser(String user) {
-        user = user;
+        this.user = user;
     }
 
     public String getPassword() {
@@ -36,7 +38,7 @@ public class Usuario extends Persona{
     }
 
     public void setPassword(String password) {
-        password = password;
+        this.password = password;
     }
 
     public boolean isNivelDeAcceso() {
@@ -44,16 +46,7 @@ public class Usuario extends Persona{
     }
 
     public void setNivelDeAcceso(boolean nivelDeAcceso) {
-        nivelDeAcceso = nivelDeAcceso;
+        this.nivelDeAcceso = nivelDeAcceso;
     }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "IdUsuario=" + idUsuario +
-                ", User='" + user + '\'' +
-                ", Password='" + password + '\'' +
-                ", NivelDeAcceso=" + nivelDeAcceso +
-                '}';
-    }
+    //endregion
 }

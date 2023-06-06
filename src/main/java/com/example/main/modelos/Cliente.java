@@ -20,7 +20,7 @@ public class Cliente extends Persona{
         this.direccion = direccion;
         this.listaVehiculos = listaVehiculos;
     }
-
+    //region Getters y Setters
     public int getIdCliente() {
         return idCliente;
     }
@@ -68,7 +68,7 @@ public class Cliente extends Persona{
     public void setListaVehiculos(List<Vehiculo> listaVehiculos) {
         listaVehiculos = listaVehiculos;
     }
-
+    //endregion
     @Override
     public String toString() {
         return "Cliente{" +

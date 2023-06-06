@@ -13,13 +13,13 @@ public class Vehiculo {
     private StringProperty Marca;
 
     public Vehiculo(){}
-    public Vehiculo(int idVehiculo, int anioFabricacion, com.example.main.enums.TipoVehiculo tipoVehiculo, String marca) {
+    public Vehiculo(int idVehiculo, int anioFabricacion, TipoVehiculo tipoVehiculo, String marca) {
         IdVehiculo = idVehiculo;
         AnioFabricacion =  new SimpleIntegerProperty(anioFabricacion);
         TipoVehiculo = tipoVehiculo;
         Marca = new SimpleStringProperty(marca);
     }
-
+    //region Getters y Setters
     public int getIdVehiculo() {
         return IdVehiculo;
     }
@@ -36,12 +36,12 @@ public class Vehiculo {
         this.AnioFabricacion.set(anioFabricacion);
     }
 
-    public com.example.main.enums.TipoVehiculo getTipoVehiculo()
+    public TipoVehiculo getTipoVehiculo()
     {
         return TipoVehiculo;
     }
 
-    public void setTipoVehiculo(com.example.main.enums.TipoVehiculo tipoVehiculo)
+    public void setTipoVehiculo(TipoVehiculo tipoVehiculo)
     {
         TipoVehiculo = tipoVehiculo;
     }

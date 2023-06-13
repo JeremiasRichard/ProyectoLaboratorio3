@@ -12,6 +12,7 @@ public class Arreglo {
     private String observacionesDelArreglo;
     private double costo;
     private EstadoReparacion estadoReparacion;
+    private boolean activo;
 
     public Arreglo(){
 
@@ -23,6 +24,7 @@ public class Arreglo {
         this.idEmpleado = idEmpleado;
         this.detalleCliente = detalleCliente;
         this.estadoReparacion = estadoReparacion;
+        this.activo = true;
     }
     //region Getters y Setters
     public Vehiculo getVehiculo() {
@@ -95,6 +97,10 @@ public class Arreglo {
     public void setEstadoReparacion(EstadoReparacion estadoReparacion) {
         this.estadoReparacion = estadoReparacion;
     }
+    public boolean getActivo() { return activo; }
+
+    public void setActivo(boolean activo) { this.activo = activo; }
+    //endregion
     @Override
     public String toString() {
         return "Arreglo{" +
@@ -106,6 +112,7 @@ public class Arreglo {
                 ", observacionesDelArreglo='" + observacionesDelArreglo + '\'' +
                 ", costo=" + costo +
                 ", estadoReparacion=" + estadoReparacion +
+                ", activo=" + activo +
                 '}';
     }
 }

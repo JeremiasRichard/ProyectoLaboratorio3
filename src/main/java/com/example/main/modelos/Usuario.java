@@ -5,7 +5,7 @@ public class Usuario {
     private String user;
     private String password;
     private boolean nivelDeAcceso;
-
+    private boolean activo;
     public Usuario() {
     }
 
@@ -14,6 +14,7 @@ public class Usuario {
         this.user = user;
         this.password = password;
         this.nivelDeAcceso = nivelDeAcceso;
+        this.activo = true;
     }
 
     //region Getters y Setters
@@ -48,5 +49,10 @@ public class Usuario {
     public void setNivelDeAcceso(boolean nivelDeAcceso) {
         this.nivelDeAcceso = nivelDeAcceso;
     }
+
+    public boolean getActivo() { return activo; }
+
+    public void setActivo(boolean activo) { this.activo = activo; }
+
     //endregion
 }

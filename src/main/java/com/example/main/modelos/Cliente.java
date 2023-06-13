@@ -9,7 +9,7 @@ public class Cliente extends Persona{
     private String mail;
     private String direccion;
     private List<Vehiculo> listaVehiculos;
-
+    private boolean activo;
     public Cliente(){}
 
     public Cliente(int idCliente, List<Arreglo> historialArreglos, int nroTelefono, String mail, String direccion, List<Vehiculo> listaVehiculos) {
@@ -19,6 +19,7 @@ public class Cliente extends Persona{
         this.mail = mail;
         this.direccion = direccion;
         this.listaVehiculos = listaVehiculos;
+        this.activo = true;
     }
     //region Getters y Setters
     public int getIdCliente() {
@@ -68,6 +69,11 @@ public class Cliente extends Persona{
     public void setListaVehiculos(List<Vehiculo> listaVehiculos) {
         listaVehiculos = listaVehiculos;
     }
+
+    public boolean getActivo() { return activo; }
+
+    public void setActivo(boolean activo) { this.activo = activo; }
+
     //endregion
     @Override
     public String toString() {
@@ -78,6 +84,7 @@ public class Cliente extends Persona{
                 ", Mail='" + mail + '\'' +
                 ", Direccion='" + direccion + '\'' +
                 ", ListaVehiculos=" + listaVehiculos +
+                ", activo=" + activo +
                 '}';
     }
 }

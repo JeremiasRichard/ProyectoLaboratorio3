@@ -9,6 +9,7 @@ public class Mecanico extends Personal{
     private List<Arreglo> listaArreglos;
     private TipoVehiculo tipoVehiculo;
     private Especialidad especialidad;
+    private boolean activo;
 
     public Mecanico(){}
 
@@ -16,6 +17,7 @@ public class Mecanico extends Personal{
         this.listaArreglos = listaArreglos;
         this.tipoVehiculo = tipoVehiculo;
         this.especialidad = especialidad;
+        this.activo = true;
     }
     //region Getters y Setters
     public List<Arreglo> getListaArreglos() {
@@ -41,6 +43,11 @@ public class Mecanico extends Personal{
     public void setEspecialidad(Especialidad especialidad) {
         especialidad = especialidad;
     }
+
+    public boolean getActivo() { return activo; }
+
+    public void setActivo(boolean activo) { this.activo = activo; }
+
     //endregion
     @Override
     public String toString() {
@@ -48,6 +55,7 @@ public class Mecanico extends Personal{
                 "ListaArreglos=" + listaArreglos +
                 ", TipoVehiculo=" + tipoVehiculo +
                 ", Especialidad=" + especialidad +
+                ", activo=" + activo +
                 '}';
     }
 }

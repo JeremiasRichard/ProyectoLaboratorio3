@@ -1,7 +1,7 @@
-package com.example.main.modelos;
+ package com.example.main.modelos;
 
 public class Usuario {
-    private int idUsuario;
+    private int idUsuario; //TODO: conexion con ID? o agregar un objeto Persona (Cliente/Mecanico)? Conexion por DNI?
     private String user;
     private String password;
     private boolean nivelDeAcceso;
@@ -53,6 +53,5 @@ public class Usuario {
     public boolean getActivo() { return activo; }
 
     public void setActivo(boolean activo) { this.activo = activo; }
-
     //endregion
 }

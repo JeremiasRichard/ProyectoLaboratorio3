@@ -8,11 +8,11 @@ public class Cliente extends Persona{
     private int nroTelefono;
     private String mail;
     private String direccion;
-    private List<Vehiculo> listaVehiculos;
+    private List<String> listaVehiculos;
     private boolean activo;
     public Cliente(){}
 
-    public Cliente(int idCliente, List<Arreglo> historialArreglos, int nroTelefono, String mail, String direccion, List<Vehiculo> listaVehiculos) {
+    public Cliente(int idCliente, List<Arreglo> historialArreglos, int nroTelefono, String mail, String direccion, List<String> listaVehiculos) {
         this.idCliente = idCliente;
         this.historialArreglos = historialArreglos;
         this.nroTelefono = nroTelefono;
@@ -62,11 +62,11 @@ public class Cliente extends Persona{
         direccion = direccion;
     }
 
-    public List<Vehiculo> getListaVehiculos() {
+    public List<String> getListaVehiculos() {
         return listaVehiculos;
     }
 
-    public void setListaVehiculos(List<Vehiculo> listaVehiculos) {
+    public void setListaVehiculos(List<String> listaVehiculos) {
         listaVehiculos = listaVehiculos;
     }
 

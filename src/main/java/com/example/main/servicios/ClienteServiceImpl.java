@@ -37,4 +37,4 @@ public class ClienteServiceImpl implements BaseService<Cliente>{
     public Cliente buscarPorId(int id){
         return clienteRepo.buscarPorId(id);
     }
-}
+}//TODO: Agregar metodos para Vehiculos(lista patentes)

@@ -2,6 +2,7 @@ package com.example.main.controladores;
 
 import com.example.main.Main;
 import com.example.main.controladores.validaciones.Validaciones;
+import com.example.main.modelos.Mecanico;
 import com.example.main.modelos.Usuario;
 import com.example.main.servicios.LoginService;
 import com.example.main.servicios.LoginServiceImpl;
@@ -30,6 +31,7 @@ public class LoginController {
     private Button exitButton;
     @FXML
     private Label errorLabel;
+    private Usuario logueado;
 
     @FXML
     public void iniciarSesion()
@@ -48,19 +50,21 @@ public class LoginController {
         else if(Validaciones.validarLogin(usuario,contraseña))
         {
             Usuario deseado = loginService.autenticar(usuario,contraseña);
+            this.logueado = deseado;
 
-            if(deseado !=  null)
+            if(logueado !=  null)
             {
                 // solo se va a verificar el nivel de acceso.
-                if (deseado.isNivelDeAcceso())
+                if (this.logueado.isNivelDeAcceso())
                 {
                     // Acceso de administrador
-                    abrirVistaAdmin();
+                    abrirVistaAdmin(this.logueado);
                 } else
                 {
                     // Acceso de usuario normal
-                    abrirVistaUsuario();
+                    abrirVistaUsuario(this.logueado);
                 }
+
             }
             else {
                 // Credenciales inválidas
@@ -73,13 +77,14 @@ public class LoginController {
         }
 
     }
-    private void abrirVistaAdmin() {
+    private void abrirVistaAdmin(Usuario actual) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/vista/adminView.fxml"));
             Scene scene = new Scene(loader.load(),800,600);
             this.primaryStage = (Stage) userTextField.getScene().getWindow();
             AdminController adminController = loader.getController();
-            //adminController.setStageAnterior(this.primaryStage);
+            adminController.setUsuario(actual);
+            adminController.setStageAnterior(this.primaryStage);
             primaryStage.setScene(scene);
 
         } catch (IOException e) {
@@ -87,12 +92,14 @@ public class LoginController {
         }
     }
 
-    private void abrirVistaUsuario() {
+    private void abrirVistaUsuario(Usuario actual) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/vista/userView.fxml"));
             Scene scene = new Scene(loader.load(),800,600);
             this.primaryStage = (Stage) userTextField.getScene().getWindow();
             UserController userController = loader.getController();
+            userController.inicializar(actual);
+            userController.setUsuario(actual);
             userController.setStageAnterior(this.primaryStage);
             primaryStage.setScene(scene);
         } catch (IOException e) {
@@ -125,6 +132,7 @@ public class LoginController {
     void closeApplication(ActionEvent event) throws IOException
     {
         Stage stage = (Stage) exitButton.getScene().getWindow();
+        this.logueado=null;
         stage.close();
     }
 

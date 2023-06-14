@@ -5,7 +5,7 @@ import com.example.main.enums.TipoVehiculo;
 
 import java.util.List;
 
-public class Mecanico extends Personal{
+public class Mecanico extends Empleado {
     private List<Arreglo> listaArreglos;
     private TipoVehiculo tipoVehiculo;
     private Especialidad especialidad;
@@ -23,23 +23,20 @@ public class Mecanico extends Personal{
     }
 
     public void setListaArreglos(List<Arreglo> listaArreglos) {
-        listaArreglos = listaArreglos;
+       this.listaArreglos = listaArreglos;
     }
 
     public TipoVehiculo getTipoVehiculo() {
         return tipoVehiculo;
     }
-
     public void setTipoVehiculo(TipoVehiculo tipoVehiculo) {
-        tipoVehiculo = tipoVehiculo;
+        this.tipoVehiculo = tipoVehiculo;
     }
-
     public Especialidad getEspecialidad() {
         return especialidad;
     }
-
     public void setEspecialidad(Especialidad especialidad) {
-        especialidad = especialidad;
+        this.especialidad = especialidad;
     }
     //endregion
     @Override

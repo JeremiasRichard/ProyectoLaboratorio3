@@ -24,53 +24,64 @@
                   <Image url="@../../images/Jorge.svg.png" />
                </image>
             </ImageView>
-            <Label layoutX="27.0" layoutY="557.0" prefHeight="19.0" prefWidth="197.0" text="Copyright(c). All Rights Reserved." textFill="#fffafa" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="557.0" prefHeight="19.0" prefWidth="197.0" text="Copyright(c). All Rights Reserved." textFill="#fffafa" />
          </children></AnchorPane>
    </left>
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="402.0" BorderPane.alignment="CENTER">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="76.0" layoutX="37.0" layoutY="266.0" stroke="GREY" strokeType="INSIDE" width="472.0" />
-            <Button fx:id="atrasButton" layoutX="410.0" layoutY="507.0" mnemonicParsing="false" onAction="#volverAtras" prefHeight="25.0" prefWidth="93.0" text="Atras" />
-            <Label fx:id="IdCliente" layoutX="125.0" layoutY="130.0" prefHeight="36.0" prefWidth="63.0" text="Id Cliente ">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="93.0" layoutX="26.0" layoutY="94.0" stroke="#0d0d0d4a" strokeType="INSIDE" width="474.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="76.0" layoutX="26.0" layoutY="225.0" stroke="GREY" strokeType="INSIDE" width="474.0" />
+            <Button fx:id="atrasButton" layoutX="417.0" layoutY="507.0" mnemonicParsing="false" onAction="#volverAtras" prefHeight="25.0" prefWidth="93.0" text="Atras" />
+            <Label fx:id="IdCliente" layoutX="107.0" layoutY="100.0" prefHeight="8.0" prefWidth="63.0" text="Id Cliente ">
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Label fx:id="Marca" layoutX="125.0" layoutY="166.0" prefHeight="36.0" prefWidth="252.0" text="Marca">
+            <Label fx:id="Marca" layoutX="86.0" layoutY="130.0" prefHeight="11.0" prefWidth="252.0" text="Marca">
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Label fx:id="IdVehiculo" layoutX="125.0" layoutY="202.0" prefHeight="36.0" prefWidth="78.0" text="Id Vehiculo ">
+            <Label fx:id="IdVehiculo" layoutX="114.0" layoutY="160.0" prefHeight="16.0" prefWidth="78.0" text="Id Vehiculo ">
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <TextArea layoutX="39.0" layoutY="350.0" prefHeight="131.0" prefWidth="468.0" promptText="Observaciones de reparacion" />
-            <Button fx:id="atrasButton1" layoutX="297.0" layoutY="507.0" mnemonicParsing="false" onAction="#volverAtras" prefHeight="25.0" prefWidth="93.0" text="Guardar" />
-            <ChoiceBox fx:id="EstadoReparacion" layoutX="93.0" layoutY="495.0" prefHeight="25.0" prefWidth="151.0" />
-            <Label layoutX="36.0" layoutY="130.0" prefHeight="36.0" prefWidth="71.0" text="Id Cliente: ">
+            <TextArea fx:id="observacionesDelArregloField" layoutX="26.0" layoutY="314.0" prefHeight="175.0" prefWidth="474.0" promptText="Observaciones de reparacion" />
+            <Button fx:id="guardarButton" layoutX="308.0" layoutY="507.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" text="Guardar" />
+            <ChoiceBox fx:id="EstadoR" layoutX="93.0" layoutY="507.0" prefHeight="25.0" prefWidth="151.0" />
+            <Label layoutX="38.0" layoutY="100.0" prefHeight="15.0" prefWidth="69.0" text="Id Cliente: ">
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Label layoutX="40.0" layoutY="166.0" prefHeight="36.0" prefWidth="63.0" text="Marca:">
+            <Label layoutX="38.0" layoutY="130.0" prefHeight="20.0" prefWidth="44.0" text="Marca:">
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Label layoutX="40.0" layoutY="202.0" prefHeight="36.0" prefWidth="80.0" text="Id Vehiculo:">
+            <Label layoutX="38.0" layoutY="160.0" prefHeight="20.0" prefWidth="76.0" text="Id Vehiculo:">
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Text layoutX="40.0" layoutY="512.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado">
+            <Text layoutX="40.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado:" wrappingWidth="46.3369140625">
                <font>
                   <Font size="14.0" />
                </font></Text>
-            <Text fill="#1b1a1a" layoutX="40.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Observaciones: " wrappingWidth="105.625">
+            <Text fill="#1b1a1a" layoutX="25.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Observaciones: " wrappingWidth="102.625">
                <font>
                   <Font size="14.0" />
                </font></Text>
-            <Label fx:id="DetallesDeFalla" layoutX="38.0" layoutY="268.0" prefHeight="73.0" prefWidth="470.0">
+            <Label fx:id="DetallesDeFalla" alignment="TOP_LEFT" layoutX="34.0" layoutY="232.0" prefHeight="63.0" prefWidth="458.0">
                <font>
                   <Font size="14.0" />
                </font></Label>
+            <Text fill="#070707" layoutX="26.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MECANICO:" wrappingWidth="84.0732421875">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Label fx:id="idNombreUsuario" layoutX="110.0" layoutY="28.0" prefHeight="20.0" prefWidth="180.0" textFill="#fc0808">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>

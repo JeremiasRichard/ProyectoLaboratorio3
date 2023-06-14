@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main.controladores.GestionDeArreglosController">
+   <left>
+      <AnchorPane prefHeight="400.0" prefWidth="250.0" style="-fx-background-color: #244894;" BorderPane.alignment="CENTER">
+         <children>
+            <Circle fill="#1f93ff00" layoutX="125.0" layoutY="169.0" radius="85.0" stroke="#d32e54" strokeType="INSIDE" strokeWidth="4.0" />
+            <Circle fill="#1f93ff00" layoutX="125.0" layoutY="169.0" radius="82.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" />
+            <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="70.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Jorge.svg.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="557.0" prefHeight="19.0" prefWidth="197.0" text="Copyright(c). All Rights Reserved." textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="600.0" prefWidth="562.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="189.0" layoutX="20.0" layoutY="56.0" stroke="#b0b0b09f" strokeType="INSIDE" width="504.0" AnchorPane.bottomAnchor="355.0" />
+            <Button layoutX="217.0" layoutY="288.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" />
+            <Button fx:id="atrasButton" layoutX="426.0" layoutY="520.0" mnemonicParsing="false" onAction="#volverAtras" prefHeight="25.0" prefWidth="102.0" text="Atras" />
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="429.0" layoutY="256.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" text="Guardar" />
+            <TableView layoutX="27.0" layoutY="318.0" prefHeight="191.0" prefWidth="504.0">
+               <columns>
+                  <TableColumn prefWidth="126.0" text="Id" />
+                  <TableColumn prefWidth="129.0" text="Patente" />
+                  <TableColumn prefWidth="248.0" text="Estado de Reparacion" />
+               </columns>
+            </TableView>
+            <Text layoutX="31.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar:" wrappingWidth="43.58203125" />
+            <TextField layoutX="27.0" layoutY="288.0" prefHeight="25.0" prefWidth="183.0" promptText="Ingrese la patente" />
+            <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="215.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/lupaBusqueda.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="27.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crear Arreglo:" wrappingWidth="79.783203125" />
+            <ChoiceBox layoutX="206.0" layoutY="85.0" prefHeight="25.0" prefWidth="130.0" />
+            <Text layoutX="31.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleccione un cliente:" wrappingWidth="130.970703125" />
+            <Text layoutX="206.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleccione un vehiculo:" wrappingWidth="130.970703125" />
+            <ChoiceBox layoutX="27.0" layoutY="85.0" prefHeight="25.0" prefWidth="130.0" />
+            <Text layoutX="380.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleccione un mecanico:" wrappingWidth="130.970703125" />
+            <ChoiceBox layoutX="380.0" layoutY="85.0" prefHeight="25.0" prefWidth="130.0" />
+            <Text layoutX="31.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detalle del cliente:" />
+            <TextArea layoutX="26.0" layoutY="151.0" prefHeight="84.0" prefWidth="490.0" promptText="Ingrese la falla">
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" />
+               </padding>
+            </TextArea>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

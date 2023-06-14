@@ -2,17 +2,14 @@ package com.example.main;
 
 import com.example.main.controladores.LoginController;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class Main extends Application
-{   
-    // Para commit *
+{
     @Override
     public void start(Stage primaryStage) throws IOException
     {
@@ -24,7 +21,6 @@ public class Main extends Application
         controller.setStage(primaryStage);
         primaryStage.show();
     }
-
     public static void main(String[] args)
     {
         launch(args);

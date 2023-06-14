@@ -16,8 +16,8 @@ public class ClienteServiceImpl implements BaseService<Cliente>{
         clienteRepo.agregar(cliente);
     }
 
-    public void editar(int id, Cliente cliente){
-        clienteRepo.editar(id, cliente);
+    public void editar(Cliente cliente){
+        clienteRepo.editar(cliente);
     }
 
     public void eliminar(int id){
@@ -27,7 +27,7 @@ public class ClienteServiceImpl implements BaseService<Cliente>{
     public void eliminadoLogico(int id){
         Cliente cliente = clienteRepo.buscarPorId(id);
         cliente.setActivo(false);
-        clienteRepo.editar(cliente.getIdCliente(), cliente);
+        clienteRepo.editar(cliente);
     }
 
     public List<Cliente> listar(){

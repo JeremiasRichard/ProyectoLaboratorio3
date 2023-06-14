@@ -18,7 +18,7 @@ public class MecanicoServiceImpl implements BaseService<Mecanico>{
         mecanicoRepo.agregar(mecanico);
     }
 
-    public void editar(int id, Mecanico mecanico){
+    public void editar(Mecanico mecanico){
         mecanicoRepo.editar(mecanico);
     }
 

@@ -16,8 +16,8 @@ public class ArregloServiceImpl implements BaseService<Arreglo> {
         arregloRepo.agregar(arreglo);
     }
 
-    public void editar(int id, Arreglo arreglo){
-        arregloRepo.editar(id, arreglo);
+    public void editar(Arreglo arreglo){
+        arregloRepo.editar(arreglo);
     }
 
     public void eliminar(int id){
@@ -27,7 +27,7 @@ public class ArregloServiceImpl implements BaseService<Arreglo> {
     public void eliminadoLogico(int id){
         Arreglo arreglo = arregloRepo.buscarPorId(id);
         arreglo.setActivo(false);
-        arregloRepo.editar(arreglo.getIdArreglo(),arreglo);
+        arregloRepo.editar(arreglo);
     }
 
     public List<Arreglo> listar(){

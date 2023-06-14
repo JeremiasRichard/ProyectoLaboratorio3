@@ -16,8 +16,8 @@ public class VehiculoServiceImpl implements BaseService<Vehiculo>{
         vehiculoRepo.agregar(vehiculo);
     }
 
-    public void editar(int id, Vehiculo vehiculo){
-        vehiculoRepo.editar(id, vehiculo);
+    public void editar(Vehiculo vehiculo){
+        vehiculoRepo.editar(vehiculo);
     }
 
     public void eliminar(int id){
@@ -27,7 +27,7 @@ public class VehiculoServiceImpl implements BaseService<Vehiculo>{
     public void eliminadoLogico(int id){
         Vehiculo vehiculo = vehiculoRepo.buscarPorId(id);
         vehiculo.setActivo(false);
-        vehiculoRepo.editar(vehiculo.getIdVehiculo(), vehiculo);
+        vehiculoRepo.editar(vehiculo);
     }
 
     public List<Vehiculo> listar(){

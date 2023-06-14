@@ -16,8 +16,8 @@ public class UsuarioServiceImpl implements BaseService<Usuario>{
         usuarioRepo.agregar(usuario);
     }
 
-    public void editar(int id, Usuario usuario){
-        usuarioRepo.editar(id, usuario);
+    public void editar(Usuario usuario){
+        usuarioRepo.editar(usuario);
     }
 
     public void eliminar(int id){

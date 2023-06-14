@@ -1,5 +1,6 @@
 package com.example.main.datos;
 
+import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.modelos.Arreglo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
@@ -35,7 +36,7 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
     }
 
     @Override
-    public void agregar(Arreglo nuevo) {
+    public void agregar(Arreglo nuevo) throws EntidadDuplicadaException {
         cargar();
         nuevo.setIdArreglo(listaArreglos.size()+1);
         this.listaArreglos.add(nuevo);

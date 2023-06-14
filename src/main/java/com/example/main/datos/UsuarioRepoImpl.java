@@ -1,5 +1,6 @@
 package com.example.main.datos;
 
+import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.modelos.Usuario;
 import com.example.main.utils.Encriptador;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,7 +36,7 @@ public class UsuarioRepoImpl implements Repositorio<Usuario> {
     }
 
     @Override
-    public void agregar(Usuario nuevo) {
+    public void agregar(Usuario nuevo) throws EntidadDuplicadaException {
         cargar();
         nuevo.setIdUsuario(listaUsuarios.size()+1);
         this.listaUsuarios.add(nuevo);

@@ -1,5 +1,6 @@
 package com.example.main.datos;
 
+import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.modelos.Mecanico;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
@@ -34,7 +35,7 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
     }
 
     @Override
-    public void agregar(Mecanico nuevo) {
+    public void agregar(Mecanico nuevo) throws EntidadDuplicadaException {
         cargar();
         nuevo.setIdEmpleado(listaMecanicos.size()+1);
         this.listaMecanicos.add(nuevo);

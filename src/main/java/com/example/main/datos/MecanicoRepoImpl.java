@@ -42,10 +42,10 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
     }
 
     @Override
-    public void editar(int id, Mecanico nuevo) {
+    public void editar(Mecanico nuevo) {
         cargar();
         for (Mecanico mecanico : listaMecanicos) {
-            if (mecanico.getIdEmpleado() == id) {
+            if (mecanico.equals(nuevo)) {
                 //Persona
                 mecanico.setNombre(nuevo.getNombre());
                 mecanico.setApellido(nuevo.getApellido());

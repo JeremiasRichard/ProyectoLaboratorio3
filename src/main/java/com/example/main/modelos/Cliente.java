@@ -87,4 +87,5 @@ public class Cliente extends Persona{
                 ", activo=" + activo +
                 '}';
     }
+
 }

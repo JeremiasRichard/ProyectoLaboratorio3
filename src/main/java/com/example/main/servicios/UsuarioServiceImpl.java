@@ -27,7 +27,7 @@ public class UsuarioServiceImpl implements BaseService<Usuario>{
     public void eliminadoLogico(int id){
         Usuario usuario = usuarioRepo.buscarPorId(id);
         usuario.setActivo(false);
-        usuarioRepo.editar(usuario.getIdUsuario(), usuario);
+        usuarioRepo.editar(usuario);
     }
 
     public List<Usuario> listar(){

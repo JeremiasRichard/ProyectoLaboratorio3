@@ -1,9 +1,23 @@
 package com.example.main.modelos;
 
+import java.util.Objects;
+
 public abstract class Empleado extends Persona{
     private int idEmpleado;
     private String datosContacto;//hay un objeto tipo DatosContacto?
     private Usuario usuario;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Empleado empleado)) return false;
+        return idEmpleado == empleado.idEmpleado;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idEmpleado);
+    }
 
     public Empleado(){}
 

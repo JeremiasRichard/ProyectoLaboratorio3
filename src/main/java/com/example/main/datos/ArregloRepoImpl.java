@@ -43,10 +43,10 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
     }
 
     @Override
-    public void editar(int id, Arreglo nuevo) {
+    public void editar(Arreglo nuevo) {
         cargar();
         for (Arreglo arreglo : listaArreglos) {
-            if (arreglo.getIdArreglo() == id) {
+            if (arreglo.equals(nuevo)) {
                 arreglo.setIdEmpleado(nuevo.getIdEmpleado());
                 arreglo.setIdEmpleado(nuevo.getIdEmpleado());
                 arreglo.setCosto(nuevo.getCosto());

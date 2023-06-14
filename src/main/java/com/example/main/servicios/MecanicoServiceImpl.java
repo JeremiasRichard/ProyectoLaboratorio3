@@ -1,8 +1,10 @@
 package com.example.main.servicios;
 
 import com.example.main.datos.MecanicoRepoImpl;
+import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Mecanico;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MecanicoServiceImpl implements BaseService<Mecanico>{
@@ -17,7 +19,7 @@ public class MecanicoServiceImpl implements BaseService<Mecanico>{
     }
 
     public void editar(int id, Mecanico mecanico){
-        mecanicoRepo.editar(id, mecanico);
+        mecanicoRepo.editar(mecanico);
     }
 
     public void eliminar(int id){
@@ -27,7 +29,7 @@ public class MecanicoServiceImpl implements BaseService<Mecanico>{
     public void eliminadoLogico(int id){
         Mecanico mecanico = mecanicoRepo.buscarPorId(id);
         mecanico.setActivo(false);
-        mecanicoRepo.editar(mecanico.getIdEmpleado(), mecanico);
+        mecanicoRepo.editar(mecanico);
     }
 
     public List<Mecanico> listar(){
@@ -36,5 +38,13 @@ public class MecanicoServiceImpl implements BaseService<Mecanico>{
 
     public Mecanico buscarPorId(int id){
         return mecanicoRepo.buscarPorId(id);
+    }
+    public List<Arreglo> listarTareasAsignadas(){
+        //Logica obtener lista de tareas asignadas
+        return new ArrayList<>();
+    }
+
+    public void cargarDetalle(){
+        //Logica cargar detalle y persistirlo en el Arreglo (editar arreglo).
     }
 }

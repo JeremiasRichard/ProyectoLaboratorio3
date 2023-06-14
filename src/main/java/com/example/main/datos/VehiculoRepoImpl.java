@@ -43,12 +43,11 @@ public class VehiculoRepoImpl implements  Repositorio<Vehiculo>{
     }
 
     @Override
-    public void editar(int id, Vehiculo nuevo) {
+    public void editar(Vehiculo nuevo) {
         cargar();
         for (Vehiculo vehiculo : listaVehiculos) {
-            if (vehiculo.getIdVehiculo() == id) {
+            if (vehiculo.equals(nuevo)) {
                 vehiculo.setTipoVehiculo(nuevo.getTipoVehiculo());
-                //TODO cambiar tipo de dato de vehiculo
                 vehiculo.setMarca(nuevo.getMarca());
                 vehiculo.setAnioFabricacion(nuevo.getAnioFabricacion());
                 break;

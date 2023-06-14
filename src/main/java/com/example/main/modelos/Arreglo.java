@@ -3,6 +3,8 @@ package com.example.main.modelos;
 
 import com.example.main.enums.EstadoReparacion;
 
+import java.util.Objects;
+
 public class Arreglo {
     private int idArreglo;
     private Vehiculo vehiculo;
@@ -114,5 +116,17 @@ public class Arreglo {
                 ", estadoReparacion=" + estadoReparacion +
                 ", activo=" + activo +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Arreglo arreglo)) return false;
+        return idArreglo == arreglo.idArreglo && idCliente == arreglo.idCliente && idEmpleado == arreglo.idEmpleado && Objects.equals(vehiculo, arreglo.vehiculo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idArreglo, vehiculo, idCliente, idEmpleado);
     }
 }

@@ -13,7 +13,7 @@ public class Mecanico extends Empleado {
 
     public Mecanico(){}
 
-    public Mecanico(List<Arreglo> listaArreglos, com.example.main.enums.TipoVehiculo tipoVehiculo, com.example.main.enums.Especialidad especialidad) {
+    public Mecanico(List<Arreglo> listaArreglos, TipoVehiculo tipoVehiculo, Especialidad especialidad) {
         this.listaArreglos = listaArreglos;
         this.tipoVehiculo = tipoVehiculo;
         this.especialidad = especialidad;

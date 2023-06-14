@@ -43,10 +43,10 @@ public class ClienteRepoImpl implements Repositorio<Cliente>{
     }
 
     @Override
-    public void editar(int id, Cliente nuevo) {
+    public void editar(Cliente nuevo) {
         cargar();
         for (Cliente cliente : listaClientes) {
-            if (cliente.getIdCliente() == id) {
+            if (cliente.equals(nuevo)) {
                 //Persona
                 cliente.setNombre(nuevo.getNombre());
                 cliente.setApellido(nuevo.getApellido());

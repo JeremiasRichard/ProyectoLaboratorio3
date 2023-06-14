@@ -43,10 +43,10 @@ public class UsuarioRepoImpl implements Repositorio<Usuario> {
     }
 
     @Override
-    public void editar(int id, Usuario nuevo) {
+    public void editar(Usuario nuevo) {
         cargar();
         for (Usuario usr : listaUsuarios) {
-            if (usr.getIdUsuario() == id) {
+            if (usr.equals(nuevo)) {
                 usr.setUser(nuevo.getUser());
                 usr.setPassword(Encriptador.obtenerMD5(nuevo.getPassword()));
                 break;

@@ -67,9 +67,9 @@ public class UserController {
 
         ObservableList<ArregloDTO> ListaParaTabla =  FXCollections.observableArrayList();
 
-        Vehiculo vehiculoUno = new Vehiculo(1,2005, TipoVehiculo.AUTO,"VolksWagen GOL POWER 1.6");
-        Vehiculo vehiculoDos = new Vehiculo(2,1995, TipoVehiculo.AUTO,"VolksWagen GOL G1 1.8");
-        Vehiculo vehiculoTres = new Vehiculo(3,2012, TipoVehiculo.AUTO,"VolksWagen GOL TREND");
+        Vehiculo vehiculoUno = new Vehiculo(1,2005, TipoVehiculo.AUTO,"VolksWagen GOL POWER 1.6","FHT248");
+        Vehiculo vehiculoDos = new Vehiculo(2,1995, TipoVehiculo.AUTO,"VolksWagen GOL G1 1.8","ADH853");
+        Vehiculo vehiculoTres = new Vehiculo(3,2012, TipoVehiculo.AUTO,"VolksWagen GOL TREND","RUD256");
 
 
         Arreglo arreglo1 = new Arreglo(1,vehiculoUno,1,1,"Detalla falla motor", EstadoReparacion.STAND_BY);

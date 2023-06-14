@@ -11,14 +11,23 @@ public class Vehiculo {
     private int anioFabricacion;
     private TipoVehiculo tipoVehiculo;
     private String marca;
+    private String patente;
     private boolean activo;
 
     public Vehiculo(){}
-    public Vehiculo(int idVehiculo, int anioFabricacion, TipoVehiculo tipoVehiculo, String marca) {
+    public Vehiculo(int anioFabricacion, TipoVehiculo tipoVehiculo, String marca, String patente) {
+        this.anioFabricacion =  anioFabricacion;
+        this.tipoVehiculo = tipoVehiculo;
+        this.marca = marca;
+        this.patente = patente;
+        this.activo = true;
+    }
+    public Vehiculo(int idVehiculo, int anioFabricacion, TipoVehiculo tipoVehiculo, String marca, String patente) {
         this.idVehiculo = idVehiculo;
         this.anioFabricacion =  anioFabricacion;
         this.tipoVehiculo = tipoVehiculo;
         this.marca = marca;
+        this.patente = patente;
         this.activo = true;
     }
     //region Getters y Setters
@@ -58,6 +67,14 @@ public class Vehiculo {
         marca = marca;
     }
 
+    public String getPatente() {
+        return patente;
+    }
+
+    public void setPatente(String patente) {
+        this.patente = patente;
+    }
+
     public boolean getActivo() { return activo; }
 
     public void setActivo(boolean activo) { this.activo = activo; }
@@ -69,6 +86,7 @@ public class Vehiculo {
                 ", AnioFabricacion=" + anioFabricacion +
                 ", TipoVehiculo=" + tipoVehiculo +
                 ", Marca='" + marca + '\'' +
+                ", Patente='" + patente +
                 ", activo=" + activo +
                 '}';
     }

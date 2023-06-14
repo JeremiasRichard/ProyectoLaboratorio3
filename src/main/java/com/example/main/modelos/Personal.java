@@ -7,8 +7,8 @@ public abstract class Personal extends Persona{
 
     public Personal(){}
 
-    public Personal(String nombre, String apellido, int edad, int idEmpleado, String datosContacto, com.example.main.modelos.Usuario usuario) {
-        super(nombre, apellido, edad);
+    public Personal(String nombre, String apellido, int edad, String dni, int idEmpleado, String datosContacto, com.example.main.modelos.Usuario usuario) {
+        super(nombre, apellido, edad, dni);
         this.idEmpleado = idEmpleado;
         this.datosContacto = datosContacto;
         this.usuario = usuario;

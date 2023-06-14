@@ -5,6 +5,7 @@ import com.example.main.enums.EstadoReparacion;
 import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.Arreglo;
 import com.example.main.DTOs.VehiculoDTO;
+import com.example.main.modelos.Usuario;
 import com.example.main.modelos.Vehiculo;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -76,9 +77,9 @@ public class UserController {
 
         // Obtener los com.example.main.datos de los autos (puedes reemplazar esto con tus propios com.example.main.datos)
         ObservableList<ArregloDTO> ListaParaTabla = FXCollections.observableArrayList();
-        Vehiculo vehiculoUno = new Vehiculo(1, 2005, TipoVehiculo.AUTO, "VolksWagen GOL POWER 1.6");
-        Vehiculo vehiculoDos = new Vehiculo(2, 1995, TipoVehiculo.AUTO, "VolksWagen GOL G1 1.8");
-        Vehiculo vehiculoTres = new Vehiculo(3, 2012, TipoVehiculo.AUTO, "VolksWagen GOL TREND");
+        Vehiculo vehiculoUno = new Vehiculo(1,TipoVehiculo.AUTO,"VolksWagen Saveiro","AJB942");
+        Vehiculo vehiculoDos = new Vehiculo(2, TipoVehiculo.AUTO, "VolksWagen GOL G1 1.8","ABC456");
+        Vehiculo vehiculoTres = new Vehiculo(3,TipoVehiculo.AUTO, "VolksWagen GOL TREND","EGF548");
 
         Arreglo arreglo1 = new Arreglo(1, vehiculoUno, 1, 1, "Detalla falla motor", EstadoReparacion.STAND_BY);
         Arreglo arreglo2 = new Arreglo(2, vehiculoDos, 2, 1, "Detalla falla calefaccion", EstadoReparacion.STAND_BY);

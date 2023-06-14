@@ -50,7 +50,6 @@ public class ClienteRepoImpl implements Repositorio<Cliente>{
                 //Persona
                 cliente.setNombre(nuevo.getNombre());
                 cliente.setApellido(nuevo.getApellido());
-                cliente.setEdad(nuevo.getEdad());
                 //Cliente
                 cliente.setDireccion(nuevo.getDireccion());
                 cliente.setMail(nuevo.getMail());

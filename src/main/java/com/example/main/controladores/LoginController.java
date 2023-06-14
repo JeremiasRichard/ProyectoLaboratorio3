@@ -32,6 +32,7 @@ public class LoginController {
     @FXML
     private Label errorLabel;
     private Usuario logueado;
+    private Usuario actual;
 
     @FXML
     public void iniciarSesion()

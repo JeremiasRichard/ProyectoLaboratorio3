@@ -7,8 +7,8 @@ public abstract class Empleado extends Persona{
 
     public Empleado(){}
 
-    public Empleado(String nombre, String apellido, int edad, int idEmpleado, String datosContacto, com.example.main.modelos.Usuario usuario) {
-        super(nombre, apellido, edad);
+    public Empleado(String nombre, String apellido , String dni,int idEmpleado, String datosContacto, com.example.main.modelos.Usuario usuario) {
+        super(nombre, apellido,dni);
         this.idEmpleado = idEmpleado;
         this.datosContacto = datosContacto;
         this.usuario = usuario;

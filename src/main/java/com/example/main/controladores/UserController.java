@@ -39,6 +39,14 @@ public class UserController {
     private Button detalleButton;
     @FXML
     private Stage stageAnterior;
+    private Usuario logueado;
+    @FXML
+    private Label idNombreUsuario = new Label();
+
+    public void setUsuario(Usuario actual)
+    {
+        this.logueado = actual;
+    }
 
     public void setStageAnterior(Stage stageAnterior)
     {
@@ -52,29 +60,29 @@ public class UserController {
         stage.close();
     }
 
-    @FXML
-    public void initialize() {
 
+    public void inicializar(Usuario actual)
+    {
+        initialize(actual);
+    }
+    @FXML
+    public void initialize(Usuario actual) {
 
         // Configurar las columnas
-        //IdArregloColumna.setCellValueFactory(cellData -> cellData.getValue().idArregloProperty().asObject());
+
+        IdArregloColumna.setCellValueFactory(cellData -> cellData.getValue().idArregloProperty().asObject());
         anioFabricacionColumna.setCellValueFactory(cellData -> cellData.getValue().getVehiculoDTO().añoFrabricacionProperty().asObject());
         MarcaColumna.setCellValueFactory(cellData -> cellData.getValue().getVehiculoDTO().marcaProperty());
 
-
-
         // Obtener los com.example.main.datos de los autos (puedes reemplazar esto con tus propios com.example.main.datos)
+        ObservableList<ArregloDTO> ListaParaTabla = FXCollections.observableArrayList();
+        Vehiculo vehiculoUno = new Vehiculo(1, 2005, TipoVehiculo.AUTO, "VolksWagen GOL POWER 1.6");
+        Vehiculo vehiculoDos = new Vehiculo(2, 1995, TipoVehiculo.AUTO, "VolksWagen GOL G1 1.8");
+        Vehiculo vehiculoTres = new Vehiculo(3, 2012, TipoVehiculo.AUTO, "VolksWagen GOL TREND");
 
-        ObservableList<ArregloDTO> ListaParaTabla =  FXCollections.observableArrayList();
-
-        Vehiculo vehiculoUno = new Vehiculo(1,2005, TipoVehiculo.AUTO,"VolksWagen GOL POWER 1.6","FHT248");
-        Vehiculo vehiculoDos = new Vehiculo(2,1995, TipoVehiculo.AUTO,"VolksWagen GOL G1 1.8","ADH853");
-        Vehiculo vehiculoTres = new Vehiculo(3,2012, TipoVehiculo.AUTO,"VolksWagen GOL TREND","RUD256");
-
-
-        Arreglo arreglo1 = new Arreglo(1,vehiculoUno,1,1,"Detalla falla motor", EstadoReparacion.STAND_BY);
-        Arreglo arreglo2 = new Arreglo(2,vehiculoDos,2,1,"Detalla falla calefaccion",EstadoReparacion.STAND_BY);
-        Arreglo arreglo3 = new Arreglo(3,vehiculoTres,3,1,"Detalla falla direccion",EstadoReparacion.STAND_BY);
+        Arreglo arreglo1 = new Arreglo(1, vehiculoUno, 1, 1, "Detalla falla motor", EstadoReparacion.STAND_BY);
+        Arreglo arreglo2 = new Arreglo(2, vehiculoDos, 2, 1, "Detalla falla calefaccion", EstadoReparacion.STAND_BY);
+        Arreglo arreglo3 = new Arreglo(3, vehiculoTres, 3, 1, "Detalla falla direccion", EstadoReparacion.STAND_BY);
 
         ArregloDTO arregloDTO1 = new ArregloDTO();
         ArregloDTO arregloDTO2 = new ArregloDTO();
@@ -88,7 +96,19 @@ public class UserController {
         ListaParaTabla.add(arregloDTO2);
         ListaParaTabla.add(arregloDTO3);
 
-        ListaTareas.setItems(ListaParaTabla);
+        ObservableList<ArregloDTO> ListaParaTablaFinal = FXCollections.observableArrayList();
+
+        idNombreUsuario.setText(actual.getUser().toString());
+
+        for (ArregloDTO arreglo :ListaParaTabla)
+        {
+            if(arreglo.getEstadoReparacion() != EstadoReparacion.FINALIZADO)
+            {
+                ListaParaTablaFinal.add(arreglo);
+            }
+        }
+
+        ListaTareas.setItems(ListaParaTablaFinal);
     }
 
     @FXML
@@ -98,10 +118,12 @@ public class UserController {
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
+        this.logueado = null;
         stage.show();
     }
 
-    public void verDetalle() {
+    public void verDetalle()
+    {
         ArregloDTO elementoSeleccionado = ListaTareas.getSelectionModel().getSelectedItem();
 
         if(elementoSeleccionado != null)
@@ -110,8 +132,9 @@ public class UserController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/vista/detalleView.fxml"));
                 Parent root = loader.load();
                 DetalleController detalleController = loader.getController();
+                detalleController.setUsuario(logueado);
                 detalleController.setStageAnterior(this.userStage);
-                detalleController.inicializar(elementoSeleccionado);
+                detalleController.inicializar(elementoSeleccionado,logueado);
                 Stage detalleStage = new Stage();
                 detalleStage.initStyle(StageStyle.UNDECORATED);
                 detalleStage.initOwner(userStage);

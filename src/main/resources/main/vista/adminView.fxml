@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main.controladores.AdminController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main.controladores.AdminController">
    <left>
       <AnchorPane prefHeight="400.0" prefWidth="250.0" style="-fx-background-color: #244894;" BorderPane.alignment="CENTER">
          <children>
             <Circle fill="#1f93ff00" layoutX="125.0" layoutY="169.0" radius="85.0" stroke="#d32e54" strokeType="INSIDE" strokeWidth="4.0" />
             <Circle fill="#1f93ff00" layoutX="125.0" layoutY="169.0" radius="82.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" />
-            <Label layoutX="27.0" layoutY="557.0" prefHeight="19.0" prefWidth="197.0" text="Copyright(c). All Rights Reserved." textFill="#fffefe" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="557.0" prefHeight="19.0" prefWidth="197.0" text="Copyright(c). All Rights Reserved." textFill="#fffefe" />
             <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="70.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/Jorge.svg.png" />
@@ -27,10 +23,10 @@
    <right>
       <AnchorPane prefHeight="600.0" prefWidth="562.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="75.0" layoutY="300.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-image: url('https://i.pinimg.com/originals/f6/f6/8b/f6f68b756a826533040032d42fcdc973.png'); -fx-background-size: 140 140; -fx-background-position: center center; -fx-background-repeat: no-repeat no-repeat;" />
-            <Button layoutX="304.0" layoutY="300.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="200.0" />
-            <Button layoutX="75.0" layoutY="71.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-image: url('https://cdn-icons-png.flaticon.com/512/814/814406.png'); -fx-background-size: 140 140; -fx-background-position: center center; -fx-background-repeat: no-repeat no-repeat;" />
-            <Button layoutX="304.0" layoutY="71.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-image: url('https://cdn2.iconfinder.com/data/icons/flat-style-svg-icons-part-1/512/motor_mechanic_tools-512.png'); -fx-background-size: 140 140; -fx-background-position: center center; -fx-background-repeat: no-repeat no-repeat;" />
+            <Button fx:id="vistaSeleccionadaButton" layoutX="75.0" layoutY="300.0" mnemonicParsing="false" onAction="#cargarGestionDeClientes" prefHeight="200.0" prefWidth="200.0" style="-fx-background-image: url('https://i.pinimg.com/originals/f6/f6/8b/f6f68b756a826533040032d42fcdc973.png'); -fx-background-size: 140 140; -fx-background-position: center center; -fx-background-repeat: no-repeat no-repeat;" />
+            <Button fx:id="vistaSeleccionadaButton" layoutX="304.0" layoutY="300.0" mnemonicParsing="false" onAction="#cargarGestionDeAlgo" prefHeight="200.0" prefWidth="200.0" />
+            <Button fx:id="vistaSeleccionadaButton" layoutX="75.0" layoutY="71.0" mnemonicParsing="false" onAction="#cargarGestionDeArreglos" prefHeight="200.0" prefWidth="200.0" style="-fx-background-image: url('https://cdn-icons-png.flaticon.com/512/814/814406.png'); -fx-background-size: 140 140; -fx-background-position: center center; -fx-background-repeat: no-repeat no-repeat;" />
+            <Button fx:id="vistaSeleccionadaButton" layoutX="304.0" layoutY="71.0" mnemonicParsing="false" onAction="#cargarGestionDeEmpleados" prefHeight="200.0" prefWidth="200.0" style="-fx-background-image: url('https://cdn2.iconfinder.com/data/icons/flat-style-svg-icons-part-1/512/motor_mechanic_tools-512.png'); -fx-background-size: 140 140; -fx-background-position: center center; -fx-background-repeat: no-repeat no-repeat;" />
             <Text layoutX="117.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion de Arreglos" wrappingWidth="115.13671875">
                <font>
                   <Font size="13.0" />

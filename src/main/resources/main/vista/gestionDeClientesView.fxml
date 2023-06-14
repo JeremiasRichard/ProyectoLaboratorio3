@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main.controladores.GestionDeClientesController">
+   <left>
+      <AnchorPane prefHeight="400.0" prefWidth="250.0" style="-fx-background-color: #244894;" BorderPane.alignment="CENTER">
+         <children>
+            <Circle fill="#1f93ff00" layoutX="125.0" layoutY="169.0" radius="85.0" stroke="#d32e54" strokeType="INSIDE" strokeWidth="4.0" />
+            <Circle fill="#1f93ff00" layoutX="125.0" layoutY="169.0" radius="82.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" />
+            <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="70.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Jorge.svg.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="557.0" prefHeight="19.0" prefWidth="197.0" text="Copyright(c). All Rights Reserved." textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="600.0" prefWidth="562.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="189.0" layoutX="20.0" layoutY="57.0" stroke="#b0b0b09f" strokeType="INSIDE" width="503.0" />
+            <Button layoutX="217.0" layoutY="288.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" />
+            <Button fx:id="atrasButton" layoutX="421.0" layoutY="506.0" mnemonicParsing="false" onAction="#volverAtras" prefHeight="25.0" prefWidth="102.0" text="Atras" />
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="429.0" layoutY="256.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" text="Guardar" />
+            <TableView layoutX="27.0" layoutY="318.0" prefHeight="180.0" prefWidth="496.0">
+              <columns>
+                <TableColumn prefWidth="124.0" text="Nombre" />
+                <TableColumn prefWidth="124.0" text="Apellido" />
+                  <TableColumn prefWidth="124.0" text="DNI" />
+                  <TableColumn prefWidth="124.0" text="Telefono" />
+              </columns>
+            </TableView>
+            <Text layoutX="31.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar:" wrappingWidth="43.58203125" />
+            <TextField layoutX="27.0" layoutY="288.0" prefHeight="25.0" prefWidth="183.0" promptText="Ingrese el DNI" />
+            <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="215.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/lupaBusqueda.png" />
+               </image>
+            </ImageView>
+            <TextField layoutX="93.0" layoutY="77.0" prefHeight="25.0" prefWidth="150.0" promptText="Nombre" />
+            <TextField layoutX="93.0" layoutY="195.0" prefHeight="25.0" prefWidth="150.0" promptText="Apellido" />
+            <TextField layoutX="93.0" layoutY="119.0" prefHeight="25.0" prefWidth="150.0" promptText="DNI" />
+            <TextField layoutX="93.0" layoutY="157.0" prefHeight="25.0" prefWidth="150.0" promptText="Telefono" />
+            <Text layoutX="27.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crear Cliente:" wrappingWidth="79.783203125" />
+            <TextField layoutX="354.0" layoutY="77.0" prefHeight="25.0" prefWidth="150.0" promptText="Marca" />
+            <TextField layoutX="354.0" layoutY="195.0" prefHeight="25.0" prefWidth="150.0" promptText="Patente" />
+            <ChoiceBox layoutX="354.0" layoutY="157.0" prefHeight="25.0" prefWidth="150.0" />
+            <Text layoutX="275.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo:" />
+            <Text layoutX="272.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patente:" />
+            <Text layoutX="275.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Año" />
+            <Text layoutX="275.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marca:" />
+            <Text layoutX="31.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" />
+            <Text layoutX="31.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DNI:" />
+            <Text layoutX="31.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono:" />
+            <Text layoutX="30.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido:" />
+            <Text layoutX="274.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehiculo:" wrappingWidth="53.298828125" />
+            <Separator layoutX="260.0" layoutY="62.0" orientation="VERTICAL" prefHeight="180.0" prefWidth="3.0" />
+            <TextField layoutX="354.0" layoutY="119.0" prefHeight="25.0" prefWidth="150.0" promptText="Año Fabricacion" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

@@ -1,14 +1,14 @@
 package com.example.main.modelos;
 
-public abstract class Personal extends Persona{
+public abstract class Empleado extends Persona{
     private int idEmpleado;
     private String datosContacto;//hay un objeto tipo DatosContacto?
     private Usuario usuario;
 
-    public Personal(){}
+    public Empleado(){}
 
-    public Personal(String nombre, String apellido, int edad, String dni, int idEmpleado, String datosContacto, com.example.main.modelos.Usuario usuario) {
-        super(nombre, apellido, edad, dni);
+    public Empleado(String nombre, String apellido, int edad, int idEmpleado, String datosContacto, com.example.main.modelos.Usuario usuario) {
+        super(nombre, apellido, edad);
         this.idEmpleado = idEmpleado;
         this.datosContacto = datosContacto;
         this.usuario = usuario;
@@ -19,7 +19,7 @@ public abstract class Personal extends Persona{
     }
 
     public void setIdEmpleado(int idEmpleado) {
-        idEmpleado = idEmpleado;
+        this.idEmpleado = idEmpleado;
     }
 
     public String getDatosContacto() {
@@ -27,15 +27,15 @@ public abstract class Personal extends Persona{
     }
 
     public void setDatosContacto(String datosContacto) {
-        datosContacto = datosContacto;
+        this.datosContacto = datosContacto;
     }
 
-    public com.example.main.modelos.Usuario getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(com.example.main.modelos.Usuario usuario) {
-        usuario = usuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
     //endregion
     @Override

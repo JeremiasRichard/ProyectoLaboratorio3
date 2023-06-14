@@ -5,14 +5,25 @@ import java.util.List;
 public class Cliente extends Persona{
     private int idCliente;
     private List<Arreglo> historialArreglos;
-    private int nroTelefono;
+    private String nroTelefono;
     private String mail;
     private String direccion;
     private List<String> listaVehiculos;
     private boolean activo;
     public Cliente(){}
 
-    public Cliente(int idCliente, List<Arreglo> historialArreglos, int nroTelefono, String mail, String direccion, List<String> listaVehiculos) {
+    public Cliente(String nombre, String apellido, String dni, int idCliente, List<Arreglo> historialArreglos, String nroTelefono, String mail, String direccion, List<String> listaVehiculos) {
+        super(nombre, apellido, dni);
+        this.idCliente = idCliente;
+        this.historialArreglos = historialArreglos;
+        this.nroTelefono = nroTelefono;
+        this.mail = mail;
+        this.direccion = direccion;
+        this.listaVehiculos = listaVehiculos;
+        this.activo = true;
+    }
+
+    public Cliente(int idCliente, List<Arreglo> historialArreglos, String nroTelefono, String mail, String direccion, List<String> listaVehiculos) {
         this.idCliente = idCliente;
         this.historialArreglos = historialArreglos;
         this.nroTelefono = nroTelefono;
@@ -27,7 +38,7 @@ public class Cliente extends Persona{
     }
 
     public void setIdCliente(int idCliente) {
-        idCliente = idCliente;
+        this.idCliente = idCliente;
     }
 
     public List<Arreglo> getHistorialArreglos() {
@@ -35,15 +46,15 @@ public class Cliente extends Persona{
     }
 
     public void setHistorialArreglos(List<Arreglo> historialArreglos) {
-        historialArreglos = historialArreglos;
+        this.historialArreglos = historialArreglos;
     }
 
-    public int getNroTelefono() {
+    public String getNroTelefono() {
         return nroTelefono;
     }
 
-    public void setNroTelefono(int nroTelefono) {
-        nroTelefono = nroTelefono;
+    public void setNroTelefono(String nroTelefono) {
+        this.nroTelefono = nroTelefono;
     }
 
     public String getMail() {
@@ -51,7 +62,7 @@ public class Cliente extends Persona{
     }
 
     public void setMail(String mail) {
-        mail = mail;
+        this.mail = mail;
     }
 
     public String getDireccion() {
@@ -59,7 +70,7 @@ public class Cliente extends Persona{
     }
 
     public void setDireccion(String direccion) {
-        direccion = direccion;
+        this.direccion = direccion;
     }
 
     public List<String> getListaVehiculos() {
@@ -67,25 +78,23 @@ public class Cliente extends Persona{
     }
 
     public void setListaVehiculos(List<String> listaVehiculos) {
-        listaVehiculos = listaVehiculos;
+        this.listaVehiculos = listaVehiculos;
     }
 
     public boolean getActivo() { return activo; }
 
     public void setActivo(boolean activo) { this.activo = activo; }
 
-    //endregion
     @Override
     public String toString() {
         return "Cliente{" +
-                "IdCliente=" + idCliente +
-                ", HistorialArreglos=" + historialArreglos +
-                ", NroTelefono=" + nroTelefono +
-                ", Mail='" + mail + '\'' +
-                ", Direccion='" + direccion + '\'' +
-                ", ListaVehiculos=" + listaVehiculos +
+                "idCliente=" + idCliente +
+                ", historialArreglos=" + historialArreglos +
+                ", nroTelefono=" + nroTelefono +
+                ", mail='" + mail + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", listaVehiculos=" + listaVehiculos +
                 ", activo=" + activo +
-                '}';
+                "} " + super.toString();
     }
-
 }

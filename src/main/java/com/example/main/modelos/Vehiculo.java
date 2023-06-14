@@ -36,7 +36,7 @@ public class Vehiculo {
     }
 
     public void setIdVehiculo(int idVehiculo) {
-        idVehiculo = idVehiculo;
+        this.idVehiculo = idVehiculo;
     }
 
     public int getAnioFabricacion() {
@@ -54,7 +54,7 @@ public class Vehiculo {
 
     public void setTipoVehiculo(TipoVehiculo tipoVehiculo)
     {
-        tipoVehiculo = tipoVehiculo;
+        this.tipoVehiculo = tipoVehiculo;
     }
 
     public int anioFabricacionProperty() {
@@ -64,7 +64,7 @@ public class Vehiculo {
     public String getMarca() { return marca; }
 
     public void setMarca(String marca) {
-        marca = marca;
+        this.marca = marca;
     }
 
     public String getPatente() {

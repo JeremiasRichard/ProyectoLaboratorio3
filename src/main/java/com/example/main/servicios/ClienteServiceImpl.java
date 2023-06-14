@@ -37,4 +37,18 @@ public class ClienteServiceImpl implements BaseService<Cliente>{
     public Cliente buscarPorId(int id){
         return clienteRepo.buscarPorId(id);
     }
+
+    public void agregarVehiculo(String patente, Cliente cliente){
+        List<String> vehiculos = cliente.getListaVehiculos();
+        vehiculos.add(patente);
+    }
+
+    public void eliminarVehiculo(String patente, Cliente cliente){
+        List<String> vehiculos = cliente.getListaVehiculos();
+        vehiculos.remove(patente);
+    }
+
+    public List<String> listarVehiculos(Cliente cliente){
+        return cliente.getListaVehiculos();
+    }
 }//TODO: Agregar metodos para Vehiculos(lista patentes)

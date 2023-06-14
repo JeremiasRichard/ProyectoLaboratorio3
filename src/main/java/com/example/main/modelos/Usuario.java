@@ -1,27 +1,19 @@
-package com.example.main.modelos;
+ package com.example.main.modelos;
 
-public class Usuario
-{
-    private int idUsuario;
+public class Usuario {
+    private int idUsuario; //TODO: conexion con ID? o agregar un objeto Persona (Cliente/Mecanico)? Conexion por DNI?
     private String user;
     private String password;
-    private boolean esAdmin;
+    private boolean nivelDeAcceso;
     private boolean activo;
     public Usuario() {
     }
 
-    public Usuario(String user, String password)
-    {
+    public Usuario(int idUsuario, String user, String password, boolean nivelDeAcceso) {
+        this.idUsuario = idUsuario;
         this.user = user;
         this.password = password;
-        this.esAdmin = false;
-        this.activo = true;
-    }
-    public Usuario(String user, String password,boolean esAdmin)
-    {
-        this.user = user;
-        this.password = password;
-        this.esAdmin = esAdmin;
+        this.nivelDeAcceso = nivelDeAcceso;
         this.activo = true;
     }
 
@@ -50,17 +42,16 @@ public class Usuario
         this.password = password;
     }
 
-    public boolean isEsAdmin() {
-        return esAdmin;
+    public boolean isNivelDeAcceso() {
+        return nivelDeAcceso;
     }
 
-    public void setEsAdmin(boolean esAdmin) {
-        this.esAdmin = esAdmin;
+    public void setNivelDeAcceso(boolean nivelDeAcceso) {
+        this.nivelDeAcceso = nivelDeAcceso;
     }
 
     public boolean getActivo() { return activo; }
 
     public void setActivo(boolean activo) { this.activo = activo; }
-
     //endregion
 }

@@ -20,8 +20,8 @@ public class ClienteServiceImpl implements BaseService<Cliente>{
         clienteRepo.editar(cliente);
     }
 
-    public void eliminar(int id){
-        clienteRepo.eliminar(id);
+    public void eliminar(Cliente cliente){
+        clienteRepo.eliminar(cliente);
     }
 
     public void eliminadoLogico(int id){

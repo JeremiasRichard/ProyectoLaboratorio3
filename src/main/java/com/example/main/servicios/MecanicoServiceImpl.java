@@ -22,8 +22,8 @@ public class MecanicoServiceImpl implements BaseService<Mecanico>{
         mecanicoRepo.editar(mecanico);
     }
 
-    public void eliminar(int id){
-        mecanicoRepo.eliminar(id);
+    public void eliminar(Mecanico mecanico){
+        mecanicoRepo.eliminar(mecanico);
     }
 
     public void eliminadoLogico(int id){

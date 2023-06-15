@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class VehiculoRepoImpl implements  Repositorio<Vehiculo>{
@@ -46,12 +47,10 @@ public class VehiculoRepoImpl implements  Repositorio<Vehiculo>{
     @Override
     public void editar(Vehiculo nuevo) {
         cargar();
-        for (Vehiculo vehiculo : listaVehiculos) {
-            if (vehiculo.equals(nuevo)) {
-                vehiculo.setTipoVehiculo(nuevo.getTipoVehiculo());
-                vehiculo.setMarca(nuevo.getMarca());
-                vehiculo.setAnioFabricacion(nuevo.getAnioFabricacion());
-                break;
+        for (int i = 0; i < this.listaVehiculos.size(); i++) {
+            Vehiculo actual = this.listaVehiculos.get(i);
+            if(actual.getPatente().equals(nuevo.getPatente())){
+                this.listaVehiculos.set(i,nuevo);
             }
         }
         guardar();
@@ -71,13 +70,9 @@ public class VehiculoRepoImpl implements  Repositorio<Vehiculo>{
     }
 
     @Override
-    public void eliminar(int id) {
-        for (Vehiculo vehiculo : this.listaVehiculos) {
-            if (vehiculo.getIdVehiculo() == id) {
-                this.listaVehiculos.remove(vehiculo);
-                break;
-            }
-        }
+    public void eliminar(Vehiculo objeto) {
+        cargar();
+        this.listaVehiculos.removeIf(actual->actual.getPatente().equals(objeto.getPatente()));
         guardar();
     }
 
@@ -85,5 +80,13 @@ public class VehiculoRepoImpl implements  Repositorio<Vehiculo>{
     public List<Vehiculo> listar() {
         cargar();
         return this.listaVehiculos;
+    }
+
+    public List<Vehiculo> buscarTodosPorPatente(List<String> patentes){
+        cargar();
+        return this.listaVehiculos
+                .stream()
+                .filter(patentes::contains)
+                .collect(Collectors.toList());
     }
 }

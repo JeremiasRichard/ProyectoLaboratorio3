@@ -45,15 +45,11 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
     @Override
     public void editar(Mecanico nuevo) {
         cargar();
-        for (Mecanico mecanico : listaMecanicos) {
-            if (mecanico.equals(nuevo)) {
-                //Persona
-                mecanico.setNombre(nuevo.getNombre());
-                mecanico.setApellido(nuevo.getApellido());
-                //Mecanico
-                mecanico.setEspecialidad(nuevo.getEspecialidad());
-                mecanico.setTipoVehiculo(nuevo.getTipoVehiculo());
+        for (int i =0 ; i<this.listaMecanicos.size();i++) {
+            String dniActual = this.listaMecanicos.get(i).getDni();
 
+            if (dniActual.equals(nuevo.getDni())) {
+                listaMecanicos.set(i,nuevo);
                 break;
             }
         }
@@ -74,13 +70,8 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
     }
 
     @Override
-    public void eliminar(int id) {
-        for (Mecanico mecanico : this.listaMecanicos) {
-            if (mecanico.getIdEmpleado() == id) {
-                this.listaMecanicos.remove(mecanico);
-                break;
-            }
-        }
+    public void eliminar(Mecanico objeto) {
+        this.listaMecanicos.removeIf(actual-> actual.getDni().equals(objeto.getDni()));
         guardar();
     }
 
@@ -88,5 +79,15 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
     public List<Mecanico> listar() {
         cargar();
         return this.listaMecanicos;
+    }
+    public Mecanico buscarPorIdUsuario(int idUsuario){
+        Mecanico encontrado = null;
+        for(Mecanico actual : this.listaMecanicos){
+            if(actual.getUsuario() == idUsuario){
+                encontrado = actual;
+                break;
+            }
+        }
+        return encontrado;
     }
 }

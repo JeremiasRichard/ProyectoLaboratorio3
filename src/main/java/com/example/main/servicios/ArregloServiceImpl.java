@@ -20,8 +20,8 @@ public class ArregloServiceImpl implements BaseService<Arreglo> {
         arregloRepo.editar(arreglo);
     }
 
-    public void eliminar(int id){
-        arregloRepo.eliminar(id);
+    public void eliminar(Arreglo a){
+        arregloRepo.eliminar(a);
     }
 
     public void eliminadoLogico(int id){

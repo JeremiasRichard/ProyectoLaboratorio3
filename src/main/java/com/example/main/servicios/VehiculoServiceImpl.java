@@ -20,8 +20,8 @@ public class VehiculoServiceImpl implements BaseService<Vehiculo>{
         vehiculoRepo.editar(vehiculo);
     }
 
-    public void eliminar(int id){
-        vehiculoRepo.eliminar(id);
+    public void eliminar(Vehiculo vehiculo){
+        vehiculoRepo.eliminar(vehiculo);
     }
 
     public void eliminadoLogico(int id){

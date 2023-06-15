@@ -46,11 +46,11 @@ public class UsuarioRepoImpl implements Repositorio<Usuario> {
     @Override
     public void editar(Usuario nuevo) {
         cargar();
-        for (Usuario usr : listaUsuarios) {
-            if (usr.equals(nuevo)) {
-                usr.setUser(nuevo.getUser());
-                usr.setPassword(Encriptador.obtenerMD5(nuevo.getPassword()));
-                break;
+        for (int i = 0; i < this.listaUsuarios.size(); i++) {
+            Usuario actual = this.listaUsuarios.get(i);
+
+            if(actual.getIdUsuario() == nuevo.getIdUsuario()){
+                listaUsuarios.set(i,nuevo);
             }
         }
         guardar();
@@ -70,13 +70,9 @@ public class UsuarioRepoImpl implements Repositorio<Usuario> {
     }
 
     @Override
-    public void eliminar(int id) {
-        for (Usuario usr : this.listaUsuarios) {
-            if (usr.getIdUsuario() == id) {
-                this.listaUsuarios.remove(usr);
-                break;
-            }
-        }
+    public void eliminar(Usuario objeto) {
+        cargar();
+        this.listaUsuarios.removeIf(actual-> actual.getIdUsuario() == objeto.getIdUsuario());
         guardar();
     }
 

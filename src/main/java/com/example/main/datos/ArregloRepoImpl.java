@@ -2,6 +2,7 @@ package com.example.main.datos;
 
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.modelos.Arreglo;
+import com.example.main.modelos.Vehiculo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 
@@ -9,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ArregloRepoImpl implements Repositorio<Arreglo> {
 
@@ -38,7 +40,7 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
     @Override
     public void agregar(Arreglo nuevo) throws EntidadDuplicadaException {
         cargar();
-        nuevo.setIdArreglo(listaArreglos.size()+1);
+        nuevo.setIdArreglo(listaArreglos.size() + 1);
         this.listaArreglos.add(nuevo);
         guardar();
     }
@@ -46,17 +48,16 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
     @Override
     public void editar(Arreglo nuevo) {
         cargar();
-        for (Arreglo arreglo : listaArreglos) {
-            if (arreglo.equals(nuevo)) {
-                arreglo.setIdEmpleado(nuevo.getIdEmpleado());
-                arreglo.setIdEmpleado(nuevo.getIdEmpleado());
-                arreglo.setEstadoReparacion(nuevo.getEstadoReparacion());
-                arreglo.setDetalleArreglo(nuevo.getDetalleArreglo());
-                arreglo.setDetalleCliente(nuevo.getDetalleCliente());
+
+        for (int i = 0; i < this.listaArreglos.size(); i++) {
+            if (listaArreglos.get(i).getIdArreglo() == nuevo.getIdArreglo()) {
+                listaArreglos.set(i, nuevo);
                 break;
             }
         }
+
         guardar();
+
     }
 
     @Override
@@ -73,13 +74,9 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
     }
 
     @Override
-    public void eliminar(int id) {
-        for (Arreglo arr : this.listaArreglos) {
-            if (arr.getIdArreglo() == id) {
-                this.listaArreglos.remove(arr);
-                break;
-            }
-        }
+    public void eliminar(Arreglo objeto) {
+        cargar();
+        this.listaArreglos.removeIf(arr-> arr.getIdArreglo() == objeto.getIdArreglo());
         guardar();
     }
 
@@ -88,4 +85,19 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
         cargar();
         return this.listaArreglos;
     }
+    public List<Arreglo> buscarTodosPorPatente(List<String> patentes){
+        cargar();
+        return this.listaArreglos
+                .stream()
+                .filter(actual -> patentes.contains(actual.getPatente()))
+                .collect(Collectors.toList());
+    }
+    public List<Arreglo> buscarTodosPorMecanico(int idMecanico){
+        cargar();
+        return this.listaArreglos
+                .stream()
+                .filter(actual -> actual.getIdEmpleado() == idMecanico)
+                .collect(Collectors.toList());
+    }
+
 }

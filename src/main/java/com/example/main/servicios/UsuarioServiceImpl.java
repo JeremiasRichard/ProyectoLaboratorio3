@@ -20,8 +20,8 @@ public class UsuarioServiceImpl implements BaseService<Usuario>{
         usuarioRepo.editar(usuario);
     }
 
-    public void eliminar(int id){
-        usuarioRepo.eliminar(id);
+    public void eliminar(Usuario usuario){
+        usuarioRepo.eliminar(usuario);
     }
 
     public void eliminadoLogico(int id){

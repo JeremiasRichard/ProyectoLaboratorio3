@@ -2,15 +2,16 @@ package com.example.main.modelos;
 
 import java.util.Objects;
 
-public abstract class Empleado extends Persona{
+public abstract class Empleado extends Persona {
     private int idEmpleado;
     private String telefono;
     private int idUsuario;
 
-    public Empleado(){}
+    public Empleado() {
+    }
 
-    public Empleado(String nombre, String apellido,String dni, String telefono,int idUsuario) {
-        super(nombre, apellido,dni);
+    public Empleado(String nombre, String apellido, String dni, String telefono, int idUsuario) {
+        super(nombre, apellido, dni);
         this.telefono = telefono;
         this.idUsuario = idUsuario;
     }

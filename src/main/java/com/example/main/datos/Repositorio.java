@@ -11,7 +11,7 @@ public interface Repositorio<T> {
     void agregar(T nuevo) throws EntidadDuplicadaException;
     void editar(T nuevo);
     T buscarPorId(int id);
-    void eliminar(int id);
+    void eliminar(T objeto);
     List<T> listar();
     void guardar() throws PersistenciaException;
 }

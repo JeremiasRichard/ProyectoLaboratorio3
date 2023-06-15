@@ -1,5 +1,6 @@
 package com.example.main.controladores;
 
+import com.example.main.DTOs.ArregloDTO;
 import com.example.main.enums.EstadoReparacion;
 import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Usuario;
@@ -37,7 +38,7 @@ public class DetalleController
     @FXML
     private TextArea observacionesDelArregloField = new TextArea();
 
-    public void initialize(Arreglo arreglo,Usuario logueado)
+    public void initialize(ArregloDTO arreglo,Usuario logueado)
     {
         idNombreUsuario.setText(logueado.getUser().toString());
 
@@ -50,7 +51,7 @@ public class DetalleController
 
         estadoAnterior = arreglo.getEstadoReparacion();
 
-        arreglo.setObservacionesDelArreglo(observacionesDelArregloField.getText());
+        arreglo.setObservacionesCliente(observacionesDelArregloField.getText());
 
         if(arreglo.getEstadoReparacion() == EstadoReparacion.STAND_BY)
             EstadoR.setValue("Stand by");
@@ -60,7 +61,7 @@ public class DetalleController
         }
         else {
             EstadoR.setValue("Finalizado");
-            arreglo.setObservacionesDelArreglo(observacionesDelArregloField.getText());
+            arreglo.setObservacionesMecanico(observacionesDelArregloField.getText());
         }
 
         EstadoR.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
@@ -79,13 +80,13 @@ public class DetalleController
         });
 
     }
-    public void inicializar(Arreglo ListaTareas, Usuario logueado)
+    public void inicializar(ArregloDTO ListaTareas, Usuario logueado)
     {   initialize(ListaTareas,logueado);
         IdCliente.setText(String.valueOf(new PropertyValueFactory("idCliente")));
         IdArreglo.setText(String.valueOf(new PropertyValueFactory("idArreglo")));
         IdVehiculo.setText(String.valueOf(new PropertyValueFactory("idVehiculo")));
         Marca.setText(String.valueOf(new PropertyValueFactory("marca")));
-        DetallesDeFalla.setText(ListaTareas.getDetalleCliente().toString());
+        DetallesDeFalla.setText(ListaTareas.getObservacionesCliente().toString());
         DetallesDeFalla.setWrapText(true);
     }
 

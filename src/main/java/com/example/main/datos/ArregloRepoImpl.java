@@ -52,7 +52,7 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
                 arreglo.setIdEmpleado(nuevo.getIdEmpleado());
                 arreglo.setEstadoReparacion(nuevo.getEstadoReparacion());
                 arreglo.setDetalleArreglo(nuevo.getDetalleArreglo());
-                arreglo.setDetalleCliente(nuevo.getDetalleCliente());
+                arreglo.setObservacionesDelCliente(nuevo.getObservacionesDelCliente());
                 break;
             }
         }

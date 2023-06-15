@@ -34,9 +34,10 @@
             <Button layoutX="436.0" layoutY="543.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="25.0" prefWidth="100.0" text="Cerrar Sesion" />
             <TableView fx:id="ListaTareas" layoutX="22.0" layoutY="111.0" prefHeight="343.0" prefWidth="514.0">
               <columns>
-                <TableColumn fx:id="IdArregloColumna" prefWidth="72.0" text="Id Arreglo" />
-                <TableColumn fx:id="patenteColumna" prefWidth="92.0" text="Año" />
-                  <TableColumn fx:id="MarcaColumna" prefWidth="362.0" text="Marca" />
+                <TableColumn fx:id="IdArregloColumna" prefWidth="77.0" text="Id Arreglo" />
+                  <TableColumn fx:id="MarcaColumna" prefWidth="174.0" text="Marca" />
+                <TableColumn fx:id="patenteColumna" prefWidth="166.0" text="Patente" />
+                  <TableColumn fx:id="anioColumna" prefWidth="96.0" text="Año" />
               </columns>
             </TableView>
             <Text layoutX="26.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MECANICO:">

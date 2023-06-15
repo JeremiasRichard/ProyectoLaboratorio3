@@ -3,14 +3,12 @@ package com.example.main.modelos;
 
 import com.example.main.enums.EstadoReparacion;
 
-import java.util.Objects;
-
 public class Arreglo {
     private int idArreglo;
     private String patente;
     private int idCliente;
     private int idEmpleado;
-    private String detalleCliente;
+    private String observacionesDelCliente;
     private String observacionesDelArreglo;
     private EstadoReparacion estadoReparacion;
 
@@ -19,13 +17,13 @@ public class Arreglo {
 
     }
 
-    public Arreglo(int idArreglo, String patente, int idCliente, int idEmpleado, String detalleCliente)
+    public Arreglo(int idArreglo, String patente, int idCliente, int idEmpleado, String observacionesDelCliente)
     {
         this.idArreglo = idArreglo;
         this.patente = patente;
         this.idCliente = idCliente;
         this.idEmpleado = idEmpleado;
-        this.detalleCliente = detalleCliente;
+        this.observacionesDelCliente = observacionesDelCliente;
         this.estadoReparacion = EstadoReparacion.STAND_BY;
     }
 
@@ -59,12 +57,12 @@ public class Arreglo {
         this.idEmpleado = idEmpleado;
     }
 
-    public String getDetalleCliente() {
-        return detalleCliente;
+    public String getObservacionesDelCliente() {
+        return observacionesDelCliente;
     }
 
-    public void setDetalleCliente(String detalleCliente) {
-        this.detalleCliente = detalleCliente;
+    public void setObservacionesDelCliente(String observacionesDelCliente) {
+        this.observacionesDelCliente = observacionesDelCliente;
     }
 
     public String getDetalleArreglo() {
@@ -96,7 +94,7 @@ public class Arreglo {
                 "idArreglo=" + idArreglo +
                 ", idCliente=" + idCliente +
                 ", idEmpleado=" + idEmpleado +
-                ", detalleCliente='" + detalleCliente + '\'' +
+                ", observacionesDelCliente='" + observacionesDelCliente + '\'' +
                 ", observacionesDelArreglo='" + observacionesDelArreglo + '\'' +
                 ", estadoReparacion=" + estadoReparacion +
                 '}';

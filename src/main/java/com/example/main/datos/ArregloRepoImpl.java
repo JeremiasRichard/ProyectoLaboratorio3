@@ -50,8 +50,6 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
             if (arreglo.equals(nuevo)) {
                 arreglo.setIdEmpleado(nuevo.getIdEmpleado());
                 arreglo.setIdEmpleado(nuevo.getIdEmpleado());
-                arreglo.setCosto(nuevo.getCosto());
-                arreglo.setVehiculo(nuevo.getVehiculo());
                 arreglo.setEstadoReparacion(nuevo.getEstadoReparacion());
                 arreglo.setDetalleArreglo(nuevo.getDetalleArreglo());
                 arreglo.setDetalleCliente(nuevo.getDetalleCliente());

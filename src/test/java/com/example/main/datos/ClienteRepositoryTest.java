@@ -12,8 +12,8 @@ public class ClienteRepositoryTest {
 
     @Test
     public void debePersistirEnArchivo(){
-        Cliente cliente = new Cliente("Carlos","Bianco","23098789",new ArrayList<Arreglo>(),"223045648", Arrays.asList("Patente1","Patente2"));
-        Cliente cliente2 = new Cliente("Carlos","Perez","23098789",new ArrayList<Arreglo>(),"223045648", Arrays.asList("Patente3","Patente4"));
+        Cliente cliente = new Cliente("Carlos","Bianco","23098789",new ArrayList<Integer>(),"223045648", Arrays.asList("Patente1","Patente2"));
+        Cliente cliente2 = new Cliente("Carlos","Perez","23098789",new ArrayList<Integer>(),"223045648", Arrays.asList("Patente3","Patente4"));
 
         /*clienteRepo.agregar(cliente);
         clienteRepo.agregar(cliente2);*/

@@ -15,15 +15,9 @@ public class Vehiculo {
     private boolean activo;
 
     public Vehiculo(){}
-    public Vehiculo(int anioFabricacion, TipoVehiculo tipoVehiculo, String marca, String patente) {
-        this.anioFabricacion =  anioFabricacion;
-        this.tipoVehiculo = tipoVehiculo;
-        this.marca = marca;
-        this.patente = patente;
-        this.activo = true;
-    }
-    public Vehiculo(int idVehiculo, int anioFabricacion, TipoVehiculo tipoVehiculo, String marca, String patente) {
-        this.idVehiculo = idVehiculo;
+
+    public Vehiculo(int anioFabricacion, TipoVehiculo tipoVehiculo, String marca, String patente)
+    {
         this.anioFabricacion =  anioFabricacion;
         this.tipoVehiculo = tipoVehiculo;
         this.marca = marca;

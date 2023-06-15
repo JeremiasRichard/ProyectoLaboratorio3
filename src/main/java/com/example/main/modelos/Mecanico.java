@@ -3,18 +3,22 @@ package com.example.main.modelos;
 import com.example.main.enums.Especialidad;
 import com.example.main.enums.TipoVehiculo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Mecanico extends Empleado {
-    private List<Arreglo> listaArreglos;
+    private transient List<Arreglo> listaArreglos;
     private TipoVehiculo tipoVehiculo;
     private Especialidad especialidad;
     private boolean activo;
+    public Mecanico()
+    {
 
-    public Mecanico(){}
 
-    public Mecanico(List<Arreglo> listaArreglos, TipoVehiculo tipoVehiculo, Especialidad especialidad) {
-        this.listaArreglos = listaArreglos;
+    }
+
+    public Mecanico(TipoVehiculo tipoVehiculo, Especialidad especialidad) {
+        this.listaArreglos = new ArrayList<>();
         this.tipoVehiculo = tipoVehiculo;
         this.especialidad = especialidad;
         this.activo = true;

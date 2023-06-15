@@ -3,15 +3,16 @@ package com.example.main.modelos;
 import java.util.List;
 import java.util.Objects;
 
-public class Cliente extends Persona{
+public class Cliente extends Persona
+{
     private int idCliente;
-    private List<Arreglo> historialArreglos;
+    private List<Integer> historialArreglos;
     private String nroTelefono;
     private List<String> listaVehiculos;
     private boolean activo;
     public Cliente(){}
 
-    public Cliente(String nombre, String apellido, String dni, List<Arreglo> historialArreglos, String nroTelefono, List<String> listaVehiculos)
+    public Cliente(String nombre, String apellido, String dni, List<Integer> historialArreglos, String nroTelefono, List<String> listaVehiculos)
     {
         super(nombre, apellido, dni);
         this.historialArreglos = historialArreglos;
@@ -26,7 +27,7 @@ public class Cliente extends Persona{
         this.nroTelefono=nroTelefono;
     }
 
-    public Cliente(int idCliente, List<Arreglo> historialArreglos, String nroTelefono, String mail, String direccion, List<String> listaVehiculos) {
+    public Cliente(int idCliente, List<Integer> historialArreglos, String nroTelefono, String mail, String direccion, List<String> listaVehiculos) {
         this.idCliente = idCliente;
         this.historialArreglos = historialArreglos;
         this.nroTelefono = nroTelefono;
@@ -42,11 +43,11 @@ public class Cliente extends Persona{
         this.idCliente = idCliente;
     }
 
-    public List<Arreglo> getHistorialArreglos() {
+    public List<Integer> getHistorialArreglos() {
         return historialArreglos;
     }
 
-    public void setHistorialArreglos(List<Arreglo> historialArreglos) {
+    public void setHistorialArreglos(List<Integer> historialArreglos) {
         this.historialArreglos = historialArreglos;
     }
 

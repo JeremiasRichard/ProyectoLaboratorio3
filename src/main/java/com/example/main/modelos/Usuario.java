@@ -1,19 +1,27 @@
 package com.example.main.modelos;
 
-public class Usuario {
+public class Usuario
+{
     private int idUsuario;
     private String user;
     private String password;
-    private boolean nivelDeAcceso;
+    private boolean esAdmin;
     private boolean activo;
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String user, String password, boolean nivelDeAcceso) {
-        this.idUsuario = idUsuario;
+    public Usuario(String user, String password)
+    {
         this.user = user;
         this.password = password;
-        this.nivelDeAcceso = nivelDeAcceso;
+        this.esAdmin = false;
+        this.activo = true;
+    }
+    public Usuario(String user, String password,boolean esAdmin)
+    {
+        this.user = user;
+        this.password = password;
+        this.esAdmin = esAdmin;
         this.activo = true;
     }
 
@@ -42,12 +50,12 @@ public class Usuario {
         this.password = password;
     }
 
-    public boolean isNivelDeAcceso() {
-        return nivelDeAcceso;
+    public boolean isEsAdmin() {
+        return esAdmin;
     }
 
-    public void setNivelDeAcceso(boolean nivelDeAcceso) {
-        this.nivelDeAcceso = nivelDeAcceso;
+    public void setEsAdmin(boolean esAdmin) {
+        this.esAdmin = esAdmin;
     }
 
     public boolean getActivo() { return activo; }

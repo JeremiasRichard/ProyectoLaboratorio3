@@ -19,6 +19,6 @@ public class LoginServiceImpl implements LoginService {
     {
         /*String passwordEncriptado = Encriptador.obtenerMD5(password);
         return usuarioRepo.buscarPorUsuarioYPassword(usuario,passwordEncriptado);*/
-        return new Usuario(1,"Jeremias Richard","asd",true);
+        return new Usuario("Jeremias Richard","asd",false);
     }
 }

@@ -26,7 +26,6 @@ public class ArregloServiceImpl implements BaseService<Arreglo> {
 
     public void eliminadoLogico(int id){
         Arreglo arreglo = arregloRepo.buscarPorId(id);
-        arreglo.setActivo(false);
         arregloRepo.editar(arreglo);
     }
 

@@ -4,29 +4,17 @@ import java.util.Objects;
 
 public abstract class Empleado extends Persona{
     private int idEmpleado;
-    private String datosContacto;//hay un objeto tipo DatosContacto?
-    private Usuario usuario;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Empleado empleado)) return false;
-        return idEmpleado == empleado.idEmpleado;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idEmpleado);
-    }
+    private String telefono;
+    private int idUsuario;
 
     public Empleado(){}
 
-    public Empleado(String nombre, String apellido , String dni,int idEmpleado, String datosContacto, com.example.main.modelos.Usuario usuario) {
+    public Empleado(String nombre, String apellido,String dni, String telefono,int idUsuario) {
         super(nombre, apellido,dni);
-        this.idEmpleado = idEmpleado;
-        this.datosContacto = datosContacto;
-        this.usuario = usuario;
+        this.telefono = telefono;
+        this.idUsuario = idUsuario;
     }
+
     //region Getters y Setters
     public int getIdEmpleado() {
         return idEmpleado;
@@ -36,28 +24,13 @@ public abstract class Empleado extends Persona{
         this.idEmpleado = idEmpleado;
     }
 
-    public String getDatosContacto() {
-        return datosContacto;
+    public int getUsuario() {
+        return idUsuario;
     }
 
-    public void setDatosContacto(String datosContacto) {
-        this.datosContacto = datosContacto;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
     //endregion
-    @Override
-    public String toString() {
-        return "Personal{" +
-                "IdEmpleado=" + idEmpleado +
-                ", DatosContacto='" + datosContacto + '\'' +
-                ", Usuario=" + usuario +
-                '}';
-    }
+
 }

@@ -1,21 +1,14 @@
 package com.example.main.controladores;
 
-import com.example.main.DTOs.ArregloDTO;
 import com.example.main.enums.EstadoReparacion;
+import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Usuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DetalleController
 {
@@ -44,7 +37,7 @@ public class DetalleController
     @FXML
     private TextArea observacionesDelArregloField = new TextArea();
 
-    public void initialize(ArregloDTO arregloDTO,Usuario logueado)
+    public void initialize(Arreglo arreglo,Usuario logueado)
     {
         idNombreUsuario.setText(logueado.getUser().toString());
 
@@ -55,18 +48,19 @@ public class DetalleController
         );
         EstadoR.setItems(opciones);
 
-        estadoAnterior = arregloDTO.getEstadoReparacion();
-        arregloDTO.setObservacionesDelArreglo(observacionesDelArregloField.getText());
+        estadoAnterior = arreglo.getEstadoReparacion();
 
-        if(arregloDTO.getEstadoReparacion() == EstadoReparacion.STAND_BY)
+        arreglo.setObservacionesDelArreglo(observacionesDelArregloField.getText());
+
+        if(arreglo.getEstadoReparacion() == EstadoReparacion.STAND_BY)
             EstadoR.setValue("Stand by");
-        else if(arregloDTO.getEstadoReparacion() == EstadoReparacion.EN_PROCESO)
+        else if(arreglo.getEstadoReparacion() == EstadoReparacion.EN_PROCESO)
         {
             EstadoR.setValue("En proceso");
         }
         else {
             EstadoR.setValue("Finalizado");
-            arregloDTO.setObservacionesDelArreglo(observacionesDelArregloField.getText());
+            arreglo.setObservacionesDelArreglo(observacionesDelArregloField.getText());
         }
 
         EstadoR.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
@@ -74,24 +68,23 @@ public class DetalleController
 
             if (newValue.equals("En proceso"))
             {
-                estadoAnterior = arregloDTO.getEstadoReparacion();
-                arregloDTO.setEstadoReparacion(EstadoReparacion.EN_PROCESO);
+                estadoAnterior = arreglo.getEstadoReparacion();
+                arreglo.setEstadoReparacion(EstadoReparacion.EN_PROCESO);
             } else if (newValue.equals("Finalizado"))
             {
-                estadoAnterior = arregloDTO.getEstadoReparacion();
-                arregloDTO.setEstadoReparacion(EstadoReparacion.FINALIZADO);
+                estadoAnterior = arreglo.getEstadoReparacion();
+                arreglo.setEstadoReparacion(EstadoReparacion.FINALIZADO);
 
             }
         });
 
-        //guardarCambios(arregloDTO);
     }
-    public void inicializar(ArregloDTO ListaTareas,Usuario logueado)
+    public void inicializar(Arreglo ListaTareas, Usuario logueado)
     {   initialize(ListaTareas,logueado);
-        IdCliente.setText(String.valueOf(ListaTareas.getIdCliente()));
-        IdArreglo.setText(String.valueOf(ListaTareas.idArregloProperty().asObject()));
-        IdVehiculo.setText(String.valueOf(ListaTareas.getVehiculoDTO().getIdVehiculo()));
-        Marca.setText(String.valueOf(ListaTareas.getVehiculoDTO().getMarca()));
+        IdCliente.setText(String.valueOf(new PropertyValueFactory("idCliente")));
+        IdArreglo.setText(String.valueOf(new PropertyValueFactory("idArreglo")));
+        IdVehiculo.setText(String.valueOf(new PropertyValueFactory("idVehiculo")));
+        Marca.setText(String.valueOf(new PropertyValueFactory("marca")));
         DetallesDeFalla.setText(ListaTareas.getDetalleCliente().toString());
         DetallesDeFalla.setWrapText(true);
     }
@@ -107,8 +100,8 @@ public class DetalleController
         stageActual.close();
     }
 
-    private void guardarCambios(ArregloDTO arregloDTO) {
-        if (arregloDTO.getEstadoReparacion() != EstadoReparacion.FINALIZADO || arregloDTO.getObservacionesDelArreglo() == null) {
+    private void guardarCambios(Arreglo arreglo) {
+        if (arreglo.getEstadoReparacion() != EstadoReparacion.FINALIZADO || arreglo.getObservacionesDelArreglo() == null) {
             System.out.println("Error, estado inválido o campo observación vacío!");
         } else {
             Stage stageActual = (Stage) atrasButton.getScene().getWindow();

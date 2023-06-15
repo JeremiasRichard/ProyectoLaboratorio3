@@ -7,44 +7,43 @@ import java.util.Objects;
 
 public class Arreglo {
     private int idArreglo;
-    private Vehiculo vehiculo;
+    private String patente;
     private int idCliente;
     private int idEmpleado;
     private String detalleCliente;
     private String observacionesDelArreglo;
-    private double costo;
     private EstadoReparacion estadoReparacion;
-    private boolean activo;
 
-    public Arreglo(){
+    public Arreglo()
+    {
 
     }
-    public Arreglo(int idArreglo,Vehiculo vehiculo, int idCliente, int idEmpleado, String detalleCliente, EstadoReparacion estadoReparacion) {
+
+    public Arreglo(int idArreglo, String patente, int idCliente, int idEmpleado, String detalleCliente)
+    {
         this.idArreglo = idArreglo;
-        this.vehiculo = vehiculo;
+        this.patente = patente;
         this.idCliente = idCliente;
         this.idEmpleado = idEmpleado;
         this.detalleCliente = detalleCliente;
-        this.estadoReparacion = estadoReparacion;
-        this.activo = true;
+        this.estadoReparacion = EstadoReparacion.STAND_BY;
     }
+
     //region Getters y Setters
-    public Vehiculo getVehiculo() {
-        return vehiculo;
+    public String getPatente() {
+        return patente;
+    }
+
+    public void setPatente(String patente) {
+        this.patente = patente;
     }
 
     public int getIdCliente() {
         return idCliente;
     }
-
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
-
-    public void setVehiculo(Vehiculo vehiculo) {
-        this.vehiculo = vehiculo;
-    }
-
     public int getIdArreglo() {
         return this.idArreglo;
     }
@@ -76,14 +75,6 @@ public class Arreglo {
         observacionesDelArreglo = detalleArreglo;
     }
 
-    public double getCosto() {
-        return costo;
-    }
-
-    public void setCosto(double costo) {
-        this.costo = costo;
-    }
-
     public String getObservacionesDelArreglo() {
         return observacionesDelArreglo;
     }
@@ -91,42 +82,24 @@ public class Arreglo {
     public void setObservacionesDelArreglo(String observacionesDelArreglo) {
         this.observacionesDelArreglo = observacionesDelArreglo;
     }
-
     public EstadoReparacion getEstadoReparacion() {
         return estadoReparacion;
     }
-
     public void setEstadoReparacion(EstadoReparacion estadoReparacion) {
         this.estadoReparacion = estadoReparacion;
     }
-    public boolean getActivo() { return activo; }
 
-    public void setActivo(boolean activo) { this.activo = activo; }
     //endregion
     @Override
     public String toString() {
         return "Arreglo{" +
                 "idArreglo=" + idArreglo +
-                ", vehiculo=" + vehiculo +
                 ", idCliente=" + idCliente +
                 ", idEmpleado=" + idEmpleado +
                 ", detalleCliente='" + detalleCliente + '\'' +
                 ", observacionesDelArreglo='" + observacionesDelArreglo + '\'' +
-                ", costo=" + costo +
                 ", estadoReparacion=" + estadoReparacion +
-                ", activo=" + activo +
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Arreglo arreglo)) return false;
-        return idArreglo == arreglo.idArreglo && idCliente == arreglo.idCliente && idEmpleado == arreglo.idEmpleado && Objects.equals(vehiculo, arreglo.vehiculo);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idArreglo, vehiculo, idCliente, idEmpleado);
-    }
 }

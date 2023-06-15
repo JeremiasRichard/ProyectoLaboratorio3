@@ -1,8 +1,6 @@
 package com.example.main.controladores;
 
-import com.example.main.Main;
 import com.example.main.controladores.validaciones.Validaciones;
-import com.example.main.modelos.Mecanico;
 import com.example.main.modelos.Usuario;
 import com.example.main.servicios.LoginService;
 import com.example.main.servicios.LoginServiceImpl;
@@ -15,9 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -56,7 +52,7 @@ public class LoginController {
             if(logueado !=  null)
             {
                 // solo se va a verificar el nivel de acceso.
-                if (this.logueado.isNivelDeAcceso())
+                if (this.logueado.isEsAdmin())
                 {
                     // Acceso de administrador
                     abrirVistaAdmin(this.logueado);

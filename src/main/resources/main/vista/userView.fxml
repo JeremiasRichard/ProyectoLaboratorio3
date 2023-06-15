@@ -35,7 +35,7 @@
             <TableView fx:id="ListaTareas" layoutX="22.0" layoutY="111.0" prefHeight="343.0" prefWidth="514.0">
               <columns>
                 <TableColumn fx:id="IdArregloColumna" prefWidth="72.0" text="Id Arreglo" />
-                <TableColumn fx:id="anioFabricacionColumna" prefWidth="92.0" text="Año" />
+                <TableColumn fx:id="patenteColumna" prefWidth="92.0" text="Año" />
                   <TableColumn fx:id="MarcaColumna" prefWidth="362.0" text="Marca" />
               </columns>
             </TableView>

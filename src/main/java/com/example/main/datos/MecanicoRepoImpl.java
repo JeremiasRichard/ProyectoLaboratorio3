@@ -50,7 +50,6 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
                 //Persona
                 mecanico.setNombre(nuevo.getNombre());
                 mecanico.setApellido(nuevo.getApellido());
-                mecanico.setDatosContacto(nuevo.getDatosContacto());
                 //Mecanico
                 mecanico.setEspecialidad(nuevo.getEspecialidad());
                 mecanico.setTipoVehiculo(nuevo.getTipoVehiculo());

@@ -13,7 +13,7 @@ public class ArregloServiceImpl implements BaseService<Arreglo> {
     }
 
     public void agregar(Arreglo arreglo){
-        arregloRepo.agregar(arreglo);
+        //arregloRepo.agregar(arreglo);
     }
 
     public void editar(Arreglo arreglo){

@@ -1,34 +1,35 @@
 package com.example.main.modelos;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Cliente extends Persona{
     private int idCliente;
     private List<Arreglo> historialArreglos;
     private String nroTelefono;
-    private String mail;
-    private String direccion;
     private List<String> listaVehiculos;
     private boolean activo;
     public Cliente(){}
 
-    public Cliente(String nombre, String apellido, String dni, int idCliente, List<Arreglo> historialArreglos, String nroTelefono, String mail, String direccion, List<String> listaVehiculos) {
+    public Cliente(String nombre, String apellido, String dni, List<Arreglo> historialArreglos, String nroTelefono, List<String> listaVehiculos)
+    {
         super(nombre, apellido, dni);
-        this.idCliente = idCliente;
         this.historialArreglos = historialArreglos;
         this.nroTelefono = nroTelefono;
-        this.mail = mail;
-        this.direccion = direccion;
         this.listaVehiculos = listaVehiculos;
         this.activo = true;
+    }
+
+    public Cliente(String nombre,String apellido,String dni,String nroTelefono)
+    {
+        super(nombre, apellido, dni);
+        this.nroTelefono=nroTelefono;
     }
 
     public Cliente(int idCliente, List<Arreglo> historialArreglos, String nroTelefono, String mail, String direccion, List<String> listaVehiculos) {
         this.idCliente = idCliente;
         this.historialArreglos = historialArreglos;
         this.nroTelefono = nroTelefono;
-        this.mail = mail;
-        this.direccion = direccion;
         this.listaVehiculos = listaVehiculos;
         this.activo = true;
     }
@@ -56,23 +57,6 @@ public class Cliente extends Persona{
     public void setNroTelefono(String nroTelefono) {
         this.nroTelefono = nroTelefono;
     }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
     public List<String> getListaVehiculos() {
         return listaVehiculos;
     }
@@ -86,16 +70,27 @@ public class Cliente extends Persona{
     public void setActivo(boolean activo) { this.activo = activo; }
 
     @Override
+    public boolean equals(Object o)
+    {
+        if(o instanceof  Cliente && o != null)
+        {
+            return this.getDni() == ((Cliente) o).getDni();
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return 1;
+    }
+
+    @Override
     public String toString() {
         return "Cliente{" +
                 "idCliente=" + idCliente +
                 ", historialArreglos=" + historialArreglos +
-                ", nroTelefono=" + nroTelefono +
-                ", mail='" + mail + '\'' +
-                ", direccion='" + direccion + '\'' +
                 ", listaVehiculos=" + listaVehiculos +
                 ", activo=" + activo +
                 "} " + super.toString();
     }
-
 }

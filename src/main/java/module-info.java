@@ -17,5 +17,7 @@ module com.example.main {
     exports com.example.main.enums to com.fasterxml.jackson.databind;
     exports com.example.main.modelos to com.fasterxml.jackson.databind;
     exports com.example.main.DTOs to com.fasterxml.jackson.databind;
+    opens com.example.main.modelos to javafx.base;
+
 }
 

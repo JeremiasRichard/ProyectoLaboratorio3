@@ -13,7 +13,7 @@ public class ClienteServiceImpl implements BaseService<Cliente>{
     }
 
     public void agregar(Cliente cliente){
-        clienteRepo.agregar(cliente);
+        //clienteRepo.agregar(cliente);
     }
 
     public void editar(Cliente cliente){

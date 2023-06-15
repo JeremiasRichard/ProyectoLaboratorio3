@@ -13,7 +13,7 @@ public class UsuarioServiceImpl implements BaseService<Usuario>{
     }
 
     public void agregar(Usuario usuario){
-        usuarioRepo.agregar(usuario);
+        //usuarioRepo.agregar(usuario);
     }
 
     public void editar(Usuario usuario){

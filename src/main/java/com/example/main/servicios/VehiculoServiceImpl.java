@@ -13,7 +13,7 @@ public class VehiculoServiceImpl implements BaseService<Vehiculo>{
     }
 
     public void agregar(Vehiculo vehiculo){
-        vehiculoRepo.agregar(vehiculo);
+        //vehiculoRepo.agregar(vehiculo);
     }
 
     public void editar(Vehiculo vehiculo){

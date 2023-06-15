@@ -1,5 +1,6 @@
 package com.example.main.servicios;
 
+import com.example.main.DTOs.ArregloDTO;
 import com.example.main.datos.MecanicoRepoImpl;
 import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Mecanico;
@@ -9,6 +10,7 @@ import java.util.List;
 
 public class MecanicoServiceImpl implements BaseService<Mecanico>{
     private MecanicoRepoImpl mecanicoRepo;
+
 
     public MecanicoServiceImpl(){
         this.mecanicoRepo = new MecanicoRepoImpl();
@@ -47,4 +49,12 @@ public class MecanicoServiceImpl implements BaseService<Mecanico>{
     public void cargarDetalle(){
         //Logica cargar detalle y persistirlo en el Arreglo (editar arreglo).
     }
+
+    public List<ArregloDTO>obtenerTareas(int idUsuario)
+    {
+        //Mecanico deseado = buscarMecanicoPorIdUsuario(actual.getId);
+        //List<Arreglo> tareas = obtenerTareasPorIdMecanico(deseado.getId);
+        return null;
+    }
+
 }

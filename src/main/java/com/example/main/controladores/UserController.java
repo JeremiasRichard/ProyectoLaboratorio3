@@ -1,8 +1,10 @@
 package com.example.main.controladores;
 
+import com.example.main.DTOs.ArregloDTO;
 import com.example.main.enums.EstadoReparacion;
 import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Usuario;
+import com.example.main.servicios.MecanicoServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,25 +19,25 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.List;
 
 public class UserController {
-
     @FXML
-    private TableView<Arreglo> ListaTareas = new TableView<>();
+    private Stage stageAnterior;
+    private Stage userStage;
+    @FXML
+    private Button exitButton;
+    @FXML
+    private Button detalleButton;
+    @FXML
+    private TableView<ArregloDTO> ListaTareas = new TableView<>();
     @FXML
     private TableColumn IdArregloColumna;
     @FXML
     private TableColumn patenteColumna;
     @FXML
     private TableColumn MarcaColumna;
-    private Stage userStage;
-    @FXML
-    private Button exitButton;
-    @FXML
-    private Button detalleButton;
-    private  ObservableList<Arreglo> tareas;
-    @FXML
-    private Stage stageAnterior;
+    private  ObservableList<ArregloDTO> tareas;
     private Usuario logueado;
     @FXML
     private Label idNombreUsuario = new Label();
@@ -66,10 +68,13 @@ public class UserController {
     public void initialize(Usuario actual)
     {
 
+        /*= mecanicoServiceImpl.obtenerTareas(actual.getIdUsuario());
+
         // Configurar las columnas
         this.IdArregloColumna.setCellValueFactory(new PropertyValueFactory("idArreglo"));
         this.patenteColumna.setCellValueFactory(new PropertyValueFactory("patente"));
         this.MarcaColumna.setCellValueFactory(new PropertyValueFactory("marca"));
+
         this.tareas = FXCollections.observableArrayList();
 
         Arreglo arreglo1 = new Arreglo(1, "vehiculoUno", 1, 1, "Detalla falla motor");
@@ -80,7 +85,7 @@ public class UserController {
         tareas.add(arreglo2);
         tareas.add(arreglo3);
 
-        idNombreUsuario.setText(actual.getUser().toString());
+        idNombreUsuario.setText(actual.getUser().toString());*/
 
         ListaTareas.setItems(tareas);
     }
@@ -98,7 +103,7 @@ public class UserController {
 
     public void verDetalle()
     {
-        Arreglo elementoSeleccionado = ListaTareas.getSelectionModel().getSelectedItem();
+        ArregloDTO elementoSeleccionado = ListaTareas.getSelectionModel().getSelectedItem();
 
         if(elementoSeleccionado != null)
         {

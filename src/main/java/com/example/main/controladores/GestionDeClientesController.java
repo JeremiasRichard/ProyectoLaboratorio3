@@ -1,6 +1,5 @@
 package com.example.main.controladores;
 
-import com.example.main.enums.EstadoReparacion;
 import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.Cliente;
 import com.example.main.modelos.Usuario;
@@ -11,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -30,6 +30,8 @@ public class GestionDeClientesController {
     @FXML
     private Button atrasButton;
     @FXML
+    private CheckBox mostrarTodos;
+    @FXML
     private TextField nombreField;
     @FXML
     private TextField dniField;
@@ -44,6 +46,8 @@ public class GestionDeClientesController {
     @FXML
     private TextField patenteField;
     @FXML
+    private  TextField txtBusquedaDNI;
+    @FXML
     private TableView<Cliente> tblClientes;
     @FXML
     private TableColumn columnaNombre;
@@ -55,6 +59,7 @@ public class GestionDeClientesController {
     private TableColumn columnaTelefono;
     @FXML
     private ObservableList<Cliente> clientes;
+    private ObservableList<Cliente> filtroClientes;
     @FXML
     private ChoiceBox<String> tipoVehiculo = new ChoiceBox<>();
     @FXML
@@ -77,6 +82,15 @@ public class GestionDeClientesController {
     public void initialize()
     {
         clientes = FXCollections.observableArrayList();
+        filtroClientes = FXCollections.observableArrayList();
+
+        Cliente nuevo2 = new Cliente("jorge","la piedra","3213","4790789",false);
+        Cliente nuevo3 = new Cliente("asda231","asd2","4567","789423",false);
+
+        clientes.add(nuevo2);
+        clientes.add(nuevo3);
+
+        tblClientes.setItems(clientes);
 
         this.columnaNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         this.columnaApellido.setCellValueFactory(new PropertyValueFactory("apellido"));
@@ -84,10 +98,12 @@ public class GestionDeClientesController {
         this.columnaTelefono.setCellValueFactory(new PropertyValueFactory("nroTelefono"));
 
         this.opciones = FXCollections.observableArrayList(
+                "",
                 " Auto",
                 " Moto",
                 " Camion"
         );
+        tipoVehiculo.setValue("");
         tipoVehiculo.setItems(opciones);
 
     }
@@ -96,10 +112,11 @@ public class GestionDeClientesController {
     private void agregarCliente(ActionEvent event) {
 
         boolean a = true;
+
         if(a != false)
         {
 
-            Cliente nuevo = new Cliente(this.nombreField.getText(),this.apellidoField.getText(),this.dniField.getText(),this.telefonoField.getText());
+            Cliente nuevo = new Cliente(this.nombreField.getText(),this.apellidoField.getText(),this.dniField.getText(),this.telefonoField.getText(),true);
 
             Vehiculo nuevoVehiculo = new Vehiculo(Integer.parseInt(this.anioFabricacionField.getText()), TipoVehiculo.AUTO,this.marcaField.getText(),this.patenteField.getText());
 
@@ -155,60 +172,92 @@ public class GestionDeClientesController {
                 this.apellidoField.setText(c.getApellido());
                 this.dniField.setText(c.getDni());
                 this.telefonoField.setText(c.getNroTelefono());
+                limpiarInputsVehiculo();
+                bloquearInputsVehiculo();
             }
 
+        } else if (clientes.isEmpty())
+        {
+            limpiarInputsUsuario();
+            desbloquearInputsVehiculo();
         }
 
 
     }
+
+    private void limpiarInputsVehiculo() {
+        this.marcaField.setText("");
+        this.anioFabricacionField.setText("");
+        this.patenteField.setText("");
+        this.tipoVehiculo.setValue("");
+    }
+
+    private void limpiarInputsUsuario() {
+        this.apellidoField.setText("");
+        this.nombreField.setText("");
+        this.dniField.setText("");
+        this.telefonoField.setText("");
+    }
+
+
+
     @FXML
     private void modificarCliente(ActionEvent event)
     {
         Cliente c = this.tblClientes.getSelectionModel().getSelectedItem();
 
-        if(c == null)
-        {
+        if (c == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Error");
             alert.setContentText("Debe seleccionar un cliente");
             alert.showAndWait();
-        }
-        else
-        {
+        } else {
             try {
 
-               String nombre = this.nombreField.getText();
-               String apellido = this.apellidoField.getText();
-               String dni = this.dniField.getText();
-               String telefono = this.telefonoField.getText();
+                String nombre = this.nombreField.getText();
+                String apellido = this.apellidoField.getText();
+                String dni = this.dniField.getText();
+                String telefono = this.telefonoField.getText();
+                limpiarInputsUsuario();
+                desbloquearInputsVehiculo();
+                Cliente aux = new Cliente(nombre, apellido, dni, telefono, true);
 
-               Cliente aux = new Cliente(nombre,apellido,dni,telefono);
-
-                if(!this.clientes.contains(aux))
-                {
+                if (!this.clientes.contains(aux)) {
                     c.setNombre(aux.getNombre());
                     c.setApellido(aux.getApellido());
                     c.setDni(aux.getDni());
                     c.setNroTelefono(aux.getNroTelefono());
-
                     this.tblClientes.refresh();
-                }
-                else
-                {
+                } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setHeaderText(null);
                     alert.setTitle("Error");
                     alert.setContentText("Debe seleccionar un cliente");
                     alert.showAndWait();
                 }
-            }
-            catch (RuntimeException e)
+            } catch (RuntimeException e)
             {
 
             }
         }
     }
+
+    private void bloquearInputsVehiculo() {
+        this.marcaField.setDisable(true);
+        this.anioFabricacionField.setDisable(true);
+        this.patenteField.setDisable(true);
+        this.tipoVehiculo.setDisable(true);
+    }
+
+    private void desbloquearInputsVehiculo()
+    {
+        this.marcaField.setDisable(false);
+        this.anioFabricacionField.setDisable(false);
+        this.patenteField.setDisable(false);
+        this.tipoVehiculo.setDisable(false);
+    }
+
     @FXML
     private void eliminarCliente(ActionEvent event)
     {
@@ -233,6 +282,54 @@ public class GestionDeClientesController {
         else
         {
             this.clientes.remove(c);
+            this.filtroClientes.remove(c);
+            this.tblClientes.refresh();
+        }
+
+    }
+
+    @FXML
+    private void filtrarPorNombre(KeyEvent event)
+    {
+        String filtroDni = this.txtBusquedaDNI.getText();
+
+        if(filtroDni.isEmpty())
+        {
+            this.tblClientes.setItems(clientes);
+        }
+        else {
+            this.filtroClientes.clear();
+
+            for(Cliente cl : this.clientes)
+            {
+                if(cl.getDni().toLowerCase().contains(filtroDni.toLowerCase()))
+                {
+                    this.filtroClientes.add(cl);
+                }
+            }
+            this.tblClientes.setItems(filtroClientes);
+        }
+    }
+
+    @FXML
+    private void filtrarActivoTodos(ActionEvent event)
+    {
+        if (!mostrarTodos.isSelected())
+        {
+            for(Cliente cl: this.clientes)
+            {
+                if(cl.isEstado() && !filtroClientes.contains(cl) && !clientes.isEmpty())
+                {
+                    this.filtroClientes.add(cl);
+                }
+            }
+            this.tblClientes.setItems(filtroClientes);
+            this.tblClientes.refresh();
+
+        }
+        else
+        {
+            this.tblClientes.setItems(clientes);
             this.tblClientes.refresh();
         }
 

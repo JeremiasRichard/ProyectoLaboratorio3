@@ -21,10 +21,11 @@ public class Cliente extends Persona
         this.activo = true;
     }
 
-    public Cliente(String nombre,String apellido,String dni,String nroTelefono)
+    public Cliente(String nombre,String apellido,String dni,String nroTelefono,boolean estado)
     {
         super(nombre, apellido, dni);
         this.nroTelefono=nroTelefono;
+        this.activo=estado;
     }
 
     public Cliente(int idCliente, List<Integer> historialArreglos, String nroTelefono, String mail, String direccion, List<String> listaVehiculos) {
@@ -93,5 +94,14 @@ public class Cliente extends Persona
                 ", listaVehiculos=" + listaVehiculos +
                 ", activo=" + activo +
                 "} " + super.toString();
+    }
+
+    public boolean isEstado()
+    {
+        if(this.activo==true)
+        {
+            return true;
+        }
+        return  false;
     }
 }

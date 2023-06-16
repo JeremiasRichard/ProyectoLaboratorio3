@@ -8,7 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class DetalleController
@@ -20,11 +19,9 @@ public class DetalleController
     @FXML
     private Stage stageAnterior;
     @FXML
-    private  Label IdArreglo = new Label();
+    private  Label DniCliente = new Label();
     @FXML
-    private  Label IdCliente = new Label();
-    @FXML
-    private Label IdVehiculo = new Label();
+    private Label Patente = new Label();
     @FXML
     private Label Marca = new Label();
     @FXML
@@ -38,7 +35,7 @@ public class DetalleController
     @FXML
     private TextArea observacionesDelArregloField = new TextArea();
 
-    public void initialize(ArregloDTO arreglo,Usuario logueado)
+    public void initialize(ArregloDTO arreglo, Usuario logueado)
     {
         idNombreUsuario.setText(logueado.getUser().toString());
 
@@ -51,7 +48,7 @@ public class DetalleController
 
         estadoAnterior = arreglo.getEstadoReparacion();
 
-        arreglo.setObservacionesCliente(observacionesDelArregloField.getText());
+        arreglo.setObservacionesMecanico(observacionesDelArregloField.getText());
 
         if(arreglo.getEstadoReparacion() == EstadoReparacion.STAND_BY)
             EstadoR.setValue("Stand by");
@@ -81,13 +78,16 @@ public class DetalleController
 
     }
     public void inicializar(ArregloDTO ListaTareas, Usuario logueado)
-    {   initialize(ListaTareas,logueado);
-        IdCliente.setText(String.valueOf(new PropertyValueFactory("idCliente")));
-        IdArreglo.setText(String.valueOf(new PropertyValueFactory("idArreglo")));
-        IdVehiculo.setText(String.valueOf(new PropertyValueFactory("idVehiculo")));
-        Marca.setText(String.valueOf(new PropertyValueFactory("marca")));
-        DetallesDeFalla.setText(ListaTareas.getObservacionesCliente().toString());
-        DetallesDeFalla.setWrapText(true);
+    {
+        initialize(ListaTareas,logueado);
+
+        this.Patente.setText(ListaTareas.getPatente());
+
+        this.DniCliente.setText(ListaTareas.getDniCliente());
+
+        this.Marca.setText(ListaTareas.getMarca());
+
+        this.DetallesDeFalla.setText(ListaTareas.getObservacionesCliente());
     }
 
     public void setStageAnterior(Stage stageAnterior) {

@@ -33,7 +33,7 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="93.0" layoutX="26.0" layoutY="94.0" stroke="#0d0d0d4a" strokeType="INSIDE" width="474.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="76.0" layoutX="26.0" layoutY="225.0" stroke="GREY" strokeType="INSIDE" width="474.0" />
             <Button fx:id="atrasButton" layoutX="417.0" layoutY="507.0" mnemonicParsing="false" onAction="#volverAtras" prefHeight="25.0" prefWidth="93.0" text="Atras" />
-            <Label fx:id="DniCliente" layoutX="128.0" layoutY="110.0" prefHeight="8.0" prefWidth="63.0">
+            <Label fx:id="DniCliente" layoutX="113.0" layoutY="100.0" prefHeight="8.0" prefWidth="63.0">
                <font>
                   <Font size="14.0" />
                </font></Label>
@@ -41,7 +41,7 @@
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Label fx:id="IdVehiculo" layoutX="93.0" layoutY="160.0" prefHeight="16.0" prefWidth="78.0">
+            <Label fx:id="Patente" layoutX="93.0" layoutY="160.0" prefHeight="16.0" prefWidth="78.0">
                <font>
                   <Font size="14.0" />
                </font></Label>
@@ -68,10 +68,6 @@
                <font>
                   <Font size="14.0" />
                </font></Text>
-            <Label fx:id="DetallesDeFalla" alignment="TOP_LEFT" layoutX="34.0" layoutY="232.0" prefHeight="63.0" prefWidth="458.0">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
             <Text fill="#070707" layoutX="26.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MECANICO:" wrappingWidth="84.0732421875">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -82,6 +78,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
+            <Label fx:id="DetallesDeFalla" layoutX="32.0" layoutY="230.0" prefHeight="66.0" prefWidth="463.0" />
          </children>
       </AnchorPane>
    </center>

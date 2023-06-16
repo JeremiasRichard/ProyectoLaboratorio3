@@ -2,9 +2,9 @@ package com.example.main.controladores;
 
 import com.example.main.DTOs.ArregloDTO;
 import com.example.main.enums.EstadoReparacion;
-import com.example.main.modelos.Arreglo;
+import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.Usuario;
-import com.example.main.servicios.MecanicoServiceImpl;
+import com.example.main.modelos.Vehiculo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.List;
 
 public class UserController {
     @FXML
@@ -30,13 +29,15 @@ public class UserController {
     @FXML
     private Button detalleButton;
     @FXML
-    private TableView<ArregloDTO> ListaTareas = new TableView<>();
+    private TableView<ArregloDTO> listaTareas = new TableView<>();
     @FXML
-    private TableColumn IdArregloColumna;
+    private TableColumn idArregloColumna;
+    @FXML
+    private TableColumn anioColumna;
     @FXML
     private TableColumn patenteColumna;
     @FXML
-    private TableColumn MarcaColumna;
+    private TableColumn marcaColumna;
     private  ObservableList<ArregloDTO> tareas;
     private Usuario logueado;
     @FXML
@@ -68,26 +69,28 @@ public class UserController {
     public void initialize(Usuario actual)
     {
 
-        /*= mecanicoServiceImpl.obtenerTareas(actual.getIdUsuario());
-
-        // Configurar las columnas
-        this.IdArregloColumna.setCellValueFactory(new PropertyValueFactory("idArreglo"));
-        this.patenteColumna.setCellValueFactory(new PropertyValueFactory("patente"));
-        this.MarcaColumna.setCellValueFactory(new PropertyValueFactory("marca"));
+        //= mecanicoServiceImpl.obtenerTareas(actual.getIdUsuario());
 
         this.tareas = FXCollections.observableArrayList();
 
-        Arreglo arreglo1 = new Arreglo(1, "vehiculoUno", 1, 1, "Detalla falla motor");
-        Arreglo arreglo2 = new Arreglo(2, "vehiculoDos", 2, 1, "Detalla falla calefaccion");
-        Arreglo arreglo3 = new Arreglo(3, "vehiculoTres", 3, 1, "Detalla falla direccion");
+        this.idArregloColumna.setCellValueFactory(new PropertyValueFactory<>("idArreglo"));
+        this.marcaColumna.setCellValueFactory(new PropertyValueFactory<>("marca"));
+        this.patenteColumna.setCellValueFactory(new PropertyValueFactory<>("patente"));
+        this.anioColumna.setCellValueFactory(new PropertyValueFactory<>("anioFabricacion"));
+
+        Vehiculo vehiculo = new Vehiculo(2000, TipoVehiculo.AUTO,"VOLKSWAGEN GOL POWER","AJB942");
+
+        ArregloDTO arreglo1 = new ArregloDTO(1, vehiculo.getPatente(), vehiculo.getMarca(),vehiculo.getAnioFabricacion(),"38829033","El cliente solicita un service completo", EstadoReparacion.STAND_BY);
+
+        ArregloDTO arreglo2 = new ArregloDTO(2,"GGF082","FIAT IVECO DAYLI",2007,"38829033","El cliente solicita cambio de diferencial",EstadoReparacion.STAND_BY);
 
         tareas.add(arreglo1);
+
         tareas.add(arreglo2);
-        tareas.add(arreglo3);
 
-        idNombreUsuario.setText(actual.getUser().toString());*/
+        idNombreUsuario.setText(actual.getUser().toString());
 
-        ListaTareas.setItems(tareas);
+        listaTareas.setItems(tareas);
     }
 
     @FXML
@@ -103,7 +106,7 @@ public class UserController {
 
     public void verDetalle()
     {
-        ArregloDTO elementoSeleccionado = ListaTareas.getSelectionModel().getSelectedItem();
+        ArregloDTO elementoSeleccionado = listaTareas.getSelectionModel().getSelectedItem();
 
         if(elementoSeleccionado != null)
         {

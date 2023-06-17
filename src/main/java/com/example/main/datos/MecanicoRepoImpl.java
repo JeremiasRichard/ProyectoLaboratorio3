@@ -46,7 +46,7 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
     @Override
     public void editar(Mecanico nuevo) {
         cargar();
-        for (int i =0 ; i<this.listaMecanicos.size();i++) {
+        for (int i = 0; i<this.listaMecanicos.size(); i++) {
             String dniActual = this.listaMecanicos.get(i).getDni();
 
             if (dniActual.equals(nuevo.getDni())) {

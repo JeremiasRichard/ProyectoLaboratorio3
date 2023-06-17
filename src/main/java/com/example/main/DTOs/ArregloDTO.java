@@ -23,6 +23,8 @@ public class ArregloDTO
         this.estadoReparacion = estadoReparacion;
     }
 
+
+
     public ArregloDTO() {
     }
 

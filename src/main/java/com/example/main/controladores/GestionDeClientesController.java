@@ -171,6 +171,7 @@ public class GestionDeClientesController {
                 this.nombreField.setText(c.getNombre());
                 this.apellidoField.setText(c.getApellido());
                 this.dniField.setText(c.getDni());
+                this.dniField.setDisable(true);
                 this.telefonoField.setText(c.getNroTelefono());
                 limpiarInputsVehiculo();
                 bloquearInputsVehiculo();
@@ -195,7 +196,7 @@ public class GestionDeClientesController {
     private void limpiarInputsUsuario() {
         this.apellidoField.setText("");
         this.nombreField.setText("");
-        this.dniField.setText("");
+        this.dniField.setDisable(true);
         this.telefonoField.setText("");
     }
 
@@ -217,16 +218,14 @@ public class GestionDeClientesController {
 
                 String nombre = this.nombreField.getText();
                 String apellido = this.apellidoField.getText();
-                String dni = this.dniField.getText();
                 String telefono = this.telefonoField.getText();
                 limpiarInputsUsuario();
                 desbloquearInputsVehiculo();
-                Cliente aux = new Cliente(nombre, apellido, dni, telefono, true);
+                Cliente aux = new Cliente(nombre, apellido, telefono,c.getDni(), true);
 
                 if (!this.clientes.contains(aux)) {
                     c.setNombre(aux.getNombre());
                     c.setApellido(aux.getApellido());
-                    c.setDni(aux.getDni());
                     c.setNroTelefono(aux.getNroTelefono());
                     this.tblClientes.refresh();
                 } else {
@@ -256,6 +255,8 @@ public class GestionDeClientesController {
         this.anioFabricacionField.setDisable(false);
         this.patenteField.setDisable(false);
         this.tipoVehiculo.setDisable(false);
+        this.dniField.setText("");
+        this.dniField.setDisable(false);
     }
 
     @FXML

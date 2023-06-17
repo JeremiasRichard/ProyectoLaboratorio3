@@ -8,7 +8,6 @@ import java.util.List;
 
 public class ClienteDTO
 {
-    private int idCliente;
     private String nombre;
     private String apellido;
     private String dni;
@@ -21,7 +20,6 @@ public class ClienteDTO
     {
         this.nombre = nombre;
         this.apellido=apellido;
-        this.idCliente = idCliente;
         this.dni=dni;
         this.historialArreglos=historialArreglos;
         this.listaVehiculos = listaVehiculos;

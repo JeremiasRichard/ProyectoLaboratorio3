@@ -28,6 +28,8 @@ public class Cliente extends Persona
         this.activo=estado;
     }
 
+
+
     public Cliente(int idCliente, List<Integer> historialArreglos, String nroTelefono, String mail, String direccion, List<String> listaVehiculos) {
         this.idCliente = idCliente;
         this.historialArreglos = historialArreglos;

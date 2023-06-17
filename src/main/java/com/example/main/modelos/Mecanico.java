@@ -17,7 +17,8 @@ public class Mecanico extends Empleado {
 
     }
 
-    public Mecanico(TipoVehiculo tipoVehiculo, Especialidad especialidad) {
+    public Mecanico(TipoVehiculo tipoVehiculo, Especialidad especialidad)
+    {
         this.listaArreglos = new ArrayList<>();
         this.tipoVehiculo = tipoVehiculo;
         this.especialidad = especialidad;

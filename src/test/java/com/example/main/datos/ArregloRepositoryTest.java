@@ -16,10 +16,10 @@ public class ArregloRepositoryTest {
     private ArregloRepoImpl arregloRepo = new ArregloRepoImpl();
     @BeforeAll
     void cargarArchivo(){
-        Arreglo arr1 = new Arreglo(1,"XD54",1,2,"No anda joder");
-        Arreglo arr2 = new Arreglo(2,"XD55",2,1,"No anda tio");
-        Arreglo arr3 = new Arreglo(3,"XD56",3,2,"No anda madre mia");
-        Arreglo arr4 = new Arreglo(4,"XD57",5,1,"No anda conio");
+        Arreglo arr1 = new Arreglo(1,"XD54","12332111",2,"No anda joder");
+        Arreglo arr2 = new Arreglo(2,"XD55","12332222",1,"No anda tio");
+        Arreglo arr3 = new Arreglo(3,"XD56","11332444",2,"No anda madre mia");
+        Arreglo arr4 = new Arreglo(4,"XD57","123435777",1,"No anda conio");
         try{
             arregloRepo.agregar(arr1);
             arregloRepo.agregar(arr2);

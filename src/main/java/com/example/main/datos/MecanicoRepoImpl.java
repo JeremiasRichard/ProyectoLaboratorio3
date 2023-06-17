@@ -38,6 +38,7 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
     public void agregar(Mecanico nuevo) throws EntidadDuplicadaException {
         cargar();
         nuevo.setIdEmpleado(listaMecanicos.size()+1);
+        nuevo.setUsuario(listaMecanicos.size()+1);
         this.listaMecanicos.add(nuevo);
         guardar();
     }

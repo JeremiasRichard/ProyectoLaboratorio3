@@ -89,4 +89,16 @@ public class VehiculoRepoImpl implements  Repositorio<Vehiculo>{
                 .filter(patentes::contains)
                 .collect(Collectors.toList());
     }
+    public Vehiculo buscarPorPatente(String patente){
+        cargar();
+        Vehiculo encontrado = null;
+        for(Vehiculo v : this.listaVehiculos ){
+            if(v.getPatente().equals(patente)){
+                encontrado = v;
+                break;
+            }
+        }
+        return encontrado;
+    }
+
 }

@@ -6,7 +6,7 @@ import com.example.main.enums.EstadoReparacion;
 public class Arreglo {
     private int idArreglo;
     private String patente;
-    private int idCliente;
+    private String dniCliente;
     private int idEmpleado;
     private String observacionesDelCliente;
     private String observacionesDelArreglo;
@@ -17,11 +17,11 @@ public class Arreglo {
 
     }
 
-    public Arreglo(int idArreglo, String patente, int idCliente, int idEmpleado, String observacionesDelCliente)
+    public Arreglo(int idArreglo, String patente, String dniCliente, int idEmpleado, String observacionesDelCliente)
     {
         this.idArreglo = idArreglo;
         this.patente = patente;
-        this.idCliente = idCliente;
+        this.dniCliente = dniCliente;
         this.idEmpleado = idEmpleado;
         this.observacionesDelCliente = observacionesDelCliente;
         this.estadoReparacion = EstadoReparacion.STAND_BY;
@@ -36,12 +36,14 @@ public class Arreglo {
         this.patente = patente;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public String getDniCliente() {
+        return dniCliente;
     }
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+
+    public void setDniCliente(String dniCliente) {
+        this.dniCliente = dniCliente;
     }
+
     public int getIdArreglo() {
         return this.idArreglo;
     }
@@ -88,16 +90,18 @@ public class Arreglo {
     }
 
     //endregion
+
+
     @Override
     public String toString() {
         return "Arreglo{" +
                 "idArreglo=" + idArreglo +
-                ", idCliente=" + idCliente +
+                ", patente='" + patente + '\'' +
+                ", dniCliente='" + dniCliente + '\'' +
                 ", idEmpleado=" + idEmpleado +
                 ", observacionesDelCliente='" + observacionesDelCliente + '\'' +
                 ", observacionesDelArreglo='" + observacionesDelArreglo + '\'' +
                 ", estadoReparacion=" + estadoReparacion +
                 '}';
     }
-
 }

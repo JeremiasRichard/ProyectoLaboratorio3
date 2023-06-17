@@ -1,11 +1,9 @@
 package com.example.main.modelos;
 
 import java.util.List;
-import java.util.Objects;
 
 public class Cliente extends Persona
 {
-    private int idCliente;
     private List<Integer> historialArreglos;
     private String nroTelefono;
     private List<String> listaVehiculos;
@@ -28,21 +26,14 @@ public class Cliente extends Persona
         this.activo=estado;
     }
 
-    public Cliente(int idCliente, List<Integer> historialArreglos, String nroTelefono, String mail, String direccion, List<String> listaVehiculos) {
-        this.idCliente = idCliente;
+    public Cliente(List<Integer> historialArreglos, String nroTelefono, String mail, String direccion, List<String> listaVehiculos) {
         this.historialArreglos = historialArreglos;
         this.nroTelefono = nroTelefono;
         this.listaVehiculos = listaVehiculos;
         this.activo = true;
     }
     //region Getters y Setters
-    public int getIdCliente() {
-        return idCliente;
-    }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
 
     public List<Integer> getHistorialArreglos() {
         return historialArreglos;
@@ -89,7 +80,6 @@ public class Cliente extends Persona
     @Override
     public String toString() {
         return "Cliente{" +
-                "idCliente=" + idCliente +
                 ", historialArreglos=" + historialArreglos +
                 ", listaVehiculos=" + listaVehiculos +
                 ", activo=" + activo +

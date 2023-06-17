@@ -9,6 +9,21 @@ public class ArregloDTO
     private String marca;
     private int anioFabricacion;
     private String dniCliente;
+
+    @Override
+    public String toString() {
+        return "ArregloDTO{" +
+                "idArreglo=" + idArreglo +
+                ", patente='" + patente + '\'' +
+                ", marca='" + marca + '\'' +
+                ", anioFabricacion=" + anioFabricacion +
+                ", dniCliente='" + dniCliente + '\'' +
+                ", observacionesCliente='" + observacionesCliente + '\'' +
+                ", observacionesMecanico='" + observacionesMecanico + '\'' +
+                ", estadoReparacion=" + estadoReparacion +
+                '}';
+    }
+
     private String observacionesCliente;
     private String observacionesMecanico;
     private EstadoReparacion estadoReparacion;

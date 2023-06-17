@@ -38,7 +38,7 @@ public class ClienteRepoImpl implements Repositorio<Cliente>{
     @Override
     public void agregar(Cliente cliente) throws EntidadDuplicadaException {
         cargar();
-        cliente.setIdCliente(listaClientes.size()+1);
+        //TODO: validar duplicado
         this.listaClientes.add(cliente);
         guardar();
     }
@@ -47,7 +47,7 @@ public class ClienteRepoImpl implements Repositorio<Cliente>{
     public void editar(Cliente nuevo) {
         cargar();
         for (int i =0;i<this.listaClientes.size();i++) {
-                if(listaClientes.get(i).getIdCliente() == nuevo.getIdCliente()){
+                if(listaClientes.get(i).equals(nuevo)){
                     listaClientes.set(i,nuevo);
             }
         }
@@ -56,10 +56,14 @@ public class ClienteRepoImpl implements Repositorio<Cliente>{
 
     @Override
     public Cliente buscarPorId(int id) {
+       throw new UnsupportedOperationException();
+    }
+
+    public Cliente buscarPorDNI(String dni) {
         cargar();
         Cliente encontrado = null;
         for (Cliente cliente : listaClientes) {
-            if (cliente.getIdCliente() == id) {
+            if (cliente.getDni().equals(dni)) {
                 encontrado = cliente;
                 break;
             }

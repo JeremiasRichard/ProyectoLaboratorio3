@@ -90,14 +90,14 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
         return this.listaArreglos
                 .stream()
                 .filter(actual -> patentes.contains(actual.getPatente()))
-                .collect(Collectors.toList());
+                .toList();
     }
     public List<Arreglo> buscarTodosPorMecanico(int idMecanico){
         cargar();
         return this.listaArreglos
                 .stream()
                 .filter(actual -> actual.getIdEmpleado() == idMecanico)
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }

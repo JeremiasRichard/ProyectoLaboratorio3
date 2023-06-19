@@ -1,10 +1,12 @@
 package com.example.main.servicios;
 
 import com.example.main.DTOs.ArregloDTO;
+import com.example.main.DTOs.MecanicoDTO;
 import com.example.main.datos.ArregloRepoImpl;
 import com.example.main.datos.MecanicoRepoImpl;
 import com.example.main.datos.VehiculoRepoImpl;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
+import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Mecanico;
 import com.example.main.modelos.Vehiculo;
@@ -51,15 +53,45 @@ public class MecanicoServiceImpl implements BaseService<Mecanico> {
         return mecanicoRepo.buscarPorId(id);
     }
 
-    public List<Arreglo> listarTareasAsignadas() {
-        //Logica obtener lista de tareas asignadas
-        return new ArrayList<>();
+    public MecanicoDTO convertAMecanicoDTO(Mecanico mecanico){
+        MecanicoDTO mecanicoDTO = new MecanicoDTO();
+        mecanicoDTO.setNombre(mecanico.getNombre());
+        mecanicoDTO.setApellido(mecanico.getApellido());
+        mecanicoDTO.setDni(mecanico.getDni());
+        mecanicoDTO.setNroTelefono(mecanico.getTelefono());
+        mecanicoDTO.setTipoVehiculo(mecanico.getTipoVehiculo());
+        mecanicoDTO.setEspecialidad(mecanico.getEspecialidad());
+        mecanicoDTO.setActivo(mecanico.getActivo());
+        return mecanicoDTO;
+    }
+    public List<MecanicoDTO> listarMecanicosDTO() {
+        return listar().stream().map(mecanico -> {
+            MecanicoDTO mecanicoDTO = new MecanicoDTO();
+            mecanicoDTO.setNombre(mecanico.getNombre());
+            mecanicoDTO.setApellido(mecanico.getApellido());
+            mecanicoDTO.setDni(mecanico.getDni());
+            mecanicoDTO.setNroTelefono(mecanico.getTelefono());
+            mecanicoDTO.setTipoVehiculo(mecanico.getTipoVehiculo());
+            mecanicoDTO.setEspecialidad(mecanico.getEspecialidad());
+            mecanicoDTO.setActivo(mecanico.getActivo());
+            return mecanicoDTO;
+        }).toList();
     }
 
-    public void cargarDetalle() {
-        //Logica cargar detalle y persistirlo en el Arreglo (editar arreglo).
+    public List<MecanicoDTO> listarMecanicoPorTipoVehiculo(TipoVehiculo tipo){
+        List<Mecanico> mecanicos = mecanicoRepo.listarPorTipoVehiculo(tipo);
+        return mecanicos.stream().map(mecanico -> {
+            MecanicoDTO mecanicoDTO = new MecanicoDTO();
+            mecanicoDTO.setNombre(mecanico.getNombre());
+            mecanicoDTO.setApellido(mecanico.getApellido());
+            mecanicoDTO.setDni(mecanico.getDni());
+            mecanicoDTO.setNroTelefono(mecanico.getTelefono());
+            mecanicoDTO.setTipoVehiculo(mecanico.getTipoVehiculo());
+            mecanicoDTO.setEspecialidad(mecanico.getEspecialidad());
+            mecanicoDTO.setActivo(mecanico.getActivo());
+            return mecanicoDTO;
+        }).toList();
     }
-
     public List<ArregloDTO> obtenerTareas(int idUsuario) {
 
         Mecanico mecanico = mecanicoRepo.buscarPorId(idUsuario);
@@ -81,5 +113,4 @@ public class MecanicoServiceImpl implements BaseService<Mecanico> {
                 )
                 .toList();
     }
-
 }

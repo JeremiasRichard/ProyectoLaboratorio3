@@ -125,4 +125,18 @@ public class MecanicoDTO
     public int hashCode() {
         return Objects.hash(getDni(), getNroTelefono(), getTipoVehiculo(), getEspecialidad(), isActivo());
     }
+
+    @Override
+    public String toString() {
+        return "MecanicoDTO{" +
+                "nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", dni='" + dni + '\'' +
+                ", nroTelefono='" + nroTelefono + '\'' +
+                ", listaArreglos=" + listaArreglos +
+                ", tipoVehiculo=" + tipoVehiculo +
+                ", especialidad=" + especialidad +
+                ", activo=" + activo +
+                '}';
+    }
 }

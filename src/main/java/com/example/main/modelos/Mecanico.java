@@ -13,8 +13,6 @@ public class Mecanico extends Empleado {
     private boolean activo;
 
     public Mecanico() {
-
-
     }
 
     public Mecanico(String nombre, String apellido, String dni, String telefono, int idUsuario, List<Arreglo> listaArreglos, TipoVehiculo tipoVehiculo, Especialidad especialidad) {

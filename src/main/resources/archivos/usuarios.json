@@ -34,4 +34,46 @@
   "password" : "7815696ecbf1c96e6894b779456d330e",
   "esAdmin" : false,
   "activo" : true
+}, {
+  "idUsuario" : 7,
+  "user" : "jereRichard",
+  "password" : "202cb962ac59075b964b07152d234b70",
+  "esAdmin" : false,
+  "activo" : true
+}, {
+  "idUsuario" : 8,
+  "user" : "jereRichard",
+  "password" : "202cb962ac59075b964b07152d234b70",
+  "esAdmin" : false,
+  "activo" : true
+}, {
+  "idUsuario" : 9,
+  "user" : "jereRichard",
+  "password" : "202cb962ac59075b964b07152d234b70",
+  "esAdmin" : false,
+  "activo" : true
+}, {
+  "idUsuario" : 10,
+  "user" : "jereRichard",
+  "password" : "202cb962ac59075b964b07152d234b70",
+  "esAdmin" : false,
+  "activo" : true
+}, {
+  "idUsuario" : 11,
+  "user" : "jereRichard",
+  "password" : "202cb962ac59075b964b07152d234b70",
+  "esAdmin" : false,
+  "activo" : true
+}, {
+  "idUsuario" : 12,
+  "user" : "jereRichard",
+  "password" : "202cb962ac59075b964b07152d234b70",
+  "esAdmin" : false,
+  "activo" : true
+}, {
+  "idUsuario" : 13,
+  "user" : "jereRichard",
+  "password" : "202cb962ac59075b964b07152d234b70",
+  "esAdmin" : false,
+  "activo" : true
 } ]

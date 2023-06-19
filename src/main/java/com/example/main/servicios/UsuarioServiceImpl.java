@@ -2,7 +2,9 @@ package com.example.main.servicios;
 
 import com.example.main.datos.UsuarioRepoImpl;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
+import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.modelos.Usuario;
+import com.example.main.utils.Encriptador;
 
 import java.util.List;
 
@@ -13,8 +15,9 @@ public class UsuarioServiceImpl implements BaseService<Usuario>{
         this.usuarioRepo = new UsuarioRepoImpl();
     }
 
-    public void agregar(Usuario usuario){
-        //usuarioRepo.agregar(usuario);
+    public void agregar(Usuario usuario) throws EntidadDuplicadaException, EntidadDuplicadaException {
+        usuario.setPassword(Encriptador.obtenerMD5(usuario.getPassword()));
+        usuarioRepo.agregar(usuario);
     }
 
     public void editar(Usuario usuario) throws EntidadNoEncontradaException {

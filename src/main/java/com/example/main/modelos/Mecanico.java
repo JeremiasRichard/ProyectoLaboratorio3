@@ -25,6 +25,14 @@ public class Mecanico extends Empleado {
         this.activo = true;
     }
 
+    public Mecanico(String nombre, String apellido, String dni, String telefono, List<Arreglo> listaArreglos, TipoVehiculo tipoVehiculo, Especialidad especialidad) {
+        super(nombre, apellido, dni, telefono);
+        this.listaArreglos = listaArreglos;
+        this.tipoVehiculo = tipoVehiculo;
+        this.especialidad = especialidad;
+        this.activo = true;
+    }
+
     public Mecanico(TipoVehiculo tipoVehiculo, Especialidad especialidad) {
         this.listaArreglos = new ArrayList<>();
         this.tipoVehiculo = tipoVehiculo;

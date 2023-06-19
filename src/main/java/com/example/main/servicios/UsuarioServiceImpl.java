@@ -15,7 +15,8 @@ public class UsuarioServiceImpl implements BaseService<Usuario>{
         this.usuarioRepo = new UsuarioRepoImpl();
     }
 
-    public void agregar(Usuario usuario) throws EntidadDuplicadaException, EntidadDuplicadaException {
+    public void agregar(Usuario usuario) throws EntidadDuplicadaException
+    {
         usuario.setPassword(Encriptador.obtenerMD5(usuario.getPassword()));
         usuarioRepo.agregar(usuario);
     }
@@ -40,5 +41,10 @@ public class UsuarioServiceImpl implements BaseService<Usuario>{
 
     public Usuario buscarPorId(int id){
         return usuarioRepo.buscarPorId(id);
+    }
+
+    public boolean buscarPorUsuario(String username)
+    {
+        return usuarioRepo.buscarPorUsuario(username) != null;
     }
 }

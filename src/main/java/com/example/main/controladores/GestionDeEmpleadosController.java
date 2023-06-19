@@ -49,7 +49,7 @@ public class GestionDeEmpleadosController {
     @FXML
     private PasswordField passwordField;
     @FXML
-    private  TextField txtBusquedaDNI;
+    private TextField txtBusquedaDNI;
     @FXML
     private TableView<MecanicoDTO> tblMecanicos;
     @FXML
@@ -68,8 +68,7 @@ public class GestionDeEmpleadosController {
     @FXML
     private ObservableList<String> opciones;
 
-    public void initialize()
-    {
+    public void initialize() {
         mecanicos = FXCollections.observableArrayList();
         filtroMecanicos = FXCollections.observableArrayList();
         tblMecanicos.setItems(mecanicos);
@@ -90,23 +89,27 @@ public class GestionDeEmpleadosController {
     }
 
     @FXML
-    private void agregarEmpleado(ActionEvent event) throws EntidadDuplicadaException {
+    private void agregarEmpleado(ActionEvent event) {
 
 
         UsuarioServiceImpl usuarioService = new UsuarioServiceImpl();
 
         boolean a = true;
 
-        if(a != false)
+        if (a != false)
         {
+            //mecanicos = usuarioService.listar();
+            MecanicoDTO nuevo = new MecanicoDTO(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), TipoVehiculo.AUTO, Especialidad.ELECTRICIDAD, true);
 
-            MecanicoDTO nuevo = new MecanicoDTO(this.nombreField.getText(),this.apellidoField.getText(),this.dniField.getText(),this.telefonoField.getText(),TipoVehiculo.AUTO, Especialidad.ELECTRICIDAD,true);
+            Mecanico aux = new Mecanico(nuevo.getNombre(),nuevo.getApellido(),nuevo.getDni(),nuevo.getNroTelefono(),nuevo.getListaArreglos(),nuevo.getTipoVehiculo(),nuevo.getEspecialidad());
 
-            Usuario nuevoUsuario = new Usuario(usuarioField.getText(),passwordField.getText(),false);
 
             try
             {
-                usuarioService.agregar(nuevoUsuario);
+
+                usuarioService.agregar(new Usuario(usuarioField.getText(), passwordField.getText(),false));
+                this.mecanicos.add(nuevo);
+
             }
             catch (EntidadDuplicadaException e)
             {
@@ -117,50 +120,38 @@ public class GestionDeEmpleadosController {
                 alert.showAndWait();
             }
 
-            this.mecanicos.add(nuevo);
-
             tblMecanicos.setItems(mecanicos);
 
             tipoVehiculo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
             {
 
-                if (newValue.equals("Auto"))
-                {
+                if (newValue.equals("Auto")) {
                     nuevo.setTipoVehiculo(TipoVehiculo.AUTO);
 
-                } else if (newValue.equals("Camion"))
-                {
+                } else if (newValue.equals("Camion")) {
                     nuevo.setTipoVehiculo(TipoVehiculo.CAMION);
 
-                }
-                else if(newValue.equals("Moto"))
-                {
+                } else if (newValue.equals("Moto")) {
                     nuevo.setTipoVehiculo(TipoVehiculo.MOTO);
                 }
             });
 
-        }
-        else
-        {
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Error");
             alert.setContentText("Quedan campos por completar!");
             alert.showAndWait();
         }
-
     }
 
     @FXML
-    private void seleccionarEmpleado(MouseEvent event)
-    {
+    private void seleccionarEmpleado(MouseEvent event) {
 
-        if(mecanicos.size() != 0)
-        {
+        if (mecanicos.size() != 0) {
             MecanicoDTO mecanicoDTO = this.tblMecanicos.getSelectionModel().getSelectedItem();
 
-            if(mecanicoDTO != null)
-            {
+            if (mecanicoDTO != null) {
                 this.nombreField.setText(mecanicoDTO.getNombre());
                 this.apellidoField.setText(mecanicoDTO.getApellido());
                 this.dniField.setText(mecanicoDTO.getDni());
@@ -170,8 +161,7 @@ public class GestionDeEmpleadosController {
                 bloquearInputsUsuario();
             }
 
-        } else if (mecanicos.isEmpty())
-        {
+        } else if (mecanicos.isEmpty()) {
             limpiarInputsMecanico();
             desbloquearInputsUsuario();
         }
@@ -201,8 +191,7 @@ public class GestionDeEmpleadosController {
         this.usuarioField.setDisable(false);
     }
 
-    private void desbloquearInputsMecanico()
-    {
+    private void desbloquearInputsMecanico() {
         this.nombreField.setDisable(false);
         this.apellidoField.setDisable(false);
         this.dniField.setDisable(false);
@@ -212,8 +201,7 @@ public class GestionDeEmpleadosController {
 
 
     @FXML
-    private void modificarEmpleado(ActionEvent event)
-    {
+    private void modificarEmpleado(ActionEvent event) {
         MecanicoDTO c = this.tblMecanicos.getSelectionModel().getSelectedItem();
 
         if (c == null) {
@@ -247,36 +235,29 @@ public class GestionDeEmpleadosController {
                     alert.setContentText("Debe seleccionar un cliente");
                     alert.showAndWait();
                 }
-            } catch (RuntimeException e)
-            {
+            } catch (RuntimeException e) {
 
             }
         }
     }
 
     @FXML
-    private void eliminarMecanico(ActionEvent event)
-    {
+    private void eliminarMecanico(ActionEvent event) {
         MecanicoDTO c = this.tblMecanicos.getSelectionModel().getSelectedItem();
 
-        if(c == null)
-        {
+        if (c == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Error");
             alert.setContentText("Debe seleccionar un usuario");
             alert.showAndWait();
-        }
-        else if(mecanicos.size() == 0)
-        {
+        } else if (mecanicos.size() == 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Error");
             alert.setContentText("La lista esta vacia");
             alert.showAndWait();
-        }
-        else
-        {
+        } else {
             this.mecanicos.remove(c);
             this.filtroMecanicos.remove(c);
             this.tblMecanicos.refresh();
@@ -286,21 +267,16 @@ public class GestionDeEmpleadosController {
     }
 
     @FXML
-    private void filtrarPorDNI(KeyEvent event)
-    {
+    private void filtrarPorDNI(KeyEvent event) {
         String filtroDni = this.txtBusquedaDNI.getText();
 
-        if(filtroDni.isEmpty())
-        {
+        if (filtroDni.isEmpty()) {
             this.tblMecanicos.setItems(mecanicos);
-        }
-        else {
+        } else {
             this.filtroMecanicos.clear();
 
-            for(MecanicoDTO cl : this.mecanicos)
-            {
-                if(cl.getDni().toLowerCase().contains(filtroDni.toLowerCase()))
-                {
+            for (MecanicoDTO cl : this.mecanicos) {
+                if (cl.getDni().toLowerCase().contains(filtroDni.toLowerCase())) {
                     this.filtroMecanicos.add(cl);
                 }
             }
@@ -309,23 +285,17 @@ public class GestionDeEmpleadosController {
     }
 
     @FXML
-    private void filtrarActivoTodos(ActionEvent event)
-    {
-        if (!mostrarTodos.isSelected())
-        {
-            for(MecanicoDTO cl: this.mecanicos)
-            {
-                if(cl.isEstado() && !filtroMecanicos.contains(cl) && !mecanicos.isEmpty())
-                {
+    private void filtrarActivoTodos(ActionEvent event) {
+        if (!mostrarTodos.isSelected()) {
+            for (MecanicoDTO cl : this.mecanicos) {
+                if (cl.isEstado() && !filtroMecanicos.contains(cl) && !mecanicos.isEmpty()) {
                     this.filtroMecanicos.add(cl);
                 }
             }
             this.tblMecanicos.setItems(filtroMecanicos);
             this.tblMecanicos.refresh();
 
-        }
-        else
-        {
+        } else {
             this.tblMecanicos.setItems(mecanicos);
             this.tblMecanicos.refresh();
         }
@@ -333,20 +303,16 @@ public class GestionDeEmpleadosController {
     }
 
 
-
-
-    public void setStageAnterior(Stage stageAdmin)
-    {
+    public void setStageAnterior(Stage stageAdmin) {
         this.stageAdmin = stageAdmin;
     }
-    public void volverAtras()
-    {
+
+    public void volverAtras() {
         Stage stageActual = (Stage) atrasButton.getScene().getWindow();
         stageActual.close();
     }
 
-    public void setUsuario(Usuario logueado)
-    {
+    public void setUsuario(Usuario logueado) {
         this.logueado = logueado;
     }
 }

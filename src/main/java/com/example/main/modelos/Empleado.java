@@ -16,6 +16,11 @@ public abstract class Empleado extends Persona {
         this.idUsuario = idUsuario;
     }
 
+    public Empleado(String nombre, String apellido, String dni, String telefono) {
+        super(nombre, apellido, dni);
+        this.telefono = telefono;
+    }
+
     //region Getters y Setters
     public int getIdEmpleado() {
         return idEmpleado;

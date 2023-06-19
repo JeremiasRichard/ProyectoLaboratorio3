@@ -1,6 +1,7 @@
 package com.example.main.servicios;
 
 import com.example.main.datos.VehiculoRepoImpl;
+import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.modelos.Vehiculo;
 
@@ -13,8 +14,8 @@ public class VehiculoServiceImpl implements BaseService<Vehiculo>{
         this.vehiculoRepo = new VehiculoRepoImpl();
     }
 
-    public void agregar(Vehiculo vehiculo){
-        //vehiculoRepo.agregar(vehiculo);
+    public void agregar(Vehiculo vehiculo) throws EntidadDuplicadaException {
+        vehiculoRepo.agregar(vehiculo);
     }
 
     public void editar(Vehiculo vehiculo) throws EntidadNoEncontradaException {
@@ -37,5 +38,15 @@ public class VehiculoServiceImpl implements BaseService<Vehiculo>{
 
     public Vehiculo buscarPorId(int id){
         return vehiculoRepo.buscarPorId(id);
+    }
+
+    public boolean buscarPorPatente(String patente)
+    {
+        return vehiculoRepo.buscarPorPatente(patente) == null;
+    }
+
+    public Vehiculo buscarPorPatenteDos(String patente)
+    {
+       return vehiculoRepo.buscarPorPatente(patente);
     }
 }

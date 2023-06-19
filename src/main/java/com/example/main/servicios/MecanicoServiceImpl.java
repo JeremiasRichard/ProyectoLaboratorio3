@@ -82,4 +82,6 @@ public class MecanicoServiceImpl implements BaseService<Mecanico> {
                 .toList();
     }
 
+
+
 }

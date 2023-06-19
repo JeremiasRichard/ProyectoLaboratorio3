@@ -1,12 +1,15 @@
 package com.example.main.DTOs;
 
 import com.example.main.enums.EstadoReparacion;
+import com.example.main.enums.TipoVehiculo;
 
 public class ArregloDTO
 {
     private int idArreglo;
     private String patente;
     private String marca;
+    private TipoVehiculo tipoVehiculo;
+    private int idEmpleado;
     private int anioFabricacion;
     private String dniCliente;
 
@@ -38,9 +41,27 @@ public class ArregloDTO
         this.estadoReparacion = estadoReparacion;
     }
 
-
+    public ArregloDTO(int idArreglo, String patente, String marca, TipoVehiculo tipoVehiculo, int anioFabricacion, String dniCliente, String observacionesCliente, int idEmpleado) {
+        this.idArreglo = idArreglo;
+        this.patente = patente;
+        this.marca = marca;
+        this.tipoVehiculo = tipoVehiculo;
+        this.anioFabricacion = anioFabricacion;
+        this.dniCliente = dniCliente;
+        this.observacionesCliente = observacionesCliente;
+        this.idEmpleado=idEmpleado;
+        this.estadoReparacion = EstadoReparacion.STAND_BY;
+    }
 
     public ArregloDTO() {
+    }
+
+    public TipoVehiculo getTipoVehiculo() {
+        return tipoVehiculo;
+    }
+
+    public void setTipoVehiculo(TipoVehiculo tipoVehiculo) {
+        this.tipoVehiculo = tipoVehiculo;
     }
 
     public int getIdArreglo() {

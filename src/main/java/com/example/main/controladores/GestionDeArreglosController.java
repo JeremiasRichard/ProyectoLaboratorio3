@@ -1,38 +1,42 @@
 package com.example.main.controladores;
 
 import com.example.main.DTOs.ArregloDTO;
-import com.example.main.DTOs.MecanicoDTO;
 import com.example.main.enums.EstadoReparacion;
 import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.Cliente;
 import com.example.main.modelos.Usuario;
-import com.example.main.modelos.Vehiculo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestionDeArreglosController
-{
+public class GestionDeArreglosController {
     private Usuario logueado;
+    private Cliente seleccionado;
     @FXML
     private Stage adminStage;
+    @FXML
+    private TextField txtBusquedaPatente;
     @FXML
     private Button atrasButton;
     @FXML
     private Button modificarButton;
     @FXML
-    private TextField txtBusquedaDNI;
+    private Button seleccionClienteButton;
     @FXML
-    private TextField txtBusquedaPatente;
-    @FXML
-    private  Button crearButton;
+    private Button crearButton;
     @FXML
     private ChoiceBox<String> listaVehiculos = new ChoiceBox<>();
     @FXML
@@ -55,78 +59,99 @@ public class GestionDeArreglosController
     @FXML
     private TextArea observacionesDelCliente = new TextArea();
 
-    public void initialize()
-    {
+    public void initialize() {
         arreglos = FXCollections.observableArrayList();
         filtroArreglos = FXCollections.observableArrayList();
-
         observacionesDelCliente.setWrapText(true);
-
         this.columnaId.setCellValueFactory(new PropertyValueFactory("idArreglo"));
         this.columnaPatente.setCellValueFactory(new PropertyValueFactory("patente"));
         this.columnaEstadoReparacion.setCellValueFactory(new PropertyValueFactory("estadoReparacion"));
+        seleccionClienteButton.setOnAction(event -> {
+            this.seleccionado = abrirSeleccionCliente();
 
-        List<String> patentes = new ArrayList<>();
+            if (seleccionado != null) {
 
-        patentes.add("AJB942");
-        patentes.add("GGF082");
-        patentes.add("EAG419");
-        this.vehiculos = FXCollections.observableArrayList(patentes);
-        listaVehiculos.setValue("");
-        listaVehiculos.setItems(vehiculos);
+                List<String> listaAutos = seleccionado.getListaVehiculos();
+                this.vehiculos = FXCollections.observableArrayList(listaAutos);
+                listaVehiculos.setItems(vehiculos);
+                List<String> mecanicos2 = new ArrayList<>();
 
-        List<String> mecanicos2 = new ArrayList<>();
+                /*if(obtenerTipoPorPatente() == TipoVehiculo.AUTO)
+                {
+                    desplegar mecanicos de autos.
+                    mecanicos2.add("Jorge");
+                    mecanicos2.add("Pedro");
+                    mecanicos2.add("Raul");
+                    this.mecanicos = FXCollections.observableArrayList(mecanicos2);
+                    listaMecanicos.setItems(mecanicos2)
+                }
+                if(obtenerTipoPorPatente() == TipoVehiculo.CAMION)
+                {
+                    desplegar mecanicos de autos.
+                    mecanicos2.add("Jorge");
+                    mecanicos2.add("Pedro");
+                    mecanicos2.add("Raul");
+                    this.mecanicos = FXCollections.observableArrayList(mecanicos2);
+                    listaMecanicos.setItems(mecanicos2)
+                }
+                else (obtenerPorTipoPatente() == TipoVehiculo.MOTO)
+                {
+                     desplegar mecanicos de autos.
+                    mecanicos2.add("Jorge");
+                    mecanicos2.add("Pedro");
+                    mecanicos2.add("Raul");
+                    this.mecanicos = FXCollections.observableArrayList(mecanicos2);
+                    listaMecanicos.setItems(mecanicos2)
+                }
+                */
 
-        mecanicos2.add("Jorge");
-        mecanicos2.add("Pedro");
-        mecanicos2.add("Raul");
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("Cliente vacio!");
+                alert.showAndWait();
+            }
 
-        this.mecanicos = FXCollections.observableArrayList(mecanicos2);
-
-        listaMecanicos.setValue("");
-
-        listaMecanicos.setItems(mecanicos);
-
+            listaMecanicos.setValue("");
+        });
     }
 
-   /* @FXML
+    @FXML
+    private Cliente abrirSeleccionCliente() {
+
+        Cliente clienteSeleccionado = null;
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/vista/seleccionDeClienteEmergente.fxml"));
+            Parent root = loader.load();
+            SeleccionDeClienteEmergenteController seleccionDeClienteEmergenteController = loader.getController();
+            seleccionDeClienteEmergenteController.setUsuario(logueado);
+            seleccionDeClienteEmergenteController.setStageAnterior(this.adminStage);
+            seleccionDeClienteEmergenteController.initialize();
+            Stage detalleStage = new Stage();
+            detalleStage.initModality(Modality.APPLICATION_MODAL);
+            detalleStage.initOwner(adminStage);
+            detalleStage.setScene(new Scene(root, 400, 300));
+            detalleStage.showAndWait();
+            clienteSeleccionado = seleccionDeClienteEmergenteController.Seleccionar();
+            adminStage = (Stage) seleccionClienteButton.getScene().getWindow();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return clienteSeleccionado;
+    }
+
+    @FXML
     private void crearArreglo(ActionEvent event) {
 
-        boolean a = true;
-
-        if(a != false)
-        {
-
-            ArregloDTO arregloDTO = new ArregloDTO(1,listaVehiculos.getSelectionModel().getSelectedItem().toString(),"volkswagen",2000,txtBusquedaDNI.getText(),observacionesDelCliente.getText(), EstadoReparacion.STAND_BY);
-
-            listaPatentes.add(nuevoVehiculo.getPatente());
-
-            nuevo.setListaVehiculos(listaPatentes);
-
-            this.clientes.add(nuevo);
-            tblClientes.setItems(clientes);
-
-            tipoVehiculo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
-            {
-
-                if (newValue.equals("Auto"))
-                {
-                    nuevoVehiculo.setTipoVehiculo(TipoVehiculo.AUTO);
-
-                } else if (newValue.equals("Camion"))
-                {
-                    nuevoVehiculo.setTipoVehiculo(TipoVehiculo.CAMION);
-
-                }
-                else if(newValue.equals("Moto"))
-                {
-                    nuevoVehiculo.setTipoVehiculo(TipoVehiculo.MOTO);
-                }
-            });
-
-        }
-        else
-        {
+        if (this.seleccionado != null) {
+            ArregloDTO arregloDTO = new ArregloDTO(1, listaVehiculos.getSelectionModel().getSelectedItem(), "volkswagen", TipoVehiculo.AUTO, 2000, this.seleccionado.getDni(), observacionesDelCliente.getText(), 1);
+            if (arregloDTO != null) {
+                this.arreglos.add(arregloDTO);
+                tblArreglos.setItems(arreglos);
+            }
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Error");
@@ -134,22 +159,18 @@ public class GestionDeArreglosController
             alert.showAndWait();
         }
 
-    }*/
+    }
 
-
-
-    public void setStageAnterior(Stage stageAdmin)
-    {
+    public void setStageAnterior(Stage stageAdmin) {
         this.adminStage = stageAdmin;
     }
-    public void volverAtras()
-    {
+
+    public void volverAtras() {
         Stage stageActual = (Stage) atrasButton.getScene().getWindow();
         stageActual.close();
     }
 
-    public void setUsuario(Usuario logueado)
-    {
+    public void setUsuario(Usuario logueado) {
         this.logueado = logueado;
     }
 

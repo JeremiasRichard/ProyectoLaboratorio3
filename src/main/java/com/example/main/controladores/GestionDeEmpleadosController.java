@@ -1,12 +1,14 @@
 package com.example.main.controladores;
 
 import com.example.main.DTOs.MecanicoDTO;
+import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.enums.Especialidad;
 import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.Cliente;
 import com.example.main.modelos.Mecanico;
 import com.example.main.modelos.Usuario;
 import com.example.main.modelos.Vehiculo;
+import com.example.main.servicios.UsuarioServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -88,7 +90,10 @@ public class GestionDeEmpleadosController {
     }
 
     @FXML
-    private void agregarEmpleado(ActionEvent event) {
+    private void agregarEmpleado(ActionEvent event) throws EntidadDuplicadaException {
+
+
+        UsuarioServiceImpl usuarioService = new UsuarioServiceImpl();
 
         boolean a = true;
 
@@ -98,6 +103,19 @@ public class GestionDeEmpleadosController {
             MecanicoDTO nuevo = new MecanicoDTO(this.nombreField.getText(),this.apellidoField.getText(),this.dniField.getText(),this.telefonoField.getText(),TipoVehiculo.AUTO, Especialidad.ELECTRICIDAD,true);
 
             Usuario nuevoUsuario = new Usuario(usuarioField.getText(),passwordField.getText(),false);
+
+            try
+            {
+                usuarioService.agregar(nuevoUsuario);
+            }
+            catch (EntidadDuplicadaException e)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("El usuario ya existe");
+                alert.showAndWait();
+            }
 
             this.mecanicos.add(nuevo);
 

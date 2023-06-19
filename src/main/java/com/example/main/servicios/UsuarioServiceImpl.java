@@ -1,7 +1,9 @@
 package com.example.main.servicios;
 
 import com.example.main.datos.UsuarioRepoImpl;
+import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.modelos.Usuario;
+import com.example.main.utils.Encriptador;
 
 import java.util.List;
 
@@ -12,18 +14,17 @@ public class UsuarioServiceImpl implements BaseService<Usuario>{
         this.usuarioRepo = new UsuarioRepoImpl();
     }
 
-    public void agregar(Usuario usuario){
-        //usuarioRepo.agregar(usuario);
+    public void agregar(Usuario usuario) throws EntidadDuplicadaException
+    {
+        usuario.setPassword(Encriptador.obtenerMD5(usuario.getPassword()));
+        usuarioRepo.agregar(usuario);
     }
-
     public void editar(Usuario usuario){
         usuarioRepo.editar(usuario);
     }
-
     public void eliminar(Usuario usuario){
         usuarioRepo.eliminar(usuario);
     }
-
     public void eliminadoLogico(int id){
         Usuario usuario = usuarioRepo.buscarPorId(id);
         usuario.setActivo(false);

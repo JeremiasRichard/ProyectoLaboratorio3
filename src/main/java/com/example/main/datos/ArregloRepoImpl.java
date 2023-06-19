@@ -1,6 +1,7 @@
 package com.example.main.datos;
 
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
+import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Vehiculo;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,9 +47,9 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
     }
 
     @Override
-    public void editar(Arreglo nuevo) {
+    public void editar(Arreglo nuevo) throws EntidadNoEncontradaException {
         cargar();
-
+        if(buscarPorId(nuevo.getIdArreglo()) == null) throw new EntidadNoEncontradaException("El arreglo solicitado no existe.");
         for (int i = 0; i < this.listaArreglos.size(); i++) {
             if (listaArreglos.get(i).getIdArreglo() == nuevo.getIdArreglo()) {
                 listaArreglos.set(i, nuevo);
@@ -57,7 +58,6 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
         }
 
         guardar();
-
     }
 
     @Override
@@ -74,8 +74,11 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
     }
 
     @Override
-    public void eliminar(Arreglo objeto) {
+    public void eliminar(Arreglo objeto) throws EntidadNoEncontradaException {
         cargar();
+        if(buscarPorId(objeto.getIdArreglo()) == null){
+            throw new EntidadNoEncontradaException("El arreglo solicitado no existe");
+        }
         this.listaArreglos.removeIf(arr-> arr.getIdArreglo() == objeto.getIdArreglo());
         guardar();
     }

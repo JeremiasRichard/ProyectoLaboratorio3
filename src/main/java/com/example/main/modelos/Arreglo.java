@@ -27,6 +27,7 @@ public class Arreglo {
         this.estadoReparacion = EstadoReparacion.STAND_BY;
     }
 
+
     //region Getters y Setters
     public String getPatente() {
         return patente;

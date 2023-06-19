@@ -1,6 +1,7 @@
 package com.example.main.servicios;
 
 import com.example.main.datos.UsuarioRepoImpl;
+import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.modelos.Usuario;
 
 import java.util.List;
@@ -16,15 +17,15 @@ public class UsuarioServiceImpl implements BaseService<Usuario>{
         //usuarioRepo.agregar(usuario);
     }
 
-    public void editar(Usuario usuario){
+    public void editar(Usuario usuario) throws EntidadNoEncontradaException {
         usuarioRepo.editar(usuario);
     }
 
-    public void eliminar(Usuario usuario){
+    public void eliminar(Usuario usuario) throws EntidadNoEncontradaException {
         usuarioRepo.eliminar(usuario);
     }
 
-    public void eliminadoLogico(int id){
+    public void eliminadoLogico(int id) throws EntidadNoEncontradaException {
         Usuario usuario = usuarioRepo.buscarPorId(id);
         usuario.setActivo(false);
         usuarioRepo.editar(usuario);

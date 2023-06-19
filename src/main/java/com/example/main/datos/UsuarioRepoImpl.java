@@ -1,6 +1,7 @@
 package com.example.main.datos;
 
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
+import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.modelos.Usuario;
 import com.example.main.utils.Encriptador;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,14 +39,16 @@ public class UsuarioRepoImpl implements Repositorio<Usuario> {
     @Override
     public void agregar(Usuario nuevo) throws EntidadDuplicadaException {
         cargar();
+        if(buscarPorId(nuevo.getIdUsuario()) != null) throw new EntidadDuplicadaException("El usuario solicitado ya existe.");
         nuevo.setIdUsuario(listaUsuarios.size()+1);
         this.listaUsuarios.add(nuevo);
         guardar();
     }
 
     @Override
-    public void editar(Usuario nuevo) {
+    public void editar(Usuario nuevo) throws EntidadNoEncontradaException {
         cargar();
+        if(buscarPorId(nuevo.getIdUsuario()) == null) throw new EntidadNoEncontradaException("El usuario no solicitado no existe.");
         for (int i = 0; i < this.listaUsuarios.size(); i++) {
             Usuario actual = this.listaUsuarios.get(i);
 
@@ -70,8 +73,11 @@ public class UsuarioRepoImpl implements Repositorio<Usuario> {
     }
 
     @Override
-    public void eliminar(Usuario objeto) {
+    public void eliminar(Usuario objeto) throws EntidadNoEncontradaException {
         cargar();
+        if(buscarPorId(objeto.getIdUsuario()) == null){
+            throw new EntidadNoEncontradaException("El usuario solicitado no existe");
+        }
         this.listaUsuarios.removeIf(actual-> actual.getIdUsuario() == objeto.getIdUsuario());
         guardar();
     }

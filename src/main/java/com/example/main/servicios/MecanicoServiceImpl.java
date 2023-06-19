@@ -4,6 +4,7 @@ import com.example.main.DTOs.ArregloDTO;
 import com.example.main.datos.ArregloRepoImpl;
 import com.example.main.datos.MecanicoRepoImpl;
 import com.example.main.datos.VehiculoRepoImpl;
+import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Mecanico;
 import com.example.main.modelos.Vehiculo;
@@ -28,15 +29,15 @@ public class MecanicoServiceImpl implements BaseService<Mecanico> {
         //mecanicoRepo.agregar(mecanico);
     }
 
-    public void editar(Mecanico mecanico) {
+    public void editar(Mecanico mecanico) throws EntidadNoEncontradaException {
         mecanicoRepo.editar(mecanico);
     }
 
-    public void eliminar(Mecanico mecanico) {
+    public void eliminar(Mecanico mecanico) throws EntidadNoEncontradaException {
         mecanicoRepo.eliminar(mecanico);
     }
 
-    public void eliminadoLogico(int id) {
+    public void eliminadoLogico(int id) throws EntidadNoEncontradaException {
         Mecanico mecanico = mecanicoRepo.buscarPorId(id);
         mecanico.setActivo(false);
         mecanicoRepo.editar(mecanico);

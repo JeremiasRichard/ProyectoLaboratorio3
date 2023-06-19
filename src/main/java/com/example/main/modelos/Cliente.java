@@ -1,5 +1,6 @@
 package com.example.main.modelos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente extends Persona
@@ -13,7 +14,7 @@ public class Cliente extends Persona
     public Cliente(String nombre, String apellido, String dni, List<Integer> historialArreglos, String nroTelefono, List<String> listaVehiculos)
     {
         super(nombre, apellido, dni);
-        this.historialArreglos = historialArreglos;
+        this.historialArreglos = new ArrayList<>();
         this.nroTelefono = nroTelefono;
         this.listaVehiculos = listaVehiculos;
         this.activo = true;
@@ -23,6 +24,7 @@ public class Cliente extends Persona
     {
         super(nombre, apellido, dni);
         this.nroTelefono=nroTelefono;
+        this.historialArreglos=new ArrayList<>();
         this.activo=estado;
     }
 

@@ -1,6 +1,7 @@
 package com.example.main.datos;
 
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
+import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.modelos.Vehiculo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
@@ -39,14 +40,16 @@ public class VehiculoRepoImpl implements  Repositorio<Vehiculo>{
     @Override
     public void agregar(Vehiculo nuevo) throws EntidadDuplicadaException {
         cargar();
+        if(buscarPorPatente(nuevo.getPatente()) != null) throw new EntidadDuplicadaException("Ya existe un vehiculo con esa patente.");
         nuevo.setIdVehiculo(listaVehiculos.size()+1);
         this.listaVehiculos.add(nuevo);
         guardar();
     }
 
     @Override
-    public void editar(Vehiculo nuevo) {
+    public void editar(Vehiculo nuevo) throws EntidadNoEncontradaException {
         cargar();
+        if(buscarPorPatente(nuevo.getPatente()) == null) throw new EntidadNoEncontradaException("El vehiculo solicitado no existe.");
         for (int i = 0; i < this.listaVehiculos.size(); i++) {
             Vehiculo actual = this.listaVehiculos.get(i);
             if(actual.getPatente().equals(nuevo.getPatente())){
@@ -70,8 +73,11 @@ public class VehiculoRepoImpl implements  Repositorio<Vehiculo>{
     }
 
     @Override
-    public void eliminar(Vehiculo objeto) {
+    public void eliminar(Vehiculo objeto) throws EntidadNoEncontradaException {
         cargar();
+        if(buscarPorPatente(objeto.getPatente()) == null){
+            throw new EntidadNoEncontradaException("El cliente solicitado no existe");
+        }
         this.listaVehiculos.removeIf(actual->actual.getPatente().equals(objeto.getPatente()));
         guardar();
     }

@@ -2,6 +2,7 @@ package com.example.main.datos;
 
 
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
+import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.modelos.Cliente;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
@@ -38,14 +39,19 @@ public class ClienteRepoImpl implements Repositorio<Cliente>{
     @Override
     public void agregar(Cliente cliente) throws EntidadDuplicadaException {
         cargar();
-        //TODO: validar duplicado
+        if(buscarPorDNI(cliente.getDni()) != null){
+            throw  new EntidadDuplicadaException("El cliente solicitado ya existe.");
+        }
         this.listaClientes.add(cliente);
         guardar();
     }
 
     @Override
-    public void editar(Cliente nuevo) {
+    public void editar(Cliente nuevo) throws EntidadNoEncontradaException{
         cargar();
+        if(buscarPorDNI(nuevo.getDni()) == null){
+            throw new EntidadNoEncontradaException("El cliente solicitado no existe.");
+        }
         for (int i =0;i<this.listaClientes.size();i++) {
                 if(listaClientes.get(i).equals(nuevo)){
                     listaClientes.set(i,nuevo);
@@ -72,8 +78,11 @@ public class ClienteRepoImpl implements Repositorio<Cliente>{
     }
 
     @Override
-    public void eliminar(Cliente objeto) {
+    public void eliminar(Cliente objeto) throws EntidadNoEncontradaException {
         cargar();
+        if(buscarPorDNI(objeto.getDni()) == null){
+            throw new EntidadNoEncontradaException("El cliente solicitado no existe");
+        }
         this.listaClientes.removeIf(cliente->cliente.equals(objeto));
         guardar();
     }

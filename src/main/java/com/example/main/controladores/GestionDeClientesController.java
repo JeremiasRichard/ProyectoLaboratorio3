@@ -1,9 +1,14 @@
 package com.example.main.controladores;
 
+import com.example.main.datos.ClienteRepoImpl;
+import com.example.main.datos.excepciones.EntidadDuplicadaException;
+import com.example.main.enums.EstadoReparacion;
 import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.Cliente;
 import com.example.main.modelos.Usuario;
 import com.example.main.modelos.Vehiculo;
+import com.example.main.servicios.ClienteServiceImpl;
+import com.example.main.servicios.VehiculoServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestionDeClientesController {
-
+    private ClienteServiceImpl clienteService = new ClienteServiceImpl();
+    private VehiculoServiceImpl vehiculoService = new VehiculoServiceImpl();
+    private Vehiculo nuevoVehiculo;
     @FXML
     private Stage adminStage;
     @FXML
@@ -79,18 +86,19 @@ public class GestionDeClientesController {
         this.logueado = logueado;
     }
 
-    public void initialize()
-    {
+    public void initialize() {
+
         clientes = FXCollections.observableArrayList();
         filtroClientes = FXCollections.observableArrayList();
 
-        Cliente nuevo2 = new Cliente("jorge","la piedra","3213","4790789",false);
-        Cliente nuevo3 = new Cliente("asda231","asd2","4567","789423",false);
-
-        clientes.add(nuevo2);
-        clientes.add(nuevo3);
-
-        tblClientes.setItems(clientes);
+        if(clienteService.listar().size() !=0)
+        {
+            List<Cliente> aux = clienteService.listar();
+            for (Cliente cl : aux) {
+                clientes.add(cl);
+            }
+            tblClientes.setItems(clientes);
+        }
 
         this.columnaNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         this.columnaApellido.setCellValueFactory(new PropertyValueFactory("apellido"));
@@ -106,6 +114,24 @@ public class GestionDeClientesController {
         tipoVehiculo.setValue("");
         tipoVehiculo.setItems(opciones);
 
+        tipoVehiculo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
+        {
+
+            if (newValue.equals("Auto"))
+            {
+                this.nuevoVehiculo.setTipoVehiculo(TipoVehiculo.AUTO);
+
+            } else if (newValue.equals("Camion"))
+            {
+                this.nuevoVehiculo.setTipoVehiculo(TipoVehiculo.AUTO);
+            }
+            else if(newValue.equals("Moto"))
+            {
+                this.nuevoVehiculo.setTipoVehiculo(TipoVehiculo.AUTO);
+            }
+        });
+
+
     }
 
     @FXML
@@ -113,43 +139,32 @@ public class GestionDeClientesController {
 
         boolean a = true;
 
-        if(a != false)
+        if (a != false)
         {
+            Cliente nuevo2 = new Cliente(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), new ArrayList<Integer>(), this.telefonoField.getText(), new ArrayList<>());
 
-            Cliente nuevo = new Cliente(this.nombreField.getText(),this.apellidoField.getText(),this.dniField.getText(),this.telefonoField.getText(),true);
-
-            Vehiculo nuevoVehiculo = new Vehiculo(Integer.parseInt(this.anioFabricacionField.getText()), TipoVehiculo.AUTO,this.marcaField.getText(),this.patenteField.getText());
+            this.nuevoVehiculo = new Vehiculo(Integer.parseInt(this.anioFabricacionField.getText()),TipoVehiculo.AUTO, this.marcaField.getText(), this.patenteField.getText());
 
             List<String> listaPatentes = new ArrayList<>();
 
             listaPatentes.add(nuevoVehiculo.getPatente());
 
-            nuevo.setListaVehiculos(listaPatentes);
+            nuevo2.setListaVehiculos(listaPatentes);
 
-            this.clientes.add(nuevo);
-            tblClientes.setItems(clientes);
+            try {
 
-            tipoVehiculo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
-            {
+                clienteService.agregar(nuevo2);
+                this.clientes.add(nuevo2);
+                tblClientes.setItems(clientes);
 
-                if (newValue.equals("Auto"))
-                {
-                    nuevoVehiculo.setTipoVehiculo(TipoVehiculo.AUTO);
-
-                } else if (newValue.equals("Camion"))
-                {
-                    nuevoVehiculo.setTipoVehiculo(TipoVehiculo.CAMION);
-
-                }
-                else if(newValue.equals("Moto"))
-                {
-                    nuevoVehiculo.setTipoVehiculo(TipoVehiculo.MOTO);
-                }
-            });
-
-        }
-        else
-        {
+            } catch (EntidadDuplicadaException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("El cliente ya existe");
+                alert.showAndWait();
+            }
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Error");
@@ -199,8 +214,6 @@ public class GestionDeClientesController {
         this.dniField.setDisable(true);
         this.telefonoField.setText("");
     }
-
-
 
     @FXML
     private void modificarCliente(ActionEvent event)
@@ -319,7 +332,7 @@ public class GestionDeClientesController {
         {
             for(Cliente cl: this.clientes)
             {
-                if(cl.isEstado() && !filtroClientes.contains(cl) && !clientes.isEmpty())
+                if(cl.isActivo() && !filtroClientes.contains(cl) && !clientes.isEmpty())
                 {
                     this.filtroClientes.add(cl);
                 }

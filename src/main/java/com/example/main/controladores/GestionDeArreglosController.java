@@ -5,6 +5,8 @@ import com.example.main.enums.EstadoReparacion;
 import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.Cliente;
 import com.example.main.modelos.Usuario;
+import com.example.main.modelos.Vehiculo;
+import com.example.main.servicios.VehiculoServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestionDeArreglosController {
+
+    private VehiculoServiceImpl vehiculoService = new VehiculoServiceImpl();
     private Usuario logueado;
     private Cliente seleccionado;
     @FXML
@@ -63,47 +67,56 @@ public class GestionDeArreglosController {
         arreglos = FXCollections.observableArrayList();
         filtroArreglos = FXCollections.observableArrayList();
         observacionesDelCliente.setWrapText(true);
+
         this.columnaId.setCellValueFactory(new PropertyValueFactory("idArreglo"));
         this.columnaPatente.setCellValueFactory(new PropertyValueFactory("patente"));
         this.columnaEstadoReparacion.setCellValueFactory(new PropertyValueFactory("estadoReparacion"));
+
         seleccionClienteButton.setOnAction(event -> {
             this.seleccionado = abrirSeleccionCliente();
 
             if (seleccionado != null) {
 
                 List<String> listaAutos = seleccionado.getListaVehiculos();
+
                 this.vehiculos = FXCollections.observableArrayList(listaAutos);
+
                 listaVehiculos.setItems(vehiculos);
+
                 List<String> mecanicos2 = new ArrayList<>();
 
-                /*if(obtenerTipoPorPatente() == TipoVehiculo.AUTO)
-                {
-                    desplegar mecanicos de autos.
-                    mecanicos2.add("Jorge");
-                    mecanicos2.add("Pedro");
-                    mecanicos2.add("Raul");
-                    this.mecanicos = FXCollections.observableArrayList(mecanicos2);
-                    listaMecanicos.setItems(mecanicos2)
-                }
-                if(obtenerTipoPorPatente() == TipoVehiculo.CAMION)
-                {
-                    desplegar mecanicos de autos.
-                    mecanicos2.add("Jorge");
-                    mecanicos2.add("Pedro");
-                    mecanicos2.add("Raul");
-                    this.mecanicos = FXCollections.observableArrayList(mecanicos2);
-                    listaMecanicos.setItems(mecanicos2)
-                }
-                else (obtenerPorTipoPatente() == TipoVehiculo.MOTO)
-                {
-                     desplegar mecanicos de autos.
-                    mecanicos2.add("Jorge");
-                    mecanicos2.add("Pedro");
-                    mecanicos2.add("Raul");
-                    this.mecanicos = FXCollections.observableArrayList(mecanicos2);
-                    listaMecanicos.setItems(mecanicos2)
-                }
-                */
+                listaVehiculos.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+
+                    String seleccion = newValue;
+
+                    Vehiculo elegido = vehiculoService.buscarPorPatenteDos(seleccion);
+                    if (elegido.getTipoVehiculo() == TipoVehiculo.AUTO) {
+                        // Desplegar mecánicos de autos.
+                        mecanicos2.clear();
+                        mecanicos2.add("Auto");
+                        mecanicos2.add("Pedro");
+                        mecanicos2.add("Raul");
+                        this.mecanicos = FXCollections.observableArrayList(mecanicos2);
+                        listaMecanicos.setItems(mecanicos);
+                    } else if (elegido.getTipoVehiculo() == TipoVehiculo.CAMION) {
+                        // Desplegar mecánicos de camiones.
+                        mecanicos2.clear();
+                        mecanicos2.add("Camion");
+                        mecanicos2.add("Pedro");
+                        mecanicos2.add("Raul");
+                        this.mecanicos = FXCollections.observableArrayList(mecanicos2);
+                        listaMecanicos.setItems(mecanicos);
+                    } else if (elegido.getTipoVehiculo() == TipoVehiculo.MOTO) {
+                        // Desplegar mecánicos de motos.
+                        mecanicos2.clear();
+                        mecanicos2.add("Motos");
+                        mecanicos2.add("Pedro");
+                        mecanicos2.add("Raul");
+                        this.mecanicos = FXCollections.observableArrayList(mecanicos2);
+                        listaMecanicos.setItems(mecanicos);
+                    }
+                });
+
 
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -145,8 +158,12 @@ public class GestionDeArreglosController {
     @FXML
     private void crearArreglo(ActionEvent event) {
 
-        if (this.seleccionado != null) {
-            ArregloDTO arregloDTO = new ArregloDTO(1, listaVehiculos.getSelectionModel().getSelectedItem(), "volkswagen", TipoVehiculo.AUTO, 2000, this.seleccionado.getDni(), observacionesDelCliente.getText(), 1);
+        if (this.seleccionado != null)
+        {
+            Vehiculo aux = vehiculoService.buscarPorPatenteDos(listaVehiculos.getSelectionModel().getSelectedItem());
+
+            ArregloDTO arregloDTO = new ArregloDTO(1, listaVehiculos.getSelectionModel().getSelectedItem(), aux.getMarca(),aux.getTipoVehiculo() , 2000, this.seleccionado.getDni(), observacionesDelCliente.getText(), 1);
+
             if (arregloDTO != null) {
                 this.arreglos.add(arregloDTO);
                 tblArreglos.setItems(arreglos);

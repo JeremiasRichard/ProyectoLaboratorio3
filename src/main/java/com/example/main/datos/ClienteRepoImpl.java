@@ -4,6 +4,7 @@ package com.example.main.datos;
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.modelos.Cliente;
+import com.example.main.modelos.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 
@@ -15,15 +16,16 @@ import java.util.List;
 public class ClienteRepoImpl implements Repositorio<Cliente>{
     private final File archivo = new File("src/main/resources/archivos/clientes.json");
     private final ObjectMapper mapper = new ObjectMapper();
-    private List<Cliente> listaClientes;
+    private List<Cliente> listaClientes = new ArrayList<>();
 
     @Override
     public void cargar() {
         try {
             CollectionType collectionType = mapper.getTypeFactory().constructCollectionType(List.class, Cliente.class);
             this.listaClientes = mapper.readValue(archivo, collectionType);
-        } catch (IOException e) {
-            this.listaClientes = new ArrayList<>();
+        } catch (IOException e)
+        {
+
         }
     }
 
@@ -69,7 +71,7 @@ public class ClienteRepoImpl implements Repositorio<Cliente>{
         cargar();
         Cliente encontrado = null;
         for (Cliente cliente : listaClientes) {
-            if (cliente.getDni().equals(dni)) {
+            if (cliente.getDni().toLowerCase().equals(dni.toLowerCase())) {
                 encontrado = cliente;
                 break;
             }
@@ -86,10 +88,10 @@ public class ClienteRepoImpl implements Repositorio<Cliente>{
         this.listaClientes.removeIf(cliente->cliente.equals(objeto));
         guardar();
     }
-
     @Override
     public List<Cliente> listar() {
         cargar();
         return this.listaClientes;
     }
+
 }

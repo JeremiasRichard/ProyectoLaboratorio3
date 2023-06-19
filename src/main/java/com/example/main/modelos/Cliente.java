@@ -3,16 +3,16 @@ package com.example.main.modelos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cliente extends Persona
-{
+public class Cliente extends Persona {
     private List<Integer> historialArreglos;
     private String nroTelefono;
     private List<String> listaVehiculos;
     private boolean activo;
-    public Cliente(){}
 
-    public Cliente(String nombre, String apellido, String dni, List<Integer> historialArreglos, String nroTelefono, List<String> listaVehiculos)
-    {
+    public Cliente() {
+    }
+
+    public Cliente(String nombre, String apellido, String dni, List<Integer> historialArreglos, String nroTelefono, List<String> listaVehiculos) {
         super(nombre, apellido, dni);
         this.historialArreglos = new ArrayList<>();
         this.nroTelefono = nroTelefono;
@@ -20,12 +20,11 @@ public class Cliente extends Persona
         this.activo = true;
     }
 
-    public Cliente(String nombre,String apellido,String dni,String nroTelefono,boolean estado)
-    {
+    public Cliente(String nombre, String apellido, String dni, String nroTelefono, boolean activo) {
         super(nombre, apellido, dni);
-        this.nroTelefono=nroTelefono;
-        this.historialArreglos=new ArrayList<>();
-        this.activo=estado;
+        this.nroTelefono = nroTelefono;
+        this.historialArreglos = new ArrayList<>();
+        this.activo = activo;
     }
 
     public Cliente(List<Integer> historialArreglos, String nroTelefono, String mail, String direccion, List<String> listaVehiculos) {
@@ -52,6 +51,7 @@ public class Cliente extends Persona
     public void setNroTelefono(String nroTelefono) {
         this.nroTelefono = nroTelefono;
     }
+
     public List<String> getListaVehiculos() {
         return listaVehiculos;
     }
@@ -60,15 +60,17 @@ public class Cliente extends Persona
         this.listaVehiculos = listaVehiculos;
     }
 
-    public boolean getActivo() { return activo; }
+    public boolean getActivo() {
+        return activo;
+    }
 
-    public void setActivo(boolean activo) { this.activo = activo; }
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
 
     @Override
-    public boolean equals(Object o)
-    {
-        if(o instanceof  Cliente && o != null)
-        {
+    public boolean equals(Object o) {
+        if (o instanceof Cliente && o != null) {
             return this.getDni() == ((Cliente) o).getDni();
         }
         return false;
@@ -88,12 +90,7 @@ public class Cliente extends Persona
                 "} " + super.toString();
     }
 
-    public boolean isEstado()
-    {
-        if(this.activo==true)
-        {
-            return true;
-        }
-        return  false;
+    public boolean isActivo() {
+        return activo;
     }
 }

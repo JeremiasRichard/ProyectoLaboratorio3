@@ -2,6 +2,7 @@ package com.example.main.controladores;
 
 import com.example.main.modelos.Cliente;
 import com.example.main.modelos.Usuario;
+import com.example.main.servicios.ClienteServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import java.util.List;
 
 public class SeleccionDeClienteEmergenteController
 {
+    private ClienteServiceImpl clienteService = new ClienteServiceImpl();
     @FXML
     private Button atrasButton;
     @FXML
@@ -48,14 +50,20 @@ public class SeleccionDeClienteEmergenteController
         clientes = FXCollections.observableArrayList();
         filtroClientes = FXCollections.observableArrayList();
 
-        Cliente nuevo2 = new Cliente("jorge","la piedra","3213","4790789",true);
+        List<Cliente> aux  = clienteService.listar();
         List<String> patentes =  new ArrayList<>();
-        patentes.add("AJB942");
-        patentes.add("AJB943");
-        patentes.add("AJB944");
-        nuevo2.setListaVehiculos(patentes);
-        clientes.add(nuevo2);
+
+        for (Cliente c: aux )
+        {
+            clientes.add(c);
+            for (String s: c.getListaVehiculos())
+            {
+                   patentes.add(s);
+            }
+        }
+
         tblClientes.setItems(clientes);
+
         this.columnaNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         this.columnaApellido.setCellValueFactory(new PropertyValueFactory("apellido"));
         this.columnaDni.setCellValueFactory(new PropertyValueFactory("dni"));

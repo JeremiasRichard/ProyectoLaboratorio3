@@ -1,20 +1,22 @@
 package com.example.main.servicios;
 
 import com.example.main.datos.ClienteRepoImpl;
+import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.modelos.Cliente;
+import com.example.main.modelos.Usuario;
 
 import java.util.List;
 
 public class ClienteServiceImpl implements BaseService<Cliente>{
     private ClienteRepoImpl clienteRepo;
 
-    public ClienteServiceImpl(){
+    public ClienteServiceImpl() {
         this.clienteRepo = new ClienteRepoImpl();
     }
 
-    public void agregar(Cliente cliente){
-        //clienteRepo.agregar(cliente);
+    public void agregar(Cliente cliente) throws EntidadDuplicadaException {
+        clienteRepo.agregar(cliente);
     }
 
     public void editar(Cliente cliente) throws EntidadNoEncontradaException {
@@ -31,25 +33,18 @@ public class ClienteServiceImpl implements BaseService<Cliente>{
         clienteRepo.editar(cliente);
     }
 
-    public List<Cliente> listar(){
+    public List<Cliente> listar() {
         return clienteRepo.listar();
     }
 
-    public Cliente buscarPorId(int id){
+    public Cliente buscarPorId(int id) {
         return clienteRepo.buscarPorId(id);
     }
 
-    public void agregarVehiculo(String patente, Cliente cliente){
-        List<String> vehiculos = cliente.getListaVehiculos();
-        vehiculos.add(patente);
+
+    public boolean buscarPorDni(String dni) {
+        return clienteRepo.buscarPorDNI(dni) != null;
     }
 
-    public void eliminarVehiculo(String patente, Cliente cliente){
-        List<String> vehiculos = cliente.getListaVehiculos();
-        vehiculos.remove(patente);
-    }
 
-    public List<String> listarVehiculos(Cliente cliente){
-        return cliente.getListaVehiculos();
-    }
 }//TODO: Agregar metodos para Vehiculos(lista patentes)

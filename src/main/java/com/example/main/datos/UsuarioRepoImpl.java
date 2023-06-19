@@ -38,11 +38,18 @@ public class UsuarioRepoImpl implements Repositorio<Usuario> {
 
     @Override
     public void agregar(Usuario nuevo) throws EntidadDuplicadaException {
+
         cargar();
-        if(buscarPorId(nuevo.getIdUsuario()) != null) throw new EntidadDuplicadaException("El usuario solicitado ya existe.");
-        nuevo.setIdUsuario(listaUsuarios.size()+1);
-        this.listaUsuarios.add(nuevo);
-        guardar();
+        if(buscarPorUsuario(nuevo.getUser())==null)
+        {
+            nuevo.setIdUsuario(listaUsuarios.size()+1);
+            this.listaUsuarios.add(nuevo);
+            this.guardar();
+        }
+        else
+        {
+            throw new EntidadDuplicadaException("El usuario solicitado ya existe.");
+        }
     }
 
     @Override
@@ -63,8 +70,21 @@ public class UsuarioRepoImpl implements Repositorio<Usuario> {
     public Usuario buscarPorId(int id) {
         cargar();
         Usuario encontrado = null;
+
         for (Usuario usr : listaUsuarios) {
             if (usr.getIdUsuario() == id) {
+                encontrado = usr;
+                break;
+            }
+        }
+        return encontrado;
+    }
+
+    public Usuario buscarPorUsuario(String userName) {
+        cargar();
+        Usuario encontrado = null;
+        for (Usuario usr : listaUsuarios) {
+            if (usr.getUser().toLowerCase().equals(userName.toLowerCase())) {
                 encontrado = usr;
                 break;
             }

@@ -9,17 +9,17 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String user, String password, boolean nivelDeAcceso) {
+    public Usuario(String user, String password, boolean esAdmin) {
         this.user = user;
         this.password = password;
-        this.esAdmin = nivelDeAcceso;
+        this.esAdmin = esAdmin;
         this.activo = true;
     }
-    public Usuario(int idUsuario, String user, String password, boolean nivelDeAcceso) {//TODO: revisar this para evitar repetir parametros
+    public Usuario(int idUsuario, String user, String password, boolean esAdmin) {//TODO: revisar this para evitar repetir parametros
         this.idUsuario = idUsuario;
         this.user = user;
         this.password = password;
-        this.esAdmin = nivelDeAcceso;
+        this.esAdmin = esAdmin;
         this.activo = true;
     }
 

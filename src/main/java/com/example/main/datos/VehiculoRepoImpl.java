@@ -41,7 +41,6 @@ public class VehiculoRepoImpl implements  Repositorio<Vehiculo>{
     public void agregar(Vehiculo nuevo) throws EntidadDuplicadaException {
         cargar();
         if(buscarPorPatente(nuevo.getPatente()) != null) throw new EntidadDuplicadaException("Ya existe un vehiculo con esa patente.");
-        nuevo.setIdVehiculo(listaVehiculos.size()+1);
         this.listaVehiculos.add(nuevo);
         guardar();
     }
@@ -60,17 +59,7 @@ public class VehiculoRepoImpl implements  Repositorio<Vehiculo>{
     }
 
     @Override
-    public Vehiculo buscarPorId(int id) {
-        cargar();
-        Vehiculo encontrado = null;
-        for (Vehiculo vehiculo : listaVehiculos) {
-            if (vehiculo.getIdVehiculo() == id) {
-                encontrado = vehiculo;
-                break;
-            }
-        }
-        return encontrado;
-    }
+    public Vehiculo buscarPorId(int id) { throw new UnsupportedOperationException(); }
 
     @Override
     public void eliminar(Vehiculo objeto) throws EntidadNoEncontradaException {

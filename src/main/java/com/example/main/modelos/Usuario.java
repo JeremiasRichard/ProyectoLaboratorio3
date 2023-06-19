@@ -1,19 +1,25 @@
  package com.example.main.modelos;
 
 public class Usuario {
-    private int idUsuario; //TODO: conexion con ID? o agregar un objeto Persona (Cliente/Mecanico)? Conexion por DNI?
+    private int idUsuario;
     private String user;
     private String password;
-    private boolean nivelDeAcceso;
+    private boolean esAdmin;
     private boolean activo;
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String user, String password, boolean nivelDeAcceso) {
+    public Usuario(String user, String password, boolean nivelDeAcceso) {
+        this.user = user;
+        this.password = password;
+        this.esAdmin = nivelDeAcceso;
+        this.activo = true;
+    }
+    public Usuario(int idUsuario, String user, String password, boolean nivelDeAcceso) {//TODO: revisar this para evitar repetir parametros
         this.idUsuario = idUsuario;
         this.user = user;
         this.password = password;
-        this.nivelDeAcceso = nivelDeAcceso;
+        this.esAdmin = nivelDeAcceso;
         this.activo = true;
     }
 
@@ -42,12 +48,12 @@ public class Usuario {
         this.password = password;
     }
 
-    public boolean isNivelDeAcceso() {
-        return nivelDeAcceso;
+    public boolean isEsAdmin() {
+        return esAdmin;
     }
 
-    public void setNivelDeAcceso(boolean nivelDeAcceso) {
-        this.nivelDeAcceso = nivelDeAcceso;
+    public void setEsAdmin(boolean nivelDeAcceso) {
+        this.esAdmin = nivelDeAcceso;
     }
 
     public boolean getActivo() { return activo; }

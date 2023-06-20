@@ -19,6 +19,8 @@ module com.example.main {
     exports com.example.main.DTOs to com.fasterxml.jackson.databind, javafx.base;
     opens com.example.main.DTOs to javafx.base;
     opens com.example.main.modelos to javafx.base;
+    exports com.example.main.utils;
+    opens com.example.main.utils to javafx.fxml;
 
 }
 

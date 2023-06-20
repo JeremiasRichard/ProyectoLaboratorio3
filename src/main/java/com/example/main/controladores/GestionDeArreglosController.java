@@ -1,11 +1,14 @@
 package com.example.main.controladores;
 
 import com.example.main.DTOs.ArregloDTO;
+import com.example.main.enums.Especialidad;
 import com.example.main.enums.EstadoReparacion;
 import com.example.main.enums.TipoVehiculo;
+import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Cliente;
 import com.example.main.modelos.Usuario;
 import com.example.main.modelos.Vehiculo;
+import com.example.main.servicios.ArregloServiceImpl;
 import com.example.main.servicios.VehiculoServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,8 +30,10 @@ import java.util.List;
 public class GestionDeArreglosController {
 
     private VehiculoServiceImpl vehiculoService = new VehiculoServiceImpl();
+    private ArregloServiceImpl arregloService = new ArregloServiceImpl();
     private Usuario logueado;
     private Cliente seleccionado;
+    private Especialidad especialidad;
     @FXML
     private Stage adminStage;
     @FXML
@@ -48,10 +53,12 @@ public class GestionDeArreglosController {
     @FXML
     private ChoiceBox<String> listaMecanicos = new ChoiceBox<>();
     @FXML
+    private ChoiceBox<String> listaEspecialidades = new ChoiceBox<>();
+    @FXML
     private ObservableList<String> mecanicos;
     @FXML
-    private ObservableList<ArregloDTO> arreglos;
-    private ObservableList<ArregloDTO> filtroArreglos;
+    private ObservableList<ArregloDTO> arreglos = FXCollections.observableArrayList();;
+    private ObservableList<ArregloDTO> filtroArreglos = FXCollections.observableArrayList();
     @FXML
     private TableView<ArregloDTO> tblArreglos;
     @FXML
@@ -62,10 +69,10 @@ public class GestionDeArreglosController {
     private TableColumn columnaEstadoReparacion;
     @FXML
     private TextArea observacionesDelCliente = new TextArea();
+    private ObservableList<String> opciones2;
 
     public void initialize() {
-        arreglos = FXCollections.observableArrayList();
-        filtroArreglos = FXCollections.observableArrayList();
+
         observacionesDelCliente.setWrapText(true);
 
         this.columnaId.setCellValueFactory(new PropertyValueFactory("idArreglo"));
@@ -78,46 +85,44 @@ public class GestionDeArreglosController {
             if (seleccionado != null) {
 
                 List<String> listaAutos = seleccionado.getListaVehiculos();
-
                 this.vehiculos = FXCollections.observableArrayList(listaAutos);
-
                 listaVehiculos.setItems(vehiculos);
-
                 List<String> mecanicos2 = new ArrayList<>();
-
                 listaVehiculos.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 
                     String seleccion = newValue;
-
                     Vehiculo elegido = vehiculoService.buscarPorPatenteDos(seleccion);
-                    if (elegido.getTipoVehiculo() == TipoVehiculo.AUTO) {
-                        // Desplegar mecánicos de autos.
-                        mecanicos2.clear();
-                        mecanicos2.add("Auto");
-                        mecanicos2.add("Pedro");
-                        mecanicos2.add("Raul");
-                        this.mecanicos = FXCollections.observableArrayList(mecanicos2);
-                        listaMecanicos.setItems(mecanicos);
-                    } else if (elegido.getTipoVehiculo() == TipoVehiculo.CAMION) {
-                        // Desplegar mecánicos de camiones.
-                        mecanicos2.clear();
-                        mecanicos2.add("Camion");
-                        mecanicos2.add("Pedro");
-                        mecanicos2.add("Raul");
-                        this.mecanicos = FXCollections.observableArrayList(mecanicos2);
-                        listaMecanicos.setItems(mecanicos);
-                    } else if (elegido.getTipoVehiculo() == TipoVehiculo.MOTO) {
-                        // Desplegar mecánicos de motos.
-                        mecanicos2.clear();
-                        mecanicos2.add("Motos");
-                        mecanicos2.add("Pedro");
-                        mecanicos2.add("Raul");
-                        this.mecanicos = FXCollections.observableArrayList(mecanicos2);
-                        listaMecanicos.setItems(mecanicos);
+
+                    if(elegido != null)
+                    {
+
+                        if (elegido.getTipoVehiculo() == TipoVehiculo.AUTO) {
+                            // Desplegar mecánicos de autos.
+                            mecanicos2.clear();
+                            mecanicos2.add("Auto");
+                            mecanicos2.add("Pedro");
+                            mecanicos2.add("Raul");
+                            this.mecanicos = FXCollections.observableArrayList(mecanicos2);
+                            listaMecanicos.setItems(mecanicos);
+                        } else if (elegido.getTipoVehiculo() == TipoVehiculo.CAMION) {
+                            // Desplegar mecánicos de camiones.
+                            mecanicos2.clear();
+                            mecanicos2.add("Camion");
+                            mecanicos2.add("Pedro");
+                            mecanicos2.add("Raul");
+                            this.mecanicos = FXCollections.observableArrayList(mecanicos2);
+                            listaMecanicos.setItems(mecanicos);
+                        } else if (elegido.getTipoVehiculo() == TipoVehiculo.MOTO) {
+                            // Desplegar mecánicos de motos.
+                            mecanicos2.clear();
+                            mecanicos2.add("Motos");
+                            mecanicos2.add("Pedro");
+                            mecanicos2.add("Raul");
+                            this.mecanicos = FXCollections.observableArrayList(mecanicos2);
+                            listaMecanicos.setItems(mecanicos);
+                        }
                     }
-                });
-
-
+                    });
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
@@ -128,6 +133,35 @@ public class GestionDeArreglosController {
 
             listaMecanicos.setValue("");
         });
+
+        this.opciones2 = FXCollections.observableArrayList(
+                "",
+                "Estetica",
+                "General",
+                "Electricidad"
+        );
+        listaEspecialidades.setValue("");
+        listaEspecialidades.setItems(opciones2);
+        listaEspecialidades.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
+        {
+
+            if (newValue.equals("Electricidad"))
+            {
+                this.especialidad = Especialidad.ELECTRICIDAD;
+                System.out.println(especialidad);
+
+            } else if (newValue.equals("Estetica"))
+            {
+                this.especialidad = Especialidad.ESTETICA;
+                System.out.println(especialidad);
+            }
+            else if(newValue.equals("General"))
+            {
+                this.especialidad = Especialidad.MECANICA_GENERAL;
+                System.out.println(especialidad);
+            }
+        });
+
     }
 
     @FXML
@@ -161,13 +195,15 @@ public class GestionDeArreglosController {
         if (this.seleccionado != null)
         {
             Vehiculo aux = vehiculoService.buscarPorPatenteDos(listaVehiculos.getSelectionModel().getSelectedItem());
-
-            ArregloDTO arregloDTO = new ArregloDTO(1, listaVehiculos.getSelectionModel().getSelectedItem(), aux.getMarca(),aux.getTipoVehiculo() , 2000, this.seleccionado.getDni(), observacionesDelCliente.getText(), 1);
+            ArregloDTO arregloDTO = new ArregloDTO(1, listaVehiculos.getSelectionModel().getSelectedItem(), aux.getMarca(),aux.getTipoVehiculo() , 2000, this.seleccionado.getDni(), observacionesDelCliente.getText(), 1,this.especialidad);
+            //Arreglo arregloD = new Arreglo(1,listaVehiculos.getSelectionModel().getSelectedItem(),seleccionado.getDni(),1,observacionesDelCliente.getText();
 
             if (arregloDTO != null) {
                 this.arreglos.add(arregloDTO);
                 tblArreglos.setItems(arreglos);
             }
+
+
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);

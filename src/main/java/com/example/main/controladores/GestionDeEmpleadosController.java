@@ -8,6 +8,7 @@ import com.example.main.modelos.Cliente;
 import com.example.main.modelos.Mecanico;
 import com.example.main.modelos.Usuario;
 import com.example.main.modelos.Vehiculo;
+import com.example.main.servicios.MecanicoServiceImpl;
 import com.example.main.servicios.UsuarioServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestionDeEmpleadosController {
+    private Mecanico mecanicoGlobal = new Mecanico();
+    private UsuarioServiceImpl usuarioService = new UsuarioServiceImpl();
+    private MecanicoServiceImpl mecanicoService = new MecanicoServiceImpl();
     @FXML
     private Stage stageAdmin;
     @FXML
@@ -36,6 +40,12 @@ public class GestionDeEmpleadosController {
     private Button eliminarButton;
     @FXML
     private CheckBox mostrarTodos;
+    @FXML
+    private CheckBox especialidadElectricidad;
+    @FXML
+    private CheckBox especialidadEstetica;
+    @FXML
+    private CheckBox especialidadGeneral;
     @FXML
     private TextField nombreField;
     @FXML
@@ -86,27 +96,52 @@ public class GestionDeEmpleadosController {
         );
         tipoVehiculo.setValue("");
         tipoVehiculo.setItems(opciones);
+
+        tipoVehiculo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
+        {
+
+            if (newValue.equals("Auto"))
+            {
+                    this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.AUTO);
+
+            } else if (newValue.equals("Camion"))
+            {
+                this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.CAMION);
+            }
+            else if(newValue.equals("Moto"))
+            {
+                this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.MOTO);
+            }
+        });
+
+
+        especialidadEstetica.setOnAction(event -> {
+            mecanicoGlobal.setEspecialidad(Especialidad.ESTETICA);
+        });
+
+        especialidadElectricidad.setOnAction(event -> {
+            mecanicoGlobal.setEspecialidad(Especialidad.ELECTRICIDAD);
+        });
+
+        especialidadGeneral.setOnAction(event -> {
+            mecanicoGlobal.setEspecialidad(Especialidad.MECANICA_GENERAL);
+        });
     }
 
     @FXML
     private void agregarEmpleado(ActionEvent event) {
 
-
-        UsuarioServiceImpl usuarioService = new UsuarioServiceImpl();
-
         boolean a = true;
 
         if (a != false)
         {
-            //mecanicos = usuarioService.listar();
+
             MecanicoDTO nuevo = new MecanicoDTO(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), TipoVehiculo.AUTO, Especialidad.ELECTRICIDAD, true);
-
             Mecanico aux = new Mecanico(nuevo.getNombre(),nuevo.getApellido(),nuevo.getDni(),nuevo.getNroTelefono(),nuevo.getListaArreglos(),nuevo.getTipoVehiculo(),nuevo.getEspecialidad());
-
 
             try
             {
-
+                mecanicoService.agregar(aux);
                 usuarioService.agregar(new Usuario(usuarioField.getText(), passwordField.getText(),false));
                 this.mecanicos.add(nuevo);
 

@@ -1,5 +1,6 @@
 package com.example.main.DTOs;
 
+import com.example.main.enums.Especialidad;
 import com.example.main.enums.EstadoReparacion;
 import com.example.main.enums.TipoVehiculo;
 
@@ -10,6 +11,7 @@ public class ArregloDTO
     private String marca;
     private TipoVehiculo tipoVehiculo;
     private int idEmpleado;
+    private Especialidad especialidad;
     private int anioFabricacion;
     private String dniCliente;
 
@@ -39,9 +41,10 @@ public class ArregloDTO
         this.dniCliente = dniCliente;
         this.observacionesCliente = observacionesCliente;
         this.estadoReparacion = estadoReparacion;
+
     }
 
-    public ArregloDTO(int idArreglo, String patente, String marca, TipoVehiculo tipoVehiculo, int anioFabricacion, String dniCliente, String observacionesCliente, int idEmpleado) {
+    public ArregloDTO(int idArreglo, String patente, String marca, TipoVehiculo tipoVehiculo, int anioFabricacion, String dniCliente, String observacionesCliente, int idEmpleado,Especialidad especialidad) {
         this.idArreglo = idArreglo;
         this.patente = patente;
         this.marca = marca;
@@ -51,6 +54,7 @@ public class ArregloDTO
         this.observacionesCliente = observacionesCliente;
         this.idEmpleado=idEmpleado;
         this.estadoReparacion = EstadoReparacion.STAND_BY;
+        this.especialidad=especialidad;
     }
 
     public ArregloDTO() {

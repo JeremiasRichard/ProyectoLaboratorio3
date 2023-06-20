@@ -4,6 +4,7 @@ import com.example.main.DTOs.ArregloDTO;
 import com.example.main.datos.ArregloRepoImpl;
 import com.example.main.datos.MecanicoRepoImpl;
 import com.example.main.datos.VehiculoRepoImpl;
+import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Mecanico;
@@ -25,8 +26,8 @@ public class MecanicoServiceImpl implements BaseService<Mecanico> {
         this.arregloRepo = new ArregloRepoImpl();
     }
 
-    public void agregar(Mecanico mecanico) {
-        //mecanicoRepo.agregar(mecanico);
+    public void agregar(Mecanico mecanico) throws EntidadDuplicadaException {
+        mecanicoRepo.agregar(mecanico);
     }
 
     public void editar(Mecanico mecanico) throws EntidadNoEncontradaException {

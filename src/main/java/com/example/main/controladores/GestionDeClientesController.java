@@ -25,7 +25,7 @@ import java.util.List;
 public class GestionDeClientesController {
     private ClienteServiceImpl clienteService = new ClienteServiceImpl();
     private VehiculoServiceImpl vehiculoService = new VehiculoServiceImpl();
-    private Vehiculo nuevoVehiculo;
+    private Vehiculo nuevoVehiculo = new Vehiculo();
     @FXML
     private Stage adminStage;
     @FXML
@@ -107,9 +107,9 @@ public class GestionDeClientesController {
 
         this.opciones = FXCollections.observableArrayList(
                 "",
-                " Auto",
-                " Moto",
-                " Camion"
+                "Auto",
+                "Moto",
+                "Camion"
         );
         tipoVehiculo.setValue("");
         tipoVehiculo.setItems(opciones);
@@ -123,15 +123,14 @@ public class GestionDeClientesController {
 
             } else if (newValue.equals("Camion"))
             {
-                this.nuevoVehiculo.setTipoVehiculo(TipoVehiculo.AUTO);
+                this.nuevoVehiculo.setTipoVehiculo(TipoVehiculo.CAMION);
             }
             else if(newValue.equals("Moto"))
             {
-                this.nuevoVehiculo.setTipoVehiculo(TipoVehiculo.AUTO);
+                this.nuevoVehiculo.setTipoVehiculo(TipoVehiculo.MOTO);
             }
 
         });
-
 
     }
 
@@ -143,8 +142,9 @@ public class GestionDeClientesController {
         if (a != false)
         {
             Cliente nuevo2 = new Cliente(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), new ArrayList<Integer>(), this.telefonoField.getText(), new ArrayList<>());
+            this.nuevoVehiculo =  new Vehiculo(Integer.parseInt(this.anioFabricacionField.getText()),nuevoVehiculo.getTipoVehiculo(), this.marcaField.getText(), this.patenteField.getText());
 
-            this.nuevoVehiculo = new Vehiculo(Integer.parseInt(this.anioFabricacionField.getText()),TipoVehiculo.AUTO, this.marcaField.getText(), this.patenteField.getText());
+            System.out.println(nuevoVehiculo);
 
             List<String> listaPatentes = new ArrayList<>();
 
@@ -153,8 +153,8 @@ public class GestionDeClientesController {
             nuevo2.setListaVehiculos(listaPatentes);
 
             try {
-
                 clienteService.agregar(nuevo2);
+                vehiculoService.agregar(nuevoVehiculo);
                 this.clientes.add(nuevo2);
                 tblClientes.setItems(clientes);
 

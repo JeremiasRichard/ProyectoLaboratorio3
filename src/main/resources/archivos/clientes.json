@@ -1,33 +1,17 @@
 [ {
-  "nombre" : "77",
-  "apellido" : "77",
-  "dni" : "77",
+  "nombre" : "AA",
+  "apellido" : "AA",
+  "dni" : "AA",
   "historialArreglos" : [ ],
-  "nroTelefono" : "77",
-  "listaVehiculos" : [ "77" ],
+  "nroTelefono" : "AA",
+  "listaVehiculos" : [ "asd123" ],
   "activo" : true
 }, {
-  "nombre" : "44",
-  "apellido" : "44",
-  "dni" : "44",
+  "nombre" : "bb",
+  "apellido" : "bb",
+  "dni" : "bb",
   "historialArreglos" : [ ],
-  "nroTelefono" : "44",
-  "listaVehiculos" : [ "44" ],
-  "activo" : true
-}, {
-  "nombre" : "55",
-  "apellido" : "55",
-  "dni" : "55",
-  "historialArreglos" : [ ],
-  "nroTelefono" : "55",
-  "listaVehiculos" : [ "55" ],
-  "activo" : true
-}, {
-  "nombre" : "dd",
-  "apellido" : "dd",
-  "dni" : "dd",
-  "historialArreglos" : [ ],
-  "nroTelefono" : "dd",
-  "listaVehiculos" : [ "dd" ],
+  "nroTelefono" : "bb",
+  "listaVehiculos" : [ "bb" ],
   "activo" : true
 } ]

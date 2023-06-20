@@ -1,29 +1,13 @@
 [ {
-  "idVehiculo" : 1,
-  "anioFabricacion" : 77,
-  "tipoVehiculo" : "AUTO",
-  "marca" : "77",
-  "patente" : "77",
+  "anioFabricacion" : 2000,
+  "tipoVehiculo" : "MOTO",
+  "marca" : "AA",
+  "patente" : "asd123",
   "activo" : true
 }, {
-  "idVehiculo" : 2,
-  "anioFabricacion" : 44,
-  "tipoVehiculo" : "AUTO",
-  "marca" : "44",
-  "patente" : "44",
-  "activo" : true
-}, {
-  "idVehiculo" : 3,
-  "anioFabricacion" : 55,
-  "tipoVehiculo" : "AUTO",
-  "marca" : "55",
-  "patente" : "55",
-  "activo" : true
-}, {
-  "idVehiculo" : 4,
-  "anioFabricacion" : 22,
-  "tipoVehiculo" : "AUTO",
-  "marca" : "dd",
-  "patente" : "dd",
+  "anioFabricacion" : 2000,
+  "tipoVehiculo" : "CAMION",
+  "marca" : "bb",
+  "patente" : "bb",
   "activo" : true
 } ]

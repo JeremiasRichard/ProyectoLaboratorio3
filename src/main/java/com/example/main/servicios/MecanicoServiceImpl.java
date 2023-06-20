@@ -72,7 +72,7 @@ public class MecanicoServiceImpl implements BaseService<Mecanico> {
     public List<MecanicoDTO> mecanicosToMecanicoDTO(List<Mecanico> mecanicos) {
         return mecanicos.stream().map(mecanico -> {
             MecanicoDTO mecanicoDTO = new MecanicoDTO();
-            mecanicoDTO.setId(mecanico.getId());
+            mecanicoDTO.setId(mecanico.getIdEmpleado());
             mecanicoDTO.setNombre(mecanico.getNombre());
             mecanicoDTO.setApellido(mecanico.getApellido());
             mecanicoDTO.setDni(mecanico.getDni());

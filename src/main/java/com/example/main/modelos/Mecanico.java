@@ -71,9 +71,9 @@ public class Mecanico extends Empleado {
         this.activo = activo;
     }
 
-    public int getId() {
+    /*public int getId() {
         return this.getIdEmpleado();
-    }
+    }*/
 
     //endregion
     @Override

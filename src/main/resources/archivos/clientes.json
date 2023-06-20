@@ -1,41 +1,17 @@
 [ {
-  "nombre" : "AA",
-  "apellido" : "AA",
-  "dni" : "AA",
+  "nombre" : "CCAMION",
+  "apellido" : "CCAMION",
+  "dni" : "CCAMION",
   "historialArreglos" : [ ],
-  "nroTelefono" : "AA",
-  "listaVehiculos" : [ "asd123" ],
+  "nroTelefono" : "CCAMION",
+  "listaVehiculos" : [ "CCAMION" ],
   "activo" : true
 }, {
-  "nombre" : "bb",
-  "apellido" : "bb",
-  "dni" : "bb",
+  "nombre" : "CMOTO",
+  "apellido" : "CMOTO",
+  "dni" : "CMOTO",
   "historialArreglos" : [ ],
-  "nroTelefono" : "bb",
-  "listaVehiculos" : [ "bb" ],
-  "activo" : true
-}, {
-  "nombre" : "3",
-  "apellido" : "3",
-  "dni" : "3",
-  "historialArreglos" : [ ],
-  "nroTelefono" : "3",
-  "listaVehiculos" : [ "3" ],
-  "activo" : true
-}, {
-  "nombre" : "Carlos",
-  "apellido" : "Bianco",
-  "dni" : "23654456",
-  "historialArreglos" : [ ],
-  "nroTelefono" : "123321",
-  "listaVehiculos" : [ ],
-  "activo" : true
-}, {
-  "nombre" : "Karla",
-  "apellido" : "Gomez",
-  "dni" : "77777777",
-  "historialArreglos" : [ ],
-  "nroTelefono" : "3212123",
-  "listaVehiculos" : [ ],
+  "nroTelefono" : "CMOTO",
+  "listaVehiculos" : [ "CMOTO" ],
   "activo" : true
 } ]

@@ -1,37 +1,13 @@
 [ {
   "anioFabricacion" : 2000,
-  "tipoVehiculo" : "MOTO",
-  "marca" : "AA",
-  "patente" : "asd123",
+  "tipoVehiculo" : "CAMION",
+  "marca" : "CCAMION",
+  "patente" : "CCAMION",
   "activo" : true
 }, {
   "anioFabricacion" : 2000,
-  "tipoVehiculo" : "CAMION",
-  "marca" : "bb",
-  "patente" : "bb",
-  "activo" : true
-}, {
-  "anioFabricacion" : 3,
-  "tipoVehiculo" : "AUTO",
-  "marca" : "3",
-  "patente" : "3",
-  "activo" : true
-}, {
-  "anioFabricacion" : 2010,
-  "tipoVehiculo" : "AUTO",
-  "marca" : "Mercedes",
-  "patente" : "XDXD1",
-  "activo" : true
-}, {
-  "anioFabricacion" : 2011,
   "tipoVehiculo" : "MOTO",
-  "marca" : "Kawazaki",
-  "patente" : "XDXD2",
-  "activo" : true
-}, {
-  "anioFabricacion" : 2012,
-  "tipoVehiculo" : "AUTO",
-  "marca" : "Alfa Romeo",
-  "patente" : "XDXD3",
+  "marca" : "CMOTO",
+  "patente" : "CMOTO",
   "activo" : true
 } ]

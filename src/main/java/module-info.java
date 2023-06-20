@@ -7,6 +7,7 @@ module com.example.main {
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
     requires com.fasterxml.jackson.databind;
+    requires javafx.graphics;
 
     opens com.example.main to javafx.fxml;
     exports com.example.main;

@@ -1,12 +1,12 @@
 [ {
-  "nombre" : "Auto",
-  "apellido" : "a",
-  "dni" : "Electricista",
+  "nombre" : "MMOTO",
+  "apellido" : "MMOTO",
+  "dni" : "MMOTO",
   "idEmpleado" : 1,
-  "telefono" : "A",
+  "telefono" : "MMOTO",
   "listaArreglos" : null,
-  "tipoVehiculo" : "AUTO",
-  "especialidad" : "ELECTRICIDAD",
+  "tipoVehiculo" : "MOTO",
+  "especialidad" : "MECANICA_GENERAL",
   "activo" : true,
   "usuario" : 1
 } ]

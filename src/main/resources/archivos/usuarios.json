@@ -1,7 +1,19 @@
 [ {
   "idUsuario" : 1,
-  "user" : "A",
-  "password" : "7fc56270e7a70fa81a5935b72eacbe29",
+  "user" : "MCAMION",
+  "password" : "0d725b282b4c204972628b1a8d819d63",
+  "esAdmin" : false,
+  "activo" : true
+}, {
+  "idUsuario" : 2,
+  "user" : "33",
+  "password" : "182be0c5cdcd5072bb1864cdee4d3d6e",
+  "esAdmin" : false,
+  "activo" : true
+}, {
+  "idUsuario" : 3,
+  "user" : "MMOTO",
+  "password" : "34d41424cf7a3e90407082e1aebe5eda",
   "esAdmin" : false,
   "activo" : true
 } ]

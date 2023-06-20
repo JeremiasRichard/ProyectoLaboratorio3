@@ -71,22 +71,23 @@ public class GestionDeEmpleadosController {
     @FXML
     private TableColumn columnaTelefono;
     @FXML
-    private ObservableList<MecanicoDTO> mecanicos;
-    private ObservableList<MecanicoDTO> filtroMecanicos;
+    private ObservableList<MecanicoDTO> mecanicos = FXCollections.observableArrayList();;
+    private ObservableList<MecanicoDTO> filtroMecanicos = FXCollections.observableArrayList();;
     @FXML
     private ChoiceBox<String> tipoVehiculo = new ChoiceBox<>();
     @FXML
     private ObservableList<String> opciones;
 
     public void initialize() {
-        mecanicos = FXCollections.observableArrayList();
-        filtroMecanicos = FXCollections.observableArrayList();
+
+        System.out.println(mecanicoService.listar().size());
 
         if(mecanicoService.listar().size() !=0)
         {
             List<Mecanico> aux = mecanicoService.listar();
             mecanicos.addAll(mecanicoService.mecanicosToMecanicoDTO(aux));
             tblMecanicos.setItems(mecanicos);
+            tblMecanicos.refresh();
         }
 
         this.columnaNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
@@ -96,9 +97,9 @@ public class GestionDeEmpleadosController {
 
         this.opciones = FXCollections.observableArrayList(
                 "",
-                " Auto",
-                " Moto",
-                " Camion"
+                "Auto",
+                "Moto",
+                "Camion"
         );
         tipoVehiculo.setValue("");
         tipoVehiculo.setItems(opciones);
@@ -106,20 +107,22 @@ public class GestionDeEmpleadosController {
         tipoVehiculo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
         {
 
-            if (newValue.equals("Auto"))
+            if (newValue.equalsIgnoreCase("Auto"))
             {
-                    this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.AUTO);
+                this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.AUTO);
+                System.out.println(mecanicoGlobal);
 
-            } else if (newValue.equals("Camion"))
+            } else if (newValue.equalsIgnoreCase("Camion"))
             {
                 this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.CAMION);
+                System.out.println(mecanicoGlobal);
             }
-            else if(newValue.equals("Moto"))
+            else if(newValue.equalsIgnoreCase("Moto"))
             {
                 this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.MOTO);
+                System.out.println(mecanicoGlobal);
             }
         });
-
 
         especialidadEstetica.setOnAction(event -> {
             mecanicoGlobal.setEspecialidad(Especialidad.ESTETICA);
@@ -142,7 +145,7 @@ public class GestionDeEmpleadosController {
         if (a != false)
         {
 
-            MecanicoDTO nuevo = new MecanicoDTO(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), TipoVehiculo.AUTO, Especialidad.ELECTRICIDAD,true);
+            MecanicoDTO nuevo = new MecanicoDTO(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), this.mecanicoGlobal.getTipoVehiculo(), this.mecanicoGlobal.getEspecialidad(),true);
             Mecanico aux = new Mecanico(nuevo.getNombre(),nuevo.getApellido(),nuevo.getDni(),nuevo.getNroTelefono(),nuevo.getListaArreglos(),nuevo.getTipoVehiculo(),nuevo.getEspecialidad());
 
             try
@@ -162,6 +165,7 @@ public class GestionDeEmpleadosController {
             }
 
             tblMecanicos.setItems(mecanicos);
+            tblMecanicos.refresh();
 
             tipoVehiculo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
             {

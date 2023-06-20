@@ -110,16 +110,18 @@ public class GestionDeArreglosController {
         listaEspecialidades.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.equals("Electricidad")) {
                 this.especialidad = Especialidad.ELECTRICIDAD;
-                System.out.println(especialidad);
+
             } else if (newValue.equals("Estetica")) {
                 this.especialidad = Especialidad.ESTETICA;
-                System.out.println(especialidad);
+
             } else if (newValue.equals("General")) {
                 this.especialidad = Especialidad.MECANICA_GENERAL;
-                System.out.println(especialidad);
+
             }
 
-            if (elegido != null) {
+            if (elegido != null)
+            {
+
                 List<MecanicoDTO> listita = mecanicoService.listarMecanicoPorEspecialidadYTipo(elegido.getTipoVehiculo(), especialidad);
                 mecanicos = FXCollections.observableArrayList();
                 for (MecanicoDTO m : listita) {

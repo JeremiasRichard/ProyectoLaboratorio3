@@ -38,7 +38,8 @@ public class MecanicoServiceTest {
 
         List<Mecanico> listaMecanicos = Arrays.asList(
                 new Mecanico("Jeremias","Richard","40123321","223666666",1,new ArrayList<>(),TipoVehiculo.AUTO, Especialidad.MECANICA_GENERAL),
-                new Mecanico("Pablo","Morales","38321332","22377777",2,new ArrayList<>(),TipoVehiculo.MOTO, Especialidad.MECANICA_GENERAL)
+                new Mecanico("Pablo","Morales","38321332","22377777",2,new ArrayList<>(),TipoVehiculo.MOTO, Especialidad.ESTETICA),
+                new Mecanico("Pablo","Baldor","35888888","22377777",3,new ArrayList<>(),TipoVehiculo.MOTO, Especialidad.ELECTRICIDAD)
         );
         //endregion
 
@@ -79,6 +80,5 @@ public class MecanicoServiceTest {
         System.out.println("Listando tareas de Jeremias:");
        List<ArregloDTO> lista = mecanicoService.obtenerTareas(1);
        lista.forEach(System.out::println);
-
     }
 }

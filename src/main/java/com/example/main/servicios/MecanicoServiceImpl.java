@@ -54,19 +54,21 @@ public class MecanicoServiceImpl implements BaseService<Mecanico> {
         return mecanicoRepo.buscarPorId(id);
     }
 
-    public MecanicoDTO convertAMecanicoDTO(Mecanico mecanico){
-        MecanicoDTO mecanicoDTO = new MecanicoDTO();
-        mecanicoDTO.setNombre(mecanico.getNombre());
-        mecanicoDTO.setApellido(mecanico.getApellido());
-        mecanicoDTO.setDni(mecanico.getDni());
-        mecanicoDTO.setNroTelefono(mecanico.getTelefono());
-        mecanicoDTO.setTipoVehiculo(mecanico.getTipoVehiculo());
-        mecanicoDTO.setEspecialidad(mecanico.getEspecialidad());
-        mecanicoDTO.setActivo(mecanico.getActivo());
-        return mecanicoDTO;
-    }
     public List<MecanicoDTO> listarMecanicosDTO() {
-        return listar().stream().map(mecanico -> {
+        return mecanicosToMecanicoDTO(this.listar());
+    }
+
+    public List<MecanicoDTO> listarMecanicoPorTipoVehiculo(TipoVehiculo tipo){
+        List<Mecanico> mecanicos = mecanicoRepo.listarPorTipoVehiculo(tipo);
+        return mecanicosToMecanicoDTO(mecanicos);
+    }
+    public List<MecanicoDTO> listarMecanicoPorEspecialidad(Especialidad especialidad){
+        List<Mecanico> mecanicos = mecanicoRepo.listarPorEspecialidad(especialidad);
+        return mecanicosToMecanicoDTO(mecanicos);
+    }
+
+    private List<MecanicoDTO> mecanicosToMecanicoDTO(List<Mecanico> mecanicos) {
+        return mecanicos.stream().map(mecanico -> {
             MecanicoDTO mecanicoDTO = new MecanicoDTO();
             mecanicoDTO.setNombre(mecanico.getNombre());
             mecanicoDTO.setApellido(mecanico.getApellido());
@@ -79,33 +81,9 @@ public class MecanicoServiceImpl implements BaseService<Mecanico> {
         }).toList();
     }
 
-    public List<MecanicoDTO> listarMecanicoPorTipoVehiculo(TipoVehiculo tipo){
-        List<Mecanico> mecanicos = mecanicoRepo.listarPorTipoVehiculo(tipo);
-        return mecanicos.stream().map(mecanico -> {
-            MecanicoDTO mecanicoDTO = new MecanicoDTO();
-            mecanicoDTO.setNombre(mecanico.getNombre());
-            mecanicoDTO.setApellido(mecanico.getApellido());
-            mecanicoDTO.setDni(mecanico.getDni());
-            mecanicoDTO.setNroTelefono(mecanico.getTelefono());
-            mecanicoDTO.setTipoVehiculo(mecanico.getTipoVehiculo());
-            mecanicoDTO.setEspecialidad(mecanico.getEspecialidad());
-            mecanicoDTO.setActivo(mecanico.getActivo());
-            return mecanicoDTO;
-        }).toList();
-    }
-    public List<MecanicoDTO> listarMecanicoPorEspecialidad(Especialidad especialidad){
-        List<Mecanico> mecanicos = mecanicoRepo.listarPorEspecialidad(especialidad);
-        return mecanicos.stream().map(mecanico -> {
-            MecanicoDTO mecanicoDTO = new MecanicoDTO();
-            mecanicoDTO.setNombre(mecanico.getNombre());
-            mecanicoDTO.setApellido(mecanico.getApellido());
-            mecanicoDTO.setDni(mecanico.getDni());
-            mecanicoDTO.setNroTelefono(mecanico.getTelefono());
-            mecanicoDTO.setTipoVehiculo(mecanico.getTipoVehiculo());
-            mecanicoDTO.setEspecialidad(mecanico.getEspecialidad());
-            mecanicoDTO.setActivo(mecanico.getActivo());
-            return mecanicoDTO;
-        }).toList();
+    public List<MecanicoDTO> listarMecanicoPorEspecialidadYTipo(TipoVehiculo tipoVehiculo, Especialidad especialidad){
+        List<Mecanico> mecanicos = mecanicoRepo.listarPorTipoVehiculo(tipoVehiculo).stream().filter(mecanico -> mecanico.getEspecialidad() == especialidad).toList();
+        return mecanicosToMecanicoDTO(mecanicos);
     }
     public List<ArregloDTO> obtenerTareas(int idUsuario) {
 

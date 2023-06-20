@@ -144,26 +144,24 @@ public class GestionDeClientesController {
         {
             Cliente nuevo2 = new Cliente(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), new ArrayList<Integer>(), this.telefonoField.getText(), new ArrayList<>());
             this.nuevoVehiculo =  new Vehiculo(Integer.parseInt(this.anioFabricacionField.getText()),nuevoVehiculo.getTipoVehiculo(), this.marcaField.getText(), this.patenteField.getText());
-
-            System.out.println(nuevoVehiculo);
-
             List<String> listaPatentes = new ArrayList<>();
-
             listaPatentes.add(nuevoVehiculo.getPatente());
-
             nuevo2.setListaVehiculos(listaPatentes);
 
             try {
-                clienteService.agregar(nuevo2);
-                vehiculoService.agregar(nuevoVehiculo);
-                this.clientes.add(nuevo2);
-                tblClientes.setItems(clientes);
-
+                if (!clientes.contains(nuevo2) && vehiculoService.buscarPorPatente(nuevoVehiculo.getPatente())) {
+                    vehiculoService.agregar(nuevoVehiculo);
+                    clienteService.agregar(nuevo2);
+                    this.clientes.add(nuevo2);
+                    tblClientes.setItems(clientes);
+                } else {
+                    throw new EntidadDuplicadaException("El cliente o vehículo ya existe");
+                }
             } catch (EntidadDuplicadaException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
                 alert.setTitle("Error");
-                alert.setContentText("El cliente ya existe");
+                alert.setContentText(e.getMessage());
                 alert.showAndWait();
             }
         } else {
@@ -293,6 +291,9 @@ public class GestionDeClientesController {
             alert.showAndWait();
         } else {
             clienteService.eliminadoLogico(c.getDni());
+            clientes.clear();
+            clientes.addAll(clienteService.listarActivos());
+            this.tblClientes.setItems(clientes);
             this.tblClientes.refresh();
         }
 

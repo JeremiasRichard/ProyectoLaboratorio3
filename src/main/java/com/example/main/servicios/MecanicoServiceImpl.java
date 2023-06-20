@@ -6,6 +6,7 @@ import com.example.main.datos.ArregloRepoImpl;
 import com.example.main.datos.MecanicoRepoImpl;
 import com.example.main.datos.VehiculoRepoImpl;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
+import com.example.main.enums.Especialidad;
 import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Mecanico;
@@ -80,6 +81,20 @@ public class MecanicoServiceImpl implements BaseService<Mecanico> {
 
     public List<MecanicoDTO> listarMecanicoPorTipoVehiculo(TipoVehiculo tipo){
         List<Mecanico> mecanicos = mecanicoRepo.listarPorTipoVehiculo(tipo);
+        return mecanicos.stream().map(mecanico -> {
+            MecanicoDTO mecanicoDTO = new MecanicoDTO();
+            mecanicoDTO.setNombre(mecanico.getNombre());
+            mecanicoDTO.setApellido(mecanico.getApellido());
+            mecanicoDTO.setDni(mecanico.getDni());
+            mecanicoDTO.setNroTelefono(mecanico.getTelefono());
+            mecanicoDTO.setTipoVehiculo(mecanico.getTipoVehiculo());
+            mecanicoDTO.setEspecialidad(mecanico.getEspecialidad());
+            mecanicoDTO.setActivo(mecanico.getActivo());
+            return mecanicoDTO;
+        }).toList();
+    }
+    public List<MecanicoDTO> listarMecanicoPorEspecialidad(Especialidad especialidad){
+        List<Mecanico> mecanicos = mecanicoRepo.listarPorEspecialidad(especialidad);
         return mecanicos.stream().map(mecanico -> {
             MecanicoDTO mecanicoDTO = new MecanicoDTO();
             mecanicoDTO.setNombre(mecanico.getNombre());

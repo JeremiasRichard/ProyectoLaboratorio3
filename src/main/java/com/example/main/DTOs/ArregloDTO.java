@@ -14,21 +14,6 @@ public class ArregloDTO
     private Especialidad especialidad;
     private int anioFabricacion;
     private String dniCliente;
-
-    @Override
-    public String toString() {
-        return "ArregloDTO{" +
-                "idArreglo=" + idArreglo +
-                ", patente='" + patente + '\'' +
-                ", marca='" + marca + '\'' +
-                ", anioFabricacion=" + anioFabricacion +
-                ", dniCliente='" + dniCliente + '\'' +
-                ", observacionesCliente='" + observacionesCliente + '\'' +
-                ", observacionesMecanico='" + observacionesMecanico + '\'' +
-                ", estadoReparacion=" + estadoReparacion +
-                '}';
-    }
-
     private String observacionesCliente;
     private String observacionesMecanico;
     private EstadoReparacion estadoReparacion;
@@ -92,6 +77,18 @@ public class ArregloDTO
         this.marca = marca;
     }
 
+    public int getIdEmpleado() { return idEmpleado; }
+
+    public void setIdEmpleado(int idEmpleado) { this.idEmpleado = idEmpleado; }
+
+    public Especialidad getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(Especialidad especialidad) {
+        this.especialidad = especialidad;
+    }
+
     public int getAnioFabricacion() {
         return anioFabricacion;
     }
@@ -131,4 +128,19 @@ public class ArregloDTO
     public void setEstadoReparacion(EstadoReparacion estadoReparacion) {
         this.estadoReparacion = estadoReparacion;
     }
+
+    @Override
+    public String toString() {
+        return "ArregloDTO{" +
+                "idArreglo=" + idArreglo +
+                ", patente='" + patente + '\'' +
+                ", marca='" + marca + '\'' +
+                ", anioFabricacion=" + anioFabricacion +
+                ", dniCliente='" + dniCliente + '\'' +
+                ", observacionesCliente='" + observacionesCliente + '\'' +
+                ", observacionesMecanico='" + observacionesMecanico + '\'' +
+                ", estadoReparacion=" + estadoReparacion +
+                '}';
+    }
 }
+

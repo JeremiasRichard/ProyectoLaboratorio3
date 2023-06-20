@@ -102,7 +102,7 @@ public class DetalleController
     }
 
     private void guardarCambios(Arreglo arreglo) {
-        if (arreglo.getEstadoReparacion() != EstadoReparacion.FINALIZADO || arreglo.getObservacionesDelArreglo() == null) {
+        if (arreglo.getEstadoReparacion() != EstadoReparacion.FINALIZADO || arreglo.getObservacionesDelMecanico() == null) {
             System.out.println("Error, estado inválido o campo observación vacío!");
         } else {
             Stage stageActual = (Stage) atrasButton.getScene().getWindow();

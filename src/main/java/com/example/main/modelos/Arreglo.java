@@ -9,7 +9,7 @@ public class Arreglo {
     private String dniCliente;
     private int idEmpleado;
     private String observacionesDelCliente;
-    private String observacionesDelArreglo;
+    private String observacionesDelMecanico;
     private EstadoReparacion estadoReparacion;
 
     public Arreglo()
@@ -69,19 +69,19 @@ public class Arreglo {
     }
 
     public String getDetalleArreglo() {
-        return observacionesDelArreglo;
+        return observacionesDelMecanico;
     }
 
     public void setDetalleArreglo(String detalleArreglo) {
-        observacionesDelArreglo = detalleArreglo;
+        observacionesDelMecanico = detalleArreglo;
     }
 
-    public String getObservacionesDelArreglo() {
-        return observacionesDelArreglo;
+    public String getObservacionesDelMecanico() {
+        return observacionesDelMecanico;
     }
 
-    public void setObservacionesDelArreglo(String observacionesDelArreglo) {
-        this.observacionesDelArreglo = observacionesDelArreglo;
+    public void setObservacionesDelMecanico(String observacionesDelMecanico) {
+        this.observacionesDelMecanico = observacionesDelMecanico;
     }
     public EstadoReparacion getEstadoReparacion() {
         return estadoReparacion;
@@ -101,7 +101,7 @@ public class Arreglo {
                 ", dniCliente='" + dniCliente + '\'' +
                 ", idEmpleado=" + idEmpleado +
                 ", observacionesDelCliente='" + observacionesDelCliente + '\'' +
-                ", observacionesDelArreglo='" + observacionesDelArreglo + '\'' +
+                ", observacionesDelArreglo='" + observacionesDelMecanico + '\'' +
                 ", estadoReparacion=" + estadoReparacion +
                 '}';
     }

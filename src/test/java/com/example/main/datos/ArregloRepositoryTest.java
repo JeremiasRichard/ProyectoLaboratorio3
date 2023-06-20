@@ -2,6 +2,7 @@ package com.example.main.datos;
 
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.modelos.Arreglo;
+import com.example.main.servicios.ArregloServiceImpl;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import java.util.Arrays;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ArregloRepositoryTest {
     private ArregloRepoImpl arregloRepo = new ArregloRepoImpl();
+    private ArregloServiceImpl arregloService = new ArregloServiceImpl();
     @BeforeAll
     void cargarArchivo(){
         Arreglo arr1 = new Arreglo(1,"XD54","12332111",2,"No anda joder");
@@ -46,5 +48,9 @@ public class ArregloRepositoryTest {
     @Test
     void buscarXPatenteTest(){
         arregloRepo.buscarTodosPorPatente(Arrays.asList(new String[]{"XD57","XD55"})).forEach(System.out::println);
+    }
+    @Test
+    void listar(){
+        arregloService.listarArreglosDTO().forEach(System.out::println);
     }
 }

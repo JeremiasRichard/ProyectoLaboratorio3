@@ -50,5 +50,8 @@ public class ClienteServiceImpl implements BaseService<Cliente>{
         return clienteRepo.buscarPorDNI(dni) != null;
     }
 
+    public List<Cliente> listarActivos(){
+       return clienteRepo.listarActivos();
+    }
 
 }//TODO: Agregar metodos para Vehiculos(lista patentes)

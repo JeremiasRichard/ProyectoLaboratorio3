@@ -28,7 +28,7 @@ public class ClienteRepositoryTest {
 
     @Test
     public void debeModificarEnArchivo() throws EntidadNoEncontradaException{
-        Cliente jose = new Cliente("Jose","Bergues","32795875",new ArrayList<>(),"491293",Arrays.asList("XD999"));
+        Cliente jose = new Cliente("Jose","Bergues","CMECANICO",new ArrayList<>(),"491293",Arrays.asList("XD999"));
         jose.setActivo(false);
         clienteRepo.editar(jose);
     }

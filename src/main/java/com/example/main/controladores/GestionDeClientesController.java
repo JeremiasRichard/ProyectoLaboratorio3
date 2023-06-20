@@ -92,9 +92,9 @@ public class GestionDeClientesController {
         clientes = FXCollections.observableArrayList();
         filtroClientes = FXCollections.observableArrayList();
 
-        if(clienteService.listar().size() !=0)
+        if(clienteService.listarActivos().size() !=0)
         {
-            List<Cliente> aux = clienteService.listar();
+            List<Cliente> aux = clienteService.listarActivos();
             for (Cliente cl : aux)
             {
                 clientes.add(cl);
@@ -276,26 +276,22 @@ public class GestionDeClientesController {
 
     @FXML
     private void eliminarCliente(ActionEvent event) throws EntidadNoEncontradaException {
+
         Cliente c = this.tblClientes.getSelectionModel().getSelectedItem();
 
-        if(c == null)
-        {
+        if (c == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Error");
             alert.setContentText("Debe seleccionar un usuario");
             alert.showAndWait();
-        }
-        else if(clientes.size() == 0)
-        {
+        } else if (clientes.size() == 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Error");
             alert.setContentText("La lista esta vacia");
             alert.showAndWait();
-        }
-        else
-        {
+        } else {
             clienteService.eliminadoLogico(c.getDni());
             this.tblClientes.refresh();
         }
@@ -303,21 +299,16 @@ public class GestionDeClientesController {
     }
 
     @FXML
-    private void filtrarPorNombre(KeyEvent event)
-    {
+    private void filtrarPorNombre(KeyEvent event) {
         String filtroDni = this.txtBusquedaDNI.getText();
 
-        if(filtroDni.isEmpty())
-        {
+        if (filtroDni.isEmpty()) {
             this.tblClientes.setItems(clientes);
-        }
-        else {
+        } else {
             this.filtroClientes.clear();
 
-            for(Cliente cl : this.clientes)
-            {
-                if(cl.getDni().toLowerCase().contains(filtroDni.toLowerCase()))
-                {
+            for (Cliente cl : this.clientes) {
+                if (cl.getDni().toLowerCase().contains(filtroDni.toLowerCase())) {
                     this.filtroClientes.add(cl);
                 }
             }
@@ -330,21 +321,14 @@ public class GestionDeClientesController {
     {
         if (!mostrarTodos.isSelected())
         {
-            for(Cliente cl: this.clientes)
-            {
-                if(cl.isActivo() && !filtroClientes.contains(cl) && !clientes.isEmpty())
-                {
-                    this.filtroClientes.add(cl);
-                }
-            }
-            this.tblClientes.setItems(filtroClientes);
+            this.tblClientes.setItems(clientes);
             this.tblClientes.refresh();
-
         }
         else
         {
-            this.tblClientes.setItems(clientes);
-            this.tblClientes.refresh();
+            filtroClientes.clear();
+            filtroClientes.setAll(clienteService.listar());
+            this.tblClientes.setItems(filtroClientes);
         }
 
     }

@@ -3,6 +3,8 @@ package com.example.main.modelos;
 
 import com.example.main.enums.EstadoReparacion;
 
+import java.util.Objects;
+
 public class Arreglo {
     private int idArreglo;
     private String patente;
@@ -98,7 +100,17 @@ public class Arreglo {
     }
 
     //endregion
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Arreglo arreglo)) return false;
+        return getIdArreglo() == arreglo.getIdArreglo() && getIdEmpleado() == arreglo.getIdEmpleado() && Objects.equals(getPatente(), arreglo.getPatente()) && Objects.equals(getDniCliente(), arreglo.getDniCliente());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIdArreglo(), getPatente(), getDniCliente(), getIdEmpleado());
+    }
 
     @Override
     public String toString() {

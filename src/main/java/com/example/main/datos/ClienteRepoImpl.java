@@ -93,5 +93,15 @@ public class ClienteRepoImpl implements Repositorio<Cliente>{
         cargar();
         return this.listaClientes;
     }
+    public List<Cliente> listarActivos(){
+        cargar();
+        List<Cliente> clientesActivos = new ArrayList<>();
+        for (Cliente cliente : this.listaClientes) {
+            if (cliente.isActivo()) {
+                clientesActivos.add(cliente);
+            }
+        }
+        return clientesActivos;
+    }
 
 }

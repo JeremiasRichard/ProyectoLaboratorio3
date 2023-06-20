@@ -1,0 +1,17 @@
+[ {
+  "nombre" : "CMOTO",
+  "apellido" : "ASD",
+  "dni" : "ASD",
+  "historialArreglos" : [ ],
+  "nroTelefono" : "ASD",
+  "listaVehiculos" : [ "ASD" ],
+  "activo" : true
+}, {
+  "nombre" : "123",
+  "apellido" : "123",
+  "dni" : "123",
+  "historialArreglos" : [ ],
+  "nroTelefono" : "123",
+  "listaVehiculos" : [ "123" ],
+  "activo" : true
+} ]

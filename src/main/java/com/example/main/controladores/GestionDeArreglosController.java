@@ -185,20 +185,24 @@ public class GestionDeArreglosController {
         if (this.seleccionado != null)
         {
             Vehiculo aux = vehiculoService.buscarPorPatenteDos(listaVehiculos.getSelectionModel().getSelectedItem());
-            ArregloDTO arregloDTO = new ArregloDTO(listaVehiculos.getSelectionModel().getSelectedItem(), aux.getMarca(), aux.getTipoVehiculo(), 2000, this.seleccionado.getDni(), observacionesDelCliente.getText(), this.idEmpleado, this.especialidad);
+            ArregloDTO arregloDTO = new ArregloDTO(listaVehiculos.getSelectionModel().getSelectedItem(), aux.getMarca(), aux.getTipoVehiculo(), aux.getAnioFabricacion(), this.seleccionado.getDni(), observacionesDelCliente.getText(), this.idEmpleado, this.especialidad);
             Arreglo arreglo = new Arreglo(aux.getPatente(),this.seleccionado.getDni(),this.idEmpleado,observacionesDelCliente.getText());
 
             if (arregloDTO != null)
             {
                 this.arreglos.add(arregloDTO);
+                this.arreglos.clear();
                 arregloService.agregar(arreglo);
-
                 if(arregloService.listar().size() !=0)
                 {
                     List<Arreglo> aux2 = arregloService.listar();
                     for (Arreglo arreglo2: aux2) {
 
-                        arreglos.add(arregloService.convertirAArregloDTO(arreglo2));
+                        if (!arreglos.contains(arreglo2))
+                        {
+                            arreglos.add(arregloService.convertirAArregloDTO(arreglo2));
+                        }
+
                     }
                     tblArreglos.setItems(arreglos);
                 }

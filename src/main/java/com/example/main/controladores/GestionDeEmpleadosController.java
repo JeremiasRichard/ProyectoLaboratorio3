@@ -96,9 +96,9 @@ public class GestionDeEmpleadosController {
 
         this.opciones = FXCollections.observableArrayList(
                 "",
-                " Auto",
-                " Moto",
-                " Camion"
+                "Auto",
+                "Moto",
+                "Camion"
         );
         tipoVehiculo.setValue("");
         tipoVehiculo.setItems(opciones);
@@ -142,7 +142,7 @@ public class GestionDeEmpleadosController {
         if (a != false)
         {
 
-            MecanicoDTO nuevo = new MecanicoDTO(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), TipoVehiculo.AUTO, Especialidad.ELECTRICIDAD,true);
+            MecanicoDTO nuevo = new MecanicoDTO(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), this.mecanicoGlobal.getTipoVehiculo(), this.mecanicoGlobal.getEspecialidad(),true);
             Mecanico aux = new Mecanico(nuevo.getNombre(),nuevo.getApellido(),nuevo.getDni(),nuevo.getNroTelefono(),nuevo.getListaArreglos(),nuevo.getTipoVehiculo(),nuevo.getEspecialidad());
 
             try

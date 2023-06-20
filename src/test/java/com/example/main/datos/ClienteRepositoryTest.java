@@ -1,6 +1,7 @@
 package com.example.main.datos;
 
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
+import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Cliente;
 import org.junit.jupiter.api.Test;
@@ -23,5 +24,12 @@ public class ClienteRepositoryTest {
     @Test
     void debeRetornarListaDeClientes(){
         clienteRepo.listar().forEach(System.out::println);
+    }
+
+    @Test
+    public void debeModificarEnArchivo() throws EntidadNoEncontradaException{
+        Cliente jose = new Cliente("Jose","Bergues","32795875",new ArrayList<>(),"491293",Arrays.asList("XD999"));
+        jose.setActivo(false);
+        clienteRepo.editar(jose);
     }
 }

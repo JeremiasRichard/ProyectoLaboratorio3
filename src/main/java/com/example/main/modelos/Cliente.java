@@ -33,6 +33,7 @@ public class Cliente extends Persona {
         this.listaVehiculos = listaVehiculos;
         this.activo = true;
     }
+
     //region Getters y Setters
 
 
@@ -71,7 +72,7 @@ public class Cliente extends Persona {
     @Override
     public boolean equals(Object o) {
         if (o instanceof Cliente && o != null) {
-            return this.getDni() == ((Cliente) o).getDni();
+            return this.getDni().equals(((Cliente) o).getDni());
         }
         return false;
     }

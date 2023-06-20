@@ -22,4 +22,20 @@
   "nroTelefono" : "3",
   "listaVehiculos" : [ "3" ],
   "activo" : true
+}, {
+  "nombre" : "Carlos",
+  "apellido" : "Bianco",
+  "dni" : "23654456",
+  "historialArreglos" : [ ],
+  "nroTelefono" : "123321",
+  "listaVehiculos" : [ ],
+  "activo" : true
+}, {
+  "nombre" : "Karla",
+  "apellido" : "Gomez",
+  "dni" : "77777777",
+  "historialArreglos" : [ ],
+  "nroTelefono" : "3212123",
+  "listaVehiculos" : [ ],
+  "activo" : true
 } ]

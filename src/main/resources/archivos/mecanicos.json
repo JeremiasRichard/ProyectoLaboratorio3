@@ -9,4 +9,59 @@
   "especialidad" : "ELECTRICIDAD",
   "activo" : true,
   "usuario" : 1
+}, {
+  "nombre" : "tyu",
+  "apellido" : "tyu",
+  "dni" : "789",
+  "idEmpleado" : 2,
+  "telefono" : "456",
+  "listaArreglos" : null,
+  "tipoVehiculo" : "AUTO",
+  "especialidad" : "ELECTRICIDAD",
+  "activo" : true,
+  "usuario" : 2
+}, {
+  "nombre" : "bnm",
+  "apellido" : "bnm",
+  "dni" : "456",
+  "idEmpleado" : 3,
+  "telefono" : "852",
+  "listaArreglos" : null,
+  "tipoVehiculo" : "AUTO",
+  "especialidad" : "ELECTRICIDAD",
+  "activo" : true,
+  "usuario" : 3
+}, {
+  "nombre" : "Jeremias",
+  "apellido" : "Richard",
+  "dni" : "40123321",
+  "idEmpleado" : 4,
+  "telefono" : "223666666",
+  "listaArreglos" : [ ],
+  "tipoVehiculo" : "AUTO",
+  "especialidad" : "MECANICA_GENERAL",
+  "activo" : true,
+  "usuario" : 4
+}, {
+  "nombre" : "Pablo",
+  "apellido" : "Morales",
+  "dni" : "38321332",
+  "idEmpleado" : 5,
+  "telefono" : "22377777",
+  "listaArreglos" : [ ],
+  "tipoVehiculo" : "MOTO",
+  "especialidad" : "ESTETICA",
+  "activo" : true,
+  "usuario" : 5
+}, {
+  "nombre" : "Pablo",
+  "apellido" : "Baldor",
+  "dni" : "35888888",
+  "idEmpleado" : 6,
+  "telefono" : "22377777",
+  "listaArreglos" : [ ],
+  "tipoVehiculo" : "MOTO",
+  "especialidad" : "ELECTRICIDAD",
+  "activo" : true,
+  "usuario" : 6
 } ]

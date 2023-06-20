@@ -16,4 +16,22 @@
   "marca" : "3",
   "patente" : "3",
   "activo" : true
+}, {
+  "anioFabricacion" : 2010,
+  "tipoVehiculo" : "AUTO",
+  "marca" : "Mercedes",
+  "patente" : "XDXD1",
+  "activo" : true
+}, {
+  "anioFabricacion" : 2011,
+  "tipoVehiculo" : "MOTO",
+  "marca" : "Kawazaki",
+  "patente" : "XDXD2",
+  "activo" : true
+}, {
+  "anioFabricacion" : 2012,
+  "tipoVehiculo" : "AUTO",
+  "marca" : "Alfa Romeo",
+  "patente" : "XDXD3",
+  "activo" : true
 } ]

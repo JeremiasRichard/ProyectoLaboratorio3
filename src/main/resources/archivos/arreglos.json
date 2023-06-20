@@ -1,0 +1,10 @@
+[ {
+  "idArreglo" : 1,
+  "patente" : "CMOTO",
+  "dniCliente" : "CMOTO",
+  "idEmpleado" : 1,
+  "observacionesDelCliente" : "ASD",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY",
+  "detalleArreglo" : null
+} ]

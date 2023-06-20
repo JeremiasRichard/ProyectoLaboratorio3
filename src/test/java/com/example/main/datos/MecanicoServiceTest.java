@@ -37,9 +37,9 @@ public class MecanicoServiceTest {
                 new Arreglo(3, "XDXD3", "77777777", 1, "AESEDE"));
 
         List<Mecanico> listaMecanicos = Arrays.asList(
-                new Mecanico("Jeremias","Richard","40123321","223666666",1,new ArrayList<>(),TipoVehiculo.AUTO, Especialidad.MECANICA_GENERAL),
-                new Mecanico("Pablo","Morales","38321332","22377777",2,new ArrayList<>(),TipoVehiculo.MOTO, Especialidad.ESTETICA),
-                new Mecanico("Pablo","Baldor","35888888","22377777",3,new ArrayList<>(),TipoVehiculo.MOTO, Especialidad.ELECTRICIDAD)
+                new Mecanico("Jeremias", "Richard", "40123321", "223666666", 1, new ArrayList<>(), TipoVehiculo.AUTO, Especialidad.MECANICA_GENERAL),
+                new Mecanico("Pablo", "Morales", "38321332", "22377777", 2, new ArrayList<>(), TipoVehiculo.MOTO, Especialidad.ESTETICA),
+                new Mecanico("Pablo", "Baldor", "35888888", "22377777", 3, new ArrayList<>(), TipoVehiculo.MOTO, Especialidad.ELECTRICIDAD)
         );
         //endregion
 
@@ -64,21 +64,27 @@ public class MecanicoServiceTest {
                 throw new RuntimeException(e);
             }
         });
-        listaVehiculos.forEach(v-> {
-           try {
-               vehiculoRepo.agregar(v);
-           } catch (EntidadDuplicadaException e) {
-               throw new RuntimeException(e);
-           }
-       });
+        listaVehiculos.forEach(v -> {
+            try {
+                vehiculoRepo.agregar(v);
+            } catch (EntidadDuplicadaException e) {
+                throw new RuntimeException(e);
+            }
+        });
         try {
-            usuarioRepo.agregar(new Usuario("jereRichard", Encriptador.obtenerMD5("123"),false));
+            usuarioRepo.agregar(new Usuario("jereRichard", Encriptador.obtenerMD5("123"), false));
         } catch (EntidadDuplicadaException e) {
             throw new RuntimeException(e);
         }
 
         System.out.println("Listando tareas de Jeremias:");
-       List<ArregloDTO> lista = mecanicoService.obtenerTareas(1);
-       lista.forEach(System.out::println);
+        List<ArregloDTO> lista = mecanicoService.obtenerTareas(1);
+        lista.forEach(System.out::println);
+    }
+
+    @Test
+    void Test3()
+    {
+        mecanicoService.listarMecanicoPorEspecialidadYTipo(TipoVehiculo.AUTO,Especialidad.ELECTRICIDAD).forEach(System.out::println);
     }
 }

@@ -14,4 +14,12 @@
   "nroTelefono" : "bb",
   "listaVehiculos" : [ "bb" ],
   "activo" : true
+}, {
+  "nombre" : "3",
+  "apellido" : "3",
+  "dni" : "3",
+  "historialArreglos" : [ ],
+  "nroTelefono" : "3",
+  "listaVehiculos" : [ "3" ],
+  "activo" : true
 } ]

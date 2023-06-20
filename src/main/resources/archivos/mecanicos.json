@@ -1,0 +1,12 @@
+[ {
+  "nombre" : "asd",
+  "apellido" : "asd",
+  "dni" : "asd",
+  "idEmpleado" : 1,
+  "telefono" : "asd",
+  "listaArreglos" : null,
+  "tipoVehiculo" : "AUTO",
+  "especialidad" : "ELECTRICIDAD",
+  "activo" : true,
+  "usuario" : 1
+} ]

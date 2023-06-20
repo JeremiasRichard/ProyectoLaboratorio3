@@ -10,4 +10,10 @@
   "marca" : "bb",
   "patente" : "bb",
   "activo" : true
+}, {
+  "anioFabricacion" : 3,
+  "tipoVehiculo" : "AUTO",
+  "marca" : "3",
+  "patente" : "3",
+  "activo" : true
 } ]

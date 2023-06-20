@@ -1,14 +1,13 @@
 package com.example.main.controladores;
 
 import com.example.main.DTOs.ArregloDTO;
+import com.example.main.DTOs.MecanicoDTO;
 import com.example.main.enums.Especialidad;
 import com.example.main.enums.EstadoReparacion;
 import com.example.main.enums.TipoVehiculo;
-import com.example.main.modelos.Arreglo;
-import com.example.main.modelos.Cliente;
-import com.example.main.modelos.Usuario;
-import com.example.main.modelos.Vehiculo;
+import com.example.main.modelos.*;
 import com.example.main.servicios.ArregloServiceImpl;
+import com.example.main.servicios.MecanicoServiceImpl;
 import com.example.main.servicios.VehiculoServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,7 +30,9 @@ public class GestionDeArreglosController {
 
     private VehiculoServiceImpl vehiculoService = new VehiculoServiceImpl();
     private ArregloServiceImpl arregloService = new ArregloServiceImpl();
+    private MecanicoServiceImpl mecanicoService = new MecanicoServiceImpl();
     private Usuario logueado;
+    private Vehiculo elegido = new Vehiculo();
     private Cliente seleccionado;
     private Especialidad especialidad;
     @FXML
@@ -71,7 +72,8 @@ public class GestionDeArreglosController {
     private TextArea observacionesDelCliente = new TextArea();
     private ObservableList<String> opciones2;
 
-    public void initialize() {
+    public void initialize()
+    {
 
         observacionesDelCliente.setWrapText(true);
 
@@ -79,59 +81,16 @@ public class GestionDeArreglosController {
         this.columnaPatente.setCellValueFactory(new PropertyValueFactory("patente"));
         this.columnaEstadoReparacion.setCellValueFactory(new PropertyValueFactory("estadoReparacion"));
 
-        seleccionClienteButton.setOnAction(event -> {
-            this.seleccionado = abrirSeleccionCliente();
+        seleccionClienteButton.setOnAction(event ->
+        {
+                this.seleccionado = abrirSeleccionCliente();
+                if (seleccionado != null)
+                {
+                    List<String> listaAutos = seleccionado.getListaVehiculos();
+                    this.vehiculos = FXCollections.observableArrayList(listaAutos);
+                    listaVehiculos.setItems(vehiculos);
+                }
 
-            if (seleccionado != null) {
-
-                List<String> listaAutos = seleccionado.getListaVehiculos();
-                this.vehiculos = FXCollections.observableArrayList(listaAutos);
-                listaVehiculos.setItems(vehiculos);
-                List<String> mecanicos2 = new ArrayList<>();
-                listaVehiculos.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-
-                    String seleccion = newValue;
-                    Vehiculo elegido = vehiculoService.buscarPorPatenteDos(seleccion);
-
-                    if(elegido != null)
-                    {
-
-                        if (elegido.getTipoVehiculo() == TipoVehiculo.AUTO) {
-                            // Desplegar mecánicos de autos.
-                            mecanicos2.clear();
-                            mecanicos2.add("Auto");
-                            mecanicos2.add("Pedro");
-                            mecanicos2.add("Raul");
-                            this.mecanicos = FXCollections.observableArrayList(mecanicos2);
-                            listaMecanicos.setItems(mecanicos);
-                        } else if (elegido.getTipoVehiculo() == TipoVehiculo.CAMION) {
-                            // Desplegar mecánicos de camiones.
-                            mecanicos2.clear();
-                            mecanicos2.add("Camion");
-                            mecanicos2.add("Pedro");
-                            mecanicos2.add("Raul");
-                            this.mecanicos = FXCollections.observableArrayList(mecanicos2);
-                            listaMecanicos.setItems(mecanicos);
-                        } else if (elegido.getTipoVehiculo() == TipoVehiculo.MOTO) {
-                            // Desplegar mecánicos de motos.
-                            mecanicos2.clear();
-                            mecanicos2.add("Motos");
-                            mecanicos2.add("Pedro");
-                            mecanicos2.add("Raul");
-                            this.mecanicos = FXCollections.observableArrayList(mecanicos2);
-                            listaMecanicos.setItems(mecanicos);
-                        }
-                    }
-                    });
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setTitle("Error");
-                alert.setContentText("Cliente vacio!");
-                alert.showAndWait();
-            }
-
-            listaMecanicos.setValue("");
         });
 
         this.opciones2 = FXCollections.observableArrayList(
@@ -140,6 +99,7 @@ public class GestionDeArreglosController {
                 "General",
                 "Electricidad"
         );
+
         listaEspecialidades.setValue("");
         listaEspecialidades.setItems(opciones2);
         listaEspecialidades.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
@@ -162,7 +122,37 @@ public class GestionDeArreglosController {
             }
         });
 
+        listaVehiculos.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
+        {
+            String seleccion = newValue;
+
+            elegido = vehiculoService.buscarPorPatenteDos(seleccion);
+
+            if (elegido != null)
+            {
+                List<MecanicoDTO> listita = mecanicoService.listarMecanicoPorEspecialidadYTipo(elegido.getTipoVehiculo(), especialidad);
+
+                for (MecanicoDTO m : listita) {
+                    mecanicos.add(m.getNombre());
+                    System.out.println("ASD");
+                }
+                listaMecanicos.setItems(mecanicos);
+            }
+        });
+
+        /*else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Cliente vacio!");
+            alert.showAndWait();
+        }*/
+
     }
+
+
+
 
     @FXML
     private Cliente abrirSeleccionCliente() {

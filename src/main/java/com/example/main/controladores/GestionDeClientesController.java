@@ -2,6 +2,7 @@ package com.example.main.controladores;
 
 import com.example.main.datos.ClienteRepoImpl;
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
+import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.enums.EstadoReparacion;
 import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.Cliente;
@@ -94,7 +95,8 @@ public class GestionDeClientesController {
         if(clienteService.listar().size() !=0)
         {
             List<Cliente> aux = clienteService.listar();
-            for (Cliente cl : aux) {
+            for (Cliente cl : aux)
+            {
                 clientes.add(cl);
             }
             tblClientes.setItems(clientes);
@@ -273,8 +275,7 @@ public class GestionDeClientesController {
     }
 
     @FXML
-    private void eliminarCliente(ActionEvent event)
-    {
+    private void eliminarCliente(ActionEvent event) throws EntidadNoEncontradaException {
         Cliente c = this.tblClientes.getSelectionModel().getSelectedItem();
 
         if(c == null)
@@ -295,8 +296,7 @@ public class GestionDeClientesController {
         }
         else
         {
-            this.clientes.remove(c);
-            this.filtroClientes.remove(c);
+            clienteService.eliminadoLogico(c.getDni());
             this.tblClientes.refresh();
         }
 

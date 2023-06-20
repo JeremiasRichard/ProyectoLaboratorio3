@@ -7,4 +7,76 @@
   "observacionesDelMecanico" : null,
   "estadoReparacion" : "STAND_BY",
   "detalleArreglo" : null
+}, {
+  "idArreglo" : 2,
+  "patente" : "CMOTO",
+  "dniCliente" : "CMOTO",
+  "idEmpleado" : 1,
+  "observacionesDelCliente" : "",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY",
+  "detalleArreglo" : null
+}, {
+  "idArreglo" : 3,
+  "patente" : "CMOTO",
+  "dniCliente" : "CMOTO",
+  "idEmpleado" : 1,
+  "observacionesDelCliente" : "",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY",
+  "detalleArreglo" : null
+}, {
+  "idArreglo" : 4,
+  "patente" : "CMOTO",
+  "dniCliente" : "CMOTO",
+  "idEmpleado" : 1,
+  "observacionesDelCliente" : "",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY",
+  "detalleArreglo" : null
+}, {
+  "idArreglo" : 5,
+  "patente" : "CMOTO",
+  "dniCliente" : "CMOTO",
+  "idEmpleado" : 1,
+  "observacionesDelCliente" : "",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY",
+  "detalleArreglo" : null
+}, {
+  "idArreglo" : 6,
+  "patente" : "CMOTO",
+  "dniCliente" : "CMOTO",
+  "idEmpleado" : 1,
+  "observacionesDelCliente" : "",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY",
+  "detalleArreglo" : null
+}, {
+  "idArreglo" : 7,
+  "patente" : "CMOTO",
+  "dniCliente" : "CMOTO",
+  "idEmpleado" : 1,
+  "observacionesDelCliente" : "asd",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY",
+  "detalleArreglo" : null
+}, {
+  "idArreglo" : 8,
+  "patente" : "CMOTO",
+  "dniCliente" : "CMOTO",
+  "idEmpleado" : 1,
+  "observacionesDelCliente" : "asd",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY",
+  "detalleArreglo" : null
+}, {
+  "idArreglo" : 9,
+  "patente" : "CMOTO",
+  "dniCliente" : "CMOTO",
+  "idEmpleado" : 1,
+  "observacionesDelCliente" : "asd",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY",
+  "detalleArreglo" : null
 } ]

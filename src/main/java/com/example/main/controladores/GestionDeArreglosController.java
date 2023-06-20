@@ -72,7 +72,6 @@ public class GestionDeArreglosController {
 
     public void initialize() {
 
-
         if(arregloService.listar().size() !=0)
         {
             List<Arreglo> aux = arregloService.listar();
@@ -190,9 +189,16 @@ public class GestionDeArreglosController {
             {
                 this.arreglos.add(arregloDTO);
                 arregloService.agregar(arreglo);
-                tblArreglos.setItems(arreglos);
-                tblArreglos.refresh();
 
+                if(arregloService.listar().size() !=0)
+                {
+                    List<Arreglo> aux2 = arregloService.listar();
+                    for (Arreglo arreglo2: aux2) {
+
+                        arreglos.add(arregloService.convertirAArregloDTO(arreglo2));
+                    }
+                    tblArreglos.setItems(arreglos);
+                }
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

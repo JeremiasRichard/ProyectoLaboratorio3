@@ -29,8 +29,8 @@ public class ArregloDTO
 
     }
 
-    public ArregloDTO(int idArreglo, String patente, String marca, TipoVehiculo tipoVehiculo, int anioFabricacion, String dniCliente, String observacionesCliente, int idEmpleado,Especialidad especialidad) {
-        this.idArreglo = idArreglo;
+    public ArregloDTO(String patente, String marca, TipoVehiculo tipoVehiculo, int anioFabricacion, String dniCliente, String observacionesCliente, int idEmpleado,Especialidad especialidad) {
+
         this.patente = patente;
         this.marca = marca;
         this.tipoVehiculo = tipoVehiculo;
@@ -43,6 +43,17 @@ public class ArregloDTO
     }
 
     public ArregloDTO() {
+    }
+
+    public ArregloDTO(int idArreglo, String patente, String marca, int idEmpleado, int anioFabricacion, String dniCliente, String observacionesCliente, EstadoReparacion estadoReparacion) {
+        this.idArreglo = idArreglo;
+        this.patente = patente;
+        this.marca = marca;
+        this.idEmpleado = idEmpleado;
+        this.anioFabricacion = anioFabricacion;
+        this.dniCliente = dniCliente;
+        this.observacionesCliente = observacionesCliente;
+        this.estadoReparacion = estadoReparacion;
     }
 
     public TipoVehiculo getTipoVehiculo() {

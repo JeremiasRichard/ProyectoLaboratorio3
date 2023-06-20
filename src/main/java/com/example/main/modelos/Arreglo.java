@@ -27,6 +27,13 @@ public class Arreglo {
         this.estadoReparacion = EstadoReparacion.STAND_BY;
     }
 
+    public Arreglo(String patente, String dniCliente, int idEmpleado, String observacionesDelCliente) {
+        this.patente = patente;
+        this.dniCliente = dniCliente;
+        this.idEmpleado = idEmpleado;
+        this.observacionesDelCliente = observacionesDelCliente;
+        this.estadoReparacion = EstadoReparacion.STAND_BY;
+    }
 
     //region Getters y Setters
     public String getPatente() {

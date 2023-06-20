@@ -81,7 +81,13 @@ public class GestionDeEmpleadosController {
     public void initialize() {
         mecanicos = FXCollections.observableArrayList();
         filtroMecanicos = FXCollections.observableArrayList();
-        tblMecanicos.setItems(mecanicos);
+
+        if(mecanicoService.listar().size() !=0)
+        {
+            List<Mecanico> aux = mecanicoService.listar();
+            mecanicos.addAll(mecanicoService.mecanicosToMecanicoDTO(aux));
+            tblMecanicos.setItems(mecanicos);
+        }
 
         this.columnaNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         this.columnaApellido.setCellValueFactory(new PropertyValueFactory("apellido"));
@@ -136,7 +142,7 @@ public class GestionDeEmpleadosController {
         if (a != false)
         {
 
-            MecanicoDTO nuevo = new MecanicoDTO(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), TipoVehiculo.AUTO, Especialidad.ELECTRICIDAD, true);
+            MecanicoDTO nuevo = new MecanicoDTO(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), TipoVehiculo.AUTO, Especialidad.ELECTRICIDAD,true);
             Mecanico aux = new Mecanico(nuevo.getNombre(),nuevo.getApellido(),nuevo.getDni(),nuevo.getNroTelefono(),nuevo.getListaArreglos(),nuevo.getTipoVehiculo(),nuevo.getEspecialidad());
 
             try

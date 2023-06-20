@@ -52,6 +52,7 @@ public class ArregloServiceImpl implements BaseService<Arreglo> {
     }
     public ArregloDTO convertirAArregloDTO(Arreglo arreglo) {
         ArregloDTO arregloDTO = new ArregloDTO();
+        arregloDTO.setIdEmpleado(arreglo.getIdEmpleado());
         arregloDTO.setIdArreglo(arreglo.getIdArreglo());
         arregloDTO.setPatente(arreglo.getPatente());
         arregloDTO.setMarca(vehiculoRepo.buscarPorPatente(arreglo.getPatente()).getMarca());

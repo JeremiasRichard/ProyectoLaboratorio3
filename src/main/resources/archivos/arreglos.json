@@ -1,0 +1,37 @@
+[ {
+  "idArreglo" : 1,
+  "patente" : "3",
+  "dniCliente" : "3",
+  "idEmpleado" : 1,
+  "observacionesDelCliente" : "Aiuda",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY",
+  "detalleArreglo" : null
+}, {
+  "idArreglo" : 2,
+  "patente" : "3",
+  "dniCliente" : "3",
+  "idEmpleado" : 1,
+  "observacionesDelCliente" : "aaasdas231231231",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY",
+  "detalleArreglo" : null
+}, {
+  "idArreglo" : 3,
+  "patente" : "3",
+  "dniCliente" : "3",
+  "idEmpleado" : 1,
+  "observacionesDelCliente" : "21314ad213",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY",
+  "detalleArreglo" : null
+}, {
+  "idArreglo" : 4,
+  "patente" : "3",
+  "dniCliente" : "3",
+  "idEmpleado" : 1,
+  "observacionesDelCliente" : "aaaasd",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY",
+  "detalleArreglo" : null
+} ]

@@ -2,9 +2,8 @@ package com.example.main.controladores;
 
 import com.example.main.DTOs.ArregloDTO;
 import com.example.main.DTOs.MecanicoDTO;
+import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.enums.Especialidad;
-import com.example.main.enums.EstadoReparacion;
-import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.*;
 import com.example.main.servicios.ArregloServiceImpl;
 import com.example.main.servicios.MecanicoServiceImpl;
@@ -22,7 +21,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GestionDeArreglosController {
@@ -33,8 +31,8 @@ public class GestionDeArreglosController {
     private Usuario logueado;
     private Vehiculo elegido = new Vehiculo();
     private Cliente seleccionado;
+    private Integer idEmpleado;
     private Especialidad especialidad;
-
     @FXML
     private Stage adminStage;
     @FXML
@@ -52,11 +50,11 @@ public class GestionDeArreglosController {
     @FXML
     private ObservableList<String> vehiculos;
     @FXML
-    private ChoiceBox<String> listaMecanicos = new ChoiceBox<>();
+    private ChoiceBox<Integer> listaMecanicos = new ChoiceBox<>();
     @FXML
     private ChoiceBox<String> listaEspecialidades = new ChoiceBox<>();
     @FXML
-    private ObservableList<String> mecanicos;
+    private ObservableList<Integer> mecanicos;
     @FXML
     private ObservableList<ArregloDTO> arreglos = FXCollections.observableArrayList();
     private ObservableList<ArregloDTO> filtroArreglos = FXCollections.observableArrayList();
@@ -73,6 +71,17 @@ public class GestionDeArreglosController {
     private ObservableList<String> opciones2;
 
     public void initialize() {
+
+
+        if(arregloService.listar().size() !=0)
+        {
+            List<Arreglo> aux = arregloService.listar();
+            for (Arreglo arreglo: aux) {
+
+               arreglos.add(arregloService.convertirAArregloDTO(arreglo));
+            }
+            tblArreglos.setItems(arreglos);
+        }
 
         observacionesDelCliente.setWrapText(true);
 
@@ -110,13 +119,11 @@ public class GestionDeArreglosController {
                 System.out.println(especialidad);
             }
 
-            // Actualizar la lista de mecánicos
             if (elegido != null) {
                 List<MecanicoDTO> listita = mecanicoService.listarMecanicoPorEspecialidadYTipo(elegido.getTipoVehiculo(), especialidad);
                 mecanicos = FXCollections.observableArrayList();
                 for (MecanicoDTO m : listita) {
-                    mecanicos.add(m.getNombre());
-                    System.out.println("ASD");
+                    mecanicos.add(Integer.valueOf(m.getId()));
                 }
                 listaMecanicos.setItems(mecanicos);
             }
@@ -124,21 +131,23 @@ public class GestionDeArreglosController {
 
         listaVehiculos.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             String seleccion = newValue;
-
             elegido = vehiculoService.buscarPorPatenteDos(seleccion);
-
             if (elegido != null) {
-                // Comprobar si ya se ha seleccionado una especialidad y actualizar la lista de mecánicos
                 if (especialidad != null) {
                     List<MecanicoDTO> listita = mecanicoService.listarMecanicoPorEspecialidadYTipo(elegido.getTipoVehiculo(), especialidad);
+
                     mecanicos = FXCollections.observableArrayList();
-                    for (MecanicoDTO m : listita) {
-                        mecanicos.add(m.getNombre());
-                        System.out.println("ASD");
+                    for (MecanicoDTO m : listita)
+                    {
+                        mecanicos.add(Integer.valueOf(m.getId()));
                     }
                     listaMecanicos.setItems(mecanicos);
                 }
             }
+        });
+
+        listaMecanicos.setOnAction(event -> {
+            this.idEmpleado = listaMecanicos.getValue();
         });
     }
 
@@ -167,14 +176,21 @@ public class GestionDeArreglosController {
     }
 
     @FXML
-    private void crearArreglo(ActionEvent event) {
-        if (this.seleccionado != null) {
-            Vehiculo aux = vehiculoService.buscarPorPatenteDos(listaVehiculos.getSelectionModel().getSelectedItem());
-            ArregloDTO arregloDTO = new ArregloDTO(1, listaVehiculos.getSelectionModel().getSelectedItem(), aux.getMarca(), aux.getTipoVehiculo(), 2000, this.seleccionado.getDni(), observacionesDelCliente.getText(), 1, this.especialidad);
+    private void crearArreglo(ActionEvent event) throws EntidadDuplicadaException {
 
-            if (arregloDTO != null) {
+        if (this.seleccionado != null)
+        {
+            Vehiculo aux = vehiculoService.buscarPorPatenteDos(listaVehiculos.getSelectionModel().getSelectedItem());
+            ArregloDTO arregloDTO = new ArregloDTO(listaVehiculos.getSelectionModel().getSelectedItem(), aux.getMarca(), aux.getTipoVehiculo(), 2000, this.seleccionado.getDni(), observacionesDelCliente.getText(), this.idEmpleado, this.especialidad);
+            Arreglo arreglo = new Arreglo(aux.getPatente(),this.seleccionado.getDni(),this.idEmpleado,observacionesDelCliente.getText());
+
+            if (arregloDTO != null)
+            {
                 this.arreglos.add(arregloDTO);
+                arregloService.agregar(arreglo);
                 tblArreglos.setItems(arreglos);
+                tblArreglos.refresh();
+
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

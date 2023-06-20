@@ -8,6 +8,7 @@ import com.example.main.datos.VehiculoRepoImpl;
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.enums.Especialidad;
+import com.example.main.enums.EstadoReparacion;
 import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Mecanico;
@@ -68,9 +69,10 @@ public class MecanicoServiceImpl implements BaseService<Mecanico> {
         return mecanicosToMecanicoDTO(mecanicos);
     }
 
-    private List<MecanicoDTO> mecanicosToMecanicoDTO(List<Mecanico> mecanicos) {
+    public List<MecanicoDTO> mecanicosToMecanicoDTO(List<Mecanico> mecanicos) {
         return mecanicos.stream().map(mecanico -> {
             MecanicoDTO mecanicoDTO = new MecanicoDTO();
+            mecanicoDTO.setId(mecanico.getId());
             mecanicoDTO.setNombre(mecanico.getNombre());
             mecanicoDTO.setApellido(mecanico.getApellido());
             mecanicoDTO.setDni(mecanico.getDni());
@@ -99,10 +101,12 @@ public class MecanicoServiceImpl implements BaseService<Mecanico> {
                                     arreglo.getIdArreglo(),
                                     arreglo.getPatente(),
                                     vehiculoActual.getMarca(),
+                                    arreglo.getIdEmpleado(),
                                     vehiculoActual.getAnioFabricacion(),
                                     arreglo.getDniCliente(),
                                     arreglo.getObservacionesDelCliente(),
-                                    arreglo.getEstadoReparacion());
+                                    arreglo.getEstadoReparacion()
+                            );
                         }
                 )
                 .toList();

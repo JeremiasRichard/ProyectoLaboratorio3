@@ -9,6 +9,7 @@ import java.util.Objects;
 
 public class MecanicoDTO
 {
+    private int id;
     private String nombre;
     private String apellido;
     private String dni;
@@ -18,7 +19,8 @@ public class MecanicoDTO
     private Especialidad especialidad;
     private boolean activo;
 
-    public MecanicoDTO(String nombre, String apellido, String dni, String nroTelefono, TipoVehiculo tipoVehiculo, Especialidad especialidad) {
+    public MecanicoDTO(int id, String nombre, String apellido, String dni, String nroTelefono, TipoVehiculo tipoVehiculo, Especialidad especialidad) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -29,6 +31,7 @@ public class MecanicoDTO
     }
 
     public MecanicoDTO(String nombre, String apellido, String dni, String nroTelefono, TipoVehiculo tipoVehiculo, Especialidad especialidad, boolean activo) {
+
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -40,6 +43,10 @@ public class MecanicoDTO
 
     public MecanicoDTO() {
     }
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public String getNombre() {
         return nombre;
@@ -129,6 +136,7 @@ public class MecanicoDTO
     @Override
     public String toString() {
         return "MecanicoDTO{" +
+                "id='" + id + '\'' +
                 "nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", dni='" + dni + '\'' +

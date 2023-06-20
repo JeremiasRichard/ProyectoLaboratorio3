@@ -1,7 +1,6 @@
-package com.example.main.modelos;
+ package com.example.main.modelos;
 
-public class Usuario
-{
+public class Usuario {
     private int idUsuario;
     private String user;
     private String password;
@@ -10,15 +9,14 @@ public class Usuario
     public Usuario() {
     }
 
-    public Usuario(String user, String password)
-    {
+    public Usuario(String user, String password, boolean esAdmin) {
         this.user = user;
         this.password = password;
-        this.esAdmin = false;
+        this.esAdmin = esAdmin;
         this.activo = true;
     }
-    public Usuario(String user, String password,boolean esAdmin)
-    {
+    public Usuario(int idUsuario, String user, String password, boolean esAdmin) {//TODO: revisar this para evitar repetir parametros
+        this.idUsuario = idUsuario;
         this.user = user;
         this.password = password;
         this.esAdmin = esAdmin;
@@ -54,13 +52,12 @@ public class Usuario
         return esAdmin;
     }
 
-    public void setEsAdmin(boolean esAdmin) {
-        this.esAdmin = esAdmin;
+    public void setEsAdmin(boolean nivelDeAcceso) {
+        this.esAdmin = nivelDeAcceso;
     }
 
     public boolean getActivo() { return activo; }
 
     public void setActivo(boolean activo) { this.activo = activo; }
-
     //endregion
 }

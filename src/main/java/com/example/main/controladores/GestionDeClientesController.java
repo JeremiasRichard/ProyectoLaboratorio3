@@ -129,7 +129,6 @@ public class GestionDeClientesController {
             {
                 this.nuevoVehiculo.setTipoVehiculo(TipoVehiculo.MOTO);
             }
-
         });
 
     }

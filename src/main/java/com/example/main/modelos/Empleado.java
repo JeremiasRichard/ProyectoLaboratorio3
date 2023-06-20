@@ -37,6 +37,10 @@ public abstract class Empleado extends Persona {
     public void setUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+
+    public String getTelefono() { return telefono; }
+
+    public void setTelefono(String telefono) { this.telefono = telefono; }
     //endregion
 
 }

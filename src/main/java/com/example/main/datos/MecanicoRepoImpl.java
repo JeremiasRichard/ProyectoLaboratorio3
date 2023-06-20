@@ -2,6 +2,8 @@ package com.example.main.datos;
 
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
+import com.example.main.enums.Especialidad;
+import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.Mecanico;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
@@ -96,5 +98,26 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
             }
         }
         return encontrado;
+    }
+    public List<Mecanico> listarPorTipoVehiculo(TipoVehiculo tipo){
+        cargar();
+        List<Mecanico> mecanicosPorTipo = new ArrayList<>();
+        for (Mecanico mecanico : listaMecanicos) {
+            if (mecanico.getTipoVehiculo() == tipo) {
+                mecanicosPorTipo.add(mecanico);
+            }
+        }
+        return mecanicosPorTipo;
+    }
+
+    public List<Mecanico> listarPorEspecialidad(Especialidad especialidad) {
+        cargar();
+        List<Mecanico> mecanicosPorEspecialidad = new ArrayList<>();
+        for (Mecanico mecanico : listaMecanicos) {
+            if (mecanico.getEspecialidad() == especialidad) {
+                mecanicosPorEspecialidad.add(mecanico);
+            }
+        }
+        return mecanicosPorEspecialidad;
     }
 }

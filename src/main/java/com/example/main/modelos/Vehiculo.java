@@ -7,7 +7,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Vehiculo {
-    private int idVehiculo;
     private int anioFabricacion;
     private TipoVehiculo tipoVehiculo;
     private String marca;
@@ -25,13 +24,6 @@ public class Vehiculo {
         this.activo = true;
     }
     //region Getters y Setters
-    public int getIdVehiculo() {
-        return idVehiculo;
-    }
-
-    public void setIdVehiculo(int idVehiculo) {
-        this.idVehiculo = idVehiculo;
-    }
 
     public int getAnioFabricacion() {
         return anioFabricacion;
@@ -76,7 +68,6 @@ public class Vehiculo {
     @Override
     public String toString() {
         return "Vehiculo{" +
-                "AñoFrabricacion=" + idVehiculo +
                 ", AnioFabricacion=" + anioFabricacion +
                 ", TipoVehiculo=" + tipoVehiculo +
                 ", Marca='" + marca + '\'' +

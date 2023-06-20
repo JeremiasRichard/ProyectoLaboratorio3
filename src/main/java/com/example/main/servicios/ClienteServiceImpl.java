@@ -27,15 +27,19 @@ public class ClienteServiceImpl implements BaseService<Cliente>{
         clienteRepo.eliminar(cliente);
     }
 
+    @Override
     public void eliminadoLogico(int id) throws EntidadNoEncontradaException {
-        Cliente cliente = clienteRepo.buscarPorId(id);
+
+    }
+
+    public void eliminadoLogico(String  dni) throws EntidadNoEncontradaException {
+        Cliente cliente = clienteRepo.buscarPorDNI(dni);
         cliente.setActivo(false);
         clienteRepo.editar(cliente);
     }
 
-    public List<Cliente> listar() {
-        return clienteRepo.listar();
-    }
+    public List<Cliente> listar()
+    {return clienteRepo.listar();}
 
     public Cliente buscarPorId(int id) {
         return clienteRepo.buscarPorId(id);

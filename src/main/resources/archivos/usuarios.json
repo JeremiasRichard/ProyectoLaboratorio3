@@ -16,4 +16,10 @@
   "password" : "34d41424cf7a3e90407082e1aebe5eda",
   "esAdmin" : false,
   "activo" : true
+}, {
+  "idUsuario" : 4,
+  "user" : "asd",
+  "password" : "7815696ecbf1c96e6894b779456d330e",
+  "esAdmin" : false,
+  "activo" : true
 } ]

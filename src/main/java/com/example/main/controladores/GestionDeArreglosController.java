@@ -3,7 +3,9 @@ package com.example.main.controladores;
 import com.example.main.DTOs.ArregloDTO;
 import com.example.main.DTOs.MecanicoDTO;
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
+import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.enums.Especialidad;
+import com.example.main.enums.EstadoReparacion;
 import com.example.main.modelos.*;
 import com.example.main.servicios.ArregloServiceImpl;
 import com.example.main.servicios.MecanicoServiceImpl;
@@ -17,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -45,6 +48,8 @@ public class GestionDeArreglosController {
     private Button seleccionClienteButton;
     @FXML
     private Button crearButton;
+    @FXML
+    private CheckBox mostrarTodos;
     @FXML
     private ChoiceBox<String> listaVehiculos = new ChoiceBox<>();
     @FXML
@@ -208,6 +213,112 @@ public class GestionDeArreglosController {
             alert.showAndWait();
         }
     }
+
+    @FXML
+    private void filtrarPorPatente(KeyEvent event)
+    {
+        String filtroPatente = this.txtBusquedaPatente.getText();
+
+        if(filtroPatente.isEmpty())
+        {
+            this.tblArreglos.setItems(arreglos);
+        }
+        else {
+            this.filtroArreglos.clear();
+
+            for(ArregloDTO cl : this.arreglos)
+            {
+                if(cl.getPatente().toLowerCase().contains(filtroPatente.toLowerCase()))
+                {
+                    this.filtroArreglos.add(cl);
+                }
+            }
+            this.tblArreglos.setItems(filtroArreglos);
+        }
+    }
+
+    @FXML
+    private void filtrarActivoTodos(ActionEvent event)
+    {
+        if (!mostrarTodos.isSelected())
+        {
+            for(ArregloDTO cl: this.arreglos)
+            {
+                if(cl.getEstadoReparacion() != EstadoReparacion.FINALIZADO && !filtroArreglos.contains(cl) && !arreglos.isEmpty())
+                {
+                    this.filtroArreglos.add(cl);
+                }
+            }
+            this.tblArreglos.setItems(filtroArreglos);
+            this.tblArreglos.refresh();
+
+        }
+        else
+        {
+            this.tblArreglos.setItems(arreglos);
+            this.tblArreglos.refresh();
+        }
+
+    }
+
+    @FXML
+    private void eliminarArreglo(ActionEvent event) throws EntidadNoEncontradaException {
+        ArregloDTO c = this.tblArreglos.getSelectionModel().getSelectedItem();
+
+        if(c == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Debe seleccionar un arreglo");
+            alert.showAndWait();
+        }
+        else if(arreglos.size() == 0)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("La lista esta vacia");
+            alert.showAndWait();
+        }
+        else
+        {
+            arregloService.eliminadoLogico(c.getIdArreglo());
+            this.tblArreglos.refresh();
+        }
+
+    }
+
+    /*private void limpiarInputsVehiculo() {
+        this.marcaField.setText("");
+        this.anioFabricacionField.setText("");
+        this.patenteField.setText("");
+        this.tipoVehiculo.setValue("");
+    }
+
+    private void limpiarInputsUsuario() {
+        this.apellidoField.setText("");
+        this.nombreField.setText("");
+        this.dniField.setDisable(true);
+        this.telefonoField.setText("");
+    }
+
+    private void bloquearInputsVehiculo() {
+        this.marcaField.setDisable(true);
+        this.anioFabricacionField.setDisable(true);
+        this.patenteField.setDisable(true);
+        this.tipoVehiculo.setDisable(true);
+    }
+
+    private void desbloquearInputsVehiculo()
+    {
+        this.marcaField.setDisable(false);
+        this.anioFabricacionField.setDisable(false);
+        this.patenteField.setDisable(false);
+        this.tipoVehiculo.setDisable(false);
+        this.dniField.setText("");
+        this.dniField.setDisable(false);
+    }*/
 
     public void setStageAnterior(Stage stageAdmin) {
         this.adminStage = stageAdmin;

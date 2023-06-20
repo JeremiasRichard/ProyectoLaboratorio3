@@ -14,7 +14,7 @@
   "idEmpleado" : 1,
   "observacionesDelCliente" : "",
   "observacionesDelMecanico" : null,
-  "estadoReparacion" : "STAND_BY",
+  "estadoReparacion" : "FINALIZADO",
   "detalleArreglo" : null
 }, {
   "idArreglo" : 3,

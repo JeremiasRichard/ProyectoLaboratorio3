@@ -9,4 +9,15 @@
   "especialidad" : "MECANICA_GENERAL",
   "activo" : true,
   "usuario" : 1
+}, {
+  "nombre" : "ASDASD",
+  "apellido" : "ASD",
+  "dni" : "ASD",
+  "idEmpleado" : 2,
+  "telefono" : "ASD",
+  "listaArreglos" : null,
+  "tipoVehiculo" : "MOTO",
+  "especialidad" : "ELECTRICIDAD",
+  "activo" : false,
+  "usuario" : 2
 } ]

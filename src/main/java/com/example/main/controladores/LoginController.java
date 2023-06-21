@@ -15,7 +15,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.io.IOException;
 
 public class LoginController {
@@ -34,8 +35,21 @@ public class LoginController {
     @FXML
     public void iniciarSesion()
     {
-        GeneradorArchivos.limpiarArchivos();
-        GeneradorArchivos.generarArchivos();
+        String rutaArchivos = "src/main/resources/archivos/";
+        String archivoMecanicos = rutaArchivos + "mecanicos.json";
+        String archivoClientes = rutaArchivos + "clientes.json";
+        String archivoVehiculos = rutaArchivos + "vehiculos.json";
+        String archivoArreglos = rutaArchivos + "arreglos.json";
+
+        // Verificar si los archivos ya existen
+        boolean archivosExisten = Files.exists(Paths.get(archivoMecanicos))
+                && Files.exists(Paths.get(archivoClientes))
+                && Files.exists(Paths.get(archivoVehiculos))
+                && Files.exists(Paths.get(archivoArreglos));
+
+        if (!archivosExisten) {
+            GeneradorArchivos.generarArchivos();
+        }
         LoginService loginService = new LoginServiceImpl();
 
         String usuario = userTextField.getText();

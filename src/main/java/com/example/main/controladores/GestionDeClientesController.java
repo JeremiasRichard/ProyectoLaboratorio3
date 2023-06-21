@@ -1,11 +1,8 @@
 package com.example.main.controladores;
 
-import com.example.main.DTOs.MecanicoDTO;
 import com.example.main.controladores.validaciones.Validaciones;
-import com.example.main.datos.ClienteRepoImpl;
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
-import com.example.main.enums.EstadoReparacion;
 import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.Cliente;
 import com.example.main.modelos.Usuario;
@@ -142,23 +139,31 @@ public class GestionDeClientesController {
 
         if (verificarCampos())
         {
-            Cliente nuevo2 = new Cliente(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), new ArrayList<Integer>(), this.telefonoField.getText(), new ArrayList<>());
-            this.nuevoVehiculo =  new Vehiculo(Integer.parseInt(this.anioFabricacionField.getText()),nuevoVehiculo.getTipoVehiculo(), this.marcaField.getText(), this.patenteField.getText());
-            List<String> listaPatentes = new ArrayList<>();
-            listaPatentes.add(nuevoVehiculo.getPatente());
-            nuevo2.setListaVehiculos(listaPatentes);
-            try {
-                if (!clientes.contains(nuevo2) && vehiculoService.buscarPorPatente(nuevoVehiculo.getPatente())) {
-                    vehiculoService.agregar(nuevoVehiculo);
-                    clienteService.agregar(nuevo2);
-                    this.clientes.add(nuevo2);
-                    tblClientes.setItems(clientes);
-                } else {
-                    throw new EntidadDuplicadaException("El cliente o vehículo ya existe");
+            if(Validaciones.isNumero(this.dniField.getText()) && Validaciones.isNumero(this.anioFabricacionField.getText()))
+            {
+                Cliente nuevo2 = new Cliente(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), new ArrayList<Integer>(), this.telefonoField.getText(), new ArrayList<>());
+                this.nuevoVehiculo =  new Vehiculo(Integer.parseInt(this.anioFabricacionField.getText()),nuevoVehiculo.getTipoVehiculo(), this.marcaField.getText(), this.patenteField.getText());
+                List<String> listaPatentes = new ArrayList<>();
+                listaPatentes.add(nuevoVehiculo.getPatente());
+                nuevo2.setListaVehiculos(listaPatentes);
+                try {
+                    if (!clientes.contains(nuevo2) && vehiculoService.buscarPorPatente(nuevoVehiculo.getPatente())) {
+                        vehiculoService.agregar(nuevoVehiculo);
+                        clienteService.agregar(nuevo2);
+                        this.clientes.add(nuevo2);
+                        tblClientes.setItems(clientes);
+                    } else {
+                        throw new EntidadDuplicadaException("El cliente o vehículo ya existe");
+                    }
+                } catch (EntidadDuplicadaException e) {
+                    mostrarAlerta(e.getMessage());
                 }
-            } catch (EntidadDuplicadaException e) {
-                mostrarAlerta(e.getMessage());
             }
+            else
+            {
+                mostrarAlerta("Los campos DNI y Año solo admiten numeros!");
+            }
+
         }
         else {
             mostrarAlerta("Quedan campos por completar");
@@ -212,36 +217,42 @@ public class GestionDeClientesController {
     private void modificarCliente(ActionEvent event) {
 
         Cliente cliente = this.tblClientes.getSelectionModel().getSelectedItem();
-        if (cliente == null)
-        {
+        if (cliente == null) {
             mostrarAlerta("Debe seleccionar un cliente");
-        }
-        else {
-            try {
+        } else {
+            if(verificarCamposModificacion())
+            {
+                try {
 
-                Cliente nuevo = new Cliente(this.nombreField.getText(), this.apellidoField.getText(),cliente.getDni(),new ArrayList<>(), this.telefonoField.getText(),cliente.getListaVehiculos());
+                    Cliente nuevo = new Cliente(this.nombreField.getText(), this.apellidoField.getText(), cliente.getDni(), new ArrayList<>(), this.telefonoField.getText(), cliente.getListaVehiculos());
+                    if (this.clientes.contains(nuevo)) {
+                        cliente.setNombre(nuevo.getNombre());
+                        cliente.setApellido(nuevo.getApellido());
+                        cliente.setDni(nuevo.getDni());
+                        cliente.setHistorialArreglos(new ArrayList<>());
+                        cliente.setNroTelefono(nuevo.getNroTelefono());
+                        cliente.setListaVehiculos(nuevo.getListaVehiculos());
+                        cliente.setActivo(nuevo.isActivo());
+                        clienteService.editar(cliente);
+                        this.tblClientes.refresh();
+                        limpiarInputsCliente();
+                        desbloquearInputsCliente();
+                        desbloquearInputsVehiculo();
+                    } else {
+                        mostrarAlerta("Debe seleccionar un cliente");
+                    }
+                } catch (RuntimeException e) {
 
-                if (this.clientes.contains(nuevo))
-                {
-                    cliente.setNombre(nuevo.getNombre());
-                    cliente.setApellido(nuevo.getApellido());
-                    cliente.setDni(nuevo.getDni());
-                    cliente.setHistorialArreglos(new ArrayList<>());
-                    cliente.setNroTelefono(nuevo.getNroTelefono());
-                    cliente.setListaVehiculos(nuevo.getListaVehiculos());
-                    cliente.setActivo(nuevo.isActivo());
-                    clienteService.editar(cliente);
-                    this.tblClientes.refresh();
-                    limpiarInputsCliente();
+                } catch (EntidadNoEncontradaException e) {
+                    throw new RuntimeException(e);
                 }
-                else {
-                   mostrarAlerta("Debe seleccionar un cliente");
-                }
-            } catch (RuntimeException e) {
-
-            } catch (EntidadNoEncontradaException e) {
-                throw new RuntimeException(e);
             }
+            else
+            {
+                mostrarAlerta("Todos los campos son requeridos");
+            }
+
+
         }
     }
 
@@ -261,6 +272,16 @@ public class GestionDeClientesController {
         this.dniField.setText("");
         this.dniField.setDisable(false);
     }
+    private void desbloquearInputsCliente()
+    {
+        this.apellidoField.setDisable(false);
+        this.nombreField.setDisable(false);
+        this.dniField.setDisable(false);
+        this.telefonoField.setDisable(false);
+        this.dniField.setDisable(false);
+    }
+
+
 
     @FXML
     private void eliminarCliente(ActionEvent event) throws EntidadNoEncontradaException {
@@ -277,6 +298,11 @@ public class GestionDeClientesController {
             clientes.addAll(clienteService.listarActivos());
             this.tblClientes.setItems(clientes);
             this.tblClientes.refresh();
+            limpiarInputsCliente();
+            limpiarInputsVehiculo();
+            desbloquearInputsVehiculo();
+            desbloquearInputsCliente();
+
         }
 
     }
@@ -326,7 +352,7 @@ public class GestionDeClientesController {
 
     private boolean verificarCampos() {
 
-        return Validaciones.isStringValido(this.nombreField.getText()) &&
+        return  Validaciones.isStringValido(this.nombreField.getText()) &&
                 Validaciones.isStringValido(this.dniField.getText()) &&
                 Validaciones.isStringValido(this.telefonoField.getText()) &&
                 Validaciones.isStringValido(this.apellidoField.getText()) &&
@@ -334,5 +360,14 @@ public class GestionDeClientesController {
                 Validaciones.isStringValido(this.anioFabricacionField.getText()) &&
                 Validaciones.isStringValido(this.patenteField.getText()) &&
                 this.nuevoVehiculo.getTipoVehiculo() != null;
+    }
+
+    private boolean verificarCamposModificacion() {
+
+        return Validaciones.isStringValido(this.nombreField.getText()) &&
+                Validaciones.isStringValido(this.dniField.getText()) &&
+                Validaciones.isStringValido(this.telefonoField.getText()) &&
+                Validaciones.isStringValido(this.apellidoField.getText());
+
     }
 }

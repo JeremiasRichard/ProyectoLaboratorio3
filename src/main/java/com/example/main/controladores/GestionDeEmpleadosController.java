@@ -91,8 +91,14 @@ public class GestionDeEmpleadosController {
         this.columnaTipoDeMecanica.setCellValueFactory(new PropertyValueFactory("tipoVehiculo"));
         this.columnaEspecialidad.setCellValueFactory(new PropertyValueFactory("especialidad"));
         this.columnaDni.setCellValueFactory(new PropertyValueFactory("dni"));
-        
-        cargarTablaEspecialidades();
+        this.opciones = FXCollections.observableArrayList(
+                "",
+                "AUTO",
+                "MOTO",
+                "CAMION"
+        );
+        tipoVehiculo.setValue("");
+        seleccionarTipoVehiculo();
         seleccionarRamaReparacion();
     }
 
@@ -117,22 +123,43 @@ public class GestionDeEmpleadosController {
         });
     }
 
-    private void cargarTablaEspecialidades() {
-        this.opciones = FXCollections.observableArrayList(
-                "",
-                "AUTO",
-                "MOTO",
-                "CAMION"
-        );
-        tipoVehiculo.setValue("");
-        tipoVehiculo.setItems(opciones);
+    @FXML
+    private void agregarEmpleado(ActionEvent event) {
 
+        if (verificarCampos())
+        {
+            MecanicoDTO nuevo = new MecanicoDTO(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), this.mecanicoGlobal.getTipoVehiculo(), this.mecanicoGlobal.getEspecialidad(), true);
+            Mecanico aux = new Mecanico(nuevo.getNombre(), nuevo.getApellido(), nuevo.getDni(), nuevo.getNroTelefono(), nuevo.getListaArreglos(), nuevo.getTipoVehiculo(), nuevo.getEspecialidad());
+
+            try {
+                mecanicoService.agregar(aux);
+                usuarioService.agregar(new Usuario(usuarioField.getText(), passwordField.getText(), false));
+
+                seleccionarTipoVehiculo();
+
+            } catch (EntidadDuplicadaException e)
+            {
+                mostrarAlerta("El usuario ya existe");
+            }
+            mecanicos.clear();
+            mecanicos.addAll(mecanicoService.listarActivos());
+            tblMecanicos.setItems(mecanicos);
+
+
+        } else {
+            mostrarAlerta("Quedan campos por completar");
+        }
+
+    }
+
+    private void seleccionarTipoVehiculo() {
+        tipoVehiculo.setItems(opciones);
         tipoVehiculo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
         {
 
             if (newValue.equals("AUTO"))
             {
-                    this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.AUTO);
+                this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.AUTO);
 
             } else if (newValue.equals("CAMION"))
             {
@@ -143,32 +170,6 @@ public class GestionDeEmpleadosController {
                 this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.MOTO);
             }
         });
-    }
-
-    @FXML
-    private void agregarEmpleado(ActionEvent event) {
-
-        if (verificarCampos()) {
-            MecanicoDTO nuevo = new MecanicoDTO(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), this.mecanicoGlobal.getTipoVehiculo(), this.mecanicoGlobal.getEspecialidad(), true);
-            Mecanico aux = new Mecanico(nuevo.getNombre(), nuevo.getApellido(), nuevo.getDni(), nuevo.getNroTelefono(), nuevo.getListaArreglos(), nuevo.getTipoVehiculo(), nuevo.getEspecialidad());
-
-            try {
-                mecanicoService.agregar(aux);
-                usuarioService.agregar(new Usuario(usuarioField.getText(), passwordField.getText(), false));
-
-            } catch (EntidadDuplicadaException e) {
-                mostrarAlerta("El usuario ya existe");
-            }
-            mecanicos.clear();
-            mecanicos.addAll(mecanicoService.listarActivos());
-            tblMecanicos.setItems(mecanicos);
-
-            cargarTablaEspecialidades();
-
-        } else {
-            mostrarAlerta("Quedan campos por completar");
-        }
-
     }
 
     @FXML
@@ -251,6 +252,9 @@ public class GestionDeEmpleadosController {
     private void desbloquearInputsUsuario() {
         this.passwordField.setDisable(false);
         this.usuarioField.setDisable(false);
+        this.especialidadGeneral.setDisable(false);
+        this.especialidadElectricidad.setDisable(false);
+        this.especialidadEstetica.setDisable(false);
     }
 
     private void desbloquearInputsMecanico() {
@@ -280,7 +284,7 @@ public class GestionDeEmpleadosController {
                     MecanicoDTO auxiliar = new MecanicoDTO(mecanicoSeleccionado.getId(),this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), this.mecanicoGlobal.getTipoVehiculo(), this.mecanicoGlobal.getEspecialidad());
                     Mecanico paraPersistir = new Mecanico(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(),new ArrayList<>(),this.mecanicoGlobal.getTipoVehiculo(),this.mecanicoGlobal.getEspecialidad());
 
-                    if (!this.mecanicos.contains(auxiliar))
+                    if (this.mecanicos.contains(auxiliar))
                     {
                         mecanicoSeleccionado.setId(mecanicoSeleccionado.getId());
                         mecanicoSeleccionado.setNombre(auxiliar.getNombre());
@@ -293,11 +297,9 @@ public class GestionDeEmpleadosController {
                         mecanicoService.editar(paraPersistir);
                         this.tblMecanicos.refresh();
                         limpiarInputsMecanico();
-                    }
-                    else
-                    {
+                        desbloquearInputsUsuario();
+                        desbloquearInputsMecanico();
 
-                        mostrarAlerta("Debe hacer algun cambio!");
                     }
                 } catch (RuntimeException e) {
 
@@ -327,6 +329,10 @@ public class GestionDeEmpleadosController {
             mecanicos.addAll(mecanicoService.listarActivos());
             this.tblMecanicos.setItems(mecanicos);
             this.tblMecanicos.refresh();
+            limpiarInputsMecanico();
+            limpiarInputsUsuario();
+            desbloquearInputsMecanico();
+            desbloquearInputsUsuario();
         }
     }
 

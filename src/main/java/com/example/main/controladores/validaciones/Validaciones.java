@@ -43,4 +43,20 @@ public class Validaciones
             return false;
         }
     }
+
+    public static boolean isNumero(String dni)
+    {
+        String regex = "^\\d+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(dni);
+
+        if(matcher.find())
+        {
+            return  true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

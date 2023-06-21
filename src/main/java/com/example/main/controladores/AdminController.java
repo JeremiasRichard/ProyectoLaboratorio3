@@ -16,10 +16,6 @@ import java.io.IOException;
 public class AdminController
 {
 
-    /*@FXML
-    private DatePicker datePicker;
-    @FXML
-    private Label fecha;*/
     @FXML
     private Button exitButton;
     @FXML
@@ -27,17 +23,6 @@ public class AdminController
     @FXML
     private Button vistaSeleccionadaButton;
     private Usuario logueado;
-
-
-
-    /*@FXML
-    public void setearFecha(ActionEvent event) {
-        String fechaString = datePicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        LocalDate fechaFormateada = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        datePicker.setValue(fechaFormateada);
-        fecha.setText(fechaFormateada.toString());
-
-    }*/
 
     @FXML
     void closeApplication(ActionEvent event) throws IOException

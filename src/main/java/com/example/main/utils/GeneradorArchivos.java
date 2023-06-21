@@ -1,16 +1,11 @@
 package com.example.main.utils;
 
-import com.example.main.datos.ArregloRepoImpl;
-import com.example.main.datos.ClienteRepoImpl;
-import com.example.main.datos.MecanicoRepoImpl;
-import com.example.main.datos.VehiculoRepoImpl;
+import com.example.main.datos.*;
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.enums.Especialidad;
 import com.example.main.enums.TipoVehiculo;
-import com.example.main.modelos.Arreglo;
-import com.example.main.modelos.Cliente;
-import com.example.main.modelos.Mecanico;
-import com.example.main.modelos.Vehiculo;
+import com.example.main.modelos.*;
+import com.example.main.servicios.UsuarioServiceImpl;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -23,6 +18,8 @@ public class GeneradorArchivos {
     private static VehiculoRepoImpl vehiculoRepo = new VehiculoRepoImpl();
     private static ClienteRepoImpl clienteRepo = new ClienteRepoImpl();
     private static MecanicoRepoImpl mecanicoRepo = new MecanicoRepoImpl();
+
+    private static UsuarioServiceImpl usuarioService = new UsuarioServiceImpl();
 
     public static void generarArchivos() {
         Arrays.asList(
@@ -38,6 +35,26 @@ public class GeneradorArchivos {
         ).forEach(nuevo -> {
             try {
                 mecanicoRepo.agregar(nuevo);
+            } catch (EntidadDuplicadaException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        Arrays.asList(
+                new Usuario("admin","admin",true),
+
+                new Usuario("carlos","bianco",false),
+                new Usuario("karla","gomez",false),
+                new Usuario("monica","gonzales",false),
+                new Usuario("angel","mendez",false),
+                new Usuario("esteban","dietrich",false),
+                new Usuario("agustin","erpen",false),
+                new Usuario("fernanda","orizuela",false),
+                new Usuario("wanda","arana",false),
+                new Usuario("elsa","bandija",false)
+        ).forEach(nuevo-> {
+            try {
+                usuarioService.agregar(nuevo);
             } catch (EntidadDuplicadaException e) {
                 throw new RuntimeException(e);
             }
@@ -73,11 +90,11 @@ public class GeneradorArchivos {
 
         Arrays.asList(
           new Arreglo(1,"RTX5459","55929334",1,"Se quedo sin frenos."),
-          new Arreglo(2,"RTX5459","55929334",1,"Se quedo sin Luces."),
-          new Arreglo(3,"RXT5248","46332343",1,"Para pintar."),
-          new Arreglo(4,"FXX5517","37943234",1,"Caja de camios rota."),
-          new Arreglo(5,"TTX5726","28694314",1,"Rayon en la caja."),
-          new Arreglo(6,"NTX5835","59795334",1,"Rayon en la puerta.")
+          new Arreglo(2,"RTX5459","55929334",2,"Se quedo sin Luces."),
+          new Arreglo(3,"RXT5248","46332343",3,"Para pintar."),
+          new Arreglo(4,"FXX5517","37943234",4,"Caja de camios rota."),
+          new Arreglo(5,"TTX5726","28694314",5,"Rayon en la caja."),
+          new Arreglo(6,"NTX5835","59795334",6,"Rayon en la puerta.")
         ).forEach(
                 arreglo -> {
                     try {

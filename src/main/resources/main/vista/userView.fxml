@@ -30,9 +30,9 @@
       <AnchorPane prefHeight="600.0" prefWidth="579.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="exitButton" layoutX="515.0" layoutY="8.0" mnemonicParsing="false" onAction="#closeCurrentWindow" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: #244894;" text="X" textFill="#f5f0f0" />
-            <Button fx:id="detalleButton" layoutX="436.0" layoutY="461.0" mnemonicParsing="false" onAction="#verDetalle" prefHeight="25.0" prefWidth="100.0" text="Ver Detalle" />
-            <Button layoutX="436.0" layoutY="543.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="25.0" prefWidth="100.0" text="Cerrar Sesion" />
-            <TableView fx:id="listaTareas" layoutX="22.0" layoutY="111.0" prefHeight="343.0" prefWidth="514.0">
+            <Button fx:id="detalleButton" layoutX="425.0" layoutY="471.0" mnemonicParsing="false" onAction="#verDetalle" prefHeight="25.0" prefWidth="102.0" text="Ver Detalle" />
+            <Button layoutX="425.0" layoutY="543.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="25.0" prefWidth="102.0" text="Cerrar Sesion" />
+            <TableView fx:id="listaTareas" layoutX="24.0" layoutY="111.0" prefHeight="343.0" prefWidth="503.0">
               <columns>
                 <TableColumn fx:id="idArregloColumna" prefWidth="77.0" text="Id Arreglo" />
                   <TableColumn fx:id="marcaColumna" prefWidth="174.0" text="Marca" />
@@ -45,9 +45,9 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <Label fx:id="idNombreUsuario" layoutX="110.0" layoutY="28.0" prefHeight="20.0" prefWidth="180.0" text="Label" textFill="#fc0808">
+            <Label fx:id="idNombreUsuario" layoutX="112.0" layoutY="26.5" prefHeight="20.0" prefWidth="180.0" textFill="#0655e8">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
          </children>

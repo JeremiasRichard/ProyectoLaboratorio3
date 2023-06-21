@@ -40,6 +40,14 @@ public abstract class Empleado extends Persona {
 
     public String getTelefono() { return telefono; }
 
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
     public void setTelefono(String telefono) { this.telefono = telefono; }
     //endregion
 

@@ -1,6 +1,7 @@
 package com.example.main.controladores;
 
 import com.example.main.DTOs.MecanicoDTO;
+import com.example.main.controladores.validaciones.Validaciones;
 import com.example.main.datos.ClienteRepoImpl;
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
@@ -139,16 +140,13 @@ public class GestionDeClientesController {
     @FXML
     private void agregarCliente(ActionEvent event) {
 
-        boolean a = true;
-
-        if (a != false)
+        if (verificarCampos())
         {
             Cliente nuevo2 = new Cliente(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), new ArrayList<Integer>(), this.telefonoField.getText(), new ArrayList<>());
             this.nuevoVehiculo =  new Vehiculo(Integer.parseInt(this.anioFabricacionField.getText()),nuevoVehiculo.getTipoVehiculo(), this.marcaField.getText(), this.patenteField.getText());
             List<String> listaPatentes = new ArrayList<>();
             listaPatentes.add(nuevoVehiculo.getPatente());
             nuevo2.setListaVehiculos(listaPatentes);
-
             try {
                 if (!clientes.contains(nuevo2) && vehiculoService.buscarPorPatente(nuevoVehiculo.getPatente())) {
                     vehiculoService.agregar(nuevoVehiculo);
@@ -159,18 +157,11 @@ public class GestionDeClientesController {
                     throw new EntidadDuplicadaException("El cliente o vehículo ya existe");
                 }
             } catch (EntidadDuplicadaException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setTitle("Error");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
+                mostrarAlerta(e.getMessage());
             }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText("Quedan campos por completar!");
-            alert.showAndWait();
+        }
+        else {
+            mostrarAlerta("Quedan campos por completar");
         }
 
     }
@@ -195,7 +186,7 @@ public class GestionDeClientesController {
 
         } else if (clientes.isEmpty())
         {
-            limpiarInputsUsuario();
+            limpiarInputsCliente();
             desbloquearInputsVehiculo();
         }
 
@@ -209,25 +200,21 @@ public class GestionDeClientesController {
         this.tipoVehiculo.setValue("");
     }
 
-    private void limpiarInputsUsuario() {
+    private void limpiarInputsCliente() {
         this.apellidoField.setText("");
         this.nombreField.setText("");
-        this.dniField.setDisable(true);
+        this.dniField.setDisable(false);
         this.telefonoField.setText("");
+        this.dniField.setText("");
     }
 
     @FXML
     private void modificarCliente(ActionEvent event) {
 
         Cliente cliente = this.tblClientes.getSelectionModel().getSelectedItem();
-
         if (cliente == null)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText(cliente.toString());
-            alert.showAndWait();
+            mostrarAlerta("Debe seleccionar un cliente");
         }
         else {
             try {
@@ -245,14 +232,10 @@ public class GestionDeClientesController {
                     cliente.setActivo(nuevo.isActivo());
                     clienteService.editar(cliente);
                     this.tblClientes.refresh();
-                    limpiarInputsUsuario();
+                    limpiarInputsCliente();
                 }
                 else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText(null);
-                    alert.setTitle("Error");
-                    alert.setContentText("Debe seleccionar un cliente");
-                    alert.showAndWait();
+                   mostrarAlerta("Debe seleccionar un cliente");
                 }
             } catch (RuntimeException e) {
 
@@ -285,17 +268,9 @@ public class GestionDeClientesController {
         Cliente c = this.tblClientes.getSelectionModel().getSelectedItem();
 
         if (c == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText("Debe seleccionar un usuario");
-            alert.showAndWait();
+            mostrarAlerta("Debe seleccionar un cliente");
         } else if (clientes.size() == 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText("La lista esta vacia");
-            alert.showAndWait();
+            mostrarAlerta("La lista esta vacia");
         } else {
             clienteService.eliminadoLogico(c.getDni());
             clientes.clear();
@@ -339,5 +314,25 @@ public class GestionDeClientesController {
             this.tblClientes.setItems(filtroClientes);
         }
 
+    }
+
+    private static void mostrarAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    private boolean verificarCampos() {
+
+        return Validaciones.isStringValido(this.nombreField.getText()) &&
+                Validaciones.isStringValido(this.dniField.getText()) &&
+                Validaciones.isStringValido(this.telefonoField.getText()) &&
+                Validaciones.isStringValido(this.apellidoField.getText()) &&
+                Validaciones.isStringValido(this.marcaField.getText()) &&
+                Validaciones.isStringValido(this.anioFabricacionField.getText()) &&
+                Validaciones.isStringValido(this.patenteField.getText()) &&
+                this.nuevoVehiculo.getTipoVehiculo() != null;
     }
 }

@@ -20,11 +20,12 @@ public class Validaciones
 
     public static boolean isStringNull(String string)
     {
-        if(string == null || string.equals(""))
-        {
-            return true;
-        }
-        return false;
+        return string == null || string.equals("");
+    }
+
+    public static boolean isStringValido(String string)
+    {
+        return string != null && !string.equals("");
     }
 
     public static boolean verificarUsuarioYContraseña(String string)

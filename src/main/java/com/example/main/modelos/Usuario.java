@@ -9,15 +9,15 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String user, String password, boolean esAdmin) {
-        this.user = user;
+    public Usuario(String userName, String password, boolean esAdmin) {
+        this.user = userName;
         this.password = password;
         this.esAdmin = esAdmin;
         this.activo = true;
     }
-    public Usuario(int idUsuario, String user, String password, boolean esAdmin) {//TODO: revisar this para evitar repetir parametros
+    public Usuario(int idUsuario, String userName, String password, boolean esAdmin) {//TODO: revisar this para evitar repetir parametros
         this.idUsuario = idUsuario;
-        this.user = user;
+        this.user = userName;
         this.password = password;
         this.esAdmin = esAdmin;
         this.activo = true;
@@ -60,4 +60,16 @@ public class Usuario {
 
     public void setActivo(boolean activo) { this.activo = activo; }
     //endregion
+
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "idUsuario=" + idUsuario +
+                ", user='" + user + '\'' +
+                ", password='" + password + '\'' +
+                ", esAdmin=" + esAdmin +
+                ", activo=" + activo +
+                '}';
+    }
 }

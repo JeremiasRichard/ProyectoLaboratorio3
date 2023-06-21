@@ -1,12 +1,8 @@
 package com.example.main.controladores;
 
 import com.example.main.DTOs.ArregloDTO;
-import com.example.main.enums.EstadoReparacion;
-import com.example.main.enums.TipoVehiculo;
-import com.example.main.modelos.Arreglo;
+import com.example.main.modelos.Mecanico;
 import com.example.main.modelos.Usuario;
-import com.example.main.modelos.Vehiculo;
-import com.example.main.servicios.ArregloServiceImpl;
 import com.example.main.servicios.MecanicoServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -68,13 +64,14 @@ public class UserController {
 
     public void inicializar(Usuario actual)
     {
+
         initialize(actual);
     }
     @FXML
     public void initialize(Usuario actual)
     {
+        List<ArregloDTO> listTareas = mecanicoService.obtenerTareas(actual.getIdUsuario());
 
-        List<ArregloDTO> listTareas = mecanicoService.obtenerTareas(1);
         tareas.addAll(listTareas);
 
         this.idArregloColumna.setCellValueFactory(new PropertyValueFactory<>("idArreglo"));
@@ -82,8 +79,8 @@ public class UserController {
         this.patenteColumna.setCellValueFactory(new PropertyValueFactory<>("patente"));
         this.anioColumna.setCellValueFactory(new PropertyValueFactory<>("anioFabricacion"));
 
-        idNombreUsuario.setText(actual.getUser().toString());
-
+        Mecanico mecanico = mecanicoService.buscarPorId(actual.getIdUsuario());
+        idNombreUsuario.setText(mecanico.getNombre()+" "+mecanico.getApellido());
         listaTareas.setItems(tareas);
     }
 
@@ -123,13 +120,21 @@ public class UserController {
                 e.printStackTrace();
             }
         }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Debe seleccionar una tarea!");
+            alert.showAndWait();
+        }
 
     }
 
     public void actualizarLista()
     {
         tareas.clear();
-        List<ArregloDTO> listTareas = mecanicoService.obtenerTareas(1);
+        List<ArregloDTO> listTareas = mecanicoService.obtenerTareas(logueado.getIdUsuario());
         tareas.addAll(listTareas);
         listaTareas.refresh();
     }

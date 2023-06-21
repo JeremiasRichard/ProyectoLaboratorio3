@@ -2,6 +2,7 @@ package com.example.main.controladores;
 
 import com.example.main.DTOs.ArregloDTO;
 import com.example.main.DTOs.MecanicoDTO;
+import com.example.main.controladores.validaciones.Validaciones;
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.enums.Especialidad;
@@ -43,8 +44,6 @@ public class GestionDeArreglosController {
     @FXML
     private Button atrasButton;
     @FXML
-    private Button modificarButton;
-    @FXML
     private Button seleccionClienteButton;
     @FXML
     private Button crearButton;
@@ -77,13 +76,8 @@ public class GestionDeArreglosController {
 
     public void initialize() {
 
-        if(arregloService.listar().size() !=0)
-        {
-            List<Arreglo> aux = arregloService.listar();
-            for (Arreglo arreglo: aux) {
-
-               arreglos.add(arregloService.convertirAArregloDTO(arreglo));
-            }
+        if (arregloService.listar().size() != 0) {
+            arreglos.addAll(arregloService.listarArreglosDTO());
             tblArreglos.setItems(arreglos);
         }
 
@@ -141,8 +135,7 @@ public class GestionDeArreglosController {
                     List<MecanicoDTO> listita = mecanicoService.listarMecanicoPorEspecialidadYTipo(elegido.getTipoVehiculo(), especialidad);
 
                     mecanicos = FXCollections.observableArrayList();
-                    for (MecanicoDTO m : listita)
-                    {
+                    for (MecanicoDTO m : listita) {
                         mecanicos.add(Integer.valueOf(m.getId()));
                     }
                     listaMecanicos.setItems(mecanicos);
@@ -182,56 +175,60 @@ public class GestionDeArreglosController {
     @FXML
     private void crearArreglo(ActionEvent event) throws EntidadDuplicadaException {
 
-        if (this.seleccionado != null)
-        {
-            Vehiculo aux = vehiculoService.buscarPorPatenteDos(listaVehiculos.getSelectionModel().getSelectedItem());
-            ArregloDTO arregloDTO = new ArregloDTO(listaVehiculos.getSelectionModel().getSelectedItem(), aux.getMarca(), aux.getTipoVehiculo(), aux.getAnioFabricacion(), this.seleccionado.getDni(), observacionesDelCliente.getText(), this.idEmpleado, this.especialidad);
-            Arreglo arreglo = new Arreglo(aux.getPatente(),this.seleccionado.getDni(),this.idEmpleado,observacionesDelCliente.getText());
+        if (this.seleccionado != null) {
+            if (verificarCampos()) {
+                Vehiculo aux = vehiculoService.buscarPorPatenteDos(listaVehiculos.getSelectionModel().getSelectedItem());
+                ArregloDTO arregloDTO = new ArregloDTO(listaVehiculos.getSelectionModel().getSelectedItem(), aux.getMarca(), aux.getTipoVehiculo(), aux.getAnioFabricacion(), this.seleccionado.getDni(), observacionesDelCliente.getText(), this.idEmpleado, this.especialidad);
+                Arreglo arreglo = new Arreglo(aux.getPatente(), this.seleccionado.getDni(), this.idEmpleado, observacionesDelCliente.getText());
 
-            if (arregloDTO != null)
-            {
-                this.arreglos.add(arregloDTO);
-                this.arreglos.clear();
-                arregloService.agregar(arreglo);
-                if(arregloService.listar().size() !=0)
-                {
-                    List<Arreglo> aux2 = arregloService.listar();
-                    for (Arreglo arreglo2: aux2) {
-
-                        if (!arreglos.contains(arreglo2))
-                        {
-                            arreglos.add(arregloService.convertirAArregloDTO(arreglo2));
+                if (arregloDTO != null) {
+                    this.arreglos.add(arregloDTO);
+                    this.arreglos.clear();
+                    arregloService.agregar(arreglo);
+                    if (arregloService.listar().size() != 0) {
+                        List<Arreglo> aux2 = arregloService.listar();
+                        for (Arreglo arreglo2 : aux2) {
+                            if (!arreglos.contains(arreglo2)) {
+                                arreglos.add(arregloService.convertirAArregloDTO(arreglo2));
+                            }
                         }
-
+                        tblArreglos.setItems(arreglos);
                     }
-                    tblArreglos.setItems(arreglos);
                 }
+            } else {
+                mostrarAlerta("Todos los campos son requeridos");
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText("Quedan campos por completar!");
-            alert.showAndWait();
+            mostrarAlerta("Debe seleccionar un cliente");
         }
     }
 
+    private static void mostrarAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    private boolean verificarCampos() {
+        return Validaciones.isStringValido(listaVehiculos.getSelectionModel().getSelectedItem()) &&
+                Validaciones.isStringValido(listaEspecialidades.getSelectionModel().getSelectedItem()) &&
+                Validaciones.isStringValido(observacionesDelCliente.getText()) &&
+                Validaciones.isStringValido(this.idEmpleado.toString());
+    }
+
     @FXML
-    private void filtrarPorPatente(KeyEvent event)
-    {
+    private void filtrarPorPatente(KeyEvent event) {
         String filtroPatente = this.txtBusquedaPatente.getText();
 
-        if(filtroPatente.isEmpty())
-        {
+        if (filtroPatente.isEmpty()) {
             this.tblArreglos.setItems(arreglos);
-        }
-        else {
+        } else {
             this.filtroArreglos.clear();
 
-            for(ArregloDTO cl : this.arreglos)
-            {
-                if(cl.getPatente().toLowerCase().contains(filtroPatente.toLowerCase()))
-                {
+            for (ArregloDTO cl : this.arreglos) {
+                if (cl.getPatente().toLowerCase().contains(filtroPatente.toLowerCase())) {
                     this.filtroArreglos.add(cl);
                 }
             }
@@ -240,87 +237,42 @@ public class GestionDeArreglosController {
     }
 
     @FXML
-    private void filtrarActivoTodos(ActionEvent event)
-    {
+    private void filtrarActivoTodos(ActionEvent event) {
+
         if (!mostrarTodos.isSelected())
         {
-            for(ArregloDTO cl: this.arreglos)
-            {
-                if(cl.getEstadoReparacion() != EstadoReparacion.FINALIZADO && !filtroArreglos.contains(cl) && !arreglos.isEmpty())
-                {
-                    this.filtroArreglos.add(cl);
-                }
-            }
-            this.tblArreglos.setItems(filtroArreglos);
+            arreglos.clear();
+            List<ArregloDTO> aux = arregloService.arreglosToArreglosDTO(arregloService.listarActivos());
+            arreglos.addAll(aux);
+            this.tblArreglos.setItems(arreglos);
             this.tblArreglos.refresh();
 
-        }
-        else
+        } else
         {
+            arreglos.clear();
+            List<ArregloDTO> aux = arregloService.arreglosToArreglosDTO(arregloService.listar());
+            arreglos.addAll(aux);
             this.tblArreglos.setItems(arreglos);
             this.tblArreglos.refresh();
         }
-
     }
 
     @FXML
     private void eliminarArreglo(ActionEvent event) throws EntidadNoEncontradaException {
         ArregloDTO c = this.tblArreglos.getSelectionModel().getSelectedItem();
 
-        if(c == null)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText("Debe seleccionar un arreglo");
-            alert.showAndWait();
-        }
-        else if(arreglos.size() == 0)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText("La lista esta vacia");
-            alert.showAndWait();
-        }
-        else
+        if (c == null) {
+            mostrarAlerta("Debe seleccionar un arreglo");
+
+        } else if (arreglos.size() == 0) {
+            mostrarAlerta("La lista está vacia");
+        } else
         {
             arregloService.eliminadoLogico(c.getIdArreglo());
-            this.tblArreglos.refresh();
+            actualizarLista();
         }
 
     }
-
-    /*private void limpiarInputsVehiculo() {
-        this.marcaField.setText("");
-        this.anioFabricacionField.setText("");
-        this.patenteField.setText("");
-        this.tipoVehiculo.setValue("");
-    }
-
-    private void limpiarInputsUsuario() {
-        this.apellidoField.setText("");
-        this.nombreField.setText("");
-        this.dniField.setDisable(true);
-        this.telefonoField.setText("");
-    }
-
-    private void bloquearInputsVehiculo() {
-        this.marcaField.setDisable(true);
-        this.anioFabricacionField.setDisable(true);
-        this.patenteField.setDisable(true);
-        this.tipoVehiculo.setDisable(true);
-    }
-
-    private void desbloquearInputsVehiculo()
-    {
-        this.marcaField.setDisable(false);
-        this.anioFabricacionField.setDisable(false);
-        this.patenteField.setDisable(false);
-        this.tipoVehiculo.setDisable(false);
-        this.dniField.setText("");
-        this.dniField.setDisable(false);
-    }*/
 
     public void setStageAnterior(Stage stageAdmin) {
         this.adminStage = stageAdmin;
@@ -333,6 +285,13 @@ public class GestionDeArreglosController {
 
     public void setUsuario(Usuario logueado) {
         this.logueado = logueado;
+    }
+
+    public void actualizarLista()
+    {
+        arreglos.clear();
+        arreglos.addAll(arregloService.listarArreglosDTO());
+        tblArreglos.refresh();
     }
 
 }

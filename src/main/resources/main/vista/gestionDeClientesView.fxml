@@ -35,8 +35,18 @@
       <AnchorPane prefHeight="600.0" prefWidth="562.0" BorderPane.alignment="CENTER">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="208.0" layoutX="25.0" layoutY="56.0" stroke="#b0b0b09f" strokeType="INSIDE" width="503.0" />
-            <Button fx:id="atrasButton" layoutX="425.0" layoutY="519.0" mnemonicParsing="false" onAction="#volverAtras" prefHeight="25.0" prefWidth="102.0" text="Atras" />
+            <TextField fx:id="nombreField" layoutX="114.0" layoutY="77.0" prefHeight="25.0" prefWidth="150.0" promptText="Nombre" />
+            <TextField fx:id="dniField" layoutX="114.0" layoutY="110.0" prefHeight="25.0" prefWidth="150.0" promptText="DNI" />
+            <TextField fx:id="telefonoField" layoutX="114.0" layoutY="145.0" prefHeight="25.0" prefWidth="150.0" promptText="Telefono" />
+            <TextField fx:id="apellidoField" layoutX="114.0" layoutY="182.0" prefHeight="25.0" prefWidth="150.0" promptText="Apellido" />
+            <TextField fx:id="marcaField" layoutX="362.0" layoutY="77.0" prefHeight="25.0" prefWidth="145.0" promptText="Marca" />
+            <TextField fx:id="anioFabricacionField" layoutX="362.0" layoutY="110.0" prefHeight="25.0" prefWidth="145.0" promptText="Año Fabricacion" />
+            <ChoiceBox fx:id="tipoVehiculo" layoutX="362.0" layoutY="145.0" prefHeight="25.0" prefWidth="145.0" />
+            <TextField fx:id="patenteField" layoutX="362.0" layoutY="182.0" prefHeight="25.0" prefWidth="145.0" promptText="Patente" />
+            <Button fx:id="modificarButton" alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="217.0" mnemonicParsing="false" onAction="#modificarCliente" prefHeight="25.0" prefWidth="91.0" text="Modificar" />
             <Button fx:id="crearButton" alignment="CENTER" contentDisplay="CENTER" layoutX="417.0" layoutY="217.0" mnemonicParsing="false" onAction="#agregarCliente" prefHeight="25.0" prefWidth="91.0" text="Crear" />
+            <Text layoutX="24.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar:" wrappingWidth="43.58203125" />
+            <TextField fx:id="txtBusquedaDNI" layoutX="24.0" layoutY="288.0" onKeyPressed="#filtrarPorNombre" prefHeight="25.0" prefWidth="183.0" promptText="Ingrese el DNI" />
             <TableView fx:id="tblClientes" layoutX="24.0" layoutY="320.0" onMouseClicked="#seleccionarCliente" prefHeight="180.0" prefWidth="503.0">
               <columns>
                 <TableColumn fx:id="columnaNombre" prefWidth="124.0" text="Nombre" />
@@ -45,16 +55,10 @@
                   <TableColumn fx:id="columnaTelefono" prefWidth="130.0" text="Telefono" />
               </columns>
             </TableView>
-            <Text layoutX="24.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar:" wrappingWidth="43.58203125" />
-            <TextField fx:id="txtBusquedaDNI" layoutX="24.0" layoutY="288.0" onKeyPressed="#filtrarPorNombre" prefHeight="25.0" prefWidth="183.0" promptText="Ingrese el DNI" />
-            <TextField fx:id="nombreField" layoutX="114.0" layoutY="77.0" prefHeight="25.0" prefWidth="150.0" promptText="Nombre" />
-            <TextField fx:id="apellidoField" layoutX="114.0" layoutY="182.0" prefHeight="25.0" prefWidth="150.0" promptText="Apellido" />
-            <TextField fx:id="dniField" layoutX="114.0" layoutY="110.0" prefHeight="25.0" prefWidth="150.0" promptText="DNI" />
-            <TextField fx:id="telefonoField" layoutX="114.0" layoutY="145.0" prefHeight="25.0" prefWidth="150.0" promptText="Telefono" />
+            <CheckBox fx:id="mostrarTodos" layoutX="27.0" layoutY="511.0" mnemonicParsing="false" onAction="#filtrarActivoTodos" text="Todos" />
+            <Button fx:id="eliminarButton" layoutX="306.0" layoutY="519.0" mnemonicParsing="false" onAction="#eliminarCliente" prefHeight="25.0" prefWidth="102.0" text="Eliminar" />
+            <Button fx:id="atrasButton" layoutX="425.0" layoutY="519.0" mnemonicParsing="false" onAction="#volverAtras" prefHeight="25.0" prefWidth="102.0" text="Atras" />
             <Text layoutX="25.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crear Cliente:" wrappingWidth="79.783203125" />
-            <TextField fx:id="marcaField" layoutX="362.0" layoutY="77.0" prefHeight="25.0" prefWidth="145.0" promptText="Marca" />
-            <TextField fx:id="patenteField" layoutX="362.0" layoutY="182.0" prefHeight="25.0" prefWidth="145.0" promptText="Patente" />
-            <ChoiceBox fx:id="tipoVehiculo" layoutX="362.0" layoutY="145.0" prefHeight="25.0" prefWidth="145.0" />
             <Text layoutX="300.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo:" />
             <Text layoutX="300.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patente:" />
             <Text layoutX="300.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Año" />
@@ -65,10 +69,6 @@
             <Text layoutX="43.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido:" />
             <Text layoutX="280.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehiculo:" wrappingWidth="53.298828125" />
             <Separator layoutX="280.0" layoutY="60.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="4.0" />
-            <TextField fx:id="anioFabricacionField" layoutX="362.0" layoutY="110.0" prefHeight="25.0" prefWidth="145.0" promptText="Año Fabricacion" />
-            <Button fx:id="modificarButton" alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="217.0" mnemonicParsing="false" onAction="#modificarCliente" prefHeight="25.0" prefWidth="91.0" text="Modificar" />
-            <Button fx:id="eliminarButton" layoutX="306.0" layoutY="519.0" mnemonicParsing="false" onAction="#eliminarCliente" prefHeight="25.0" prefWidth="102.0" text="Eliminar" />
-            <CheckBox fx:id="mostrarTodos" layoutX="27.0" layoutY="511.0" mnemonicParsing="false" onAction="#filtrarActivoTodos" text="Todos" />
          </children>
       </AnchorPane>
    </center>

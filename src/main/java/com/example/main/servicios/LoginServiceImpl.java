@@ -17,8 +17,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Usuario autenticar(String usuario, String password)
     {
-        /*String passwordEncriptado = Encriptador.obtenerMD5(password);
-        return usuarioRepo.buscarPorUsuarioYPassword(usuario,passwordEncriptado);*/
-        return new Usuario(1,"Jeremias Richard","asd",false);
+        String passwordEncriptado = Encriptador.obtenerMD5(password);
+        return usuarioRepo.buscarPorUsuarioYPassword(usuario,passwordEncriptado);
     }
 }

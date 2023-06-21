@@ -58,8 +58,8 @@ public class MecanicoServiceImpl implements BaseService<Mecanico> {
         return mecanicoRepo.listar();
     }
 
-    public List<Mecanico> listarActivos(){
-        return mecanicoRepo.listarActivos();
+    public List<MecanicoDTO> listarActivos(){
+      return  mecanicosToMecanicoDTO(mecanicoRepo.listarActivos());
     }
 
     public Mecanico buscarPorId(int id) {

@@ -6,9 +6,11 @@ import com.example.main.datos.MecanicoRepoImpl;
 import com.example.main.datos.VehiculoRepoImpl;
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
+import com.example.main.enums.EstadoReparacion;
 import com.example.main.modelos.Arreglo;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ArregloServiceImpl implements BaseService<Arreglo> {
     private ArregloRepoImpl arregloRepo;
@@ -33,11 +35,15 @@ public class ArregloServiceImpl implements BaseService<Arreglo> {
 
     public void eliminadoLogico(int id) throws EntidadNoEncontradaException {
         Arreglo arreglo = arregloRepo.buscarPorId(id);
+        arreglo.setEstadoReparacion(EstadoReparacion.FINALIZADO);
         arregloRepo.editar(arreglo);
     }
 
     public List<Arreglo> listar(){
         return arregloRepo.listar();
+    }
+    public List<Arreglo> listarActivos(){
+        return arregloRepo.listar().stream().filter(arreglo -> arreglo.getEstadoReparacion() != EstadoReparacion.FINALIZADO).toList();
     }
 
     public Arreglo buscarPorId(int id){
@@ -45,9 +51,9 @@ public class ArregloServiceImpl implements BaseService<Arreglo> {
     }
 
     public List<ArregloDTO> listarArreglosDTO(){
-        return arreglosToArreglosDTO(this.listar());
+        return arreglosToArreglosDTO(this.listarActivos());
     }
-    private List<ArregloDTO> arreglosToArreglosDTO(List<Arreglo> arreglos){
+    public List<ArregloDTO> arreglosToArreglosDTO(List<Arreglo> arreglos){
         return arreglos.stream().map(this::convertirAArregloDTO).toList();
     }
     public ArregloDTO convertirAArregloDTO(Arreglo arreglo) {

@@ -54,7 +54,6 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
         if(buscarPorDNI(nuevo.getDni()) == null) throw new EntidadNoEncontradaException("El mecanico solicitado no existe.");
         for (int i = 0; i<this.listaMecanicos.size(); i++) {
             String dniActual = this.listaMecanicos.get(i).getDni();
-
             if (dniActual.equals(nuevo.getDni())) {
                 listaMecanicos.set(i,nuevo);
                 break;

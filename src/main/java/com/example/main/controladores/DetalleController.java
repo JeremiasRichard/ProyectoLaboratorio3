@@ -4,19 +4,24 @@ import com.example.main.DTOs.ArregloDTO;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.enums.EstadoReparacion;
 import com.example.main.modelos.Arreglo;
+import com.example.main.modelos.Mecanico;
 import com.example.main.modelos.Usuario;
 import com.example.main.servicios.ArregloServiceImpl;
+import com.example.main.servicios.MecanicoServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class DetalleController
 {
     ArregloServiceImpl arregloService = new ArregloServiceImpl();
     UserController userController = new UserController();
+    MecanicoServiceImpl mecanicoService = new MecanicoServiceImpl();
     private ArregloDTO arregloDTO;
     @FXML
     private Button atrasButton;
@@ -44,8 +49,8 @@ public class DetalleController
     public void initialize(ArregloDTO arreglo, Usuario logueado)
     {
         this.arregloDTO=arreglo;
-
-        idNombreUsuario.setText(logueado.getUser().toString());
+        Mecanico actual = mecanicoService.buscarPorId(logueado.getIdUsuario());
+        idNombreUsuario.setText(actual.getNombre().toString()+" "+actual.getApellido());
 
         ObservableList<String> opciones = FXCollections.observableArrayList(
                 "Stand By",
@@ -96,6 +101,15 @@ public class DetalleController
         this.Marca.setText(ListaTareas.getMarca());
 
         this.DetallesDeFalla.setText(ListaTareas.getObservacionesCliente());
+
+        observacionesDelArregloField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.TAB)
+            {
+                event.consume();
+                EstadoR.requestFocus();
+            }
+        });
+
     }
 
     public void setStageAnterior(Stage stageAnterior) {
@@ -112,11 +126,9 @@ public class DetalleController
     @FXML
     private void guardarCambios(ActionEvent event) throws EntidadNoEncontradaException {
 
-
-
         if (this.arregloDTO.getEstadoReparacion() != EstadoReparacion.FINALIZADO || this.arregloDTO.getObservacionesMecanico() == null)
         {
-            System.out.println("Error, estado inválido o campo observación vacío!");
+            mostrarAlerta("Error, estado inválido o campo observación vacío!");
         } else
         {
             arregloDTO.setObservacionesMecanico(observacionesDelArregloField.getText());
@@ -128,6 +140,14 @@ public class DetalleController
         }
     }
 
+    private static void mostrarAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
     public void setUsuario(Usuario logueado)
     {
         this.logueado = logueado;
@@ -137,4 +157,6 @@ public class DetalleController
     {
         this.userController=userController;
     }
+
+
 }

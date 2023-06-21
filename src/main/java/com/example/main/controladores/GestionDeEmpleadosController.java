@@ -1,6 +1,7 @@
 package com.example.main.controladores;
 
 import com.example.main.DTOs.MecanicoDTO;
+import com.example.main.controladores.validaciones.Validaciones;
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.enums.Especialidad;
@@ -65,59 +66,37 @@ public class GestionDeEmpleadosController {
     @FXML
     private TableColumn columnaApellido;
     @FXML
+    private TableColumn columnaTipoDeMecanica;
+    @FXML
+    private TableColumn columnaEspecialidad;
+    @FXML
     private TableColumn columnaDni;
     @FXML
-    private TableColumn columnaTelefono;
-    @FXML
-    private ObservableList<MecanicoDTO> mecanicos;
-    private ObservableList<MecanicoDTO> filtroMecanicos;
+    private ObservableList<MecanicoDTO> mecanicos = FXCollections.observableArrayList();;
+    private ObservableList<MecanicoDTO> filtroMecanicos = FXCollections.observableArrayList();;
     @FXML
     private ChoiceBox<String> tipoVehiculo = new ChoiceBox<>();
     @FXML
     private ObservableList<String> opciones;
 
     public void initialize() {
-        mecanicos = FXCollections.observableArrayList();
-        filtroMecanicos = FXCollections.observableArrayList();
 
         if(mecanicoService.listar().size() !=0)
         {
-            List<Mecanico> aux = mecanicoService.listarActivos();
-            mecanicos.addAll(mecanicoService.mecanicosToMecanicoDTO(aux));
+            mecanicos.addAll(mecanicoService.listarActivos());
             tblMecanicos.setItems(mecanicos);
         }
-
         this.columnaNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         this.columnaApellido.setCellValueFactory(new PropertyValueFactory("apellido"));
+        this.columnaTipoDeMecanica.setCellValueFactory(new PropertyValueFactory("tipoVehiculo"));
+        this.columnaEspecialidad.setCellValueFactory(new PropertyValueFactory("especialidad"));
         this.columnaDni.setCellValueFactory(new PropertyValueFactory("dni"));
-        this.columnaTelefono.setCellValueFactory(new PropertyValueFactory("nroTelefono"));
+        
+        cargarTablaEspecialidades();
+        seleccionarRamaReparacion();
+    }
 
-        this.opciones = FXCollections.observableArrayList(
-                "",
-                "Auto",
-                "Moto",
-                "Camion"
-        );
-        tipoVehiculo.setValue("");
-        tipoVehiculo.setItems(opciones);
-
-        tipoVehiculo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
-        {
-
-            if (newValue.equals("Auto"))
-            {
-                    this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.AUTO);
-
-            } else if (newValue.equals("Camion"))
-            {
-                this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.CAMION);
-            }
-            else if(newValue.equals("Moto"))
-            {
-                this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.MOTO);
-            }
-        });
-
+    private void seleccionarRamaReparacion() {
 
         especialidadEstetica.setOnAction(event -> {
             mecanicoGlobal.setEspecialidad(Especialidad.ESTETICA);
@@ -138,63 +117,65 @@ public class GestionDeEmpleadosController {
         });
     }
 
+    private void cargarTablaEspecialidades() {
+        this.opciones = FXCollections.observableArrayList(
+                "",
+                "AUTO",
+                "MOTO",
+                "CAMION"
+        );
+        tipoVehiculo.setValue("");
+        tipoVehiculo.setItems(opciones);
+
+        tipoVehiculo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
+        {
+
+            if (newValue.equals("AUTO"))
+            {
+                    this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.AUTO);
+
+            } else if (newValue.equals("CAMION"))
+            {
+                this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.CAMION);
+            }
+            else if(newValue.equals("MOTO"))
+            {
+                this.mecanicoGlobal.setTipoVehiculo(TipoVehiculo.MOTO);
+            }
+        });
+    }
+
     @FXML
     private void agregarEmpleado(ActionEvent event) {
 
-        boolean a = true;
+        if (verificarCampos()) {
+            MecanicoDTO nuevo = new MecanicoDTO(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), this.mecanicoGlobal.getTipoVehiculo(), this.mecanicoGlobal.getEspecialidad(), true);
+            Mecanico aux = new Mecanico(nuevo.getNombre(), nuevo.getApellido(), nuevo.getDni(), nuevo.getNroTelefono(), nuevo.getListaArreglos(), nuevo.getTipoVehiculo(), nuevo.getEspecialidad());
 
-        if (a != false)
-        {
-
-            MecanicoDTO nuevo = new MecanicoDTO(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), this.mecanicoGlobal.getTipoVehiculo(), this.mecanicoGlobal.getEspecialidad(),true);
-            Mecanico aux = new Mecanico(nuevo.getNombre(),nuevo.getApellido(),nuevo.getDni(),nuevo.getNroTelefono(),nuevo.getListaArreglos(),nuevo.getTipoVehiculo(),nuevo.getEspecialidad());
-
-            try
-            {
+            try {
                 mecanicoService.agregar(aux);
-                usuarioService.agregar(new Usuario(usuarioField.getText(), passwordField.getText(),false));
+                usuarioService.agregar(new Usuario(usuarioField.getText(), passwordField.getText(), false));
 
-            }
-            catch (EntidadDuplicadaException e)
-            {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setTitle("Error");
-                alert.setContentText("El usuario ya existe");
-                alert.showAndWait();
+            } catch (EntidadDuplicadaException e) {
+                mostrarAlerta("El usuario ya existe");
             }
             mecanicos.clear();
-            List<Mecanico> aux2 = mecanicoService.listarActivos();
-            mecanicos.addAll(mecanicoService.mecanicosToMecanicoDTO(aux2));
+            mecanicos.addAll(mecanicoService.listarActivos());
             tblMecanicos.setItems(mecanicos);
 
-            tipoVehiculo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
-            {
-
-                if (newValue.equals("Auto")) {
-                    nuevo.setTipoVehiculo(TipoVehiculo.AUTO);
-
-                } else if (newValue.equals("Camion")) {
-                    nuevo.setTipoVehiculo(TipoVehiculo.CAMION);
-
-                } else if (newValue.equals("Moto")) {
-                    nuevo.setTipoVehiculo(TipoVehiculo.MOTO);
-                }
-            });
+            cargarTablaEspecialidades();
 
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText("Quedan campos por completar!");
-            alert.showAndWait();
+            mostrarAlerta("Quedan campos por completar");
         }
+
     }
 
     @FXML
     private void seleccionarEmpleado(MouseEvent event) {
 
         if (mecanicos.size() != 0) {
+
             MecanicoDTO mecanicoDTO = this.tblMecanicos.getSelectionModel().getSelectedItem();
 
             if (mecanicoDTO != null) {
@@ -202,6 +183,31 @@ public class GestionDeEmpleadosController {
                 this.apellidoField.setText(mecanicoDTO.getApellido());
                 this.dniField.setText(mecanicoDTO.getDni());
                 this.telefonoField.setText(mecanicoDTO.getNroTelefono());
+                this.tipoVehiculo.setValue(mecanicoDTO.getTipoVehiculo().toString());
+                mecanicoGlobal.setTipoVehiculo(mecanicoDTO.getTipoVehiculo());
+
+                if(mecanicoDTO.getEspecialidad() == Especialidad.ELECTRICIDAD)
+                {
+                    mecanicoGlobal.setEspecialidad(Especialidad.ELECTRICIDAD);
+                    especialidadElectricidad.setSelected(true);
+                    especialidadEstetica.setSelected(false);
+                    especialidadGeneral.setSelected(false);
+                }
+                else if (mecanicoDTO.getEspecialidad() == Especialidad.ESTETICA)
+                {
+                    mecanicoGlobal.setEspecialidad(Especialidad.ESTETICA);
+                    especialidadEstetica.setSelected(true);
+                    especialidadElectricidad.setSelected(false);
+                    especialidadGeneral.setSelected(false);
+                }
+                else if(mecanicoDTO.getEspecialidad() == Especialidad.MECANICA_GENERAL)
+                {
+                    mecanicoGlobal.setEspecialidad(Especialidad.MECANICA_GENERAL);
+                    especialidadGeneral.setSelected(true);
+                    especialidadElectricidad.setSelected(false);
+                    especialidadEstetica.setSelected(false);
+                }
+
                 limpiarInputsUsuario();
                 desbloquearInputsMecanico();
                 bloquearInputsUsuario();
@@ -224,13 +230,22 @@ public class GestionDeEmpleadosController {
         this.apellidoField.setText("");
         this.nombreField.setText("");
         this.dniField.setText("");
+        this.dniField.setDisable(false);
         this.telefonoField.setText("");
+        this.tipoVehiculo.setValue("");
+        this.especialidadEstetica.setSelected(false);
+        this.especialidadElectricidad.setSelected(false);
+        this.especialidadGeneral.setSelected(false);
+
     }
 
     private void bloquearInputsUsuario() {
         this.passwordField.setDisable(true);
         this.usuarioField.setDisable(true);
         this.dniField.setDisable(true);
+        this.especialidadGeneral.setDisable(true);
+        this.especialidadElectricidad.setDisable(true);
+        this.especialidadEstetica.setDisable(true);
     }
 
     private void desbloquearInputsUsuario() {
@@ -250,46 +265,51 @@ public class GestionDeEmpleadosController {
     @FXML
     private void modificarEmpleado(ActionEvent event) {
 
-        MecanicoDTO mecanicoDTO = this.tblMecanicos.getSelectionModel().getSelectedItem();
+        MecanicoDTO mecanicoSeleccionado = this.tblMecanicos.getSelectionModel().getSelectedItem();
 
-        if (mecanicoDTO == null)
+        if (mecanicoSeleccionado == null)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText(mecanicoDTO.toString());
-            alert.showAndWait();
+            mostrarAlerta("Debe seleccionar un mecanico");
         }
         else {
-            try {
+            if(verificarCampos())
+            {
+                bloquearInputsUsuario();
+                try {
 
-                MecanicoDTO nuevo = new MecanicoDTO(mecanicoDTO.getId(),this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), this.mecanicoGlobal.getTipoVehiculo(), this.mecanicoGlobal.getEspecialidad());
-                Mecanico aux = new Mecanico(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(),new ArrayList<>(),this.mecanicoGlobal.getTipoVehiculo(),this.mecanicoGlobal.getEspecialidad());
+                    MecanicoDTO auxiliar = new MecanicoDTO(mecanicoSeleccionado.getId(),this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), this.mecanicoGlobal.getTipoVehiculo(), this.mecanicoGlobal.getEspecialidad());
+                    Mecanico paraPersistir = new Mecanico(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(),new ArrayList<>(),this.mecanicoGlobal.getTipoVehiculo(),this.mecanicoGlobal.getEspecialidad());
 
-                if (!this.mecanicos.contains(nuevo))
-                {
-                    mecanicoDTO.setNombre(nuevo.getNombre());
-                    mecanicoDTO.setApellido(nuevo.getApellido());
-                    mecanicoDTO.setDni(nuevo.getDni());
-                    mecanicoDTO.setNroTelefono(nuevo.getNroTelefono());
-                    mecanicoDTO.setTipoVehiculo(nuevo.getTipoVehiculo());
-                    mecanicoDTO.setEspecialidad(nuevo.getEspecialidad());
-                    mecanicoService.editar(aux);
-                    this.tblMecanicos.refresh();
-                    limpiarInputsMecanico();
+                    if (!this.mecanicos.contains(auxiliar))
+                    {
+                        mecanicoSeleccionado.setId(mecanicoSeleccionado.getId());
+                        mecanicoSeleccionado.setNombre(auxiliar.getNombre());
+                        mecanicoSeleccionado.setApellido(auxiliar.getApellido());
+                        mecanicoSeleccionado.setDni(auxiliar.getDni());
+                        mecanicoSeleccionado.setNroTelefono(auxiliar.getNroTelefono());
+                        mecanicoSeleccionado.setTipoVehiculo(auxiliar.getTipoVehiculo());
+                        paraPersistir.setIdEmpleado(mecanicoSeleccionado.getId());
+                        paraPersistir.setIdUsuario(mecanicoSeleccionado.getId());
+                        mecanicoService.editar(paraPersistir);
+                        this.tblMecanicos.refresh();
+                        limpiarInputsMecanico();
+                    }
+                    else
+                    {
+
+                        mostrarAlerta("Debe hacer algun cambio!");
+                    }
+                } catch (RuntimeException e) {
+
+                } catch (EntidadNoEncontradaException e) {
+                    throw new RuntimeException(e);
                 }
-                else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText(null);
-                    alert.setTitle("Error");
-                    alert.setContentText(mecanicoDTO.toString()+"\n"+nuevo.toString());
-                    alert.showAndWait();
-                }
-            } catch (RuntimeException e) {
-
-            } catch (EntidadNoEncontradaException e) {
-                throw new RuntimeException(e);
             }
+            else
+            {
+                mostrarAlerta("Todos los campos son requeridos");
+            }
+
         }
     }
 
@@ -297,28 +317,17 @@ public class GestionDeEmpleadosController {
     private void eliminarMecanico(ActionEvent event) throws EntidadNoEncontradaException {
 
         MecanicoDTO c = this.tblMecanicos.getSelectionModel().getSelectedItem();
-
         if (c == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText("Debe seleccionar un mecanico");
-            alert.showAndWait();
+            mostrarAlerta("Debe seleccionar un mecanico");
         } else if (mecanicos.size() == 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText("La lista esta vacia");
-            alert.showAndWait();
+            mostrarAlerta("La lista esta vacia");
         } else {
             mecanicoService.eliminadoLogico(c.getDni());
             mecanicos.clear();
-            List<Mecanico>  mecanicoList = mecanicoService.listarActivos();
-            mecanicos.addAll(mecanicoService.mecanicosToMecanicoDTO(mecanicoList));
+            mecanicos.addAll(mecanicoService.listarActivos());
             this.tblMecanicos.setItems(mecanicos);
             this.tblMecanicos.refresh();
         }
-
     }
 
     @FXML
@@ -368,5 +377,23 @@ public class GestionDeEmpleadosController {
 
     public void setUsuario(Usuario logueado) {
         this.logueado = logueado;
+    }
+
+
+    private static void mostrarAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    private boolean verificarCampos()
+    {
+        return Validaciones.isStringValido(this.nombreField.getText()) &&
+                Validaciones.isStringValido(this.dniField.getText()) &&
+                Validaciones.isStringValido(this.telefonoField.getText()) &&
+                Validaciones.isStringValido(this.apellidoField.getText()) &&
+                this.mecanicoGlobal.getTipoVehiculo() != null;
     }
 }

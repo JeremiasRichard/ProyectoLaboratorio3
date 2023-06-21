@@ -57,7 +57,6 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
                 break;
             }
         }
-
         guardar();
     }
 

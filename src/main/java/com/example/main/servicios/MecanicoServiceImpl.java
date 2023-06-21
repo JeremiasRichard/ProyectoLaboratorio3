@@ -11,6 +11,7 @@ import com.example.main.enums.Especialidad;
 import com.example.main.enums.EstadoReparacion;
 import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.Arreglo;
+import com.example.main.modelos.Cliente;
 import com.example.main.modelos.Mecanico;
 import com.example.main.modelos.Vehiculo;
 
@@ -42,14 +43,23 @@ public class MecanicoServiceImpl implements BaseService<Mecanico> {
         mecanicoRepo.eliminar(mecanico);
     }
 
+    @Override
     public void eliminadoLogico(int id) throws EntidadNoEncontradaException {
-        Mecanico mecanico = mecanicoRepo.buscarPorId(id);
+
+    }
+
+    public void eliminadoLogico(String dni) throws EntidadNoEncontradaException {
+        Mecanico mecanico = mecanicoRepo.buscarPorDNI(dni);
         mecanico.setActivo(false);
         mecanicoRepo.editar(mecanico);
     }
 
     public List<Mecanico> listar() {
         return mecanicoRepo.listar();
+    }
+
+    public List<Mecanico> listarActivos(){
+        return mecanicoRepo.listarActivos();
     }
 
     public Mecanico buscarPorId(int id) {

@@ -43,8 +43,13 @@ public class MecanicoServiceImpl implements BaseService<Mecanico> {
         mecanicoRepo.eliminar(mecanico);
     }
 
+    @Override
     public void eliminadoLogico(int id) throws EntidadNoEncontradaException {
-        Mecanico mecanico = mecanicoRepo.buscarPorIdUsuario(id);
+
+    }
+
+    public void eliminadoLogico(String dni) throws EntidadNoEncontradaException {
+        Mecanico mecanico = mecanicoRepo.buscarPorDNI(dni);
         mecanico.setActivo(false);
         mecanicoRepo.editar(mecanico);
     }

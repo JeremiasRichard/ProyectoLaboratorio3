@@ -311,7 +311,7 @@ public class GestionDeEmpleadosController {
             alert.setContentText("La lista esta vacia");
             alert.showAndWait();
         } else {
-            mecanicoService.eliminadoLogico(c.getId());
+            mecanicoService.eliminadoLogico(c.getDni());
             mecanicos.clear();
             List<Mecanico>  mecanicoList = mecanicoService.listarActivos();
             mecanicos.addAll(mecanicoService.mecanicosToMecanicoDTO(mecanicoList));

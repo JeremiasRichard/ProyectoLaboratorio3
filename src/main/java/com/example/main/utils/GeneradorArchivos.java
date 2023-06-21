@@ -27,7 +27,7 @@ public class GeneradorArchivos {
                 new Mecanico("Karla", "Gomez", "37888439", "4751113", new ArrayList<>(), TipoVehiculo.AUTO, Especialidad.ELECTRICIDAD),
                 new Mecanico("Angel", "Mendez", "83888353", "4751311", new ArrayList<>(), TipoVehiculo.AUTO, Especialidad.ESTETICA),
                 new Mecanico("Monica", "Gonzales", "25848343", "4751121", new ArrayList<>(), TipoVehiculo.MOTO, Especialidad.MECANICA_GENERAL),
-                new Mecanico("Esteban", "Dietrich", "35888333", "4721112", new ArrayList<>(), TipoVehiculo.MOTO, Especialidad.ELECTRICIDAD),
+                new Mecanico("Esteban", "Dietrich", "75556453158749", "4721112", new ArrayList<>(), TipoVehiculo.MOTO, Especialidad.ELECTRICIDAD),
                 new Mecanico("Agustin", "Erpen", "35888333", "4761122", new ArrayList<>(), TipoVehiculo.MOTO, Especialidad.ESTETICA),
                 new Mecanico("Fernanda", "Orizuela", "55885335", "4951212", new ArrayList<>(), TipoVehiculo.CAMION, Especialidad.MECANICA_GENERAL),
                 new Mecanico("Wanda", "Arana", "37858338", "4851212", new ArrayList<>(), TipoVehiculo.CAMION, Especialidad.ELECTRICIDAD),
@@ -70,11 +70,11 @@ public class GeneradorArchivos {
 
         Arrays.asList(
           new Arreglo(1,"RTX5459","55929334",1,"Se quedo sin frenos."),
-          new Arreglo(2,"RTX5459","55929334",2,"Se quedo sin Luces."),
-          new Arreglo(3,"RXT5248","46332343",6,"Para pintar."),
-          new Arreglo(4,"FXX5517","37943234",7,"Caja de camios rota."),
-          new Arreglo(5,"TTX5726","28694314",9,"Rayon en la caja."),
-          new Arreglo(6,"NTX5835","59795334",3,"Rayon en la puerta.")
+          new Arreglo(2,"RTX5459","55929334",1,"Se quedo sin Luces."),
+          new Arreglo(3,"RXT5248","46332343",1,"Para pintar."),
+          new Arreglo(4,"FXX5517","37943234",1,"Caja de camios rota."),
+          new Arreglo(5,"TTX5726","28694314",1,"Rayon en la caja."),
+          new Arreglo(6,"NTX5835","59795334",1,"Rayon en la puerta.")
         ).forEach(
                 arreglo -> {
                     try {

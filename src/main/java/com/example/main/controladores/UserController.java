@@ -3,8 +3,11 @@ package com.example.main.controladores;
 import com.example.main.DTOs.ArregloDTO;
 import com.example.main.enums.EstadoReparacion;
 import com.example.main.enums.TipoVehiculo;
+import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Usuario;
 import com.example.main.modelos.Vehiculo;
+import com.example.main.servicios.ArregloServiceImpl;
+import com.example.main.servicios.MecanicoServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,8 +22,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.List;
 
 public class UserController {
+    public MecanicoServiceImpl mecanicoService = new MecanicoServiceImpl();
     @FXML
     private Stage stageAnterior;
     private Stage userStage;
@@ -38,7 +43,7 @@ public class UserController {
     private TableColumn patenteColumna;
     @FXML
     private TableColumn marcaColumna;
-    private  ObservableList<ArregloDTO> tareas;
+    private  ObservableList<ArregloDTO> tareas = FXCollections.observableArrayList();
     private Usuario logueado;
     @FXML
     private Label idNombreUsuario = new Label();
@@ -69,24 +74,13 @@ public class UserController {
     public void initialize(Usuario actual)
     {
 
-        //= mecanicoServiceImpl.obtenerTareas(actual.getIdUsuario());
-
-        this.tareas = FXCollections.observableArrayList();
+        List<ArregloDTO> listTareas = mecanicoService.obtenerTareas(1);
+        tareas.addAll(listTareas);
 
         this.idArregloColumna.setCellValueFactory(new PropertyValueFactory<>("idArreglo"));
         this.marcaColumna.setCellValueFactory(new PropertyValueFactory<>("marca"));
         this.patenteColumna.setCellValueFactory(new PropertyValueFactory<>("patente"));
         this.anioColumna.setCellValueFactory(new PropertyValueFactory<>("anioFabricacion"));
-
-        Vehiculo vehiculo = new Vehiculo(2000, TipoVehiculo.AUTO,"VOLKSWAGEN GOL POWER","AJB942");
-
-        ArregloDTO arreglo1 = new ArregloDTO(1, vehiculo.getPatente(), vehiculo.getMarca(),vehiculo.getAnioFabricacion(),"38829033","El cliente solicita un service completo", EstadoReparacion.STAND_BY);
-
-        ArregloDTO arreglo2 = new ArregloDTO(2,"GGF082","FIAT IVECO DAYLI",2007,"38829033","El cliente solicita cambio de diferencial",EstadoReparacion.STAND_BY);
-
-        tareas.add(arreglo1);
-
-        tareas.add(arreglo2);
 
         idNombreUsuario.setText(actual.getUser().toString());
 

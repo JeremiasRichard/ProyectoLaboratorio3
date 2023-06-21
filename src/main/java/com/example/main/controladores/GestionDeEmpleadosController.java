@@ -400,6 +400,8 @@ public class GestionDeEmpleadosController {
                 Validaciones.isStringValido(this.dniField.getText()) &&
                 Validaciones.isStringValido(this.telefonoField.getText()) &&
                 Validaciones.isStringValido(this.apellidoField.getText()) &&
+                Validaciones.isStringValido(this.usuarioField.getText()) &&
+                Validaciones.isStringValido(this.passwordField.getText()) &&
                 this.mecanicoGlobal.getTipoVehiculo() != null;
     }
 }

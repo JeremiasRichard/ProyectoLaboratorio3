@@ -1,0 +1,49 @@
+[ {
+  "idArreglo" : 1,
+  "patente" : "RTX5459",
+  "dniCliente" : "55929334",
+  "idEmpleado" : 1,
+  "observacionesDelCliente" : "Se quedo sin frenos.",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY"
+}, {
+  "idArreglo" : 2,
+  "patente" : "RTX5459",
+  "dniCliente" : "55929334",
+  "idEmpleado" : 2,
+  "observacionesDelCliente" : "Se quedo sin Luces.",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY"
+}, {
+  "idArreglo" : 3,
+  "patente" : "RXT5248",
+  "dniCliente" : "46332343",
+  "idEmpleado" : 3,
+  "observacionesDelCliente" : "Para pintar.",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY"
+}, {
+  "idArreglo" : 4,
+  "patente" : "FXX5517",
+  "dniCliente" : "37943234",
+  "idEmpleado" : 4,
+  "observacionesDelCliente" : "Caja de camios rota.",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY"
+}, {
+  "idArreglo" : 5,
+  "patente" : "TTX5726",
+  "dniCliente" : "28694314",
+  "idEmpleado" : 5,
+  "observacionesDelCliente" : "Rayon en la caja.",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY"
+}, {
+  "idArreglo" : 6,
+  "patente" : "NTX5835",
+  "dniCliente" : "59795334",
+  "idEmpleado" : 6,
+  "observacionesDelCliente" : "Rayon en la puerta.",
+  "observacionesDelMecanico" : null,
+  "estadoReparacion" : "STAND_BY"
+} ]

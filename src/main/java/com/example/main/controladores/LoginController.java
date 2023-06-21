@@ -4,6 +4,7 @@ import com.example.main.controladores.validaciones.Validaciones;
 import com.example.main.modelos.Usuario;
 import com.example.main.servicios.LoginService;
 import com.example.main.servicios.LoginServiceImpl;
+import com.example.main.utils.GeneradorArchivos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +34,7 @@ public class LoginController {
     @FXML
     public void iniciarSesion()
     {
+        GeneradorArchivos.generarArchivos();
         LoginService loginService = new LoginServiceImpl();
 
         String usuario = userTextField.getText();

@@ -34,6 +34,7 @@ public class LoginController {
     @FXML
     public void iniciarSesion()
     {
+        GeneradorArchivos.limpiarArchivos();
         GeneradorArchivos.generarArchivos();
         LoginService loginService = new LoginServiceImpl();
 

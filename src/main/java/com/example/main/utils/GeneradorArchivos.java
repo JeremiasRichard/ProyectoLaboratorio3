@@ -12,6 +12,9 @@ import com.example.main.modelos.Cliente;
 import com.example.main.modelos.Mecanico;
 import com.example.main.modelos.Vehiculo;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -84,5 +87,26 @@ public class GeneradorArchivos {
                     }
                 }
         );
+    }
+    public static void limpiarArchivos(){
+        System.out.println("Ejecutando limpieza de archivos");
+        final File archivoUsuarios = new File("src/main/resources/archivos/usuarios.json");
+        final File archivoClientes = new File("src/main/resources/archivos/clientes.json");
+        final File archivoMecanicos = new File("src/main/resources/archivos/mecanicos.json");
+        final File archivoVehiculos = new File("src/main/resources/archivos/vehiculos.json");
+
+        try (
+                FileWriter escritorArchivoUsuarios = new FileWriter(archivoUsuarios);
+                FileWriter escritorArchivoClientes = new FileWriter(archivoClientes);
+                FileWriter escritorArchivoMecanicos = new FileWriter(archivoMecanicos);
+                FileWriter escritorArchivoVehiculos = new FileWriter(archivoVehiculos)
+        ) {
+            escritorArchivoUsuarios.write("");
+            escritorArchivoClientes.write("");
+            escritorArchivoMecanicos.write("");
+            escritorArchivoVehiculos.write("");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

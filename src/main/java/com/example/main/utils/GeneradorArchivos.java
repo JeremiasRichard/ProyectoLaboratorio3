@@ -94,17 +94,20 @@ public class GeneradorArchivos {
         final File archivoClientes = new File("src/main/resources/archivos/clientes.json");
         final File archivoMecanicos = new File("src/main/resources/archivos/mecanicos.json");
         final File archivoVehiculos = new File("src/main/resources/archivos/vehiculos.json");
+        final File archivoArreglos = new File("src/main/resources/archivos/arreglos.json");
 
         try (
                 FileWriter escritorArchivoUsuarios = new FileWriter(archivoUsuarios);
                 FileWriter escritorArchivoClientes = new FileWriter(archivoClientes);
                 FileWriter escritorArchivoMecanicos = new FileWriter(archivoMecanicos);
-                FileWriter escritorArchivoVehiculos = new FileWriter(archivoVehiculos)
+                FileWriter escritorArchivoVehiculos = new FileWriter(archivoVehiculos);
+                FileWriter escritorArchivoArreglos = new FileWriter(archivoArreglos)
         ) {
             escritorArchivoUsuarios.write("");
             escritorArchivoClientes.write("");
             escritorArchivoMecanicos.write("");
             escritorArchivoVehiculos.write("");
+            escritorArchivoArreglos.write("");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

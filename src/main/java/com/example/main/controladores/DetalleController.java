@@ -1,17 +1,23 @@
 package com.example.main.controladores;
 
 import com.example.main.DTOs.ArregloDTO;
+import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.enums.EstadoReparacion;
 import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Usuario;
+import com.example.main.servicios.ArregloServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class DetalleController
 {
+    ArregloServiceImpl arregloService = new ArregloServiceImpl();
+    UserController userController = new UserController();
+    private ArregloDTO arregloDTO;
     @FXML
     private Button atrasButton;
     @FXML
@@ -37,6 +43,8 @@ public class DetalleController
 
     public void initialize(ArregloDTO arreglo, Usuario logueado)
     {
+        this.arregloDTO=arreglo;
+
         idNombreUsuario.setText(logueado.getUser().toString());
 
         ObservableList<String> opciones = FXCollections.observableArrayList(
@@ -46,19 +54,19 @@ public class DetalleController
         );
         EstadoR.setItems(opciones);
 
-        estadoAnterior = arreglo.getEstadoReparacion();
+        estadoAnterior = this.arregloDTO.getEstadoReparacion();
 
-        arreglo.setObservacionesMecanico(observacionesDelArregloField.getText());
+        arregloDTO.setObservacionesMecanico(observacionesDelArregloField.getText());
 
-        if(arreglo.getEstadoReparacion() == EstadoReparacion.STAND_BY)
+        if(arregloDTO.getEstadoReparacion() == EstadoReparacion.STAND_BY)
             EstadoR.setValue("Stand by");
-        else if(arreglo.getEstadoReparacion() == EstadoReparacion.EN_PROCESO)
+        else if(arregloDTO.getEstadoReparacion() == EstadoReparacion.EN_PROCESO)
         {
             EstadoR.setValue("En proceso");
         }
         else {
             EstadoR.setValue("Finalizado");
-            arreglo.setObservacionesMecanico(observacionesDelArregloField.getText());
+            arregloDTO.setObservacionesMecanico(observacionesDelArregloField.getText());
         }
 
         EstadoR.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
@@ -66,12 +74,12 @@ public class DetalleController
 
             if (newValue.equals("En proceso"))
             {
-                estadoAnterior = arreglo.getEstadoReparacion();
-                arreglo.setEstadoReparacion(EstadoReparacion.EN_PROCESO);
+                estadoAnterior = arregloDTO.getEstadoReparacion();
+                arregloDTO.setEstadoReparacion(EstadoReparacion.EN_PROCESO);
             } else if (newValue.equals("Finalizado"))
             {
-                estadoAnterior = arreglo.getEstadoReparacion();
-                arreglo.setEstadoReparacion(EstadoReparacion.FINALIZADO);
+                estadoAnterior = arregloDTO.getEstadoReparacion();
+                arregloDTO.setEstadoReparacion(EstadoReparacion.FINALIZADO);
 
             }
         });
@@ -101,18 +109,32 @@ public class DetalleController
         stageActual.close();
     }
 
-    private void guardarCambios(Arreglo arreglo) {
-        if (arreglo.getEstadoReparacion() != EstadoReparacion.FINALIZADO || arreglo.getObservacionesDelMecanico() == null) {
+    @FXML
+    private void guardarCambios(ActionEvent event) throws EntidadNoEncontradaException {
+
+
+
+        if (this.arregloDTO.getEstadoReparacion() != EstadoReparacion.FINALIZADO || this.arregloDTO.getObservacionesMecanico() == null)
+        {
             System.out.println("Error, estado inválido o campo observación vacío!");
-        } else {
+        } else
+        {
+            arregloDTO.setObservacionesMecanico(observacionesDelArregloField.getText());
+            Arreglo nuevo = new Arreglo(arregloDTO.getIdArreglo(),arregloDTO.getPatente(),arregloDTO.getDniCliente(),arregloDTO.getIdEmpleado(),arregloDTO.getObservacionesCliente(),arregloDTO.getObservacionesMecanico(),arregloDTO.getEstadoReparacion());
+            arregloService.editar(nuevo);
+            userController.actualizarLista();
             Stage stageActual = (Stage) atrasButton.getScene().getWindow();
             stageActual.close();
-
         }
     }
 
     public void setUsuario(Usuario logueado)
     {
         this.logueado = logueado;
+    }
+
+    public void setVistaUsuariosController(UserController userController)
+    {
+        this.userController=userController;
     }
 }

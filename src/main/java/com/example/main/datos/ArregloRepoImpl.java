@@ -2,6 +2,7 @@ package com.example.main.datos;
 
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
+import com.example.main.enums.EstadoReparacion;
 import com.example.main.modelos.Arreglo;
 import com.example.main.modelos.Vehiculo;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -99,7 +100,7 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
         cargar();
         return this.listaArreglos
                 .stream()
-                .filter(actual -> actual.getIdEmpleado() == idMecanico)
+                .filter(actual -> actual.getIdEmpleado() == idMecanico && actual.getEstadoReparacion() != EstadoReparacion.FINALIZADO)
                 .toList();
     }
 

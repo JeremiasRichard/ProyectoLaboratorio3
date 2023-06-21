@@ -4,9 +4,8 @@
   "dniCliente" : "55929334",
   "idEmpleado" : 1,
   "observacionesDelCliente" : "Se quedo sin frenos.",
-  "observacionesDelMecanico" : null,
-  "estadoReparacion" : "STAND_BY",
-  "detalleArreglo" : null
+  "observacionesDelMecanico" : "JAJAJAJAJAJAJAJAA PUTO mira de quie nte reuiste java fx",
+  "estadoReparacion" : "FINALIZADO"
 }, {
   "idArreglo" : 2,
   "patente" : "RTX5459",
@@ -14,8 +13,7 @@
   "idEmpleado" : 1,
   "observacionesDelCliente" : "Se quedo sin Luces.",
   "observacionesDelMecanico" : null,
-  "estadoReparacion" : "STAND_BY",
-  "detalleArreglo" : null
+  "estadoReparacion" : "STAND_BY"
 }, {
   "idArreglo" : 3,
   "patente" : "RXT5248",
@@ -23,8 +21,7 @@
   "idEmpleado" : 1,
   "observacionesDelCliente" : "Para pintar.",
   "observacionesDelMecanico" : null,
-  "estadoReparacion" : "STAND_BY",
-  "detalleArreglo" : null
+  "estadoReparacion" : "STAND_BY"
 }, {
   "idArreglo" : 4,
   "patente" : "FXX5517",
@@ -32,8 +29,7 @@
   "idEmpleado" : 1,
   "observacionesDelCliente" : "Caja de camios rota.",
   "observacionesDelMecanico" : null,
-  "estadoReparacion" : "STAND_BY",
-  "detalleArreglo" : null
+  "estadoReparacion" : "STAND_BY"
 }, {
   "idArreglo" : 5,
   "patente" : "TTX5726",
@@ -41,8 +37,7 @@
   "idEmpleado" : 1,
   "observacionesDelCliente" : "Rayon en la caja.",
   "observacionesDelMecanico" : null,
-  "estadoReparacion" : "STAND_BY",
-  "detalleArreglo" : null
+  "estadoReparacion" : "STAND_BY"
 }, {
   "idArreglo" : 6,
   "patente" : "NTX5835",
@@ -50,6 +45,5 @@
   "idEmpleado" : 1,
   "observacionesDelCliente" : "Rayon en la puerta.",
   "observacionesDelMecanico" : null,
-  "estadoReparacion" : "STAND_BY",
-  "detalleArreglo" : null
+  "estadoReparacion" : "STAND_BY"
 } ]

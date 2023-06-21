@@ -51,7 +51,6 @@ public class LoginController {
             GeneradorArchivos.generarArchivos();
         }
         LoginService loginService = new LoginServiceImpl();
-
         String usuario = userTextField.getText();
         String contraseña = passwordField.getText();
 

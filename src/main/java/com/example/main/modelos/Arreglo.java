@@ -29,6 +29,16 @@ public class Arreglo {
         this.estadoReparacion = EstadoReparacion.STAND_BY;
     }
 
+    public Arreglo(int idArreglo, String patente, String dniCliente, int idEmpleado, String observacionesDelCliente, String observacionesDelMecanico, EstadoReparacion estadoReparacion) {
+        this.idArreglo = idArreglo;
+        this.patente = patente;
+        this.dniCliente = dniCliente;
+        this.idEmpleado = idEmpleado;
+        this.observacionesDelCliente = observacionesDelCliente;
+        this.observacionesDelMecanico = observacionesDelMecanico;
+        this.estadoReparacion = estadoReparacion;
+    }
+
     public Arreglo(String patente, String dniCliente, int idEmpleado, String observacionesDelCliente) {
         this.patente = patente;
         this.dniCliente = dniCliente;
@@ -76,15 +86,6 @@ public class Arreglo {
     public void setObservacionesDelCliente(String observacionesDelCliente) {
         this.observacionesDelCliente = observacionesDelCliente;
     }
-
-    public String getDetalleArreglo() {
-        return observacionesDelMecanico;
-    }
-
-    public void setDetalleArreglo(String detalleArreglo) {
-        observacionesDelMecanico = detalleArreglo;
-    }
-
     public String getObservacionesDelMecanico() {
         return observacionesDelMecanico;
     }

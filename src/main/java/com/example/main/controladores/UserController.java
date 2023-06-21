@@ -98,7 +98,7 @@ public class UserController {
         stage.show();
     }
 
-    public void verDetalle()
+    public void verDetalle(ActionEvent event)
     {
         ArregloDTO elementoSeleccionado = listaTareas.getSelectionModel().getSelectedItem();
 
@@ -109,13 +109,14 @@ public class UserController {
                 Parent root = loader.load();
                 DetalleController detalleController = loader.getController();
                 detalleController.setUsuario(logueado);
+                detalleController.setVistaUsuariosController(this);
                 detalleController.setStageAnterior(this.userStage);
                 detalleController.inicializar(elementoSeleccionado,logueado);
                 Stage detalleStage = new Stage();
                 detalleStage.initStyle(StageStyle.UNDECORATED);
                 detalleStage.initOwner(userStage);
                 detalleStage.setScene(new Scene(root,800,600));
-                detalleStage.show();
+                detalleStage.showAndWait();
                 userStage = (Stage) detalleButton.getScene().getWindow();
             } catch (IOException e)
             {
@@ -123,5 +124,13 @@ public class UserController {
             }
         }
 
+    }
+
+    public void actualizarLista()
+    {
+        tareas.clear();
+        List<ArregloDTO> listTareas = mecanicoService.obtenerTareas(1);
+        tareas.addAll(listTareas);
+        listaTareas.refresh();
     }
 }

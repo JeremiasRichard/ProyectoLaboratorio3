@@ -4,6 +4,7 @@ import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.enums.Especialidad;
 import com.example.main.enums.TipoVehiculo;
+import com.example.main.modelos.Cliente;
 import com.example.main.modelos.Mecanico;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
@@ -40,7 +41,7 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
     @Override
     public void agregar(Mecanico nuevo) throws EntidadDuplicadaException {
         cargar();
-        if(buscarPorId(nuevo.getIdEmpleado()) != null) throw new EntidadDuplicadaException("El mecanico solicitado ya existe.");
+        if(buscarPorDNI(nuevo.getDni()) != null) throw new EntidadDuplicadaException("El mecanico solicitado ya existe.");
         nuevo.setIdEmpleado(listaMecanicos.size()+1);
         nuevo.setUsuario(listaMecanicos.size()+1);
         this.listaMecanicos.add(nuevo);
@@ -50,7 +51,7 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
     @Override
     public void editar(Mecanico nuevo) throws EntidadNoEncontradaException {
         cargar();
-        if(buscarPorId(nuevo.getIdEmpleado()) == null) throw new EntidadNoEncontradaException("El mecanico solicitado no existe.");
+        if(buscarPorDNI(nuevo.getDni()) == null) throw new EntidadNoEncontradaException("El mecanico solicitado no existe.");
         for (int i = 0; i<this.listaMecanicos.size(); i++) {
             String dniActual = this.listaMecanicos.get(i).getDni();
 
@@ -74,6 +75,22 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
         }
         return encontrado;
     }
+
+    public Mecanico buscarPorDNI(String dni)
+    {
+        cargar();
+        Mecanico encontrado = null;
+        for (Mecanico mecanico : listaMecanicos) {
+            if (mecanico.getDni().equalsIgnoreCase(dni))
+            {
+                encontrado = mecanico;
+                break;
+            }
+        }
+        return encontrado;
+    }
+
+
 
     @Override
     public void eliminar(Mecanico objeto) throws EntidadNoEncontradaException {
@@ -119,5 +136,15 @@ public class MecanicoRepoImpl implements Repositorio<Mecanico> {
             }
         }
         return mecanicosPorEspecialidad;
+    }
+    public List<Mecanico> listarActivos(){
+        cargar();
+        List<Mecanico> mecanicosActivos = new ArrayList<>();
+        for (Mecanico mecanico : this.listaMecanicos) {
+            if (mecanico.getActivo()) {
+                mecanicosActivos.add(mecanico);
+            }
+        }
+        return mecanicosActivos;
     }
 }

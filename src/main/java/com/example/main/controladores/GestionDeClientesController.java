@@ -1,5 +1,6 @@
 package com.example.main.controladores;
 
+import com.example.main.DTOs.MecanicoDTO;
 import com.example.main.datos.ClienteRepoImpl;
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
@@ -216,41 +217,47 @@ public class GestionDeClientesController {
     }
 
     @FXML
-    private void modificarCliente(ActionEvent event)
-    {
-        Cliente c = this.tblClientes.getSelectionModel().getSelectedItem();
+    private void modificarCliente(ActionEvent event) {
 
-        if (c == null) {
+        Cliente cliente = this.tblClientes.getSelectionModel().getSelectedItem();
+
+        if (cliente == null)
+        {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Error");
-            alert.setContentText("Debe seleccionar un cliente");
+            alert.setContentText(cliente.toString());
             alert.showAndWait();
-        } else {
+        }
+        else {
             try {
 
-                String nombre = this.nombreField.getText();
-                String apellido = this.apellidoField.getText();
-                String telefono = this.telefonoField.getText();
-                limpiarInputsUsuario();
-                desbloquearInputsVehiculo();
-                Cliente aux = new Cliente(nombre, apellido, telefono,c.getDni(), true);
+                Cliente nuevo = new Cliente(this.nombreField.getText(), this.apellidoField.getText(),cliente.getDni(),new ArrayList<>(), this.telefonoField.getText(),cliente.getListaVehiculos());
 
-                if (!this.clientes.contains(aux)) {
-                    c.setNombre(aux.getNombre());
-                    c.setApellido(aux.getApellido());
-                    c.setNroTelefono(aux.getNroTelefono());
+                if (this.clientes.contains(nuevo))
+                {
+                    cliente.setNombre(nuevo.getNombre());
+                    cliente.setApellido(nuevo.getApellido());
+                    cliente.setDni(nuevo.getDni());
+                    cliente.setHistorialArreglos(new ArrayList<>());
+                    cliente.setNroTelefono(nuevo.getNroTelefono());
+                    cliente.setListaVehiculos(nuevo.getListaVehiculos());
+                    cliente.setActivo(nuevo.isActivo());
+                    clienteService.editar(cliente);
                     this.tblClientes.refresh();
-                } else {
+                    limpiarInputsUsuario();
+                }
+                else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setHeaderText(null);
                     alert.setTitle("Error");
                     alert.setContentText("Debe seleccionar un cliente");
                     alert.showAndWait();
                 }
-            } catch (RuntimeException e)
-            {
+            } catch (RuntimeException e) {
 
+            } catch (EntidadNoEncontradaException e) {
+                throw new RuntimeException(e);
             }
         }
     }

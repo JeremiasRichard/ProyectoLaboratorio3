@@ -82,4 +82,5 @@ public class Mecanico extends Empleado {
     public String toString() {
         return "Mecanico{" + "ListaArreglos=" + listaArreglos + ", TipoVehiculo=" + tipoVehiculo + ", Especialidad=" + especialidad + ", activo=" + activo + '}';
     }
+
 }

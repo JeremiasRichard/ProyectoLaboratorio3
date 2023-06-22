@@ -1,6 +1,5 @@
 package com.example.main.modelos;
 
-import java.util.Objects;
 
 public abstract class Empleado extends Persona {
     private int idEmpleado;

@@ -10,7 +10,6 @@ import com.example.main.enums.EstadoReparacion;
 import com.example.main.modelos.Arreglo;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ArregloServiceImpl implements BaseService<Arreglo> {
     private ArregloRepoImpl arregloRepo;

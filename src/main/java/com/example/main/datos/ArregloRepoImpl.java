@@ -4,15 +4,12 @@ import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.enums.EstadoReparacion;
 import com.example.main.modelos.Arreglo;
-import com.example.main.modelos.Vehiculo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ArregloRepoImpl implements Repositorio<Arreglo> {
 
@@ -35,7 +32,7 @@ public class ArregloRepoImpl implements Repositorio<Arreglo> {
         try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(archivo, this.listaArreglos);
         } catch (IOException e) {
-            throw new RuntimeException(); //Cambiar
+            throw new RuntimeException();
         }
     }
 

@@ -4,17 +4,12 @@ import com.example.main.controladores.validaciones.Validaciones;
 import com.example.main.modelos.Usuario;
 import com.example.main.servicios.LoginService;
 import com.example.main.servicios.LoginServiceImpl;
-import com.example.main.utils.GeneradorArchivos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.io.IOException;
 
 public class LoginController {

@@ -18,9 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class GestionDeEmpleadosController {
     private Mecanico mecanicoGlobal = new Mecanico();

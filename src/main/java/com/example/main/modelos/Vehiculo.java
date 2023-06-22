@@ -1,10 +1,6 @@
 package com.example.main.modelos;
 
 import com.example.main.enums.TipoVehiculo;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 public class Vehiculo {
     private int anioFabricacion;

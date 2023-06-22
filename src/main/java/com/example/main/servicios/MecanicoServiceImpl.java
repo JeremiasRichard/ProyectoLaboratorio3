@@ -8,10 +8,8 @@ import com.example.main.datos.VehiculoRepoImpl;
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.enums.Especialidad;
-import com.example.main.enums.EstadoReparacion;
 import com.example.main.enums.TipoVehiculo;
 import com.example.main.modelos.Arreglo;
-import com.example.main.modelos.Cliente;
 import com.example.main.modelos.Mecanico;
 import com.example.main.modelos.Vehiculo;
 

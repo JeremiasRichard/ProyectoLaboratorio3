@@ -4,7 +4,6 @@ package com.example.main.datos;
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.modelos.Cliente;
-import com.example.main.modelos.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 
@@ -34,7 +33,7 @@ public class ClienteRepoImpl implements Repositorio<Cliente>{
         try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(archivo, this.listaClientes);
         } catch (IOException e) {
-            throw new RuntimeException(); //Cambiar
+            throw new RuntimeException();
         }
     }
 
@@ -71,7 +70,7 @@ public class ClienteRepoImpl implements Repositorio<Cliente>{
         cargar();
         Cliente encontrado = null;
         for (Cliente cliente : listaClientes) {
-            if (cliente.getDni().toLowerCase().equals(dni.toLowerCase())) {
+            if (cliente.getDni().equalsIgnoreCase(dni)) {
                 encontrado = cliente;
                 break;
             }

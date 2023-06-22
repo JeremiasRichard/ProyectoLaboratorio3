@@ -4,7 +4,6 @@ import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.enums.Especialidad;
 import com.example.main.enums.TipoVehiculo;
-import com.example.main.modelos.Cliente;
 import com.example.main.modelos.Mecanico;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;

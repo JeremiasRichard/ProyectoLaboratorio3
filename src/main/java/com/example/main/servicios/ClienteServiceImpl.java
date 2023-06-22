@@ -4,7 +4,6 @@ import com.example.main.datos.ClienteRepoImpl;
 import com.example.main.datos.excepciones.EntidadDuplicadaException;
 import com.example.main.datos.excepciones.EntidadNoEncontradaException;
 import com.example.main.modelos.Cliente;
-import com.example.main.modelos.Usuario;
 
 import java.util.List;
 

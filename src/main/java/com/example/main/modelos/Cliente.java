@@ -1,11 +1,10 @@
 package com.example.main.modelos;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Cliente extends Persona {
-    private List<Integer> historialArreglos;
+
     private String nroTelefono;
     private List<String> listaVehiculos;
     private boolean activo;
@@ -13,9 +12,8 @@ public class Cliente extends Persona {
     public Cliente() {
     }
 
-    public Cliente(String nombre, String apellido, String dni, List<Integer> historialArreglos, String nroTelefono, List<String> listaVehiculos) {
+    public Cliente(String nombre, String apellido, String dni, String nroTelefono, List<String> listaVehiculos) {
         super(nombre, apellido, dni);
-        this.historialArreglos = new ArrayList<>();
         this.nroTelefono = nroTelefono;
         this.listaVehiculos = listaVehiculos;
         this.activo = true;
@@ -24,24 +22,13 @@ public class Cliente extends Persona {
     public Cliente(String nombre, String apellido, String dni, String nroTelefono, boolean activo) {
         super(nombre, apellido, dni);
         this.nroTelefono = nroTelefono;
-        this.historialArreglos = new ArrayList<>();
         this.activo = activo;
     }
 
-    public Cliente(List<Integer> historialArreglos, String nroTelefono, String mail, String direccion, List<String> listaVehiculos) {
-        this.historialArreglos = historialArreglos;
+    public Cliente(String nroTelefono, String mail, String direccion, List<String> listaVehiculos) {
         this.nroTelefono = nroTelefono;
         this.listaVehiculos = listaVehiculos;
         this.activo = true;
-    }
-
-
-    public List<Integer> getHistorialArreglos() {
-        return historialArreglos;
-    }
-
-    public void setHistorialArreglos(List<Integer> historialArreglos) {
-        this.historialArreglos = historialArreglos;
     }
 
     public String getNroTelefono() {
@@ -81,7 +68,6 @@ public class Cliente extends Persona {
     @Override
     public String toString() {
         return "Cliente{" +
-                ", historialArreglos=" + historialArreglos +
                 ", listaVehiculos=" + listaVehiculos +
                 ", activo=" + activo +
                 "} " + super.toString();

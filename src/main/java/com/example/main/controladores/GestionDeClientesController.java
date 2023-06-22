@@ -132,7 +132,7 @@ public class GestionDeClientesController {
         if (verificarCampos()) {
             if (verificarNumeros())
             {
-                Cliente nuevo2 = new Cliente(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), new ArrayList<Integer>(), this.telefonoField.getText(), new ArrayList<>());
+                Cliente nuevo2 = new Cliente(this.nombreField.getText(), this.apellidoField.getText(), this.dniField.getText(), this.telefonoField.getText(), new ArrayList<>());
                 this.nuevoVehiculo = new Vehiculo(Integer.parseInt(this.anioFabricacionField.getText()), nuevoVehiculo.getTipoVehiculo(), this.marcaField.getText(), this.patenteField.getText());
                 List<String> listaPatentes = new ArrayList<>();
                 listaPatentes.add(nuevoVehiculo.getPatente());
@@ -190,7 +190,7 @@ public class GestionDeClientesController {
         } else {
             if (verificarCamposModificacion()) {
                 try {
-                    Cliente nuevo = new Cliente(this.nombreField.getText(), this.apellidoField.getText(), cliente.getDni(), new ArrayList<>(), this.telefonoField.getText(), cliente.getListaVehiculos());
+                    Cliente nuevo = new Cliente(this.nombreField.getText(), this.apellidoField.getText(), cliente.getDni(), this.telefonoField.getText(), cliente.getListaVehiculos());
                     if (this.clientes.contains(nuevo)) {
                         editarCliente(cliente, nuevo);
                         this.tblClientes.refresh();
@@ -264,7 +264,6 @@ public class GestionDeClientesController {
         cliente.setNombre(nuevo.getNombre());
         cliente.setApellido(nuevo.getApellido());
         cliente.setDni(nuevo.getDni());
-        cliente.setHistorialArreglos(new ArrayList<>());
         cliente.setNroTelefono(nuevo.getNroTelefono());
         cliente.setListaVehiculos(nuevo.getListaVehiculos());
         cliente.setActivo(nuevo.isActivo());

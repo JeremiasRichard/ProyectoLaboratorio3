@@ -61,11 +61,11 @@ public class GeneradorArchivos {
         });
 
         Arrays.asList(
-                new Cliente("Daniel","Marzoli","55929334",new ArrayList<>(),"4645814",Arrays.asList("RTX5459")),
-                new Cliente("Flavia","Gorriti","46332343",new ArrayList<>(),"4435844",Arrays.asList("RXT5248")),
-                new Cliente("Ernesto","Jurado","37943234",new ArrayList<>(),"4715814",Arrays.asList("FXX5517")),
-                new Cliente("Cristian","Etchber","28694314",new ArrayList<>(),"4975244",Arrays.asList("TTX5726")),
-                new Cliente("Nahuel","Ganso","59795334",new ArrayList<>(),"4895244",Arrays.asList("NTX5835"))
+                new Cliente("Daniel","Marzoli","55929334","4645814",Arrays.asList("RTX5459")),
+                new Cliente("Flavia","Gorriti","46332343","4435844",Arrays.asList("RXT5248")),
+                new Cliente("Ernesto","Jurado","37943234","4715814",Arrays.asList("FXX5517")),
+                new Cliente("Cristian","Etchber","28694314","4975244",Arrays.asList("TTX5726")),
+                new Cliente("Nahuel","Ganso","59795334","4895244",Arrays.asList("NTX5835"))
         ).forEach(cliente -> {
             try {
                 clienteRepo.agregar(cliente);

@@ -135,7 +135,7 @@ public class GestionDeArreglosController {
         this.arreglos.clear();
         arregloService.agregar(arreglo);
         if (arregloService.listarActivos().size() != 0) {
-            List<Arreglo> aux2 = arregloService.listar();
+            List<Arreglo> aux2 = arregloService.listarActivos();
             for (Arreglo arreglo2 : aux2) {
                 if (!arreglos.contains(arreglo2)) {
                     arreglos.add(arregloService.convertirAArregloDTO(arreglo2));

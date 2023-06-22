@@ -58,10 +58,4 @@
   "password" : "abb8eeccac8477a09d4a367111fb2a22",
   "esAdmin" : false,
   "activo" : true
-}, {
-  "idUsuario" : 10,
-  "user" : "123",
-  "password" : "202cb962ac59075b964b07152d234b70",
-  "esAdmin" : false,
-  "activo" : true
 } ]

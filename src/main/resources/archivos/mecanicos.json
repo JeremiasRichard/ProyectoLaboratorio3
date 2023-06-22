@@ -106,16 +106,4 @@
   "especialidad" : "ESTETICA",
   "activo" : true,
   "usuario" : 9
-}, {
-  "nombre" : "asd",
-  "apellido" : "123",
-  "dni" : "123",
-  "idEmpleado" : 10,
-  "telefono" : "123",
-  "idUsuario" : 10,
-  "listaArreglos" : null,
-  "tipoVehiculo" : "CAMION",
-  "especialidad" : "MECANICA_GENERAL",
-  "activo" : false,
-  "usuario" : 10
 } ]

@@ -2,6 +2,7 @@ package com.example.main.modelos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Cliente extends Persona {
     private List<Integer> historialArreglos;
@@ -33,8 +34,6 @@ public class Cliente extends Persona {
         this.listaVehiculos = listaVehiculos;
         this.activo = true;
     }
-
-    //region Getters y Setters
 
 
     public List<Integer> getHistorialArreglos() {
@@ -71,15 +70,12 @@ public class Cliente extends Persona {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Cliente && o != null) {
-            return this.getDni().equals(((Cliente) o).getDni());
-        }
-        return false;
+        return super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return 1;
+        return Objects.hash(super.hashCode(), getDni());
     }
 
     @Override

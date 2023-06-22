@@ -1,5 +1,7 @@
 package com.example.main.modelos;
 
+import java.util.Objects;
+
 public abstract class Persona {
     private String nombre;
     private String apellido;
@@ -37,5 +39,17 @@ public abstract class Persona {
                 ", Apellido='" + apellido + '\'' +
                 ", Dni='" + dni +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Persona persona)) return false;
+        return Objects.equals(getNombre(), persona.getNombre()) && Objects.equals(getApellido(), persona.getApellido()) && Objects.equals(getDni(), persona.getDni());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDni());
     }
 }

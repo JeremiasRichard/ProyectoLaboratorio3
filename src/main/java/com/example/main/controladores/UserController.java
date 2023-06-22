@@ -43,25 +43,7 @@ public class UserController {
     private Usuario logueado;
     @FXML
     private Label idNombreUsuario = new Label();
-
-    public void setUsuario(Usuario actual)
-    {
-        this.logueado = actual;
-    }
-
-    public void setStageAnterior(Stage stageAnterior)
-    {
-        this.stageAnterior = stageAnterior;
-    }
-
-    @FXML
-    void closeCurrentWindow(ActionEvent event) throws IOException
-    {
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
-    }
-
-
+    
     public void inicializar(Usuario actual)
     {
 
@@ -70,35 +52,11 @@ public class UserController {
     @FXML
     public void initialize(Usuario actual)
     {
-        List<ArregloDTO> listTareas = mecanicoService.obtenerTareas(actual.getIdUsuario());
-
-        tareas.addAll(listTareas);
-
-        this.idArregloColumna.setCellValueFactory(new PropertyValueFactory<>("idArreglo"));
-        this.marcaColumna.setCellValueFactory(new PropertyValueFactory<>("marca"));
-        this.patenteColumna.setCellValueFactory(new PropertyValueFactory<>("patente"));
-        this.anioColumna.setCellValueFactory(new PropertyValueFactory<>("anioFabricacion"));
-
-        Mecanico mecanico = mecanicoService.buscarPorId(actual.getIdUsuario());
-        idNombreUsuario.setText(mecanico.getNombre()+" "+mecanico.getApellido());
-        listaTareas.setItems(tareas);
+        inicializarListaDeTareas(actual);
     }
-
-    @FXML
-    private void cerrarSesion(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/vista/loginView.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        this.logueado = null;
-        stage.show();
-    }
-
     public void verDetalle(ActionEvent event)
     {
         ArregloDTO elementoSeleccionado = listaTareas.getSelectionModel().getSelectedItem();
-
         if(elementoSeleccionado != null)
         {
             try {
@@ -122,13 +80,46 @@ public class UserController {
         }
         else
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText("Debe seleccionar una tarea!");
-            alert.showAndWait();
+            mostrarAlerta("Debe seleccionar una tarea!");
         }
+    }
 
+    @FXML
+    private void cerrarSesion(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/vista/loginView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        this.logueado = null;
+        stage.show();
+    }
+    @FXML
+    void closeCurrentWindow(ActionEvent event) throws IOException
+    {
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        stage.close();
+    }
+
+    private void inicializarListaDeTareas(Usuario actual) {
+        List<ArregloDTO> listTareas = mecanicoService.obtenerTareas(actual.getIdUsuario());
+        tareas.addAll(listTareas);
+        this.idArregloColumna.setCellValueFactory(new PropertyValueFactory<>("idArreglo"));
+        this.marcaColumna.setCellValueFactory(new PropertyValueFactory<>("marca"));
+        this.patenteColumna.setCellValueFactory(new PropertyValueFactory<>("patente"));
+        this.anioColumna.setCellValueFactory(new PropertyValueFactory<>("anioFabricacion"));
+        Mecanico mecanico = mecanicoService.buscarPorId(actual.getIdUsuario());
+        idNombreUsuario.setText(mecanico.getNombre()+" "+mecanico.getApellido());
+        listaTareas.setItems(tareas);
+    }
+    public void setUsuario(Usuario actual)
+    {
+        this.logueado = actual;
+    }
+
+    public void setStageAnterior(Stage stageAnterior)
+    {
+        this.stageAnterior = stageAnterior;
     }
 
     public void actualizarLista()
@@ -138,4 +129,13 @@ public class UserController {
         tareas.addAll(listTareas);
         listaTareas.refresh();
     }
+    private static void mostrarAlerta(String s)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.setContentText(s);
+        alert.showAndWait();
+    }
+    
 }

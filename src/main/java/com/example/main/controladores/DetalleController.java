@@ -14,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class DetalleController
@@ -50,7 +49,7 @@ public class DetalleController
     {
         this.arregloDTO=arreglo;
         Mecanico actual = mecanicoService.buscarPorId(logueado.getIdUsuario());
-        idNombreUsuario.setText(actual.getNombre().toString()+" "+actual.getApellido());
+        idNombreUsuario.setText(actual.getNombre()+" "+actual.getApellido());
 
         ObservableList<String> opciones = FXCollections.observableArrayList(
                 "Stand By",
@@ -126,7 +125,7 @@ public class DetalleController
     @FXML
     private void guardarCambios(ActionEvent event) throws EntidadNoEncontradaException {
 
-        if (this.arregloDTO.getEstadoReparacion() != EstadoReparacion.FINALIZADO || this.arregloDTO.getObservacionesMecanico() == null)
+        if (this.arregloDTO.getEstadoReparacion() == EstadoReparacion.STAND_BY && this.arregloDTO.getObservacionesMecanico() == null)
         {
             mostrarAlerta("Error, estado inválido o campo observación vacío!");
         } else

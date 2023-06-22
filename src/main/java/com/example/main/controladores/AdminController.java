@@ -1,5 +1,4 @@
 package com.example.main.controladores;
-
 import com.example.main.modelos.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,10 +11,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-
-public class AdminController
-{
-
+public class AdminController {
     @FXML
     private Button exitButton;
     @FXML
@@ -24,46 +20,23 @@ public class AdminController
     private Button vistaSeleccionadaButton;
     private Usuario logueado;
 
-    @FXML
-    void closeApplication(ActionEvent event) throws IOException
-    {
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
-    }
-
-    @FXML
-    private void cerrarSesion(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/vista/loginView.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void setStageAnterior(Stage stageLogin)
-    {
-        this.stageLogin = stageLogin;
-    }
-
     public void cargarGestionDeEmpleados() {
 
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/vista/gestionDeEmpleadosView.fxml"));
-                Parent root = loader.load();
-                GestionDeEmpleadosController gestionDeEmpleadosController = loader.getController();
-                gestionDeEmpleadosController.setUsuario(logueado);
-                gestionDeEmpleadosController.setStageAnterior(this.stageLogin);
-                Stage gestionDeEmpleadosStage = new Stage();
-                gestionDeEmpleadosStage.initStyle(StageStyle.UNDECORATED);
-                gestionDeEmpleadosStage.initOwner(stageLogin);
-                gestionDeEmpleadosStage.setScene(new Scene(root,800,600));
-                gestionDeEmpleadosStage.show();
-                vistaSeleccionadaButton.getScene().getWindow();
-            } catch (IOException e)
-            {
-                e.printStackTrace();
-            }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/vista/gestionDeEmpleadosView.fxml"));
+            Parent root = loader.load();
+            GestionDeEmpleadosController gestionDeEmpleadosController = loader.getController();
+            gestionDeEmpleadosController.setUsuario(logueado);
+            gestionDeEmpleadosController.setStageAnterior(this.stageLogin);
+            Stage gestionDeEmpleadosStage = new Stage();
+            gestionDeEmpleadosStage.initStyle(StageStyle.UNDECORATED);
+            gestionDeEmpleadosStage.initOwner(stageLogin);
+            gestionDeEmpleadosStage.setScene(new Scene(root, 800, 600));
+            gestionDeEmpleadosStage.show();
+            vistaSeleccionadaButton.getScene().getWindow();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void cargarGestionDeClientes() {
@@ -77,11 +50,10 @@ public class AdminController
             Stage gestionDeClientesStage = new Stage();
             gestionDeClientesStage.initStyle(StageStyle.UNDECORATED);
             gestionDeClientesStage.initOwner(stageLogin);
-            gestionDeClientesStage.setScene(new Scene(root,800,600));
+            gestionDeClientesStage.setScene(new Scene(root, 800, 600));
             gestionDeClientesStage.show();
             vistaSeleccionadaButton.getScene().getWindow();
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -97,11 +69,10 @@ public class AdminController
             Stage gestionDeArreglosStage = new Stage();
             gestionDeArreglosStage.initStyle(StageStyle.UNDECORATED);
             gestionDeArreglosStage.initOwner(stageLogin);
-            gestionDeArreglosStage.setScene(new Scene(root,800,600));
+            gestionDeArreglosStage.setScene(new Scene(root, 800, 600));
             gestionDeArreglosStage.show();
             vistaSeleccionadaButton.getScene().getWindow();
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -117,17 +88,35 @@ public class AdminController
             Stage gestionDeAlgoStage = new Stage();
             gestionDeAlgoStage.initStyle(StageStyle.UNDECORATED);
             gestionDeAlgoStage.initOwner(stageLogin);
-            gestionDeAlgoStage.setScene(new Scene(root,800,600));
+            gestionDeAlgoStage.setScene(new Scene(root, 800, 600));
             gestionDeAlgoStage.show();
             vistaSeleccionadaButton.getScene().getWindow();
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void setUsuario(Usuario logueado)
-    {
+    public void setUsuario(Usuario logueado) {
         this.logueado = logueado;
+    }
+
+    @FXML
+    void closeApplication(){
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void cerrarSesion(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/vista/loginView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void setStageAnterior(Stage stageLogin) {
+        this.stageLogin = stageLogin;
     }
 }

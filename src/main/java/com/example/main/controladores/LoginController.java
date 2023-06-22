@@ -12,12 +12,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
 
 public class LoginController {
-    private  Stage primaryStage;
+    private Stage primaryStage;
     @FXML
     private TextField userTextField;
     @FXML
@@ -32,43 +33,23 @@ public class LoginController {
         LoginService loginService = new LoginServiceImpl();
         String usuario = userTextField.getText();
         String contraseña = passwordField.getText();
-
         if (Validaciones.isStringNull(usuario) || Validaciones.isStringNull(contraseña)) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText(mostrarErrorCamposVacios());
-            alert.showAndWait();
+            mostrarAlerta("El campo usuario o contraseña estan vacios!");
         } else if (Validaciones.validarLogin(usuario, contraseña)) {
             Usuario deseado = loginService.autenticar(usuario, contraseña);
             this.logueado = deseado;
-
             if (logueado != null) {
                 if (this.logueado.isEsAdmin()) {
-
                     abrirVistaAdmin(this.logueado);
                 } else {
-
                     abrirVistaUsuario(this.logueado);
                 }
             } else {
-
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setTitle("Error");
-                alert.setContentText(mostrarUsuarioOContraseñaInvalidos());
-                alert.showAndWait();
-
+                mostrarAlerta("Credenciales inválidas" + "\n" + "Intenta nuevamente!");
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText(mostrarErrorCamposInvalidos());
-            alert.showAndWait();
-
+            mostrarAlerta("Solo se admiten caracteres alfanumericos!");
         }
-
     }
 
     private void abrirVistaAdmin(Usuario actual) {
@@ -102,18 +83,6 @@ public class LoginController {
         }
     }
 
-    private String mostrarUsuarioOContraseñaInvalidos() {
-        return "Credenciales inválidas" + "\n" + "Intenta nuevamente!";
-    }
-
-    private String mostrarErrorCamposInvalidos() {
-        return "Solo se admiten caracteres alfanumericos!";
-    }
-
-    private String mostrarErrorCamposVacios() {
-        return "El campo usuario o contraseña estan vacios!";
-    }
-
     @FXML
     void closeApplication(ActionEvent event) throws IOException {
         Stage stage = (Stage) exitButton.getScene().getWindow();
@@ -125,8 +94,11 @@ public class LoginController {
         this.primaryStage = primaryStage;
     }
 
-    public void show(ActionEvent event) {
-        primaryStage.show();
+    private static void mostrarAlerta(String s) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.setContentText(s);
+        alert.showAndWait();
     }
-
 }

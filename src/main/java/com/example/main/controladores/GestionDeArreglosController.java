@@ -121,6 +121,7 @@ public class GestionDeArreglosController {
                 Arreglo arreglo = new Arreglo(aux.getPatente(), this.seleccionado.getDni(), this.idEmpleado, observacionesDelCliente.getText());
                 if (arregloDTO != null) {
                     modificarArreglo(arregloDTO, arreglo);
+                    resetearCampos();
                 }
             } else {
                 mostrarAlerta("Todos los campos son requeridos");
@@ -303,4 +304,18 @@ public class GestionDeArreglosController {
                 Validaciones.isStringValido(observacionesDelCliente.getText()) &&
                 Validaciones.isStringValido(this.idEmpleado.toString());
     }
+
+    private void resetearCampos() {
+        limpiarInputsArreglo();
+    }
+
+
+    private void limpiarInputsArreglo() {
+        this.listaVehiculos.setValue("");
+        this.listaEspecialidades.setValue("");
+        this.listaMecanicos.setValue(null);
+        this.observacionesDelCliente.setText("");
+    }
+
+
 }
